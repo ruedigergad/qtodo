@@ -28,7 +28,7 @@ Dialog {
 
       Text {
           id: homepage
-          text: "<a href=\"http://to-do-o.sourceforge.net\" style=\"text-decoration:none; color:#78bfff\">Q To-Do<br /><img src=\"/opt/qtodo/icons/logo.png\" /><br />Version 0.7.1</a>"
+          text: "<a href=\"http://ruedigergad.github.com/qtodo\" style=\"text-decoration:none; color:#78bfff\">Q To-Do<br /><img src=\"/opt/qtodo/icons/logo.png\" /><br />Version 0.7.1</a>"
           textFormat: Text.RichText;
           onLinkActivated: { Qt.openUrlExternally(link); }
           font.pixelSize: 25; horizontalAlignment: Text.AlignHCenter;

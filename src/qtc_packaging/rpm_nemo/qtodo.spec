@@ -11,7 +11,7 @@ Version:    0.7.1
 Release:    1
 Group:      Applications/Productivity
 License:    GPLv3
-URL:        http://to-do-o.sourceforge.net
+URL:        http://ruedigergad.github.com/qtodo
 Source0:    %{name}_%{version}.tar.gz
 Source100:  qtodo.yaml
 BuildRequires:  pkgconfig(QtCore) >= 4.7.0

@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Ruediger Gad <r.c.g@gmx.de>
 Build-Depends: debhelper (>= 5), pkg-config, libqt4-dev, applauncherd-dev
 Standards-Version: 3.7.3
-Homepage: http://to-do-o.sourceforge.net
+Homepage: http://ruedigergad.github.com/qtodo
 
 Package: qtodo
 Architecture: any
