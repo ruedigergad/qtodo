@@ -33,7 +33,7 @@ var views = new Array();
 function createNextView(parentView) {
     console.log("Creating sub view.");
 
-    var viewString = "import QtQuick 1.0; import qtodo 1.0; "
+    var viewString = "import QtQuick 1.1; import qtodo 1.0; "
         + "NodeListView{ "
         + "id: nodeListView" + treeView.listViewCount +"; "
         + "width: treeView.width; "
