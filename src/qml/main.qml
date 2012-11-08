@@ -99,7 +99,9 @@ PageStackWindow {
         onAccepted: treeView.currentModel.deleteElement(treeView.currentIndex)
     }
 
-    EditToDoSheet{ id: editToDoSheet }
+    EditToDoSheet { id: editToDoSheet }
+
+    EditSketchSheet { id: editSketchSheet }
 
     ToolBarLayout {
         id: commonTools
@@ -113,6 +115,12 @@ PageStackWindow {
                 editToDoSheet.text = ""
                 editToDoSheet.edit = false
                 editToDoSheet.open()
+            }
+        }
+        ToolIcon { id: iconSketch; iconSource: "../icons/sketch.png"
+            opacity: enabled ? 1 : 0.5
+            onClicked: {
+                editSketchSheet.open()
             }
         }
         ToolIcon { id: iconMarkDone; platformIconId: "toolbar-done"
