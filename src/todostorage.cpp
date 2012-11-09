@@ -25,14 +25,17 @@
 ToDoStorage::ToDoStorage(QObject *parent) :
     QObject(parent)
 {
-    if(!QDir().exists(DEFAULT_PATH)){
-        QDir().mkdir(DEFAULT_PATH);
+    if(!QDir().exists(getPath())){
+        QDir().mkdir(getPath());
         QFile file(DEFAULT_FILE);
         file.open(QFile::WriteOnly);
         // Quite a hack but this should work for now...
         file.write("<?xml version='1.0' encoding='UTF-8'?><root></root>");
         file.flush();
         file.close();
+    }
+    if(!QDir().exists(getPath() + "/sketches")){
+        QDir().mkdir(getPath() + "/sketches");
     }
 }
 

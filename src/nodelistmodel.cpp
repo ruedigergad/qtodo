@@ -32,6 +32,7 @@ NodeListModel::NodeListModel(QObject *parent) :
     roles[DateRole] = "elementDate";
     roles[IsDoneRole] = "isDone";
     roles[ProgressRole] = "elementProgress";
+    roles[IdRole] = "elementId";
     setRoleNames(roles);
 }
 
@@ -65,6 +66,8 @@ QVariant NodeListModel::data(const QModelIndex &idx, int role) const{
         return element.attribute("done", "false") == "true";
     else if (role == ProgressRole)
         return element.attribute("progress", "-1").toDouble();
+    else if (role == IdRole)
+        return element.attribute("id", "-1").toInt();
     return QVariant();
 }
 
@@ -110,7 +113,7 @@ void NodeListModel::addElement(QString type, QString text, QString color){
         element.setAttribute("color", color);
     }
 
-    int max_id = root.attribute("max_id", "0").toInt();
+    int max_id = getMaxId();
     max_id++;
     element.setAttribute("id", max_id);
     root.setAttribute("max_id", max_id);

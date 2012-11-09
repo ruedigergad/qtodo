@@ -27,6 +27,7 @@ Sheet{
     visualParent: mainPage
 
     property bool edit: false
+    property int sketchId: 0
 
     onStatusChanged: {
         if (status === DialogStatus.Opening){
@@ -84,9 +85,7 @@ Sheet{
     }
 
     onAccepted: {
-        if(edit){
-        }else{
-        }
+        drawing.save(rootElementModel.getPath() + "/sketches/" + sketchId + ".png")
 
         editSketchSheet.close();
     }

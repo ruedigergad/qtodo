@@ -41,7 +41,8 @@ public:
         ColorRole,
         DateRole,
         IsDoneRole,
-        ProgressRole
+        ProgressRole,
+        IdRole
     };
 
     explicit NodeListModel(QObject *parent = 0);
@@ -54,9 +55,10 @@ public:
 
     Q_INVOKABLE void addElement(QString type, QString text, QString color);
     Q_INVOKABLE void deleteElement(int index);
-    Q_INVOKABLE void updateElement(int index, QString type, QString text, QString color);
-    Q_INVOKABLE void setAttribute(int index, QString name, QString value);
+    Q_INVOKABLE int getMaxId(){ return root.attribute("max_id", "0").toInt(); }
     Q_INVOKABLE void move(int from, int to, int n);
+    Q_INVOKABLE void setAttribute(int index, QString name, QString value);
+    Q_INVOKABLE void updateElement(int index, QString type, QString text, QString color);
 
     Q_INVOKABLE int countSubTodos(int index, bool todoOnly = false, bool recursive = false );
 
