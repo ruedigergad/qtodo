@@ -1,5 +1,5 @@
 /*
- *  Copyright 2011 Ruediger Gad
+ *  Copyright 2012 Ruediger Gad
  *
  *  This file is part of Q To-Do.
  *
@@ -31,6 +31,8 @@ Sheet{
     onStatusChanged: {
         if (status === DialogStatus.Opening){
             commonTools.enabled = false
+            drawing.clear()
+            blackButton.checked = true
         }else if (status === DialogStatus.Closed){
             commonTools.enabled = true
         }
@@ -55,11 +57,7 @@ Sheet{
             platformStyle: SheetButtonAccentStyle { }
             text: "OK"
             onClicked: {
-                if(textInput.text === ""){
-                    noTextGivenDialog.open()
-                }else{
-                    editSketchSheet.accept()
-                }
+                editSketchSheet.accept()
             }
         }
     }
@@ -72,24 +70,29 @@ Sheet{
             anchors{top: parent.top; left: parent.left; right: parent.right}
 
             Button {
-                id: blueButton
-                iconSource: "../icons/to-do_blue.png"
+                id: blackButton
+                iconSource: "../icons/sketch_black.png"
+                onClicked: drawing.drawColor = "black"
+            }
+            Button {
+                iconSource: "../icons/sketch_blue.png"
                 onClicked: drawing.drawColor = "blue"
             }
             Button {
-                id: greenButton
-                iconSource: "../icons/to-do_green.png"
+                iconSource: "../icons/sketch_green.png"
                 onClicked: drawing.drawColor = "green"
             }
             Button {
-                id: yellowButton
-                iconSource: "../icons/to-do_yellow.png"
+                iconSource: "../icons/sketch_yellow.png"
                 onClicked: drawing.drawColor = "yellow"
             }
             Button {
-                id: redButton
-                iconSource: "../icons/to-do_red.png"
+                iconSource: "../icons/sketch_red.png"
                 onClicked: drawing.drawColor = "red"
+            }
+            Button {
+                iconSource: "../icons/sketch_erase.png"
+                onClicked: drawing.drawColor = "white"
             }
         }
 
