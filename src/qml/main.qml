@@ -120,7 +120,8 @@ PageStackWindow {
         ToolIcon { id: iconSketch; iconSource: "../icons/sketch.png"
             opacity: enabled ? 1 : 0.5
             onClicked: {
-                editSketchSheet.sketchId = rootElementModel.getMaxId() + 1
+                editSketchSheet.edit = false
+                editSketchSheet.sketchPath = storage.getPath() + "/sketches/" + (rootElementModel.getMaxId() + 1) + ".png"
                 editSketchSheet.open()
             }
         }
