@@ -38,7 +38,7 @@ public:
     QDomDocument getDocument() { return document; }
     QDomElement getRootElement() { return document.documentElement(); }
 
-    Q_INVOKABLE QString getPath() { return DEFAULT_PATH };
+    Q_INVOKABLE QString getPath() { return DEFAULT_PATH ; }
     Q_INVOKABLE void open();
     Q_INVOKABLE void open(QString fileName);
 
