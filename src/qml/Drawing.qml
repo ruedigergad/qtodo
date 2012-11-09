@@ -27,14 +27,17 @@ Canvas {
         hoverEnabled:true
         anchors.fill: parent
         onClicked: drawPoint();
+/*
         onPositionChanged:  {
             if (mousearea.pressed)
                 drawLineSegment();
             paintX = mouseX;
             paintY = mouseY;
         }
+*/
     }
 
+/*
     function drawLineSegment() {
         ctx.beginPath();
         ctx.strokeStyle = drawColor
@@ -44,6 +47,7 @@ Canvas {
         ctx.stroke();
         ctx.closePath();
     }
+*/
 
     function drawPoint() {
         ctx.lineWidth = lineWidth
