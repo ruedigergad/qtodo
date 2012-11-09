@@ -19,7 +19,7 @@
 
 import QtQuick 1.1
 import com.nokia.meego 1.0
-import canvas 1.0
+import qmlcanvas 1.0
 
 Sheet{
     id: editSketchSheet
@@ -74,29 +74,29 @@ Sheet{
             Button {
                 id: blueButton
                 iconSource: "../icons/to-do_blue.png"
-                onClicked: color = "blue"
+                onClicked: drawing.drawColor = "blue"
             }
             Button {
                 id: greenButton
                 iconSource: "../icons/to-do_green.png"
-                onClicked: color = "green"
+                onClicked: drawing.drawColor = "green"
             }
             Button {
                 id: yellowButton
                 iconSource: "../icons/to-do_yellow.png"
-                onClicked: color = "yellow"
+                onClicked: drawing.drawColor = "yellow"
             }
             Button {
                 id: redButton
                 iconSource: "../icons/to-do_red.png"
-                onClicked: color = "red"
+                onClicked: drawing.drawColor = "red"
             }
         }
 
-        Canvas {
-            id: sketchCanvas
+        Drawing {
+            id: drawing
             anchors{top: colorButtonRow.bottom; left: parent.left; right: parent.right; bottom: parent.bottom}
-
+            lineWidth: (drawColor === "white) ? 30 : 2
         }
     }
 
