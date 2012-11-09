@@ -86,7 +86,9 @@ Sheet{
 
     onAccepted: {
         console.log("Saving sketch to: " + sketchPath)
+
         drawing.save(sketchPath)
+        treeView.currentModel.addElement("sketch", sketchPath, "na")
 
         editSketchSheet.close();
     }
