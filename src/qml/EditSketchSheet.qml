@@ -99,7 +99,7 @@ Sheet{
         Drawing {
             id: drawing
             anchors{top: colorButtonRow.bottom; left: parent.left; right: parent.right; bottom: parent.bottom}
-            lineWidth: (drawColor === "white) ? 30 : 2
+            lineWidth: (drawColor === "white") ? 35 : 2
         }
     }
 
