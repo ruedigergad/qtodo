@@ -33,34 +33,14 @@ Sheet{
             commonTools.enabled = false
             drawing.clear()
             blackButton.checked = true
+            drawing.drawColor = "black"
         }else if (status === DialogStatus.Closed){
             commonTools.enabled = true
         }
     }
 
-    buttons: Item {
-        anchors.fill: parent
-        SheetButton{
-            id: rejectButton
-            anchors.left: parent.left
-            anchors.leftMargin: 16
-            anchors.verticalCenter: parent.verticalCenter
-            text: "Cancel"
-            onClicked: editSketchSheet.reject();
-        }
-
-        SheetButton{
-            id: acceptButton
-            anchors.right: parent.right
-            anchors.rightMargin: 16
-            anchors.verticalCenter: parent.verticalCenter
-            platformStyle: SheetButtonAccentStyle { }
-            text: "OK"
-            onClicked: {
-                editSketchSheet.accept()
-            }
-        }
-    }
+    acceptButtonText: "OK"
+    rejectButtonText: "Cancel"
 
     content: Item {
         anchors.fill: parent
