@@ -1,6 +1,6 @@
 Name: qtodo
 Summary: Q ToDo -- A Todo List Organizer
-Version: 0.7.1
+Version: 0.8.0
 Release: 1
 Group: Applications/Productivity
 License: GPLv3
@@ -18,7 +18,7 @@ PkgConfigBR:
 Configure: none
 Builder: qmake 
 Files:
-    - "/usr/share/applications/%{name}.desktop"
+    - "%{_datadir}/applications/%{name}.desktop"
     - "/opt/%{name}"
-    - "/usr/share/icons/hicolor/*/apps/%{name}.png"
-    - "/usr/share/icons/hicolor/*/apps/%{name}.svg"
+    - "%{_datadir}/icons/hicolor/*/apps/%{name}.png"
+    - "%{_datadir}/icons/hicolor/*/apps/%{name}.svg"
