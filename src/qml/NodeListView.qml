@@ -151,15 +151,6 @@ Item{
             height: delegateRectangle.height
             width: parent.width
             
-            function selectItem() {
-                currentIndex = index
-                if(isExpandable){
-                    expandTree()
-                }else{
-                    leafNodeSelected()
-                }
-            }
-
             /*
              * These properties are used to access the item properties/data of
              * the current item as returned via the ListView currentItem property.
@@ -171,24 +162,32 @@ Item{
             property bool done: isDone
             property double progress: elementProgress
 
-                    function getProgress() {
-                        if (done)
-                            return 1
-                        if(progress >= 0)
-                            return progress
-
-                        var idx = treeView.currentLevel == 0 ? index : index + 1
-                        var nTodos = treeView.currentModel.countSubTodos(idx, false, true)
-                        var notDone = treeView.currentModel.countSubTodos(idx, true, true)
-
-//                        console.log(nTodos + " - " + notDone)
-                        if (nTodos <= 0)
-                            return 0
-
-                        return (1 - (notDone / nTodos))
-                    }
-
             property double displayedProgress: getProgress()
+
+            function selectItem() {
+                currentIndex = index
+                if(isExpandable){
+                    expandTree()
+                }else{
+                    leafNodeSelected()
+                }
+            }
+
+            function getProgress() {
+                if (done)
+                    return 1
+                if(progress >= 0)
+                    return progress
+
+                var idx = treeView.currentLevel == 0 ? index : index + 1
+                var nTodos = treeView.currentModel.countSubTodos(idx, false, true)
+                var notDone = treeView.currentModel.countSubTodos(idx, true, true)
+
+                if (nTodos <= 0)
+                    return 0
+
+                return (1 - (notDone / nTodos))
+            }
 
             Item {
                 id: delegateRectangle
