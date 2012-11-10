@@ -320,6 +320,7 @@ Item{
         }
 
         highlightMoveDuration: 200
+        highlightResizeDuration: 150
         highlight: Rectangle {
             id: highlightRectangle
             color: "gray"
