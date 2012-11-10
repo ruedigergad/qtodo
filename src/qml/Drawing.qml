@@ -1,10 +1,13 @@
 /*
- * This file had been taken from the painting example in qmlcanvas.
+ * This file had been initally taken from the painting example in qmlcanvas.
  * At the time this file was taken there was no license attached 
  * to any of the files in the painting example.
  * 
- * Changes include the adaptation of the import statements
- * and the addition of the load function.
+ * Changes (by Ruediger Gad) include the adaptation of the import statements
+ * the addition of the load function, or the introduction of the
+ * backgroundColor property.
+ * These changes come without any warranty and are free for use 
+ * without any further requirements.
  *
  * You can find the original version at:
  * https://qt.gitorious.org/qt-labs/qmlcanvas/trees/master/examples/painting
@@ -21,7 +24,8 @@ Canvas {
     property int paintY
     property int count: 0
     property int lineWidth: 2
-    property variant drawColor: "black"
+    property string drawColor: "black"
+    property string backgroundColor: "white"
     property variant ctx: getContext("2d");
 
     MouseArea {
@@ -54,7 +58,9 @@ Canvas {
     }
 
     function clear() {
-        ctx.clearRect(0, 0, width, height);
+        ctx.fillStyle = backgroundColor
+        ctx.fillRect(0, 0, width, height);
+        ctx.fillStyle = drawColor
     }
 
     // Added by Ruediger Gad

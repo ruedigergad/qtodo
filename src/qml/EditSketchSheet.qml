@@ -79,14 +79,15 @@ Sheet{
             }
             Button {
                 iconSource: "../icons/sketch_erase.png"
-                onClicked: drawing.drawColor = "white"
+                onClicked: drawing.drawColor = drawing.backgroundColor
             }
         }
 
         Drawing {
             id: drawing
             anchors{top: colorButtonRow.bottom; left: parent.left; right: parent.right; bottom: parent.bottom}
-            lineWidth: (drawColor === "white") ? 35 : 3
+            backgroundColor: "lightgray"
+            lineWidth: (drawColor === backgroundColor) ? 35 : 3
         }
     }
 
