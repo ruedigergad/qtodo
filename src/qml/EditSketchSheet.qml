@@ -36,7 +36,7 @@ Sheet{
             if (edit) {
                 drawing.load(sketchPath)
             } else {
-                drawing.clear()
+                drawing.init()
             }
 
             blackButton.checked = true
@@ -86,7 +86,7 @@ Sheet{
         Drawing {
             id: drawing
             anchors{top: colorButtonRow.bottom; left: parent.left; right: parent.right; bottom: parent.bottom}
-            backgroundColor: "lightgray"
+            backgroundColor: mainRectangle.color
             lineWidth: (drawColor === backgroundColor) ? 35 : 3
         }
     }

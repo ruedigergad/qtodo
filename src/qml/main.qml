@@ -48,8 +48,9 @@ PageStackWindow {
         orientationLock: PageOrientation.LockPortrait
 
         Rectangle{
+            id: mainRectangle
             anchors.fill: parent
-            color: "lemonchiffon"
+            color: "lightgoldenrodyellow"
 
             Rectangle {
                 id: header

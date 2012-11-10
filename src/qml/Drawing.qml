@@ -35,18 +35,18 @@ Canvas {
         onClicked: drawPoint();
         onPositionChanged:  {
             if (mousearea.pressed)
-                drawLineSegment();
+                drawLine(paintX, paintY, mousearea.mouseX, mousearea.mouseY);
             paintX = mouseX;
             paintY = mouseY;
         }
     }
 
-    function drawLineSegment() {
+    function drawLine(x1, y1, x2, y2) {
         ctx.beginPath();
         ctx.strokeStyle = drawColor
         ctx.lineWidth = lineWidth
-        ctx.moveTo(paintX, paintY);
-        ctx.lineTo(mousearea.mouseX, mousearea.mouseY);
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
         ctx.stroke();
         ctx.closePath();
     }
@@ -68,5 +68,12 @@ Canvas {
     function load(path) {
         var img = ctx.createImage(path)
         ctx.drawImage(img, 0, 0, width, height)
+    }
+    function init(){
+        clear()
+        ctx.lineWidth = 1
+        ctx.strokeStyle = "salmon"
+        var gap = 3
+        ctx.strokeRect(gap, gap, width - (2*gap), height - (2*gap));
     }
 }
