@@ -95,7 +95,12 @@ Sheet{
         console.log("Saving sketch to: " + sketchPath)
 
         drawing.save(sketchPath)
-        treeView.currentModel.addElement("sketch", sketchPath, "na")
+
+        if (edit) {
+            treeView.currentModel.updateElement(treeView.currentIndex, "sketch", sketchPath, "na")
+        } else {
+            treeView.currentModel.addElement("sketch", sketchPath, "na")
+        }
 
         editSketchSheet.close();
     }

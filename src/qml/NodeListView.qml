@@ -208,6 +208,7 @@ Item{
                         id: elementIcon
                         height: if (tagName !== "sketch") { textDelegate.height }
                         fillMode: Image.PreserveAspectFit
+                        cache: (tagName !== "sketch")
                         source: (tagName === "to-do")
                                 ? "../icons/to-do_" + (isDone ? "done_" : "") + elementColor + ".png"
                                 : (tagName === "sketch")
