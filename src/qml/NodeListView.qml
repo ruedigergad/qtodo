@@ -202,14 +202,16 @@ Item{
                     id: contentDelegate
                     anchors.left: parent.left
                     anchors.right: nextButton.left
-                    height: textDelegate.height
+                    height: elementIcon.height
 
                     Image {
                         id: elementIcon
-                        height: contentDelegate.height
+                        height: if (tagName !== "sketch") { textDelegate.height }
                         fillMode: Image.PreserveAspectFit
                         source: (tagName === "to-do")
                                 ? "../icons/to-do_" + (isDone ? "done_" : "") + elementColor + ".png"
+                                : (tagName === "sketch")
+                                ? elementText
                                 : "../icons/note.png"
                     }
 
