@@ -49,7 +49,7 @@ PageStackWindow {
 
         Rectangle{
             anchors.fill: parent
-            color: "lightgray"
+            color: "lemonchiffon"
 
             Rectangle {
                 id: header
