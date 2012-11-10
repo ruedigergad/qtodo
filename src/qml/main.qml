@@ -27,11 +27,18 @@ PageStackWindow {
     initialPage: mainPage
 
     function editSelectedItem(){
-        editToDoSheet.color = treeView.currentItem.itemColor
-        editToDoSheet.type = treeView.currentItem.type
-        editToDoSheet.text = treeView.currentItem.text
-        editToDoSheet.edit = true
-        editToDoSheet.open()
+        var currentItem = treeView.currentItem
+        if (currentItem.type === "sketch") {
+            editSketchSheet.sketchPath = currentItem.text
+            editSketchSheet.edit = true
+            editSketchSheet.open()
+        } else {
+            editToDoSheet.color = currentItem.itemColor
+            editToDoSheet.type = currentItem.type
+            editToDoSheet.text = currentItem.text
+            editToDoSheet.edit = true
+            editToDoSheet.open()
+        }
     }
 
     Page {

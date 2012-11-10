@@ -3,7 +3,9 @@
  * At the time this file was taken there was no license attached 
  * to any of the files in the painting example.
  * 
- * The only changes made were to adjust the imports.
+ * Changes include the adaptation of the import statements
+ * and the addition of the load function.
+ *
  * You can find the original version at:
  * https://qt.gitorious.org/qt-labs/qmlcanvas/trees/master/examples/painting
  */
@@ -53,5 +55,12 @@ Canvas {
 
     function clear() {
         ctx.clearRect(0, 0, width, height);
+    }
+
+    // Added by Ruediger Gad
+    // Code comes without warranty but is free for use without any further requirements.
+    function load(path) {
+        var img = ctx.createImage(path)
+        ctx.drawImage(img, 0, 0, width, height)
     }
 }

@@ -32,7 +32,13 @@ Sheet{
     onStatusChanged: {
         if (status === DialogStatus.Opening){
             commonTools.enabled = false
-            drawing.clear()
+
+            if (edit) {
+                drawing.load(sketchPath)
+            } else {
+                drawing.clear()
+            }
+
             blackButton.checked = true
             drawing.drawColor = "black"
         }else if (status === DialogStatus.Closed){
