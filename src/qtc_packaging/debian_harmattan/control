@@ -8,7 +8,7 @@ Homepage: http://ruedigergad.github.com/qtodo
 
 Package: qtodo
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, qmlcanvas
 Description: Q To-Do is a simple to-do list organizer.
  Q To-Do allows to maintain nested to-do's and additional notes. You can indicate the importance of a to-do via four colors and mark to-do's as done.
  Q To-Do is a Qt/QML port of To-Do-O.

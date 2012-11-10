@@ -1,3 +1,10 @@
+qtodo (0.8.1) unstable; urgency=low
+
+  * Change background color.
+  * Fix dependencies.
+
+ -- Ruediger Gad <r.c.g@gmx.de>  Sun, 11 Nov 2012 00:24:00 +0200
+
 qtodo (0.8.0) unstable; urgency=low
 
   * Add functionality to add sketches.

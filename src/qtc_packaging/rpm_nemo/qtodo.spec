@@ -9,13 +9,14 @@ Name:       qtodo
 # << macros
 
 Summary:    Q ToDo -- A Todo List Organizer
-Version:    0.8.0
+Version:    0.8.1
 Release:    1
 Group:      Applications/Productivity
 License:    GPLv3
 URL:        http://ruedigergad.github.com/qtodo
 Source0:    %{name}_%{version}.tar.gz
 Source100:  qtodo.yaml
+Requires:   qmlcanvas
 BuildRequires:  pkgconfig(QtCore) >= 4.7.0
 BuildRequires:  pkgconfig(QtGui)
 BuildRequires:  pkgconfig(qdeclarative-boostable)
