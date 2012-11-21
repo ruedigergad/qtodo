@@ -191,28 +191,44 @@ Item{
 
             Item {
                 id: delegateRectangle
-                width: parent.width
-                height: contentDelegate.height
+                width: tagName === "sketch" ? sketchContentDelegate.width : parent.width
+                height: tagName === "sketch" ? sketchContentDelegate.height : textContentDelegate.height 
 
                 /*
                  * Begin of custom code to display the data. Here the Q To-Do to-do or
                  * note elements are shown. Customize this to display your own stuff.
                  */
                 Item {
-                    id: contentDelegate
+                    id: sketchContentDelegate
+                    anchors.left: parent.left
+                    visible: tagName === "sketch"
+                    height: sketchImage.height
+                    width: sketchImage.width
+
+                    Image {
+                        id: sketchImage
+                        fillMode: Image.PreserveAspectFit
+                        cache: false
+                        source: tagName === "sketch" ? elementText : ""
+                        height: sourceSize.height * 0.5
+                        width: sourceSize.width * 0.5
+                    }
+                }
+
+                Item {
+                    id: textContentDelegate
                     anchors.left: parent.left
                     anchors.right: nextButton.left
                     height: elementIcon.height
 
+                    visible: tagName !== "sketch"
+
                     Image {
                         id: elementIcon
-                        height: if (tagName !== "sketch") { textDelegate.height }
+                        height: textDelegate.height
                         fillMode: Image.PreserveAspectFit
-                        cache: (tagName !== "sketch")
-                        source: (tagName === "to-do")
+                        source: tagName === "to-do"
                                 ? "../icons/to-do_" + (isDone ? "done_" : "") + elementColor + ".png"
-                                : (tagName === "sketch")
-                                ? elementText
                                 : "../icons/note.png"
                     }
 
@@ -276,7 +292,7 @@ Item{
                     id: nextButton
                     anchors.right: parent.right
                     width: (! isExpandable) ? 0 : 40
-                    height: contentDelegate.height
+                    height: parent.height
 
                     Rectangle{
                         id: button
