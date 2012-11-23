@@ -123,7 +123,7 @@ Item{
         }
     }
 
-    ListView{
+    FlowListView{
         id: nodeListView
         anchors.fill: parent
 
@@ -149,7 +149,7 @@ Item{
         delegate: Item {
             id: delegateItem
             height: delegateRectangle.height
-            width: parent.width
+            width: delegateRectangle.width
             
             /*
              * These properties are used to access the item properties/data of
@@ -191,7 +191,7 @@ Item{
 
             Item {
                 id: delegateRectangle
-                width: tagName === "sketch" ? sketchContentDelegate.width : parent.width
+                width: tagName === "sketch" ? sketchContentDelegate.width : nodeListView.width
                 height: tagName === "sketch" ? sketchContentDelegate.height : textContentDelegate.height 
 
                 /*
@@ -210,8 +210,8 @@ Item{
                         fillMode: Image.PreserveAspectFit
                         cache: false
                         source: tagName === "sketch" ? elementText : ""
-                        height: sourceSize.height * 0.5
-                        width: sourceSize.width * 0.5
+                        height: sourceSize.height * (width / sourceSize.width)
+                        width: nodeListView.width * 0.5
                     }
                 }
 
@@ -333,23 +333,14 @@ Item{
                     radius: 10
                     opacity: contentMouseArea.pressed ? 0.3 : 0
                 }
-            }
-        }
 
-        highlightMoveDuration: 200
-        highlightResizeDuration: highlightMoveDuration
-        highlight: Rectangle {
-            id: highlightRectangle
-            color: "gray"
-            width: parent.width
-            /*
-             * Set z to a seemingly insane high value. For some strange/unknown reason the
-             * the highlight is not shown at all with z=0. For z=1 the highligh is shown but
-             * disappears for parts that had been at least once out of the screen bounds
-             * (i.e. had not been visible in the list). Hence, just in case set z=32.
-             */
-            z:32
-            opacity: 0.4
+                Rectangle {
+                    id: highlight
+                    anchors.fill: parent
+                    color: "gray"
+                    opacity: nodeListView.currentIndex === index ? 0.5 : 0
+                }
+            }
         }
     }
 }

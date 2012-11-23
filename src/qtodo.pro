@@ -42,7 +42,8 @@ OTHER_FILES += \
     qml/nodelisthelper.js \
     qml/TreeView.qml \
     qml/EditToDoSheet.qml \
-    qml/AboutDialog.qml
+    qml/AboutDialog.qml \
+    qml/FlowListView.qml
 
 #RESOURCES += \
 #    res.qrc
