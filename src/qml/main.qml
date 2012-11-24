@@ -143,6 +143,11 @@ PageStackWindow {
                 }
             }
         }
+        ToolIcon { id: iconDelete; platformIconId: "toolbar-delete"
+            enabled: treeView.currentIndex >= 0
+            opacity: enabled ? 1 : 0.5
+            onClicked: confirmDeleteDialog.open()
+        }
         ToolIcon { id: iconBack; iconSource: "../icons/back.png"
             enabled: treeView.currentLevel > 0
             opacity: enabled ? 1 : 0.5
