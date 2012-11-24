@@ -112,9 +112,11 @@ Item {
     Component.onCompleted: {
         NodeListHelper.views.push(rootListView)
         listViewCount++
-        currentItem = rootListView.currentItem
         currentIndex = rootListView.currentIndex
         currentModel = model
+        if (rootListView.currentIndex >= 0) {
+            currentItem = rootListView.currentItem
+        }
     }
 
     onCurrentLevelChanged: {

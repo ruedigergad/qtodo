@@ -38,7 +38,7 @@ Flickable {
     contentHeight: flow.childrenRect.height
 
     property alias count: repeater.count
-    property int currentIndex: 0
+    property int currentIndex: -1
     property variant currentItem;
     property alias delegate: repeater.delegate
     property alias flow: flow.flow
@@ -54,6 +54,12 @@ Flickable {
 
         Repeater {
             id: repeater
+
+            onCountChanged: {
+                if (flowListView.currentIndex === -1 && count > 0) {
+                    flowListView.currentIndex = 0
+                }
+            }
         }
     }
 }
