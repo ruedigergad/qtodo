@@ -22,9 +22,8 @@
  *  of the GNU Lesser General Public License (LGPL) as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
- *  Files considered part of the TreeView are: TreeView.qml, NodeListView.qml,
- *  and nodelisthelper.js. These files are additionally licensed under the
- *  terms of the LGPL.
+ *  File considered part of the FlowListView is this file, FlowListView.qml.
+ *  This file is additionally licensed under the terms of the LGPL.
  *
  */
 
