@@ -134,6 +134,7 @@ PageStackWindow {
             }
         }
         ToolIcon { id: iconMarkDone; platformIconId: "toolbar-done"
+            enabled: treeView.currentItem.type === "to-do"
             opacity: enabled ? 1 : 0.5
             onClicked: {
                 if(treeView.currentItem.done){
