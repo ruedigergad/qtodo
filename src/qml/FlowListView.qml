@@ -44,6 +44,11 @@ Flickable {
     property alias model: repeater.model
 
     onCurrentIndexChanged: {
+        // Note: in the "normal" FlowListView we do:
+        // currentItem = model.get(currentIndex)
+        // However, with our current model we need to do it as follows.
+        // Note that we are "re-exposing" the model properties via properties
+        // of our delegate.
         currentItem = repeater.itemAt(currentIndex)
     }
 
@@ -57,6 +62,9 @@ Flickable {
             onCountChanged: {
                 if (flowListView.currentIndex === -1 && count > 0) {
                     flowListView.currentIndex = 0
+                }
+                if (flowListView.currentIndex >= count) {
+                    flowListView.currentIndex = count - 1
                 }
             }
         }
