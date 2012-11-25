@@ -74,16 +74,11 @@ PageStackWindow {
                 color: parent.color
 
                 onCurrentItemChanged: {
+                    console.log(currentItem.type)
                     if(currentItem === null) {
                         iconMarkDone.enabled = false
                     }else{
-                        iconMarkDone.enabled = true
-
-                        if(currentItem.type === "note"){
-                            iconMarkDone.enabled = false
-                        }else{
-                            iconMarkDone.enabled = true
-                        }
+                        iconMarkDone.enabled = currentItem.type === "to-do"
                     }
                 }
                 onDoubleClicked: editSelectedItem()
