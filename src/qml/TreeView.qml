@@ -122,8 +122,10 @@ Item {
     onCurrentLevelChanged: {
         if(currentLevel >= 0 && currentLevel < listViewCount){
             flickable.contentX = currentLevel * treeView.width
-            currentItem = NodeListHelper.views[currentLevel].currentItem
             currentModel = NodeListHelper.views[currentLevel].model
+            if (NodeListHelper.views[currentLevel] >= 0) {
+                currentItem = NodeListHelper.views[currentLevel].currentItem
+            }
         }else if (currentLevel >= listViewCount){
             console.log("Tried to exceed number of available levels.")
             currentLevel--
