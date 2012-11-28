@@ -24,7 +24,8 @@ symbian:TARGET.CAPABILITY += NetworkServices
 # The .cpp file which was generated for your project. Feel free to hack it.
 SOURCES += main.cpp \
     todostorage.cpp \
-    nodelistmodel.cpp
+    nodelistmodel.cpp \
+    filehelper.cpp
 
 
 OTHER_FILES += \
@@ -81,4 +82,5 @@ QMAKE_LFLAGS += -pie -rdynamic
 
 HEADERS += \
     todostorage.h \
-    nodelistmodel.h
+    nodelistmodel.h \
+    filehelper.h

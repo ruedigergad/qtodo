@@ -1,3 +1,11 @@
+qtodo (0.8.2) unstable; urgency=low
+
+  * Use FlowListView.
+  * Place two figures side-by-side.
+  * Delete figure when deleting a sketch entry.
+
+ -- Ruediger Gad <r.c.g@gmx.de>  Wed, 28 Nov 2012 23:50:00 +0200
+
 qtodo (0.8.1) unstable; urgency=low
 
   * Change background color.

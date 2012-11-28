@@ -22,6 +22,7 @@
 #include <QtGui/QApplication>
 #include <QtDeclarative>
 
+#include <filehelper.h>
 #include <nodelistmodel.h>
 #include <todostorage.h>
 
@@ -30,6 +31,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QApplication *app = MDeclarativeCache::qApplication(argc, argv);
     QDeclarativeView *view = MDeclarativeCache::qDeclarativeView();
 
+    qmlRegisterType<FileHelper>("qtodo", 1, 0, "FileHelper");
     qmlRegisterType<NodeListModel>("qtodo", 1, 0, "NodeListModel");
     qmlRegisterType<ToDoStorage>("qtodo", 1, 0, "ToDoStorage");
 

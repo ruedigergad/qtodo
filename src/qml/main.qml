@@ -99,8 +99,16 @@ PageStackWindow {
         acceptButtonText: "OK"
         rejectButtonText: "Cancel"
 
-        onAccepted: treeView.currentModel.deleteElement(treeView.currentIndex)
+        onAccepted: {
+            var currentItem = treeView.currentItem
+            if (currentItem.type === "sketch") {
+                fileHelper.rm(currentItem.text)
+            }
+            treeView.currentModel.deleteElement(treeView.currentIndex)
+        }
     }
+
+    FileHelper {id: fileHelper }
 
     EditToDoSheet { id: editToDoSheet }
 
