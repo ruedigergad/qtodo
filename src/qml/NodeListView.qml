@@ -36,6 +36,7 @@ Item {
     property alias model: nodeListView.model
     property alias currentIndex: nodeListView.currentIndex
     property alias currentItem: nodeListView.currentItem
+    property int level;
 
     signal countChanged(int count)
     signal expandTree()
@@ -133,6 +134,10 @@ Item {
         }
 
         onCurrentIndexChanged: {
+            if(treeView.currentLevel !== level) {
+                return
+            }
+
             /*
              * Only update the TreeView current item and index if there had actually a
              * valid item been selected. An index of -1 is used to clear the selection
@@ -179,7 +184,7 @@ Item {
                 if(progress >= 0)
                     return progress
 
-                var idx = treeView.currentLevel == 0 ? index : index + 1
+                var idx = treeView.currentLevel === 0 ? index : index + 1
                 var nTodos = treeView.currentModel.countSubTodos(idx, false, true)
                 var notDone = treeView.currentModel.countSubTodos(idx, true, true)
 

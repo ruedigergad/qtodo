@@ -35,7 +35,8 @@ function createNextView(parentView) {
 
     var viewString = "import QtQuick 1.1; import qtodo 1.0; "
         + "NodeListView{ "
-        + "id: nodeListView" + treeView.listViewCount +"; "
+        + "id: nodeListView" + treeView.listViewCount + "; "
+        + "level: " + treeView.listViewCount + "; "
         + "width: treeView.width; "
         + "anchors.left: parent.right; "
         + "anchors.top: parent.top; "
