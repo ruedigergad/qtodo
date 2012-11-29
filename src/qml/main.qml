@@ -205,8 +205,6 @@ PageStackWindow {
 
     NodeListModel {
         id: rootElementModel
-
-        onChanged: storage.save()
     }
 
     ToDoStorage {

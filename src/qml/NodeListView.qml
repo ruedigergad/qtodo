@@ -37,6 +37,7 @@ Item {
     property alias currentIndex: nodeListView.currentIndex
     property alias currentItem: nodeListView.currentItem
     property int level;
+    property int tempIndex;
 
     signal countChanged(int count)
     signal expandTree()
@@ -53,6 +54,20 @@ Item {
             return "#c20000"
 
         return "#00ff00"
+    }
+
+    Connections {
+        target: model
+
+        onChanged: {
+            storage.save()
+            currentIndex = -1
+            currentIndex = tempIndex
+        }
+
+        onModelAboutToBeReset: {
+            tempIndex = currentIndex
+        }
     }
 
     function updateLabels() {
@@ -133,7 +148,7 @@ Item {
             updateLabels()
         }
 
-        onCurrentIndexChanged: {
+        onCurrentItemChanged: {
             if(treeView.currentLevel !== level) {
                 return
             }

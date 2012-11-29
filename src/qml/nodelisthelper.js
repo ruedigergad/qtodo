@@ -45,7 +45,7 @@ function createNextView(parentView) {
      * TODO: Calling save here is quite ugly. This should better be done at a central place.
      *       For the time being this should work though.
      */
-        + "model: NodeListModel{ id: elementListModel"+ treeView.listViewCount + "; onChanged: storage.save() } "
+        + "model: NodeListModel{ id: elementListModel"+ treeView.listViewCount + " } "
         + "}"
 
     console.log(viewString);
