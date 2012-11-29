@@ -30,7 +30,7 @@
 
 import QtQuick 1.1
 
-Item{
+Item {
     id: nodeListItem
 
     property alias model: nodeListView.model
@@ -41,7 +41,7 @@ Item{
     signal expandTree()
     signal leafNodeSelected()
 
-    function getColor(colorString){
+    function getColor(colorString) {
         if(colorString === "blue")
             return "#2c81c8"
         if(colorString === "green")
@@ -54,7 +54,7 @@ Item{
         return "#00ff00"
     }
 
-    function updateLabels(){
+    function updateLabels() {
         var listEmpty = (nodeListView.model.rowCount() <= 0)
         emptyListRectangle.visible = listEmpty
     }
@@ -68,7 +68,7 @@ Item{
         treeView.clearSubLists()
     }
 
-    Rectangle{
+    Rectangle {
         id: emptyListRectangle
         anchors.fill: parent
         color: treeView.color
@@ -89,7 +89,7 @@ Item{
         }
     }
 
-    PinchArea{
+    PinchArea {
         id: dndArea
         anchors.fill: parent
 
@@ -115,7 +115,7 @@ Item{
 
         onPinchFinished: storage.save()
 
-        function moveItem(targetIndex){
+        function moveItem(targetIndex) {
             if(targetIndex >= 0 && targetIndex < nodeListView.count){
                 nodeListView.model.move(nodeListView.currentIndex, targetIndex, 1)
                 nodeListView.currentIndex = targetIndex
@@ -123,7 +123,7 @@ Item{
         }
     }
 
-    FlowListView{
+    FlowListView {
         id: nodeListView
         anchors.fill: parent
 
@@ -139,7 +139,7 @@ Item{
              * of the ListView from the TreeView. Hence, we do not want this change
              * to propagate back to the TreeView.
              */
-            if(currentIndex >= 0){
+            if(currentIndex >= 0) {
                 treeView.currentItem = currentItem
                 treeView.currentIndex = currentIndex
                 updateLabels()
@@ -274,7 +274,7 @@ Item{
                  * End of custom code for displaying the data.
                  */
 
-                MouseArea{
+                MouseArea {
                     id: contentMouseArea
                     anchors.fill: parent
                     onClicked: selectItem()
@@ -314,7 +314,7 @@ Item{
                             source: "../icons/next.png"
                         }
 
-                        MouseArea{
+                        MouseArea {
                             id: nextMouseArea
                             anchors.fill: parent
 
