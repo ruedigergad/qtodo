@@ -105,10 +105,8 @@ Item {
          * as well. Besides, this would yield in an incorrectly displayed
          * highlight.
          */
-        var itm = currentItem
         NodeListHelper.views[currentLevel+1].currentIndex = -1
         NodeListHelper.views[currentLevel+1].model.setParentFromSelection(model, index)
-        currentItem = itm
     }
 
     Component.onCompleted: {

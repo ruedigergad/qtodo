@@ -167,8 +167,8 @@ PageStackWindow {
         }
         ToolIcon {
             id: iconMenu; platformIconId: "toolbar-view-menu"
-            anchors.right: parent===undefined ? undefined : parent.right
-            onClicked: (myMenu.status == DialogStatus.Closed) ? myMenu.open() : myMenu.close()
+            anchors.right: parent === undefined ? undefined : parent.right
+            onClicked: myMenu.status === DialogStatus.Closed ? myMenu.open() : myMenu.close()
             opacity: enabled ? 1 : 0.5
         }
     }
