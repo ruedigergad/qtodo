@@ -26,7 +26,7 @@ PageStackWindow {
 
     initialPage: mainPage
 
-    function editSelectedItem(){
+    function editSelectedItem() {
         var currentItem = treeView.currentItem
         if (currentItem.type === "sketch") {
             editSketchSheet.sketchPath = currentItem.text
@@ -108,7 +108,7 @@ PageStackWindow {
         }
     }
 
-    FileHelper {id: fileHelper }
+    FileHelper { id: fileHelper }
 
     EditToDoSheet { id: editToDoSheet }
 
@@ -118,7 +118,8 @@ PageStackWindow {
         id: commonTools
         visible: true
 
-        ToolIcon { id: iconAdd; platformIconId: "toolbar-add"
+        ToolIcon {
+            id: iconAdd; platformIconId: "toolbar-add"
             opacity: enabled ? 1 : 0.5
             onClicked: {
                 editToDoSheet.color = "blue"
@@ -128,7 +129,8 @@ PageStackWindow {
                 editToDoSheet.open()
             }
         }
-        ToolIcon { id: iconSketch; iconSource: "../icons/sketch.png"
+        ToolIcon {
+            id: iconSketch; iconSource: "../icons/sketch.png"
             opacity: enabled ? 1 : 0.5
             onClicked: {
                 editSketchSheet.edit = false
@@ -136,7 +138,8 @@ PageStackWindow {
                 editSketchSheet.open()
             }
         }
-        ToolIcon { id: iconMarkDone; platformIconId: "toolbar-done"
+        ToolIcon {
+            id: iconMarkDone; platformIconId: "toolbar-done"
             enabled: treeView.currentItem.type === "to-do"
             opacity: enabled ? 1 : 0.5
             onClicked: {
@@ -147,7 +150,8 @@ PageStackWindow {
                 }
             }
         }
-        ToolIcon { id: iconDelete; platformIconId: "toolbar-delete"
+        ToolIcon {
+            id: iconDelete; platformIconId: "toolbar-delete"
             enabled: treeView.currentIndex >= 0
             opacity: enabled ? 1 : 0.5
             onClicked: {
@@ -155,15 +159,17 @@ PageStackWindow {
                 confirmDeleteDialog.open()
             }
         }
-        ToolIcon { id: iconBack; iconSource: "../icons/back.png"
+        ToolIcon {
+            id: iconBack; iconSource: "../icons/back.png"
             enabled: treeView.currentLevel > 0
             opacity: enabled ? 1 : 0.5
             onClicked: treeView.currentLevel--
         }
-        ToolIcon { id: iconMenu; platformIconId: "toolbar-view-menu"
-             anchors.right: parent===undefined ? undefined : parent.right
-             onClicked: (myMenu.status == DialogStatus.Closed) ? myMenu.open() : myMenu.close()
-             opacity: enabled ? 1 : 0.5
+        ToolIcon {
+            id: iconMenu; platformIconId: "toolbar-view-menu"
+            anchors.right: parent===undefined ? undefined : parent.right
+            onClicked: (myMenu.status == DialogStatus.Closed) ? myMenu.open() : myMenu.close()
+            opacity: enabled ? 1 : 0.5
         }
     }
 
@@ -197,13 +203,13 @@ PageStackWindow {
         }
     }
 
-    NodeListModel{
+    NodeListModel {
         id: rootElementModel
 
         onChanged: storage.save()
     }
 
-    ToDoStorage{
+    ToDoStorage {
         id: storage
 
         onDocumentOpened: {
