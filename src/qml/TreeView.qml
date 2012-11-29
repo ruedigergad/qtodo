@@ -61,7 +61,7 @@ Item {
     property int currentIndex: -1
     property QtObject currentModel: null
 
-    function addView(parentView){
+    function addView(parentView) {
         console.log("Entering addView...")
         if(NodeListHelper.views.length < (currentLevel + 2) ){
             console.log("Creating new sub view...")
@@ -71,7 +71,7 @@ Item {
         }
     }
 
-    function clearSubLists(){
+    function clearSubLists() {
         console.log("Entering clearSublists...")
         /*
          * If a leaf node is selected all sub lists need to be cleared.
@@ -83,7 +83,7 @@ Item {
         NodeListHelper.views.length = listViewCount
     }
 
-    function updateSubView(model, index){
+    function updateSubView(model, index) {
         console.log("Updating sub view for level: " + currentLevel)
         if (NodeListHelper.views.length >= currentLevel + 2) {
             /*
@@ -126,10 +126,10 @@ Item {
             if (NodeListHelper.views[currentLevel] >= 0) {
                 currentItem = NodeListHelper.views[currentLevel].currentItem
             }
-        }else if (currentLevel >= listViewCount){
+        } else if (currentLevel >= listViewCount) {
             console.log("Tried to exceed number of available levels.")
             currentLevel--
-        }else{
+        } else {
             console.log("Invalid current level given: " + currentLevel)
             console.log("List view count is: " + listViewCount)
         }
@@ -159,7 +159,7 @@ Item {
             }
         }
 
-        Rectangle{
+        Rectangle {
             id: listsRectangle
             width: treeView.width * listViewCount
             anchors.left: parent.left
@@ -178,9 +178,9 @@ Item {
 
         onFlickStarted: {
             animationIsRunning = true
-            if(horizontalVelocity > 0){
+            if(horizontalVelocity > 0) {
                 currentLevel = Math.min(++currentLevel, listViewCount)
-            }else{
+            } else {
                 currentLevel = Math.max(--currentLevel, 0)
             }
         }
@@ -191,11 +191,11 @@ Item {
          * This is done to avoid stopping "in between" to lists.
          */
         onMovementEnded: {
-            if(! animationIsRunning){
+            if(! animationIsRunning) {
                 var newLevel = Math.floor((contentX + 0.5 * treeView.width) / treeView.width)
                 if(currentLevel === newLevel){
                     contentX = currentLevel * treeView.width
-                }else{
+                } else {
                     currentLevel = newLevel
                 }
             }
