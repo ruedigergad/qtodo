@@ -196,8 +196,8 @@ Item {
             function getProgress() {
                 if (done)
                     return 1
-                if(progress >= 0)
-                    return progress
+//                if(progress >= 0)
+//                    return progress
 
                 var idx = treeView.currentLevel === 0 ? index : index + 1
                 var nTodos = treeView.currentModel.countSubTodos(idx, false, true)
@@ -262,7 +262,11 @@ Item {
                             id: progressBar
                             anchors.left: parent.left
                             height: parent.height
-                            width: displayedProgress * parent.width
+                            width: {
+                                return (displayedProgress > 0) && (displayedProgress <= 1) ?
+                                            displayedProgress * parent.width :
+                                            0
+                            }
                             color: "#aaaaaa"
 //                            opacity: 0.2
                         }
