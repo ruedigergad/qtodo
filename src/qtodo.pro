@@ -1,5 +1,19 @@
 # Add more folders to ship with the application, here
 
+exists($$QMAKE_INCDIR_QT"/../applauncherd/MDeclarativeCache"): {
+    MEEGO_VERSION_MAJOR     = 1
+    MEEGO_VERSION_MINOR     = 2
+    MEEGO_VERSION_PATCH     = 0
+    MEEGO_EDITION           = harmattan
+
+    DEFINES += MEEGO_EDITION_HARMATTAN
+
+    # enable booster
+    CONFIG += qdeclarative-boostable
+    QMAKE_CXXFLAGS += -fPIC -fvisibility=hidden -fvisibility-inlines-hidden
+    QMAKE_LFLAGS += -pie -rdynamic
+}
+
 # Additional import path used to resolve QML modules in Creator's code model
 QML_IMPORT_PATH =
 
@@ -20,13 +34,17 @@ symbian:TARGET.CAPABILITY += NetworkServices
 # lines and add the respective components to the MOBILITY variable.
 # CONFIG += mobility
 # MOBILITY +=
+# QT += opengl
 
-# The .cpp file which was generated for your project. Feel free to hack it.
+HEADERS += \
+    todostorage.h \
+    nodelistmodel.h \
+    filehelper.h
+
 SOURCES += main.cpp \
     todostorage.cpp \
     nodelistmodel.cpp \
     filehelper.cpp
-
 
 OTHER_FILES += \
     qml/main.qml \
@@ -74,13 +92,3 @@ qtcAddDeployment()
 splash.files = splash.png
 splash.path = /opt/qtodo
 INSTALLS += splash
-
-# enable booster
-CONFIG += qdeclarative-boostable
-QMAKE_CXXFLAGS += -fPIC -fvisibility=hidden -fvisibility-inlines-hidden
-QMAKE_LFLAGS += -pie -rdynamic
-
-HEADERS += \
-    todostorage.h \
-    nodelistmodel.h \
-    filehelper.h

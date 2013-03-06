@@ -17,7 +17,9 @@
  *  along with Q To-Do.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifdef MEEGO_EDITION_HARMATTAN
 #include <applauncherd/MDeclarativeCache>
+#endif
 
 #include <QtGui/QApplication>
 #include <QtDeclarative>
@@ -28,13 +30,23 @@
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
+#ifdef MEEGO_EDITION_HARMATTAN
     QApplication *app = MDeclarativeCache::qApplication(argc, argv);
     QDeclarativeView *view = MDeclarativeCache::qDeclarativeView();
+#else
+    QApplication *app = new QApplication(argc, argv);
+    QDeclarativeView *view = new QDeclarativeView();
+#endif
 
     qmlRegisterType<FileHelper>("qtodo", 1, 0, "FileHelper");
     qmlRegisterType<NodeListModel>("qtodo", 1, 0, "NodeListModel");
     qmlRegisterType<ToDoStorage>("qtodo", 1, 0, "ToDoStorage");
 
+//    view->setViewport(new QGLWidget());
+    view->setAttribute(Qt::WA_OpaquePaintEvent);
+    view->setAttribute(Qt::WA_NoSystemBackground);
+    view->viewport()->setAttribute(Qt::WA_OpaquePaintEvent);
+    view->viewport()->setAttribute(Qt::WA_NoSystemBackground);
     view->setSource(QUrl("/opt/qtodo/qml/main.qml"));
     view->showFullScreen();
 
