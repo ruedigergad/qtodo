@@ -1,5 +1,5 @@
 /*
- *  Copyright 2011 Ruediger Gad
+ *  Copyright 2011, 2012, 2013 Ruediger Gad
  *
  *  This file is part of Q To-Do..
  *
