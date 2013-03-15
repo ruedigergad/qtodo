@@ -42,16 +42,19 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qmlRegisterType<NodeListModel>("qtodo", 1, 0, "NodeListModel");
     qmlRegisterType<ToDoStorage>("qtodo", 1, 0, "ToDoStorage");
 
-//    view->setViewport(new QGLWidget());
     view->setAttribute(Qt::WA_OpaquePaintEvent);
     view->setAttribute(Qt::WA_NoSystemBackground);
     view->viewport()->setAttribute(Qt::WA_OpaquePaintEvent);
     view->viewport()->setAttribute(Qt::WA_NoSystemBackground);
-    view->setSource(QUrl("/opt/qtodo/qml/main.qml"));
-    view->showFullScreen();
 
-//    view.setResizeMode(QDeclarativeView::SizeRootObjectToView);
-//    view.resize(500, 400);
-//    view.show();
+#ifdef MEEGO_EDITION_HARMATTAN
+    view->setSource(QUrl("qml/meego/main.qml"));
+    view->showFullScreen();
+#else
+    view->setSource(QUrl("qml/desktop/main.qml"));
+    view->setResizeMode(QDeclarativeView::SizeRootObjectToView);
+    view->resize(500, 600);
+    view->show();
+#endif
     return app->exec();
 }

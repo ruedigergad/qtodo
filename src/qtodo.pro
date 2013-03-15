@@ -12,7 +12,28 @@ exists($$QMAKE_INCDIR_QT"/../applauncherd/MDeclarativeCache"): {
     CONFIG += qdeclarative-boostable
     QMAKE_CXXFLAGS += -fPIC -fvisibility=hidden -fvisibility-inlines-hidden
     QMAKE_LFLAGS += -pie -rdynamic
+
+    qmlMeego.source = qml/meego
+    qmlMeego.target = qml
+
+    qmlMeegoCommon.source = qml/meego/common
+    qmlMeegoCommon.target = qml
+
+    DEPLOYMENTFOLDERS += qmlMeego qmlMeegoCommon
+} else {
+    qmlDesktop.source = qml/desktop
+    qmlDesktop.target = qml
+
+    qmlDesktopCommon.source = qml/desktop/common
+    qmlDesktopCommon.target = qml
+
+    DEPLOYMENTFOLDERS += qmlDesktop qmlDesktopCommon
 }
+
+qmlCommon.source = qml/common
+qmlCommon.target = qml
+
+DEPLOYMENTFOLDERS += qmlCommon
 
 # Additional import path used to resolve QML modules in Creator's code model
 QML_IMPORT_PATH =
@@ -47,7 +68,6 @@ SOURCES += main.cpp \
     filehelper.cpp
 
 OTHER_FILES += \
-    qml/main.qml \
     qtodo.desktop \
     qtodo.svg \
     qtodo.png \
@@ -57,12 +77,15 @@ OTHER_FILES += \
     qtc_packaging/debian_harmattan/control \
     qtc_packaging/debian_harmattan/compat \
     qtc_packaging/debian_harmattan/changelog \
-    qml/NodeListView.qml \
-    qml/nodelisthelper.js \
-    qml/TreeView.qml \
-    qml/EditToDoSheet.qml \
-    qml/AboutDialog.qml \
-    qml/FlowListView.qml
+    qml/common/AboutDialog.qml \
+    qml/common/Drawing.qml \
+    qml/common/FlowListView.qml \
+    qml/common/NodeListView.qml \
+    qml/common/nodelisthelper.js \
+    qml/common/TreeView.qml \
+    qml/meego/EditSketchSheet.qml \
+    qml/meego/EditToDoSheet.qml \
+    qml/meego/main.qml
 
 #RESOURCES += \
 #    res.qrc
