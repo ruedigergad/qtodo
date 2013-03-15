@@ -25,6 +25,8 @@ Rectangle {
     property alias text: textItem.text
     property alias font: textItem.font
 
+    property string iconSource;
+
     signal clicked
 
     width: textItem.width + 40; height: textItem.height + 10

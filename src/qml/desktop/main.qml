@@ -39,4 +39,8 @@ Rectangle {
     Menu {
         id: myMenu
     }
+
+    EditToDoSheet {
+        id: editToDoSheet
+    }
 }

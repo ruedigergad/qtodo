@@ -81,7 +81,7 @@ Item {
             id: menuArea
             anchors.centerIn: parent
             width: parent.width - 20
-            height: 5 * changePassword.height + 40
+            height: 5 * about.height + 40
 
             color:"white"
             radius: 20
