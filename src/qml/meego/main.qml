@@ -47,7 +47,8 @@ PageStackWindow {
         visible: true
 
         ToolIcon {
-            id: iconAdd; platformIconId: "toolbar-add"
+            id: iconAdd
+            platformIconId: "toolbar-add"
             opacity: enabled ? 1 : 0.5
             onClicked: {
                 editToDoSheet.color = "blue"
@@ -58,7 +59,8 @@ PageStackWindow {
             }
         }
         ToolIcon {
-            id: iconSketch; iconSource: "../icons/sketch.png"
+            id: iconSketch
+            iconSource: "../icons/sketch.png"
             opacity: enabled ? 1 : 0.5
             onClicked: {
                 editSketchSheet.edit = false
@@ -67,7 +69,8 @@ PageStackWindow {
             }
         }
         ToolIcon {
-            id: iconMarkDone; platformIconId: "toolbar-done"
+            id: iconMarkDone
+            platformIconId: "toolbar-done"
             enabled: treeView.currentItem.type === "to-do"
             opacity: enabled ? 1 : 0.5
             onClicked: {
@@ -79,7 +82,8 @@ PageStackWindow {
             }
         }
         ToolIcon {
-            id: iconDelete; platformIconId: "toolbar-delete"
+            id: iconDelete
+            platformIconId: "toolbar-delete"
             enabled: treeView.currentIndex >= 0
             opacity: enabled ? 1 : 0.5
             onClicked: {
@@ -88,13 +92,15 @@ PageStackWindow {
             }
         }
         ToolIcon {
-            id: iconBack; iconSource: "../icons/back.png"
+            id: iconBack
+            iconSource: "../icons/back.png"
             enabled: treeView.currentLevel > 0
             opacity: enabled ? 1 : 0.5
             onClicked: treeView.currentLevel--
         }
         ToolIcon {
-            id: iconMenu; platformIconId: "toolbar-view-menu"
+            id: iconMenu
+            platformIconId: "toolbar-view-menu"
             anchors.right: parent === undefined ? undefined : parent.right
             onClicked: myMenu.status === DialogStatus.Closed ? myMenu.open() : myMenu.close()
             opacity: enabled ? 1 : 0.5
