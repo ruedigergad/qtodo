@@ -58,7 +58,7 @@ Item {
         id: menuBorder
         y: parent.height
         width: parent.width
-        height: menuArea.height + 40
+        height: menuArea.height
 
         color: "lightgray"
         opacity: 1
@@ -87,54 +87,6 @@ Item {
             radius: 20
 
             CommonButton{
-                id: changePassword
-                anchors.bottom: exportButton.top
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width - 40
-                text: "Change Password"
-                onClicked: {
-                    menu.close()
-                    passwordChangeDialog.open()
-                }
-            }
-            CommonButton{
-                id: exportButton
-                anchors.bottom: importButton.top
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width - 40
-                text: "Export"
-                onClicked: {
-                    menu.close();
-                    entryStorage.exportKeePassXml()
-                }
-            }
-            CommonButton{
-                id: importButton
-                anchors.bottom: deleteEntry.top
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width - 40
-                text: "Import"
-                onClicked: {
-                    menu.close();
-                    entryStorage.importKeePassXml()
-                }
-            }
-            CommonButton{
-                id: deleteEntry
-                anchors.bottom: about.top
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width - 40
-                text: "Delete Entry"
-
-                onClicked: {
-                    var index = entryListView.currentIndex
-                    deleteConfirmationDialog.index = index
-                    deleteConfirmationDialog.entryName = entryStorage.getModel().at(index).name
-                    deleteConfirmationDialog.open()
-                    menu.close()
-                }
-            }
-            CommonButton{
                 id: about
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 20
@@ -142,7 +94,7 @@ Item {
                 width: parent.width - 40
                 text: "About"
                 onClicked: {
-                    aboutDialog.open()
+                    mainRectangle.aboutDialog.open()
                     menu.close()
                 }
             }
@@ -154,7 +106,6 @@ Item {
     }
 
     function open(){
-        deleteEntry.enabled = entryListView.currentIndex >= 0 && entryListView.currentIndex < entryStorage.getModel().rowCount()
         menu.visible = true
         menuBorder.y = height - menuBorder.height
     }

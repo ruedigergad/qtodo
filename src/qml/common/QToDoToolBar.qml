@@ -82,7 +82,7 @@ CommonToolBar {
         platformIconId: "toolbar-view-menu"
         text: "Menu"
         anchors.right: parent === undefined ? undefined : parent.right
-        onClicked: myMenu.status === DialogStatus.Closed ? myMenu.open() : myMenu.close()
+        onClicked: ! myMenu.isOpen ? myMenu.open() : myMenu.close()
         opacity: enabled ? 1 : 0.5
     }
 }

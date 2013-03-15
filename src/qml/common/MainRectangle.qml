@@ -28,6 +28,9 @@ Rectangle{
 
     property alias treeView: treeView
     property alias confirmDeleteDialog: confirmDeleteDialog
+    property alias aboutDialog: aboutDialog
+
+    property bool isTodo;
 
     function editSelectedItem() {
         var currentItem = treeView.currentItem
@@ -68,9 +71,9 @@ Rectangle{
         onCurrentItemChanged: {
             console.log(currentItem.type)
             if(currentItem === null) {
-                iconMarkDone.enabled = false
+                mainRectangle.isTodo = false
             }else{
-                iconMarkDone.enabled = currentItem.type === "to-do"
+                mainRectangle.isTodo = currentItem.type === "to-do"
             }
         }
         onDoubleClicked: editSelectedItem()

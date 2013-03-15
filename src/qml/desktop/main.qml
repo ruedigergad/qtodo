@@ -35,4 +35,8 @@ Rectangle {
     QToDoToolBar {
         id: toolBar
     }
+
+    Menu {
+        id: myMenu
+    }
 }
