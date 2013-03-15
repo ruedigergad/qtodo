@@ -33,7 +33,10 @@ exists($$QMAKE_INCDIR_QT"/../applauncherd/MDeclarativeCache"): {
 qmlCommon.source = qml/common
 qmlCommon.target = qml
 
-DEPLOYMENTFOLDERS += qmlCommon
+iconDeployment.source = icons
+iconDeployment.target = qml
+
+DEPLOYMENTFOLDERS += qmlCommon iconDeployment
 
 # Additional import path used to resolve QML modules in Creator's code model
 QML_IMPORT_PATH =
