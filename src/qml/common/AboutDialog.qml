@@ -27,7 +27,7 @@ CommonDialog {
 
       Text {
           id: homepage
-          text: "<a href=\"http://ruedigergad.github.com/qtodo\" style=\"text-decoration:none; color:#78bfff\">Q To-Do<br /><img src=\"/opt/qtodo/icons/logo.png\" /><br />Version 0.8.2</a>"
+          text: "<a href=\"http://ruedigergad.github.com/qtodo\" style=\"text-decoration:none; color:#78bfff\">Q To-Do<br /><img src=\"../icons/logo.png\" /><br />Version 0.8.2</a>"
           textFormat: Text.RichText;
           onLinkActivated: { Qt.openUrlExternally(link); }
           font.pixelSize: 25; horizontalAlignment: Text.AlignHCenter;
