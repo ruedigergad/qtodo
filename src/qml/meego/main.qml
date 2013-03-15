@@ -42,69 +42,8 @@ PageStackWindow {
 
     EditSketchSheet { id: editSketchSheet }
 
-    ToolBarLayout {
+    QToDoToolBar {
         id: commonTools
-        visible: true
-
-        ToolIcon {
-            id: iconAdd
-            platformIconId: "toolbar-add"
-            opacity: enabled ? 1 : 0.5
-            onClicked: {
-                editToDoSheet.color = "blue"
-                editToDoSheet.type = "to-do"
-                editToDoSheet.text = ""
-                editToDoSheet.edit = false
-                editToDoSheet.open()
-            }
-        }
-        ToolIcon {
-            id: iconSketch
-            iconSource: "../icons/sketch.png"
-            opacity: enabled ? 1 : 0.5
-            onClicked: {
-                editSketchSheet.edit = false
-                editSketchSheet.sketchPath = storage.getPath() + "/sketches/" + (rootElementModel.getMaxId() + 1) + ".png"
-                editSketchSheet.open()
-            }
-        }
-        ToolIcon {
-            id: iconMarkDone
-            platformIconId: "toolbar-done"
-            enabled: treeView.currentItem.type === "to-do"
-            opacity: enabled ? 1 : 0.5
-            onClicked: {
-                if(treeView.currentItem.done){
-                    treeView.currentModel.setAttribute(treeView.currentIndex, "done", "false")
-                }else{
-                    treeView.currentModel.setAttribute(treeView.currentIndex, "done", "true")
-                }
-            }
-        }
-        ToolIcon {
-            id: iconDelete
-            platformIconId: "toolbar-delete"
-            enabled: treeView.currentIndex >= 0
-            opacity: enabled ? 1 : 0.5
-            onClicked: {
-                confirmDeleteDialog.message = "Delete \"" + treeView.currentItem.text + "\"?"
-                confirmDeleteDialog.open()
-            }
-        }
-        ToolIcon {
-            id: iconBack
-            iconSource: "../icons/back.png"
-            enabled: treeView.currentLevel > 0
-            opacity: enabled ? 1 : 0.5
-            onClicked: treeView.currentLevel--
-        }
-        ToolIcon {
-            id: iconMenu
-            platformIconId: "toolbar-view-menu"
-            anchors.right: parent === undefined ? undefined : parent.right
-            onClicked: myMenu.status === DialogStatus.Closed ? myMenu.open() : myMenu.close()
-            opacity: enabled ? 1 : 0.5
-        }
     }
 
     ContextMenu {

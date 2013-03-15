@@ -95,15 +95,6 @@ OTHER_FILES += \
 #RESOURCES += \
 #    res.qrc
 
-jsFiles.path = /opt/$${TARGET}/qml
-jsFiles.files = qml/*.js
-
-qmlFiles.path = /opt/$${TARGET}/qml
-qmlFiles.files = qml/*.qml
-
-iconFiles.path = /opt/$${TARGET}/icons
-iconFiles.files = icons/*
-
 logoFiles.path = /opt/$${TARGET}/icons
 logoFiles.files = icons/logo.png
 
