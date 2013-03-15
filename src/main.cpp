@@ -48,7 +48,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     view->viewport()->setAttribute(Qt::WA_NoSystemBackground);
 
 #ifdef MEEGO_EDITION_HARMATTAN
-    view->setSource(QUrl("qml/meego/main.qml"));
+    view->setSource(QUrl("/opt/qtodo/qml/meego/main.qml"));
     view->showFullScreen();
 #else
     view->setSource(QUrl("qml/desktop/main.qml"));
