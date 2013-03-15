@@ -9,5 +9,11 @@ Rectangle {
 
     MainRectangle {
         id: mainRectangle
+
+        anchors {top: parent.top; left: parent.left; right: parent.right; bottom: toolBar.top}
+    }
+
+    QToDoToolBar {
+        id: toolBar
     }
 }

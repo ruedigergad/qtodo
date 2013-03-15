@@ -88,7 +88,9 @@ OTHER_FILES += \
     qml/common/TreeView.qml \
     qml/meego/EditSketchSheet.qml \
     qml/meego/EditToDoSheet.qml \
-    qml/meego/main.qml
+    qml/meego/main.qml \
+    qml/desktop/common/CommonToolBar.qml \
+    qml/common/QToDoToolBar.qml
 
 #RESOURCES += \
 #    res.qrc

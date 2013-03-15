@@ -7,6 +7,9 @@ Rectangle{
     anchors.fill: parent
     color: "lightgoldenrodyellow"
 
+    property alias treeView: treeView
+    property alias confirmDeleteDialog: confirmDeleteDialog
+
     function editSelectedItem() {
         var currentItem = treeView.currentItem
         if (currentItem.type === "sketch") {
