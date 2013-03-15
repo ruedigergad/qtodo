@@ -222,3 +222,26 @@ int NodeListModel::countSubNodeTodos(QDomNodeList subNodes, bool todoOnly, bool 
 
     return count;
 }
+
+void NodeListModel::cleanDone(){
+    beginResetModel();
+
+    int index = 0;
+
+    if(childNodes.at(0).isText())
+        index++;
+
+    for (int i = 0; i < childNodes.count(); i++) {
+        QDomNode node = childNodes.at(i);
+        if (! node.isText()) {
+            QDomElement element = node.toElement();
+            if (element.attribute("done", "false") == "true") {
+                parentElement.removeChild(element);
+                i--;
+            }
+        }
+    }
+
+    endResetModel();
+    emit changed();
+}

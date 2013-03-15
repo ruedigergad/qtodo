@@ -28,6 +28,7 @@ Rectangle{
 
     property alias treeView: treeView
     property alias confirmDeleteDialog: confirmDeleteDialog
+    property alias confirmCleanDoneDialog: confirmCleanDoneDialog
     property alias aboutDialog: aboutDialog
 
     property bool isTodo;
@@ -98,6 +99,17 @@ Rectangle{
         }
     }
 
+    ConfirmationDialog {
+        id: confirmCleanDoneDialog
+
+        titleText: "Clean Done?"
+        message: "Delete all items marked as done?"
+
+        onAccepted: {
+            treeView.currentModel.cleanDone()
+        }
+    }
+
     FileHelper { id: fileHelper }
 
     NodeListModel {
@@ -116,8 +128,6 @@ Rectangle{
     Component.onCompleted: {
         storage.open()
 //        storage.open("/opt/qtodo/sample.xml")
-
-        iconMarkDone.enabled = false
     }
 }
 

@@ -87,9 +87,20 @@ Item {
             radius: 20
 
             CommonButton{
+                id: cleanDone
+                anchors.bottom: about.top
+                anchors.horizontalCenter: parent.horizontalCenter
+                width: parent.width - 40
+                text: "Clean Done"
+                onClicked: {
+                    mainRectangle.confirmCleanDoneDialog.open()
+                    menu.close()
+                }
+            }
+
+            CommonButton{
                 id: about
                 anchors.bottom: parent.bottom
-                anchors.bottomMargin: 20
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width - 40
                 text: "About"

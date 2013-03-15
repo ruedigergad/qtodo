@@ -62,6 +62,8 @@ public:
 
     Q_INVOKABLE int countSubTodos(int index, bool todoOnly = false, bool recursive = false );
 
+    Q_INVOKABLE void cleanDone();
+
 signals:
     void changed();
 
