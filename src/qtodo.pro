@@ -41,6 +41,9 @@ DEPLOYMENTFOLDERS += qmlCommon iconDeployment
 # Additional import path used to resolve QML modules in Creator's code model
 QML_IMPORT_PATH =
 
+CONFIG += link_pkgconfig
+PKGCONFIG += qmfclient
+
 QT+= declarative xml
 symbian:TARGET.UID3 = 0xE1CCA219
 
@@ -63,12 +66,14 @@ symbian:TARGET.CAPABILITY += NetworkServices
 HEADERS += \
     todostorage.h \
     nodelistmodel.h \
-    filehelper.h
+    filehelper.h \
+    imapstorage.h
 
 SOURCES += main.cpp \
     todostorage.cpp \
     nodelistmodel.cpp \
-    filehelper.cpp
+    filehelper.cpp \
+    imapstorage.cpp
 
 OTHER_FILES += \
     qtodo.desktop \
