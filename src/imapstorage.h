@@ -29,7 +29,7 @@ class ImapStorage : public QObject
 public:
     explicit ImapStorage(QObject *parent = 0);
     
-    Q_INVOKABLE QMailAccountIdList queryImapAccounts();
+    Q_INVOKABLE QVariantList queryImapAccounts();
 
 signals:
     

@@ -26,10 +26,11 @@ Rectangle{
     anchors.fill: parent
     color: "lightgoldenrodyellow"
 
-    property alias treeView: treeView
+    property alias aboutDialog: aboutDialog
     property alias confirmDeleteDialog: confirmDeleteDialog
     property alias confirmCleanDoneDialog: confirmCleanDoneDialog
-    property alias aboutDialog: aboutDialog
+    property alias imapStorage: imapStorage
+    property alias treeView: treeView
 
     property bool isTodo;
 
@@ -45,6 +46,16 @@ Rectangle{
             editToDoSheet.text = currentItem.text
             editToDoSheet.edit = true
             editToDoSheet.open()
+        }
+    }
+
+    function syncToImap() {
+        var accIds = imapStorage.queryImapAccounts()
+        console.log("Found " + accIds.length + " IMAP account(s).")
+
+        if (accIds.length === 1) {
+            console.log("Found a single IMAP account. Using this for syncing.")
+            console.log("IMAP account id is: " + accIds[0])
         }
     }
 
@@ -123,6 +134,10 @@ Rectangle{
             console.log("Document opened.")
             rootElementModel.setRoot(storage);
         }
+    }
+
+    ImapStorage {
+        id: imapStorage
     }
 
     Component.onCompleted: {

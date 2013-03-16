@@ -26,14 +26,16 @@ ImapStorage::ImapStorage(QObject *parent) :
 {
 }
 
-QMailAccountIdList ImapStorage::queryImapAccounts() {
+QVariantList ImapStorage::queryImapAccounts() {
     QMailAccountIdList accountIds = QMailStore::instance()->queryAccounts();
+    QVariantList ret;
 
     for (int i = 0; i < accountIds.count(); i++) {
         QMailAccount account(accountIds.at(i));
 
         if(account.messageSources().contains("imap4", Qt::CaseInsensitive)) {
             qDebug() << "Found IMAP account with id: " << account.id() << " and name: " << account.name();
+            ret.append(account.id().toULongLong());
         } else {
             qDebug() << "Account with id: " << account.id() << " and name: " << account.name() << " does not support IMAP.";
             accountIds.removeAt(i);
@@ -41,5 +43,5 @@ QMailAccountIdList ImapStorage::queryImapAccounts() {
         }
     }
 
-    return accountIds;
+    return ret;
 }

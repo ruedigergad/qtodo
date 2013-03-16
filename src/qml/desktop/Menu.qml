@@ -88,12 +88,24 @@ Item {
 
             CommonButton{
                 id: cleanDone
-                anchors.bottom: about.top
+                anchors.bottom: syncToImap.top
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width - 40
                 text: "Clean Done"
                 onClicked: {
                     mainRectangle.confirmCleanDoneDialog.open()
+                    menu.close()
+                }
+            }
+
+            CommonButton{
+                id: syncToImap
+                anchors.bottom: about.top
+                anchors.horizontalCenter: parent.horizontalCenter
+                width: parent.width - 40
+                text: "Sync To IMAP"
+                onClicked: {
+                    mainRectangle.syncToImap()
                     menu.close()
                 }
             }
