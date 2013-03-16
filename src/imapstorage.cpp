@@ -39,7 +39,10 @@ ImapStorage::ImapStorage(QObject *parent) :
 /*
  * FIXME: For now we are checking if the account got modified in order to determine
  * if our folder got created. For some reason activityChanged(QMailServiceAction::Activity)
- * always reports a failure, even though the folder was created successfully.
+ * always reports a failure, even though the folder was created successfully. Also the
+ * foldersAdded and foldersUpdated signals of QMailStore are not triggered when we add
+ * our storage folder. Could it be that this is due to the fact that we are creating a
+ * folder at the root level?
  */
 void ImapStorage::accountContentsModified(const QMailAccountIdList &ids) {
     Q_UNUSED(ids);
@@ -63,6 +66,10 @@ void ImapStorage::createFolderActivityChanged(QMailServiceAction::Activity activ
     }
 }
 
+/*
+ * Used for debugging. For some reason the activityChanged signal of createFolderAction
+ * is not emitted upon success even though the folder is actually created successfully.
+ */
 void ImapStorage::foldersAdded(const QMailFolderIdList &ids) {
     qDebug() << "Folders added: " << ids << " number of new folders: " << ids.count();
 }
