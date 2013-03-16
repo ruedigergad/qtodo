@@ -36,7 +36,7 @@ Rectangle{
 
     property int imapAccountId: -1
     property string imapFolderName: "qtodo"
-    property string imapMessageSubject: "[QTODO] SimpleSync 14"
+    property string imapMessageSubject: "[QTODO] SimpleSync 15"
 
     function editSelectedItem() {
         var currentItem = treeView.currentItem
@@ -85,7 +85,7 @@ Rectangle{
         var messageIds = imapStorage.queryMessages(imapAccountId, imapFolderName, imapMessageSubject)
         if (messageIds.length === 0) {
             console.log("No message found. Performing initital upload.")
-            imapStorage.addMessage(imapAccountId, imapFolderName, imapMessageSubject)
+            imapStorage.addMessage(imapAccountId, imapFolderName, imapMessageSubject, "to-do-o/default.xml")
         } else if (messageIds.length === 1) {
             console.log("Message found, processing...")
         } else {

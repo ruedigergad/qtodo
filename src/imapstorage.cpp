@@ -19,6 +19,7 @@
 
 #include "imapstorage.h"
 #include <QDebug>
+#include <QDir>
 #include <qmfclient/qmaildisconnected.h>
 #include <qmfclient/qmailstore.h>
 #include <qmfclient/qmailfolderkey.h>
@@ -63,7 +64,7 @@ void ImapStorage::accountContentsModified(const QMailAccountIdList &ids) {
     currentAction = NoAction;
 }
 
-void ImapStorage::addMessage(ulong accId, QString folder, QString subject) {
+void ImapStorage::addMessage(ulong accId, QString folder, QString subject, QString attachment) {
     QMailFolderIdList folderIds = queryFolders(accId, folder);
     if (folderIds.count() != 1) {
         qDebug("Error retrieving folder for new message!");
@@ -78,6 +79,9 @@ void ImapStorage::addMessage(ulong accId, QString folder, QString subject) {
     msg.setMessageType(QMailMessageMetaDataFwd::Email);
     msg.setDate(QMailTimeStamp(QDateTime::currentDateTime()));
     msg.setStatus(QMailMessage::LocalOnly, true);
+    if (attachment != "") {
+        msg.setAttachments(QStringList() << QDir::homePath() + "/" + attachment);
+    }
 
     QMailStore::instance()->addMessage(&msg);
 

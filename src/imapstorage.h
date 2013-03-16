@@ -30,7 +30,7 @@ class ImapStorage : public QObject
 public:
     explicit ImapStorage(QObject *parent = 0);
     
-    Q_INVOKABLE void addMessage(ulong accId, QString folder, QString subject);
+    Q_INVOKABLE void addMessage(ulong accId, QString folder, QString subject, QString attachment = "");
     Q_INVOKABLE void createFolder(ulong accId, QString name);
     Q_INVOKABLE bool folderExists(ulong accId, QString path);
     Q_INVOKABLE QVariantList queryImapAccounts();
