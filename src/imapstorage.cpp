@@ -25,11 +25,46 @@
 ImapStorage::ImapStorage(QObject *parent) :
     QObject(parent)
 {
+    createFolderAction = new QMailStorageAction();
+    connect(createFolderAction, SIGNAL(activityChanged(QMailServiceAction::Activity)),
+            this, SLOT(createFolderActivityChanged(QMailServiceAction::Activity)));
+    connect(QMailStore::instance(), SIGNAL(foldersAdded(QMailFolderIdList)),
+            this, SLOT(foldersAdded(QMailFolderIdList&)));
+    connect(QMailStore::instance(), SIGNAL(foldersUpdated(QMailFolderIdList)),
+            this, SLOT(foldersAdded(QMailFolderIdList&)));
+    connect(QMailStore::instance(), SIGNAL(accountContentsModified(QMailAccountIdList)),
+            this, SLOT(accountContentsModified(QMailAccountIdList)));
 }
 
-bool ImapStorage::addFolder(ulong accId, QString name) {
-    QMailFolder *folder = new QMailFolder(name, QMailFolderId(), QMailAccountId(accId));
-    return QMailStore::instance()->addFolder(folder);
+/*
+ * FIXME: For now we are checking if the account got modified in order to determine
+ * if our folder got created. For some reason activityChanged(QMailServiceAction::Activity)
+ * always reports a failure, even though the folder was created successfully.
+ */
+void ImapStorage::accountContentsModified(const QMailAccountIdList &ids) {
+    Q_UNUSED(ids);
+    qDebug() << "accountContentsModified";
+    emit folderCreated();
+}
+
+void ImapStorage::createFolder(ulong accId, QString name) {
+    createFolderAction->createFolder(name, QMailAccountId(accId), QMailFolderId());
+}
+
+/*
+ * FIXME: This is not working properly right now. As a workaround we use the
+ * accountContentsModified(QMailAccountIdList) signal of QMailStore (see above).
+ */
+void ImapStorage::createFolderActivityChanged(QMailServiceAction::Activity activity) {
+    qDebug() << "createFolderAction activity changed: " << activity;
+    if (activity == QMailServiceAction::Successful) {
+        qDebug() << "Succeeded in creating folder.";
+        //emit folderCreated();
+    }
+}
+
+void ImapStorage::foldersAdded(const QMailFolderIdList &ids) {
+    qDebug() << "Folders added: " << ids << " number of new folders: " << ids.count();
 }
 
 bool ImapStorage::folderExists(ulong accId, QString path) {

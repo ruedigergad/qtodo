@@ -32,7 +32,10 @@ Rectangle{
     property alias imapStorage: imapStorage
     property alias treeView: treeView
 
-    property bool isTodo;
+    property bool isTodo
+
+    property int imapAccountId: -1
+    property string imapFolderName: "qtodo"
 
     function editSelectedItem() {
         var currentItem = treeView.currentItem
@@ -56,14 +59,26 @@ Rectangle{
         if (accIds.length === 1) {
             console.log("Found a single IMAP account. Using this for syncing.")
             console.log("IMAP account id is: " + accIds[0])
+            imapAccountId = accIds[0]
+            prepareImapFolder()
+        }
+    }
 
-            var folderExists = imapStorage.folderExists(accIds[0], "qtodo");
-            console.log("Folder exists: " + folderExists)
+    function prepareImapFolder() {
+        if (! imapStorage.folderExists(imapAccountId, imapFolderName)) {
+            console.log("Creating folder...")
+            imapStorage.createFolder(imapAccountId, imapFolderName)
+        } else {
+            processImapFolder()
+        }
+    }
 
-            if (! folderExists) {
-                var result = imapStorage.addFolder(accIds[0], "qtodo")
-                console.log("Result of adding folder: " + result);
-            }
+    function processImapFolder() {
+        console.log("Processing content of IMAP folder...")
+
+        if (! imapStorage.folderExists(imapAccountId, imapFolderName)) {
+            console.log("Error: IMAP folder does not exist!")
+            return
         }
     }
 
@@ -146,6 +161,8 @@ Rectangle{
 
     ImapStorage {
         id: imapStorage
+
+        onFolderCreated: processImapFolder()
     }
 
     Component.onCompleted: {

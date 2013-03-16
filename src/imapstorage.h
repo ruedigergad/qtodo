@@ -22,6 +22,7 @@
 
 #include <QObject>
 #include <qmfclient/qmailaccount.h>
+#include <qmfclient/qmailserviceaction.h>
 
 class ImapStorage : public QObject
 {
@@ -29,14 +30,22 @@ class ImapStorage : public QObject
 public:
     explicit ImapStorage(QObject *parent = 0);
     
-    Q_INVOKABLE bool addFolder(ulong accId, QString name);
+    Q_INVOKABLE void createFolder(ulong accId, QString name);
     Q_INVOKABLE bool folderExists(ulong accId, QString path);
     Q_INVOKABLE QVariantList queryImapAccounts();
 
 signals:
+    void folderCreated();
     
 public slots:
 
+private slots:
+    void accountContentsModified(const QMailAccountIdList &ids);
+    void createFolderActivityChanged(QMailServiceAction::Activity);
+    void foldersAdded(const QMailFolderIdList &ids);
+
+private:
+    QMailStorageAction *createFolderAction;
     
 };
 
