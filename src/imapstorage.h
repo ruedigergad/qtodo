@@ -30,9 +30,12 @@ class ImapStorage : public QObject
 public:
     explicit ImapStorage(QObject *parent = 0);
     
+    Q_INVOKABLE void addMessage(ulong accId, QString folder, QString subject);
     Q_INVOKABLE void createFolder(ulong accId, QString name);
     Q_INVOKABLE bool folderExists(ulong accId, QString path);
     Q_INVOKABLE QVariantList queryImapAccounts();
+    Q_INVOKABLE QVariantList queryMessages(ulong accId, QString folder, QString subject);
+    Q_INVOKABLE bool removeMessage(ulong msgId);
 
 signals:
     void folderCreated();
@@ -45,8 +48,16 @@ private slots:
     void foldersAdded(const QMailFolderIdList &ids);
 
 private:
+    enum CurrentAction {
+        CreateFolderAction,
+        AddMessageAction,
+        NoAction
+    };
+
     QMailStorageAction *createFolderAction;
-    
+    CurrentAction currentAction;
+
+    QMailFolderIdList queryFolders(ulong accId, QString path);
 };
 
 #endif // IMAPSTORAGE_H

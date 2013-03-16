@@ -19,6 +19,7 @@
 
 #include "imapstorage.h"
 #include <QDebug>
+#include <qmfclient/qmaildisconnected.h>
 #include <qmfclient/qmailstore.h>
 #include <qmfclient/qmailfolderkey.h>
 
@@ -34,6 +35,7 @@ ImapStorage::ImapStorage(QObject *parent) :
             this, SLOT(foldersAdded(QMailFolderIdList&)));
     connect(QMailStore::instance(), SIGNAL(accountContentsModified(QMailAccountIdList)),
             this, SLOT(accountContentsModified(QMailAccountIdList)));
+    currentAction = NoAction;
 }
 
 /*
@@ -47,10 +49,46 @@ ImapStorage::ImapStorage(QObject *parent) :
 void ImapStorage::accountContentsModified(const QMailAccountIdList &ids) {
     Q_UNUSED(ids);
     qDebug() << "accountContentsModified";
-    emit folderCreated();
+
+    switch (currentAction) {
+        case CreateFolderAction:
+            emit folderCreated();
+            break;
+        case AddMessageAction:
+        case NoAction:
+        default:
+            break;
+    }
+
+    currentAction = NoAction;
+}
+
+void ImapStorage::addMessage(ulong accId, QString folder, QString subject) {
+    QMailFolderIdList folderIds = queryFolders(accId, folder);
+    if (folderIds.count() != 1) {
+        qDebug("Error retrieving folder for new message!");
+        return;
+    }
+    QMailFolderId folderId = folderIds.at(0);
+
+    QMailMessage msg;
+    msg.setParentAccountId(QMailAccountId(accId));
+    msg.setParentFolderId(folderId);
+    msg.setSubject(subject);
+    msg.setMessageType(QMailMessageMetaDataFwd::Email);
+    msg.setDate(QMailTimeStamp(QDateTime::currentDateTime()));
+    msg.setStatus(QMailMessage::LocalOnly, true);
+
+    QMailStore::instance()->addMessage(&msg);
+
+    QMailDisconnected::moveToFolder(QMailMessageIdList() << msg.id(), folderId);
+    currentAction = AddMessageAction;
+    QMailRetrievalAction retrievalAction;
+    retrievalAction.exportUpdates(QMailAccountId(accId));
 }
 
 void ImapStorage::createFolder(ulong accId, QString name) {
+    currentAction = CreateFolderAction;
     createFolderAction->createFolder(name, QMailAccountId(accId), QMailFolderId());
 }
 
@@ -75,12 +113,15 @@ void ImapStorage::foldersAdded(const QMailFolderIdList &ids) {
 }
 
 bool ImapStorage::folderExists(ulong accId, QString path) {
+    return (queryFolders(accId, path).count() == 1);
+}
+
+QMailFolderIdList ImapStorage::queryFolders(ulong accId, QString path) {
     QMailFolderKey accountKey(QMailFolderKey::parentAccountId(QMailAccountId(accId)));
     QMailFolderKey pathKey(QMailFolderKey::path(path));
 
     QMailFolderIdList folderIds = QMailStore::instance()->queryFolders(accountKey & pathKey);
-
-    return (folderIds.count() == 1);
+    return folderIds;
 }
 
 QVariantList ImapStorage::queryImapAccounts() {
@@ -101,4 +142,29 @@ QVariantList ImapStorage::queryImapAccounts() {
     }
 
     return ret;
+}
+
+QVariantList ImapStorage::queryMessages(ulong accId, QString folder, QString subject) {
+    QMailMessageKey accountKey(QMailMessageKey::parentAccountId(QMailAccountId(accId)));
+
+    QMailFolderIdList folders = queryFolders(accId, folder);
+    if (folders.count() != 1) {
+        qDebug("Error retrieving folder for query!");
+        return QVariantList();
+    }
+
+    QMailMessageKey folderKey(QMailMessageKey::parentFolderId(folders.at(0)));
+    QMailMessageKey subjectKey(QMailMessageKey::subject(subject));
+
+    QMailMessageIdList messageIds = QMailStore::instance()->queryMessages(accountKey & folderKey & subjectKey);
+
+    QVariantList ret;
+    for (int i = 0; i < messageIds.count(); i++) {
+        ret.append(messageIds.at(i));
+    }
+    return ret;
+}
+
+bool ImapStorage::removeMessage(ulong msgId) {
+    return QMailStore::instance()->removeMessage(QMailMessageId(msgId));
 }

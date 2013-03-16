@@ -36,6 +36,7 @@ Rectangle{
 
     property int imapAccountId: -1
     property string imapFolderName: "qtodo"
+    property string imapMessageSubject: "[QTODO] SimpleSync 14"
 
     function editSelectedItem() {
         var currentItem = treeView.currentItem
@@ -79,6 +80,16 @@ Rectangle{
         if (! imapStorage.folderExists(imapAccountId, imapFolderName)) {
             console.log("Error: IMAP folder does not exist!")
             return
+        }
+
+        var messageIds = imapStorage.queryMessages(imapAccountId, imapFolderName, imapMessageSubject)
+        if (messageIds.length === 0) {
+            console.log("No message found. Performing initital upload.")
+            imapStorage.addMessage(imapAccountId, imapFolderName, imapMessageSubject)
+        } else if (messageIds.length === 1) {
+            console.log("Message found, processing...")
+        } else {
+            console.log("Error: Multiple messages found.")
         }
     }
 
