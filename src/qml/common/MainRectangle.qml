@@ -56,6 +56,14 @@ Rectangle{
         if (accIds.length === 1) {
             console.log("Found a single IMAP account. Using this for syncing.")
             console.log("IMAP account id is: " + accIds[0])
+
+            var folderExists = imapStorage.folderExists(accIds[0], "qtodo");
+            console.log("Folder exists: " + folderExists)
+
+            if (! folderExists) {
+                var result = imapStorage.addFolder(accIds[0], "qtodo")
+                console.log("Result of adding folder: " + result);
+            }
         }
     }
 

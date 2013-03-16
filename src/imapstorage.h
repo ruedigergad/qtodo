@@ -29,6 +29,8 @@ class ImapStorage : public QObject
 public:
     explicit ImapStorage(QObject *parent = 0);
     
+    Q_INVOKABLE bool addFolder(ulong accId, QString name);
+    Q_INVOKABLE bool folderExists(ulong accId, QString path);
     Q_INVOKABLE QVariantList queryImapAccounts();
 
 signals:

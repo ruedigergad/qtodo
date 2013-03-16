@@ -20,10 +20,25 @@
 #include "imapstorage.h"
 #include <QDebug>
 #include <qmfclient/qmailstore.h>
+#include <qmfclient/qmailfolderkey.h>
 
 ImapStorage::ImapStorage(QObject *parent) :
     QObject(parent)
 {
+}
+
+bool ImapStorage::addFolder(ulong accId, QString name) {
+    QMailFolder *folder = new QMailFolder(name, QMailFolderId(), QMailAccountId(accId));
+    return QMailStore::instance()->addFolder(folder);
+}
+
+bool ImapStorage::folderExists(ulong accId, QString path) {
+    QMailFolderKey accountKey(QMailFolderKey::parentAccountId(QMailAccountId(accId)));
+    QMailFolderKey pathKey(QMailFolderKey::path(path));
+
+    QMailFolderIdList folderIds = QMailStore::instance()->queryFolders(accountKey & pathKey);
+
+    return (folderIds.count() == 1);
 }
 
 QVariantList ImapStorage::queryImapAccounts() {
