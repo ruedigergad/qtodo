@@ -105,7 +105,7 @@ Item {
                 width: parent.width - 40
                 text: "Sync To IMAP"
                 onClicked: {
-                    mainRectangle.syncToImap()
+                    mainRectangle.confirmSyncToImapDialog.open()
                     menu.close()
                 }
             }

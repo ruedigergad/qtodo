@@ -75,7 +75,7 @@ PageStackWindow {
             }
             MenuItem {
                 text: "Sync To IMAP"
-                onClicked: mainRectangle.syncToImap()
+                onClicked: mainRectangle.confirmSyncToImapDialog.open()
             }
             MenuItem { 
                 text: "About"

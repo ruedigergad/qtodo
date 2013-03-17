@@ -29,6 +29,7 @@ Rectangle{
     property alias aboutDialog: aboutDialog
     property alias confirmDeleteDialog: confirmDeleteDialog
     property alias confirmCleanDoneDialog: confirmCleanDoneDialog
+    property alias confirmSyncToImapDialog: confirmSyncToImapDialog
     property alias imapStorage: imapStorage
     property alias treeView: treeView
 
@@ -180,6 +181,17 @@ Rectangle{
 
         onAccepted: {
             treeView.currentModel.cleanDone()
+        }
+    }
+
+    ConfirmationDialog {
+        id: confirmSyncToImapDialog
+
+        titleText: "Sync to IMAP?"
+        message: "This may take some time."
+
+        onAccepted: {
+            syncToImap();
         }
     }
 
