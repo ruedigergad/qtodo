@@ -29,6 +29,42 @@ Merger::Merger(QObject *parent) :
     ownStorage = new ToDoStorage();
 }
 
+QDomElement Merger::copyElement(QDomElement from, QDomElement to) {
+    QDomElement newElement = incomingStorage->getDocument().createElement(from.tagName());
+    newElement.appendChild(incomingStorage->getDocument().createTextNode(from.firstChild().toText().nodeValue()));
+
+    if(from.tagName() == "to-do"){
+        newElement.setAttribute("color", from.attribute("color", "blue"));
+        newElement.setAttribute("done", from.attribute("done", "false"));
+    }
+
+    maxId++;;
+    newElement.setAttribute("id", maxId);
+
+    to.appendChild(newElement);
+    return newElement;
+}
+
+void Merger::deepCopy(QDomElement from, QDomElement to) {
+    if (! from.hasChildNodes()) {
+        return;
+    }
+
+    QDomNodeList childNodes = from.childNodes();
+    for (int i = 0; i < childNodes.count(); i++) {
+        QDomNode node = childNodes.at(i);
+
+        if (! node.isText()) {
+            QDomElement element = node.toElement();
+
+            QDomElement newElement = copyElement(element, to);
+            if (element.hasChildNodes()) {
+                deepCopy(element, newElement);
+            }
+        }
+    }
+}
+
 void Merger::deleteOldNodes(QDomElement parentElement) {
     QDomNodeList childNodes = parentElement.childNodes();
     for (int i = 0; i < childNodes.count(); i++) {
@@ -130,18 +166,11 @@ void Merger::mergeElements(QDomElement own, QDomElement incoming) {
 
             QDomElement foundElement = existsInElement(ownElement, incoming);
             if (foundElement.isNull()) {
-                QDomElement newElement = incomingStorage->getDocument().createElement(ownElement.tagName());
-                newElement.appendChild(incomingStorage->getDocument().createTextNode(ownElement.firstChild().toText().nodeValue()));
+                QDomElement newElement = copyElement(ownElement, incoming);
 
-                if(ownElement.tagName() == "to-do"){
-                    newElement.setAttribute("color", ownElement.attribute("color", "blue"));
-                    newElement.setAttribute("done", ownElement.attribute("done", "false"));
+                if (ownElement.hasChildNodes()) {
+                    deepCopy(ownElement, newElement);
                 }
-
-                maxId++;;
-                newElement.setAttribute("id", maxId);
-
-                incoming.appendChild(newElement);
             } else {
                 mergeElements(ownElement, foundElement);
             }
