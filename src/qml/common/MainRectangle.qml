@@ -36,6 +36,7 @@ Rectangle{
 
     property int imapAccountId: -1
     property string imapFolderName: "qtodo"
+    property int imapMessageId: -1
     property string imapMessageSubject: "[QTODO] SimpleSync"
 
     function editSelectedItem() {
@@ -85,17 +86,25 @@ Rectangle{
         imapStorage.retrieveMessageList(imapAccountId, imapFolderName)
     }
 
-    function processMessages() {
+    function findAndRetrieveMessages() {
         console.log("Processing messages...")
         var messageIds = imapStorage.queryMessages(imapAccountId, imapFolderName, imapMessageSubject)
         if (messageIds.length === 0) {
             console.log("No message found. Performing initital upload.")
             imapStorage.addMessage(imapAccountId, imapFolderName, imapMessageSubject, "to-do-o/default.xml")
         } else if (messageIds.length === 1) {
-            console.log("Message found, processing...")
+            console.log("Message found.")
+            imapMessageId = messageIds[0]
+            console.log("Message id is: " + imapMessageId)
+            imapStorage.retrieveMessage(imapMessageId)
         } else {
             console.log("Error: Multiple messages found.")
         }
+    }
+
+    function processMessage() {
+        console.log("Processing message...")
+
     }
 
     Rectangle {
@@ -180,7 +189,8 @@ Rectangle{
 
         onFolderCreated: processImapFolder()
         onFolderListRetrieved: prepareImapFolder()
-        onMessageListRetrieved: processMessages()
+        onMessageRetrieved: processMessage()
+        onMessageListRetrieved: findAndRetrieveMessages()
     }
 
     Component.onCompleted: {

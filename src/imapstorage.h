@@ -37,12 +37,14 @@ public:
     Q_INVOKABLE QVariantList queryMessages(ulong accId, QString folder, QString subject);
     Q_INVOKABLE bool removeMessage(ulong msgId);
     Q_INVOKABLE void retrieveFolderList(ulong accId);
+    Q_INVOKABLE void retrieveMessage(ulong msgId);
     Q_INVOKABLE void retrieveMessageList(ulong accId, QString folder);
     Q_INVOKABLE void searchMessage(ulong accId, QString folder, QString subject);
 
 signals:
     void folderCreated();
     void folderListRetrieved();
+    void messageRetrieved();
     void messageListRetrieved();
     void searchFinished(QVariantList msgIds);
     
@@ -62,7 +64,8 @@ private:
         AddMessageAction,
         SearchAction,
         RetrieveFolderListAction,
-        RetrieveMessageListAction
+        RetrieveMessageListAction,
+        RetrieveMessageAction
     };
 
     QMailStorageAction *createFolderAction;
