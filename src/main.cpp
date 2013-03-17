@@ -17,10 +17,6 @@
  *  along with Q To-Do.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifdef MEEGO_EDITION_HARMATTAN
-#include <applauncherd/MDeclarativeCache>
-#endif
-
 #include <QtGui/QApplication>
 #include <QtDeclarative>
 
@@ -31,13 +27,8 @@
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
-#ifdef MEEGO_EDITION_HARMATTAN
-    QApplication *app = MDeclarativeCache::qApplication(argc, argv);
-    QDeclarativeView *view = MDeclarativeCache::qDeclarativeView();
-#else
     QApplication *app = new QApplication(argc, argv);
     QDeclarativeView *view = new QDeclarativeView();
-#endif
 
     qmlRegisterType<FileHelper>("qtodo", 1, 0, "FileHelper");
     qmlRegisterType<ImapStorage>("qtodo", 1, 0, "ImapStorage");

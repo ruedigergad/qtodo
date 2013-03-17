@@ -69,9 +69,17 @@ PageStackWindow {
         id: myMenu
         visualParent: pageStack
         MenuLayout {
+            MenuItem {
+                text: "Clean Done"
+                onClicked: mainRectangle.confirmCleanDoneDialog.open()
+            }
+            MenuItem {
+                text: "Sync To IMAP"
+                onClicked: mainRectangle.syncToImap()
+            }
             MenuItem { 
-                text: "About" 
-                onClicked: aboutDialog.open()
+                text: "About"
+                onClicked: mainRectangle.aboutDialog.open()
             }
         }
     }

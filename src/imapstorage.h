@@ -36,25 +36,38 @@ public:
     Q_INVOKABLE QVariantList queryImapAccounts();
     Q_INVOKABLE QVariantList queryMessages(ulong accId, QString folder, QString subject);
     Q_INVOKABLE bool removeMessage(ulong msgId);
+    Q_INVOKABLE void retrieveFolderList(ulong accId);
+    Q_INVOKABLE void retrieveMessageList(ulong accId, QString folder);
+    Q_INVOKABLE void searchMessage(ulong accId, QString folder, QString subject);
 
 signals:
     void folderCreated();
+    void folderListRetrieved();
+    void messageListRetrieved();
+    void searchFinished(QVariantList msgIds);
     
 public slots:
 
 private slots:
     void accountContentsModified(const QMailAccountIdList &ids);
     void createFolderActivityChanged(QMailServiceAction::Activity);
-    void foldersAdded(const QMailFolderIdList &ids);
+    void foldersAdded(QMailFolderIdList ids);
+    void retrieveActivityChanged(QMailServiceAction::Activity);
+    void searchMessageActivityChanged(QMailServiceAction::Activity);
 
 private:
     enum CurrentAction {
+        NoAction,
         CreateFolderAction,
         AddMessageAction,
-        NoAction
+        SearchAction,
+        RetrieveFolderListAction,
+        RetrieveMessageListAction
     };
 
     QMailStorageAction *createFolderAction;
+    QMailRetrievalAction *retrievalAction;
+    QMailSearchAction *searchAction;
     CurrentAction currentAction;
 
     QMailFolderIdList queryFolders(ulong accId, QString path);

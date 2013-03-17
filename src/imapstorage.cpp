@@ -28,14 +28,23 @@ ImapStorage::ImapStorage(QObject *parent) :
     QObject(parent)
 {
     createFolderAction = new QMailStorageAction();
+    retrievalAction = new QMailRetrievalAction();
+    searchAction = new QMailSearchAction();
+
     connect(createFolderAction, SIGNAL(activityChanged(QMailServiceAction::Activity)),
             this, SLOT(createFolderActivityChanged(QMailServiceAction::Activity)));
     connect(QMailStore::instance(), SIGNAL(foldersAdded(QMailFolderIdList)),
-            this, SLOT(foldersAdded(QMailFolderIdList&)));
+            this, SLOT(foldersAdded(QMailFolderIdList)));
     connect(QMailStore::instance(), SIGNAL(foldersUpdated(QMailFolderIdList)),
-            this, SLOT(foldersAdded(QMailFolderIdList&)));
+            this, SLOT(foldersAdded(QMailFolderIdList)));
     connect(QMailStore::instance(), SIGNAL(accountContentsModified(QMailAccountIdList)),
             this, SLOT(accountContentsModified(QMailAccountIdList)));
+
+    connect(retrievalAction, SIGNAL(activityChanged(QMailServiceAction::Activity)),
+            this, SLOT(retrieveActivityChanged(QMailServiceAction::Activity)));
+    connect(searchAction, SIGNAL(activityChanged(QMailServiceAction::Activity)),
+            this, SLOT(searchMessageActivityChanged(QMailServiceAction::Activity)));
+
     currentAction = NoAction;
 }
 
@@ -53,6 +62,7 @@ void ImapStorage::accountContentsModified(const QMailAccountIdList &ids) {
 
     switch (currentAction) {
         case CreateFolderAction:
+            currentAction = NoAction;
             emit folderCreated();
             break;
         case AddMessageAction:
@@ -60,8 +70,6 @@ void ImapStorage::accountContentsModified(const QMailAccountIdList &ids) {
         default:
             break;
     }
-
-    currentAction = NoAction;
 }
 
 void ImapStorage::addMessage(ulong accId, QString folder, QString subject, QString attachment) {
@@ -112,7 +120,7 @@ void ImapStorage::createFolderActivityChanged(QMailServiceAction::Activity activ
  * Used for debugging. For some reason the activityChanged signal of createFolderAction
  * is not emitted upon success even though the folder is actually created successfully.
  */
-void ImapStorage::foldersAdded(const QMailFolderIdList &ids) {
+void ImapStorage::foldersAdded(QMailFolderIdList ids) {
     qDebug() << "Folders added: " << ids << " number of new folders: " << ids.count();
 }
 
@@ -171,4 +179,86 @@ QVariantList ImapStorage::queryMessages(ulong accId, QString folder, QString sub
 
 bool ImapStorage::removeMessage(ulong msgId) {
     return QMailStore::instance()->removeMessage(QMailMessageId(msgId));
+}
+
+void ImapStorage::retrieveFolderList(ulong accId) {
+    qDebug() << "Retrieving folder list for account id: " << accId;
+    currentAction = RetrieveFolderListAction;
+    retrievalAction->retrieveFolderList(QMailAccountId(accId), QMailFolderId());
+}
+
+void ImapStorage::retrieveMessageList(ulong accId, QString folder) {
+    qDebug() << "Retrieving messages for account id: " << accId << " from folder: " << folder;
+
+    QMailFolderIdList folders = queryFolders(accId, folder);
+    if (folders.count() != 1) {
+        qDebug("Error retrieving folder for search!");
+        return;
+    }
+
+    currentAction = RetrieveMessageListAction;
+    retrievalAction->retrieveMessageList(QMailAccountId(accId), folders.at(0));
+}
+
+void ImapStorage::retrieveActivityChanged(QMailServiceAction::Activity activity) {
+    qDebug() << "retrieveActivityChanged: " << activity;
+
+    switch (activity) {
+    case QMailServiceAction::Successful:
+        switch (currentAction) {
+        case RetrieveFolderListAction:
+            currentAction = NoAction;
+            emit folderListRetrieved();
+            break;
+        case RetrieveMessageListAction:
+            currentAction = NoAction;
+            emit messageListRetrieved();
+            break;
+        default:
+            break;
+        }
+        break;
+    default:
+        break;
+    }
+}
+
+void ImapStorage::searchMessageActivityChanged(QMailServiceAction::Activity activity) {
+    qDebug() << "searchActivityChanged: " << activity;
+
+    QVariantList ret;
+    QMailMessageIdList msgIds;
+
+    switch (activity) {
+        case QMailServiceAction::Successful:
+            msgIds = searchAction->matchingMessageIds();
+
+            qDebug() << "Search succeeded. Found " << msgIds.count() << " matches";
+
+            for (int i = 0; i < msgIds.count(); i++) {
+                ret.append(msgIds.at(i));
+            }
+            emit searchFinished(ret);
+            break;
+        case QMailServiceAction::Failed:
+            emit searchFinished(ret);
+            break;
+        default:
+            break;
+    }
+}
+
+void ImapStorage::searchMessage(ulong accId, QString folder, QString subject) {
+    QMailMessageKey accountKey(QMailMessageKey::parentAccountId(QMailAccountId(accId)));
+
+    QMailFolderIdList folders = queryFolders(accId, folder);
+    if (folders.count() != 1) {
+        qDebug("Error retrieving folder for search!");
+        return;
+    }
+
+    QMailMessageKey folderKey(QMailMessageKey::parentFolderId(folders.at(0)));
+    QMailMessageKey subjectKey(QMailMessageKey::subject(subject));
+
+    searchAction->searchMessages(accountKey & folderKey & subjectKey, QString(), QMailSearchAction::Remote);
 }

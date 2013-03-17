@@ -36,7 +36,7 @@ Rectangle{
 
     property int imapAccountId: -1
     property string imapFolderName: "qtodo"
-    property string imapMessageSubject: "[QTODO] SimpleSync 15"
+    property string imapMessageSubject: "[QTODO] SimpleSync"
 
     function editSelectedItem() {
         var currentItem = treeView.currentItem
@@ -61,7 +61,7 @@ Rectangle{
             console.log("Found a single IMAP account. Using this for syncing.")
             console.log("IMAP account id is: " + accIds[0])
             imapAccountId = accIds[0]
-            prepareImapFolder()
+            imapStorage.retrieveFolderList(imapAccountId)
         }
     }
 
@@ -82,6 +82,11 @@ Rectangle{
             return
         }
 
+        imapStorage.retrieveMessageList(imapAccountId, imapFolderName)
+    }
+
+    function processMessages() {
+        console.log("Processing messages...")
         var messageIds = imapStorage.queryMessages(imapAccountId, imapFolderName, imapMessageSubject)
         if (messageIds.length === 0) {
             console.log("No message found. Performing initital upload.")
@@ -174,6 +179,8 @@ Rectangle{
         id: imapStorage
 
         onFolderCreated: processImapFolder()
+        onFolderListRetrieved: prepareImapFolder()
+        onMessageListRetrieved: processMessages()
     }
 
     Component.onCompleted: {
