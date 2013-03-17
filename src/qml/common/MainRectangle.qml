@@ -111,6 +111,11 @@ Rectangle{
 
         imapSyncFile = imapStorage.writeAttachmentTo(imapMessageId, attachmentLocations[0], "to-do-o")
         console.log("Wrote attachment to: " + imapSyncFile)
+
+        if (imapSyncFile.indexOf("to-do-o/default.xml") > -1) {
+            console.log("Initial sync, reloading storage...")
+            storage.open()
+        }
     }
 
     Rectangle {
