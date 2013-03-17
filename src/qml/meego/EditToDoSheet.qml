@@ -168,9 +168,9 @@ Sheet{
 
     onAccepted: {
         if(edit){
-            treeView.currentModel.updateElement(treeView.currentIndex, type, text, color)
+            mainRectangle.treeView.currentModel.updateElement(mainRectangle.treeView.currentIndex, type, text, color)
         }else{
-            treeView.currentModel.addElement(type, text, color)
+            mainRectangle.treeView.currentModel.addElement(type, text, color)
         }
 
         editToDoSheet.close();

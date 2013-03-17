@@ -98,9 +98,9 @@ Sheet{
         drawing.save(sketchPath)
 
         if (edit) {
-            treeView.currentModel.updateElement(treeView.currentIndex, "sketch", sketchPath, "na")
+            mainRectangle.treeView.currentModel.updateElement(mainRectangle.treeView.currentIndex, "sketch", sketchPath, "na")
         } else {
-            treeView.currentModel.addElement("sketch", sketchPath, "na")
+            mainRectangle.treeView.currentModel.addElement("sketch", sketchPath, "na")
         }
 
         editSketchSheet.close();
