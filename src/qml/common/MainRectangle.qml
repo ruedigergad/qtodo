@@ -133,7 +133,7 @@ Rectangle{
         storage.open()
 
         imapStorage.updateMessageAttachment(imapMessageId, "to-do-o/default.xml")
-//        fileHelper.rm(imapSyncFile)
+        fileHelper.rm(imapSyncFile)
     }
 
     Rectangle {

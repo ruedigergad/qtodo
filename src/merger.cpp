@@ -49,6 +49,29 @@ void Merger::deleteOldNodes(QDomElement parentElement) {
     }
 }
 
+QDomElement Merger::existsInElement(QDomElement searched, QDomElement container) {
+    if (! container.hasChildNodes()) {
+        return QDomElement();
+    }
+
+    QDomNodeList childNodes = container.childNodes();
+    for (int i = 0; i < childNodes.count(); i++) {
+        QDomNode node = childNodes.at(i);
+
+        if (! node.isText()) {
+            QDomElement element = node.toElement();
+
+            if(element.tagName() == searched.tagName() &&
+                    element.attribute("id", "-1").toInt() == searched.attribute("id", "-1").toInt() &&
+                    element.firstChild().toText().nodeValue() == searched.firstChild().toText().nodeValue()) {
+                return element;
+            }
+        }
+    }
+
+    return QDomElement();
+}
+
 void Merger::findMinId(QDomElement parentElement) {
     QDomNodeList childNodes = parentElement.childNodes();
 
@@ -76,13 +99,52 @@ void Merger::merge(QString incoming) {
 
     mergeDeletions();
 
-    incomingStorage->save(incoming);
+    maxId = incomingRoot.attribute("max_id", "-1").toInt();
+    qDebug() << "maxId: " << maxId;
+
+    mergeElements(ownRoot, incomingRoot);
+    incomingRoot.setAttribute("max_id", maxId);
+
+    incomingStorage->save();
 }
 
 void Merger::mergeDeletions() {
     minId = std::numeric_limits<int>::max();
 
     findMinId(ownRoot);
-    qDebug() << "Found min id: " << minId;
+    qDebug() << "Found minId: " << minId;
     deleteOldNodes(incomingRoot);
+}
+
+void Merger::mergeElements(QDomElement own, QDomElement incoming) {
+    if (! own.hasChildNodes()) {
+        return;
+    }
+
+    QDomNodeList ownChildNodes = own.childNodes();
+    for (int i = 0; i < ownChildNodes.count(); i++) {
+        QDomNode ownNode = ownChildNodes.at(i);
+
+        if (! ownNode.isText()) {
+            QDomElement ownElement = ownNode.toElement();
+
+            QDomElement foundElement = existsInElement(ownElement, incoming);
+            if (foundElement.isNull()) {
+                QDomElement newElement = incomingStorage->getDocument().createElement(ownElement.tagName());
+                newElement.appendChild(incomingStorage->getDocument().createTextNode(ownElement.firstChild().toText().nodeValue()));
+
+                if(ownElement.tagName() == "to-do"){
+                    newElement.setAttribute("color", ownElement.attribute("color", "blue"));
+                    newElement.setAttribute("done", ownElement.attribute("done", "false"));
+                }
+
+                maxId++;;
+                newElement.setAttribute("id", maxId);
+
+                incoming.appendChild(newElement);
+            } else {
+                mergeElements(ownElement, foundElement);
+            }
+        }
+    }
 }

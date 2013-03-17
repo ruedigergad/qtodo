@@ -43,11 +43,14 @@ private:
     QDomElement ownRoot;
     ToDoStorage *ownStorage;
 
+    int maxId;
     int minId;
 
-    void mergeDeletions();
     void deleteOldNodes(QDomElement element);
+    QDomElement existsInElement(QDomElement searched, QDomElement container);
     void findMinId(QDomElement element);
+    void mergeDeletions();
+    void mergeElements(QDomElement own, QDomElement incoming);
 };
 
 #endif // MERGER_H
