@@ -124,12 +124,12 @@ Rectangle{
         if (imapSyncFile.indexOf("to-do-o/default.xml") > -1) {
             console.log("Initial sync, reloading storage...")
             storage.open()
+            syncToImapProgressDialog.close()
+            return
         }
 
         imapStorage.updateMessageAttachment(imapMessageId, "to-do-o/default.xml")
         fileHelper.rm(imapSyncFile)
-
-        syncToImapProgressDialog.close()
     }
 
     Rectangle {
@@ -213,7 +213,7 @@ Rectangle{
         title: "Syncing..."
         message: "Sync to IMAP in progess"
 
-        maxValue: 4
+        maxValue: 5
         currentValue: 0
     }
 
@@ -239,6 +239,7 @@ Rectangle{
         onFolderListRetrieved: prepareImapFolder()
         onMessageListRetrieved: findAndRetrieveMessages()
         onMessageRetrieved: processMessage()
+        onMessageUpdated: syncToImapProgressDialog.close()
     }
 
     Component.onCompleted: {

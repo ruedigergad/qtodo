@@ -26,47 +26,50 @@ CommonDialog {
     property alias title: titleText.text
     property alias message: message.text
 
-    Text {
-        id: titleText
-        anchors.bottom: progressIndicatorBackground.top
-        anchors.margins: 20
-        width: parent.width
-        color: "white"
-        font.pointSize: 40
-        font.bold: true
-        horizontalAlignment: Text.AlignHCenter
-        wrapMode: Text.Wrap
-    }
-
-    Rectangle {
-        id: progressIndicatorBackground
-        anchors.centerIn: parent
-
-        width: parent.width * 0.8
-        height: 80
-
-        color: "white"
+    content:Item {
+      anchors.fill: parent
+        Text {
+            id: titleText
+            anchors.bottom: progressIndicatorBackground.top
+            anchors.margins: 20
+            width: parent.width
+            color: "white"
+            font.pointSize: 40
+            font.bold: true
+            horizontalAlignment: Text.AlignHCenter
+            wrapMode: Text.Wrap
+        }
 
         Rectangle {
-            id: progressIndicator
+            id: progressIndicatorBackground
+            anchors.centerIn: parent
 
-            color: "steelblue"
+            width: parent.width * 0.8
+            height: 80
 
-            anchors {left: parent.left; top: parent.top; bottom: parent.bottom}
-            width: parent.width * (currentValue === 0 ? 0 : (currentValue/maxValue))
+            color: "white"
+
+            Rectangle {
+                id: progressIndicator
+
+                color: "steelblue"
+
+                anchors {left: parent.left; top: parent.top; bottom: parent.bottom}
+                width: parent.width * (currentValue === 0 ? 0 : (currentValue/maxValue))
+            }
         }
-    }
 
-    Text {
-        id:message
+        Text {
+            id:message
 
-        anchors.top: progressIndicatorBackground.bottom
-        anchors.margins: 20
+            anchors.top: progressIndicatorBackground.bottom
+            anchors.margins: 20
 
-        width: parent.width
-        color: "white"
-        font.pointSize: 25
-        horizontalAlignment: Text.AlignHCenter
-        wrapMode: Text.Wrap
+            width: parent.width
+            color: "white"
+            font.pointSize: 25
+            horizontalAlignment: Text.AlignHCenter
+            wrapMode: Text.Wrap
+        }
     }
 }
