@@ -14,10 +14,10 @@
    height="80"
    id="svg2393"
    sodipodi:version="0.32"
-   inkscape:version="0.48.1 r9760"
+   inkscape:version="0.48.4 r9939"
    sodipodi:docname="qtodo.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   inkscape:export-filename="/home/rc/qt_workspace/qtodo/qtodo.png"
+   inkscape:export-filename="/home/rc/repositories/private/qt/qtodo/src/qtodo.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90"
    version="1.1">
@@ -105,11 +105,11 @@
      showgrid="true"
      inkscape:grid-bbox="true"
      inkscape:document-units="px"
-     inkscape:window-width="1420"
-     inkscape:window-height="904"
-     inkscape:window-x="181"
-     inkscape:window-y="182"
-     inkscape:window-maximized="0" />
+     inkscape:window-width="1366"
+     inkscape:window-height="743"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
   <metadata
      id="metadata2398">
     <rdf:RDF>
@@ -135,13 +135,13 @@
        sodipodi:nodetypes="ssssss" />
     <path
        sodipodi:type="arc"
-       style="fill:#2c81c8;fill-opacity:1;fill-rule:evenodd;stroke:none"
+       style="fill:#00b000;fill-opacity:1;fill-rule:evenodd;stroke:none"
        id="path2403"
        sodipodi:cx="25.317469"
        sodipodi:cy="27.222277"
        sodipodi:rx="11.29686"
        sodipodi:ry="11.29686"
-       d="m 36.614328,27.222277 a 11.29686,11.29686 0 1 1 -22.593719,0 11.29686,11.29686 0 1 1 22.593719,0 z"
+       d="m 36.614328,27.222277 c 0,6.239083 -5.057776,11.296859 -11.296859,11.296859 -6.239084,0 -11.29686,-5.057776 -11.29686,-11.296859 0,-6.239084 5.057776,-11.29686 11.29686,-11.29686 6.239083,0 11.296859,5.057776 11.296859,11.29686 z"
        transform="matrix(2.5868858,0,0,2.5868858,-25.493399,-78.42092)"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90"

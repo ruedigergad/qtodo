@@ -27,7 +27,7 @@ CommonDialog {
 
       Text {
           id: homepage
-          text: "<a href=\"http://ruedigergad.github.com/qtodo\" style=\"text-decoration:none; color:#78bfff\">Q To-Do<br /><img src=\"../icons/logo.png\" /><br />Version 0.8.2</a>"
+          text: "<a href=\"http://ruedigergad.github.com/qtodo\" style=\"text-decoration:none; color:#00b000\">Q To-Do<br /><img src=\"../icons/logo.png\" /><br />Version 0.8.2</a>"
           textFormat: Text.RichText;
           onLinkActivated: { Qt.openUrlExternally(link); }
           font.pixelSize: 25; horizontalAlignment: Text.AlignHCenter;
@@ -43,7 +43,7 @@ CommonDialog {
       Text {
           id: author;
           text: "Author: <br />"
-                 + "Ruediger Gad - <a href=\"mailto:r.c.g@gmx.de\" style=\"text-decoration:none; color:#78bfff\" >r.c.g@gmx.de</a><br />"
+                 + "Ruediger Gad - <a href=\"mailto:r.c.g@gmx.de\" style=\"text-decoration:none; color:#00b000\" >r.c.g@gmx.de</a><br />"
           textFormat: Text.RichText;
           onLinkActivated: { Qt.openUrlExternally(link); }
           font.pixelSize: 20; anchors.centerIn: parent; color: "lightgray"; horizontalAlignment: Text.AlignHCenter
@@ -52,7 +52,7 @@ CommonDialog {
       Text {
           id: license
           text: "Q To-Do is free software: you can redistribute it and/or modify "
-            + "it under the terms of the <a href=\"http://www.gnu.org/licenses\" style=\"text-decoration:none; color:#78bfff\" >GNU General Public License</a> as published by "
+            + "it under the terms of the <a href=\"http://www.gnu.org/licenses\" style=\"text-decoration:none; color:#00b000\" >GNU General Public License</a> as published by "
             + "the Free Software Foundation, either version 3 of the License, or "
             + "(at your option) any later version.";
           textFormat: Text.RichText;

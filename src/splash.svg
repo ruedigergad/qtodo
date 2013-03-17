@@ -14,9 +14,9 @@
    height="480"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.1 r9760"
+   inkscape:version="0.48.4 r9939"
    sodipodi:docname="splash.svg"
-   inkscape:export-filename="/home/rc/qt_workspace/qtodo/splash.png"
+   inkscape:export-filename="/home/rc/repositories/private/qt/qtodo/src/splash.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -433,8 +433,8 @@
      inkscape:current-layer="layer1"
      showgrid="false"
      units="px"
-     inkscape:window-width="1920"
-     inkscape:window-height="1150"
+     inkscape:window-width="1366"
+     inkscape:window-height="743"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1" />
@@ -446,7 +446,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -468,31 +468,30 @@
          x="-954.34735"
          y="635.19293">Q To-Do</tspan></text>
     <g
-       id="g2966"
-       transform="matrix(0,-11.521336,11.521336,0,-7140.4116,2219.6111)">
+       id="g4796">
       <path
          inkscape:export-filename="/home/rc/workspace_test/Mobile To-Do/icons/todo_blue.png"
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
-         transform="matrix(1.171866,0,0,1.171866,92.474176,619.74707)"
-         d="m 36.614328,27.222277 c 0,6.239083 -5.057776,11.296859 -11.296859,11.296859 -6.239084,0 -11.29686,-5.057776 -11.29686,-11.296859 0,-6.239084 5.057776,-11.29686 11.29686,-11.29686 6.239083,0 11.296859,5.057776 11.296859,11.29686 z"
+         transform="matrix(0,-13.501462,13.501462,0,-0.09737151,1154.185)"
+         d="m 36.614328,27.222277 a 11.29686,11.29686 0 1 1 -22.593719,0 11.29686,11.29686 0 1 1 22.593719,0 z"
          sodipodi:ry="11.29686"
          sodipodi:rx="11.29686"
          sodipodi:cy="27.222277"
          sodipodi:cx="25.317469"
          id="path2403-6"
-         style="fill:#2c81c8;fill-opacity:1;fill-rule:evenodd;stroke:none"
+         style="fill:#00b000;fill-opacity:1;fill-rule:evenodd;stroke:none"
          sodipodi:type="arc" />
       <text
-         transform="scale(1.0178302,0.98248214)"
+         transform="matrix(0,-1.0178302,0.98248214,0,0,0)"
          sodipodi:linespacing="125%"
          id="text3175"
-         y="672.39563"
-         x="115.57551"
-         style="font-size:27.54609871px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Nimbus Roman No9 L;-inkscape-font-specification:Nimbus Roman No9 L Bold"
+         y="479.16946"
+         x="-849.14398"
+         style="font-size:317.36785889px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Nimbus Roman No9 L;-inkscape-font-specification:Nimbus Roman No9 L Bold"
          xml:space="preserve"><tspan
-           y="672.39563"
-           x="115.57551"
+           y="479.16946"
+           x="-849.14398"
            id="tspan3177"
            sodipodi:role="line">!</tspan></text>
     </g>
