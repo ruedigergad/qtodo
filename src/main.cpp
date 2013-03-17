@@ -22,6 +22,7 @@
 
 #include <filehelper.h>
 #include <imapstorage.h>
+#include <merger.h>
 #include <nodelistmodel.h>
 #include <todostorage.h>
 
@@ -32,6 +33,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     qmlRegisterType<FileHelper>("qtodo", 1, 0, "FileHelper");
     qmlRegisterType<ImapStorage>("qtodo", 1, 0, "ImapStorage");
+    qmlRegisterType<Merger>("qtodo", 1, 0, "Merger");
     qmlRegisterType<NodeListModel>("qtodo", 1, 0, "NodeListModel");
     qmlRegisterType<ToDoStorage>("qtodo", 1, 0, "ToDoStorage");
 

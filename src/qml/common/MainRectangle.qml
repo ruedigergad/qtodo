@@ -101,6 +101,7 @@ Rectangle{
         if (messageIds.length === 0) {
             console.log("No message found. Performing initital upload.")
             imapStorage.addMessage(imapAccountId, imapFolderName, imapMessageSubject, "to-do-o/default.xml")
+            syncToImapProgressDialog.close()
         } else if (messageIds.length === 1) {
             console.log("Message found.")
             imapMessageId = messageIds[0]
@@ -128,8 +129,11 @@ Rectangle{
             return
         }
 
+        merger.merge(imapSyncFile)
+        storage.open()
+
         imapStorage.updateMessageAttachment(imapMessageId, "to-do-o/default.xml")
-        fileHelper.rm(imapSyncFile)
+//        fileHelper.rm(imapSyncFile)
     }
 
     Rectangle {
@@ -240,6 +244,10 @@ Rectangle{
         onMessageListRetrieved: findAndRetrieveMessages()
         onMessageRetrieved: processMessage()
         onMessageUpdated: syncToImapProgressDialog.close()
+    }
+
+    Merger {
+        id: merger
     }
 
     Component.onCompleted: {

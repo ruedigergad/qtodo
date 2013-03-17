@@ -67,13 +67,15 @@ HEADERS += \
     todostorage.h \
     nodelistmodel.h \
     filehelper.h \
-    imapstorage.h
+    imapstorage.h \
+    merger.h
 
 SOURCES += main.cpp \
     todostorage.cpp \
     nodelistmodel.cpp \
     filehelper.cpp \
-    imapstorage.cpp
+    imapstorage.cpp \
+    merger.cpp
 
 OTHER_FILES += \
     qtodo.desktop \
