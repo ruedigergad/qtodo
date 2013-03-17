@@ -60,6 +60,8 @@ Rectangle{
         var accIds = imapStorage.queryImapAccounts()
         console.log("Found " + accIds.length + " IMAP account(s).")
 
+        syncToImapProgressDialog.currentValue++
+
         if (accIds.length === 1) {
             console.log("Found a single IMAP account. Using this for syncing.")
             console.log("IMAP account id is: " + accIds[0])
@@ -69,6 +71,8 @@ Rectangle{
     }
 
     function prepareImapFolder() {
+        syncToImapProgressDialog.currentValue++
+
         if (! imapStorage.folderExists(imapAccountId, imapFolderName)) {
             console.log("Creating folder...")
             imapStorage.createFolder(imapAccountId, imapFolderName)
@@ -79,6 +83,7 @@ Rectangle{
 
     function processImapFolder() {
         console.log("Processing content of IMAP folder...")
+        syncToImapProgressDialog.currentValue++
 
         if (! imapStorage.folderExists(imapAccountId, imapFolderName)) {
             console.log("Error: IMAP folder does not exist!")
@@ -90,6 +95,8 @@ Rectangle{
 
     function findAndRetrieveMessages() {
         console.log("Processing messages...")
+        syncToImapProgressDialog.currentValue++
+
         var messageIds = imapStorage.queryMessages(imapAccountId, imapFolderName, imapMessageSubject)
         if (messageIds.length === 0) {
             console.log("No message found. Performing initital upload.")
@@ -106,6 +113,7 @@ Rectangle{
 
     function processMessage() {
         console.log("Processing message...")
+        syncToImapProgressDialog.currentValue++
 
         var attachmentLocations = imapStorage.getAttachmentLocations(imapMessageId)
         console.log("Found the following attachment locations: " + attachmentLocations)
@@ -120,6 +128,8 @@ Rectangle{
 
         imapStorage.updateMessageAttachment(imapMessageId, "to-do-o/default.xml")
         fileHelper.rm(imapSyncFile)
+
+        syncToImapProgressDialog.close()
     }
 
     Rectangle {
@@ -192,7 +202,19 @@ Rectangle{
 
         onAccepted: {
             syncToImap();
+            syncToImapProgressDialog.currentValue = 0
+            syncToImapProgressDialog.open()
         }
+    }
+
+    ProgressDialog {
+        id: syncToImapProgressDialog
+
+        title: "Syncing..."
+        message: "Sync to IMAP in progess"
+
+        maxValue: 4
+        currentValue: 0
     }
 
     FileHelper { id: fileHelper }
