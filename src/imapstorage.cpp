@@ -188,7 +188,7 @@ void ImapStorage::retrieveFolderList(ulong accId) {
 }
 
 void ImapStorage::retrieveMessageList(ulong accId, QString folder) {
-    qDebug() << "Retrieving messages for account id: " << accId << " from folder: " << folder;
+    qDebug() << "Retrieving message list for account id: " << accId << " from folder: " << folder;
 
     QMailFolderIdList folders = queryFolders(accId, folder);
     if (folders.count() != 1) {
