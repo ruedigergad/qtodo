@@ -45,13 +45,13 @@ Item {
 
     function getColor(colorString) {
         if(colorString === "blue")
-            return "#ace0ff"
+            return "#2c81c8"
         if(colorString === "green")
-            return "#b0fCb0"
+            return "#18FF00"
         if(colorString === "yellow")
-            return "#fbfba9"
+            return "#FFD600"
         if(colorString === "red")
-            return "#FFC0C0"
+            return "#FF2300"
 
         return "#00ff00"
     }
@@ -267,8 +267,8 @@ Item {
                                             displayedProgress * parent.width :
                                             0
                             }
-                            color: "#49e149"
-//                            opacity: 0.2
+                            color: "#00cc00"
+                            opacity: 0.6
                         }
 
                         Rectangle {
@@ -277,7 +277,7 @@ Item {
                             anchors.right: parent.right
                             height: parent.height
                             color: getColor(itemColor)
-//                            opacity: 0.2
+                            opacity: 0.2
                         }
 
                         Text {
