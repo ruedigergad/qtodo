@@ -128,6 +128,18 @@ bool ImapStorage::folderExists(ulong accId, QString path) {
     return (queryFolders(accId, path).count() == 1);
 }
 
+QStringList ImapStorage::getAttachmentLocations(ulong msgId) {
+    QMailMessage *msg = new QMailMessage(QMailMessageId(msgId));
+    QList<QMailMessagePartContainer::Location> locations = msg->findAttachmentLocations();
+
+    QStringList ret;
+    for (int i = 0; i < locations.count(); i++) {
+        ret << locations.at(i).toString(true);
+    }
+
+    return ret;
+}
+
 QMailFolderIdList ImapStorage::queryFolders(ulong accId, QString path) {
     QMailFolderKey accountKey(QMailFolderKey::parentAccountId(QMailAccountId(accId)));
     QMailFolderKey pathKey(QMailFolderKey::path(path));
@@ -271,4 +283,11 @@ void ImapStorage::searchMessageActivityChanged(QMailServiceAction::Activity acti
         default:
             break;
     }
+}
+
+QString ImapStorage::writeAttachmentTo(ulong msgId, QString attachmentLocation, QString path) {
+    QMailMessage *msg = new QMailMessage(QMailMessageId(msgId));
+    QMailMessagePart attachment = msg->partAt(QMailMessagePart::Location(attachmentLocation));
+    QString ret = attachment.writeBodyTo(QDir::homePath() + "/" + path);
+    return ret;
 }

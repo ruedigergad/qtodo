@@ -38,6 +38,7 @@ Rectangle{
     property string imapFolderName: "qtodo"
     property int imapMessageId: -1
     property string imapMessageSubject: "[QTODO] SimpleSync"
+    property string imapSyncFile: ""
 
     function editSelectedItem() {
         var currentItem = treeView.currentItem
@@ -105,6 +106,11 @@ Rectangle{
     function processMessage() {
         console.log("Processing message...")
 
+        var attachmentLocations = imapStorage.getAttachmentLocations(imapMessageId)
+        console.log("Found the following attachment locations: " + attachmentLocations)
+
+        imapSyncFile = imapStorage.writeAttachmentTo(imapMessageId, attachmentLocations[0], "to-do-o")
+        console.log("Wrote attachment to: " + imapSyncFile)
     }
 
     Rectangle {

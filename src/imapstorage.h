@@ -33,6 +33,7 @@ public:
     Q_INVOKABLE void addMessage(ulong accId, QString folder, QString subject, QString attachment = "");
     Q_INVOKABLE void createFolder(ulong accId, QString name);
     Q_INVOKABLE bool folderExists(ulong accId, QString path);
+    Q_INVOKABLE QStringList getAttachmentLocations(ulong msgId);
     Q_INVOKABLE QVariantList queryImapAccounts();
     Q_INVOKABLE QVariantList queryMessages(ulong accId, QString folder, QString subject);
     Q_INVOKABLE bool removeMessage(ulong msgId);
@@ -40,6 +41,7 @@ public:
     Q_INVOKABLE void retrieveMessage(ulong msgId);
     Q_INVOKABLE void retrieveMessageList(ulong accId, QString folder);
     Q_INVOKABLE void searchMessage(ulong accId, QString folder, QString subject);
+    Q_INVOKABLE QString writeAttachmentTo(ulong msgId, QString attachmentLocation, QString path);
 
 signals:
     void folderCreated();
