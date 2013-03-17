@@ -52,14 +52,14 @@ PageStackWindow {
             MenuItem {
                 text: "Edit"
                 onClicked: {
-                    editSelectedItem()
+                    mainRectangle.editSelectedItem()
                 }
             }
             MenuItem {
                 text: "Delete"
                 onClicked: {
-                    confirmDeleteDialog.message = "Delete \"" + treeView.currentItem.text + "\"?"
-                    confirmDeleteDialog.open()
+                    mainRectangle.confirmDeleteDialog.message = "Delete \"" + treeView.currentItem.text + "\"?"
+                    mainRectangle.confirmDeleteDialog.open()
                 }
             }
         }
