@@ -159,6 +159,7 @@ void Merger::merge(QString incoming) {
     maxId = incomingRoot.attribute("max_id", "-1").toInt();
     qDebug() << "maxId: " << maxId;
 
+    nonExistentIds.clear();
     for (int i = 0; i <= maxId; i++) {
         nonExistentIds.append(i);
     }
