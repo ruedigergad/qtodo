@@ -45,13 +45,13 @@ Item {
 
     function getColor(colorString) {
         if(colorString === "blue")
-            return "#9999D6"
+            return "#ace0ff"
         if(colorString === "green")
-            return "#80CC80"
+            return "#b0fCb0"
         if(colorString === "yellow")
-            return "#DBDB4D"
+            return "#fbfba9"
         if(colorString === "red")
-            return "#FF9999"
+            return "#FFC0C0"
 
         return "#00ff00"
     }
@@ -267,7 +267,7 @@ Item {
                                             displayedProgress * parent.width :
                                             0
                             }
-                            color: "#19D119"
+                            color: "#49e149"
 //                            opacity: 0.2
                         }
 
