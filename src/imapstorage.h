@@ -32,8 +32,10 @@ public:
     
     Q_INVOKABLE void addMessage(ulong accId, QString folder, QString subject, QString attachment = "");
     Q_INVOKABLE void createFolder(ulong accId, QString name);
+    Q_INVOKABLE void deleteMessage(ulong msgId);
     Q_INVOKABLE bool folderExists(ulong accId, QString path);
     Q_INVOKABLE QStringList getAttachmentLocations(ulong msgId);
+    Q_INVOKABLE void moveMessageToTrash(ulong msgId);
     Q_INVOKABLE QVariantList queryImapAccounts();
     Q_INVOKABLE QVariantList queryMessages(ulong accId, QString folder, QString subject);
     Q_INVOKABLE bool removeMessage(ulong msgId);
@@ -41,23 +43,26 @@ public:
     Q_INVOKABLE void retrieveMessage(ulong msgId);
     Q_INVOKABLE void retrieveMessageList(ulong accId, QString folder);
     Q_INVOKABLE void searchMessage(ulong accId, QString folder, QString subject);
+    Q_INVOKABLE void updateMessageAttachment(ulong msgId, QString attachment);
     Q_INVOKABLE QString writeAttachmentTo(ulong msgId, QString attachmentLocation, QString path);
 
 signals:
     void folderCreated();
     void folderListRetrieved();
-    void messageRetrieved();
+    void messageDeleted();
     void messageListRetrieved();
+    void messageRetrieved();
+    void messageUpdated();
     void searchFinished(QVariantList msgIds);
     
 public slots:
 
 private slots:
     void accountContentsModified(const QMailAccountIdList &ids);
-    void createFolderActivityChanged(QMailServiceAction::Activity);
     void foldersAdded(QMailFolderIdList ids);
     void retrieveActivityChanged(QMailServiceAction::Activity);
     void searchMessageActivityChanged(QMailServiceAction::Activity);
+    void storageActivityChanged(QMailServiceAction::Activity);
 
 private:
     enum CurrentAction {
@@ -67,13 +72,16 @@ private:
         SearchAction,
         RetrieveFolderListAction,
         RetrieveMessageListAction,
-        RetrieveMessageAction
+        RetrieveMessageAction,
+        UpdateMessageAction,
+        DeleteMessageAction,
+        MoveToTrashAction
     };
 
-    QMailStorageAction *createFolderAction;
+    CurrentAction currentAction;
     QMailRetrievalAction *retrievalAction;
     QMailSearchAction *searchAction;
-    CurrentAction currentAction;
+    QMailStorageAction *storageAction;
 
     QMailFolderIdList queryFolders(ulong accId, QString path);
 };

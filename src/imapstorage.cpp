@@ -27,12 +27,12 @@
 ImapStorage::ImapStorage(QObject *parent) :
     QObject(parent)
 {
-    createFolderAction = new QMailStorageAction();
+    storageAction = new QMailStorageAction();
     retrievalAction = new QMailRetrievalAction();
     searchAction = new QMailSearchAction();
 
-    connect(createFolderAction, SIGNAL(activityChanged(QMailServiceAction::Activity)),
-            this, SLOT(createFolderActivityChanged(QMailServiceAction::Activity)));
+    connect(storageAction, SIGNAL(activityChanged(QMailServiceAction::Activity)),
+            this, SLOT(storageActivityChanged(QMailServiceAction::Activity)));
     connect(QMailStore::instance(), SIGNAL(foldersAdded(QMailFolderIdList)),
             this, SLOT(foldersAdded(QMailFolderIdList)));
     connect(QMailStore::instance(), SIGNAL(foldersUpdated(QMailFolderIdList)),
@@ -95,25 +95,18 @@ void ImapStorage::addMessage(ulong accId, QString folder, QString subject, QStri
 
     QMailDisconnected::moveToFolder(QMailMessageIdList() << msg.id(), folderId);
     currentAction = AddMessageAction;
-    QMailRetrievalAction retrievalAction;
-    retrievalAction.exportUpdates(QMailAccountId(accId));
+    retrievalAction->exportUpdates(QMailAccountId(accId));
 }
 
 void ImapStorage::createFolder(ulong accId, QString name) {
     currentAction = CreateFolderAction;
-    createFolderAction->createFolder(name, QMailAccountId(accId), QMailFolderId());
+    storageAction->createFolder(name, QMailAccountId(accId), QMailFolderId());
 }
 
-/*
- * FIXME: This is not working properly right now. As a workaround we use the
- * accountContentsModified(QMailAccountIdList) signal of QMailStore (see above).
- */
-void ImapStorage::createFolderActivityChanged(QMailServiceAction::Activity activity) {
-    qDebug() << "createFolderAction activity changed: " << activity;
-    if (activity == QMailServiceAction::Successful) {
-        qDebug() << "Succeeded in creating folder.";
-        //emit folderCreated();
-    }
+void ImapStorage::deleteMessage(ulong msgId) {
+    qDebug() << "Deleting message with id: " << msgId;
+    currentAction = DeleteMessageAction;
+    storageAction->deleteMessages(QMailMessageIdList() << QMailMessageId(msgId));
 }
 
 /*
@@ -138,6 +131,12 @@ QStringList ImapStorage::getAttachmentLocations(ulong msgId) {
     }
 
     return ret;
+}
+
+void ImapStorage::moveMessageToTrash(ulong msgId) {
+    QMailDisconnected::moveToStandardFolder(QMailMessageIdList() << QMailMessageId(msgId), QMailFolder::TrashFolder);
+    currentAction = MoveToTrashAction;
+    retrievalAction->exportUpdates(QMailMessage(QMailMessageId(msgId)).parentAccountId());
 }
 
 QMailFolderIdList ImapStorage::queryFolders(ulong accId, QString path) {
@@ -211,6 +210,14 @@ void ImapStorage::retrieveActivityChanged(QMailServiceAction::Activity activity)
             currentAction = NoAction;
             emit messageListRetrieved();
             break;
+        case UpdateMessageAction:
+            qDebug("Message updated.");
+            currentAction = NoAction;
+            emit messageUpdated();
+            break;
+        case MoveToTrashAction:
+            qDebug() << "Message was successfully moved to trash.";
+            currentAction = NoAction;
         default:
             break;
         }
@@ -283,6 +290,74 @@ void ImapStorage::searchMessageActivityChanged(QMailServiceAction::Activity acti
         default:
             break;
     }
+}
+
+/*
+ * FIXME: This is not working properly right now. As a workaround we use the
+ * accountContentsModified(QMailAccountIdList) signal of QMailStore (see above).
+ */
+void ImapStorage::storageActivityChanged(QMailServiceAction::Activity activity) {
+    qDebug() << "storageActivityChanged changed: " << activity;
+
+    switch (activity) {
+    case QMailServiceAction::Successful:
+        switch (currentAction) {
+        case CreateFolderAction:
+            qDebug() << "Succeeded creating folder.";
+            //emit folderCreated();
+            break;
+        case DeleteMessageAction:
+            qDebug() << "Message deleted successfully.";
+            currentAction = NoAction;
+            emit messageDeleted();
+            break;
+        default:
+            break;
+        }
+    default:
+        break;
+    }
+
+    if (activity == QMailServiceAction::Successful) {
+
+    }
+}
+
+void ImapStorage::updateMessageAttachment(ulong msgId, QString attachment) {
+    qDebug("Updating message attachment...");
+    QMailMessage *oldMsg = new QMailMessage(QMailMessageId(msgId));
+
+    /*
+     * FIXME: Quite a hack to update the message on the server.
+     * What we do is, essentially, to clone the message, upload the clone, and remove the old message.
+     * Note: The account must be set to delete messages on the server for this to work.
+     * See also the other FIXME below. This is actually how it should work.
+     */
+    QMailMessage msg;
+    msg.setParentAccountId(oldMsg->parentAccountId());
+    msg.setParentFolderId(oldMsg->parentFolderId());
+    msg.setSubject(oldMsg->subject());
+    msg.setMessageType(oldMsg->messageType());
+    msg.setDate(QMailTimeStamp(QDateTime::currentDateTime()));
+    msg.setStatus(QMailMessage::LocalOnly, true);
+    msg.setAttachments(QStringList() << QDir::homePath() + "/" + attachment);
+
+    QMailStore::instance()->addMessage(&msg);
+    QMailStore::instance()->removeMessage(oldMsg->id(), QMailStore::CreateRemovalRecord);
+    QMailDisconnected::moveToFolder(QMailMessageIdList() << msg.id(), msg.parentFolderId());
+
+    /*
+     * FIXME: Why is this not working.
+     * Ideally, we would just update the message as can be seen below.
+     * However, this results in a copy of the old message being retained on the server.
+     */
+//    oldMsg->setAttachments(QStringList() << QDir::homePath() + "/" + attachment);
+//    oldMsg->setDate(QMailTimeStamp(QDateTime::currentDateTime()));
+//    oldMsg->setStatus(QMailMessage::LocalOnly, true);
+//    QMailStore::instance()->updateMessage(oldMsg);
+
+    currentAction = UpdateMessageAction;
+    retrievalAction->exportUpdates(QMailAccountId(oldMsg->parentAccountId()));
 }
 
 QString ImapStorage::writeAttachmentTo(ulong msgId, QString attachmentLocation, QString path) {

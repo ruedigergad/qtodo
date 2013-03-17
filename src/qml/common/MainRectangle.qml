@@ -116,12 +116,14 @@ Rectangle{
             console.log("Initial sync, reloading storage...")
             storage.open()
         }
+
+        imapStorage.updateMessageAttachment(imapMessageId, "to-do-o/default.xml")
     }
 
     Rectangle {
         id: header
         height: 72
-        color: "#0c61a8"
+        color: "#009900" //#0c61a8"
         anchors{left: parent.left; right: parent.right; top: parent.top}
         z: 48
 
@@ -200,8 +202,8 @@ Rectangle{
 
         onFolderCreated: processImapFolder()
         onFolderListRetrieved: prepareImapFolder()
-        onMessageRetrieved: processMessage()
         onMessageListRetrieved: findAndRetrieveMessages()
+        onMessageRetrieved: processMessage()
     }
 
     Component.onCompleted: {
