@@ -29,6 +29,27 @@ Merger::Merger(QObject *parent) :
     ownStorage = new ToDoStorage();
 }
 
+void Merger::checkIdExistence(QDomElement parentElement) {
+    if (! parentElement.hasChildNodes()) {
+        return;
+    }
+
+    QDomNodeList childNodes = parentElement.childNodes();
+    for (int i = 0; i < childNodes.count(); i++) {
+        QDomNode node = childNodes.at(i);
+
+        if (! node.isText()) {
+            QDomElement element = node.toElement();
+            int id = element.attribute("id", "-1").toInt();
+            nonExistentIds.removeAll(id);
+
+            if (element.hasChildNodes()) {
+                checkIdExistence(element);
+            }
+        }
+    }
+}
+
 QDomElement Merger::copyElement(QDomElement from, QDomElement to) {
     QDomElement newElement = incomingStorage->getDocument().createElement(from.tagName());
     newElement.appendChild(incomingStorage->getDocument().createTextNode(from.firstChild().toText().nodeValue()));
@@ -138,6 +159,13 @@ void Merger::merge(QString incoming) {
     maxId = incomingRoot.attribute("max_id", "-1").toInt();
     qDebug() << "maxId: " << maxId;
 
+    for (int i = 0; i <= maxId; i++) {
+        nonExistentIds.append(i);
+    }
+    checkIdExistence(ownRoot);
+    qDebug() << "Non-existent ids: " << nonExistentIds;
+    removeNonExistentIds(incomingRoot);
+
     mergeElements(ownRoot, incomingRoot);
     incomingRoot.setAttribute("max_id", maxId);
 
@@ -173,6 +201,28 @@ void Merger::mergeElements(QDomElement own, QDomElement incoming) {
                 }
             } else {
                 mergeElements(ownElement, foundElement);
+            }
+        }
+    }
+}
+
+void Merger::removeNonExistentIds(QDomElement parentElement) {
+    if (! parentElement.hasChildNodes()) {
+        return;
+    }
+
+    QDomNodeList childNodes = parentElement.childNodes();
+    for (int i = 0; i < childNodes.count(); i++) {
+        QDomNode node = childNodes.at(i);
+
+        if (! node.isText()) {
+            QDomElement element = node.toElement();
+            int id = element.attribute("id", "-1").toInt();
+
+            if (nonExistentIds.contains(id)) {
+                parentElement.removeChild(element);
+            } else if (element.hasChildNodes()) {
+                removeNonExistentIds(element);
             }
         }
     }
