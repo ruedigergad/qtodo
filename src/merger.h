@@ -43,11 +43,10 @@ private:
     QDomElement ownRoot;
     ToDoStorage *ownStorage;
 
-    QList<int> nonExistentIds;
+    QStringList deletedIds;
     int maxId;
     int minId;
 
-    void checkIdExistence(QDomElement element);
     QDomElement copyElement(QDomElement from, QDomElement to);
     void deepCopy(QDomElement from, QDomElement to);
     void deleteOldNodes(QDomElement element);
@@ -55,7 +54,7 @@ private:
     void findMinId(QDomElement element);
     void mergeDeletions();
     void mergeElements(QDomElement own, QDomElement incoming);
-    void removeNonExistentIds(QDomElement element);
+    void removeDeletedIds(QDomElement element);
 };
 
 #endif // MERGER_H

@@ -134,8 +134,14 @@ void NodeListModel::deleteElement(int index){
     if(childNodes.at(0).isText())
         index++;
 
+    QString id = childNodes.at(index).toElement().attribute("id", "-1");
+    QStringList deleted = root.attribute("deleted_ids", "").split(",");
+    deleted.append(id);
+
     parentElement.removeChild(childNodes.at(index));
     endResetModel();
+
+    root.setAttribute("deleted_ids", deleted.join(","));
     emit changed();
 }
 
