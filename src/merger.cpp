@@ -133,6 +133,8 @@ void Merger::merge(QString incoming) {
     ownStorage->open();
     ownRoot = ownStorage->getRootElement();
     deletedIds = ownRoot.attribute("deleted_ids", "").split(",");
+    deletedIds.append(incomingStorage.attribute("deleted_ids", "").split(","));
+    deletedIds.removeDuplicates();
 
     mergeDeletions();
 
