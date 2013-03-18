@@ -20,6 +20,10 @@
 #include <QtGui/QApplication>
 #include <QtDeclarative>
 
+#ifdef MEEGO_EDITION_HARMATTAN
+#include <applauncherd/MDeclarativeCache>
+#endif
+
 #include <filehelper.h>
 #include <imapstorage.h>
 #include <merger.h>
@@ -28,8 +32,16 @@
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
-    QApplication *app = new QApplication(argc, argv);
-    QDeclarativeView *view = new QDeclarativeView();
+    QApplication *app;
+    QDeclarativeView *view;
+
+#ifdef MEEGO_EDITION_HARMATTAN
+    app = MDeclarativeCache::qApplication(argc, argv);
+    view = MDeclarativeCache::qDeclarativeView();
+#else
+    app = new QApplication(argc, argv);
+    view = new QDeclarativeView();
+#endif
 
     qmlRegisterType<FileHelper>("qtodo", 1, 0, "FileHelper");
     qmlRegisterType<ImapStorage>("qtodo", 1, 0, "ImapStorage");

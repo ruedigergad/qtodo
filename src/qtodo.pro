@@ -8,11 +8,6 @@ exists($$QMAKE_INCDIR_QT"/../applauncherd/MDeclarativeCache"): {
 
     DEFINES += MEEGO_EDITION_HARMATTAN
 
-    # enable booster
-    CONFIG += qdeclarative-boostable
-    QMAKE_CXXFLAGS += -fPIC -fvisibility=hidden -fvisibility-inlines-hidden
-    QMAKE_LFLAGS += -pie -rdynamic
-
     qmlMeego.source = qml/meego
     qmlMeego.target = qml
 
@@ -102,19 +97,24 @@ OTHER_FILES += \
 #RESOURCES += \
 #    res.qrc
 
-logoFiles.path = /opt/$${TARGET}/icons
 logoFiles.files = icons/logo.png
+logoFiles.path = /opt/$${TARGET}/icons
 
-sampleXml.path = /opt/$${TARGET}
+splash.files = splash.png
+splash.path = /opt/$${TARGET}
+
 sampleXml.files = sample.xml
+sampleXml.path = /opt/$${TARGET}
 
-INSTALLS += iconFiles jsFiles qmlFiles logoFiles
+INSTALLS += logoFiles splash
 #sampleXml
 
 # Please do not modify the following two lines. Required for deployment.
 include(deployment.pri)
 qtcAddDeployment()
 
-splash.files = splash.png
-splash.path = /opt/qtodo
-INSTALLS += splash
+exists($$QMAKE_INCDIR_QT"/../applauncherd/MDeclarativeCache"): {
+    CONFIG += qdeclarative-boostable
+    QMAKE_CXXFLAGS += -fPIC -fvisibility=hidden -fvisibility-inlines-hidden
+    QMAKE_LFLAGS += -pie -rdynamic
+}
