@@ -26,14 +26,22 @@ Rectangle {
     anchors.fill: parent
     color: "white"
 
-    MainRectangle {
-        id: mainRectangle
+    Rectangle {
+        anchors {top: parent.top; left: parent.left; right: parent.right; bottom: toolBarItem.top}
 
-        anchors {top: parent.top; left: parent.left; right: parent.right; bottom: toolBar.top}
+        MainRectangle {
+            id: mainRectangle
+        }
     }
 
-    QToDoToolBar {
-        id: toolBar
+    Rectangle {
+        id: toolBarItem
+        anchors {left: parent.left; right: parent.right; bottom: parent.bottom}
+        height: toolBar.height
+
+        QToDoToolBar {
+            id: toolBar
+        }
     }
 
     Menu {
