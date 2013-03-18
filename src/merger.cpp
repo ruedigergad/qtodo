@@ -142,6 +142,7 @@ void Merger::merge(QString incoming) {
     qDebug() << "maxId: " << maxId;
 
     removeDeletedIds(incomingRoot);
+    removeDeletedIds(ownRoot);
 
     mergeElements(ownRoot, incomingRoot);
     incomingRoot.setAttribute("max_id", maxId);
