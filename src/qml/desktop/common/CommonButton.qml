@@ -25,7 +25,7 @@ Rectangle {
     property alias text: textItem.text
     property alias font: textItem.font
 
-    property string iconSource;
+    property alias iconSource: iconImage.source;
 
     signal clicked
 
@@ -44,6 +44,12 @@ Rectangle {
         x: parent.width/2 - width/2; y: parent.height/2 - height/2
         font.pixelSize: 30
         color: "black"
+    }
+
+    Image {
+        id: iconImage
+
+        anchors.centerIn: parent
     }
 
     MouseArea {
