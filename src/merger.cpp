@@ -41,7 +41,14 @@ QDomElement Merger::copyElement(QDomElement from, QDomElement to) {
     maxId++;;
     newElement.setAttribute("id", maxId);
 
-    to.appendChild(newElement);
+    if(to.firstChild().isText()) {
+        to.insertAfter(newElement, to.firstChild());
+    } else if (! to.firstChild().isNull()){
+        to.insertBefore(newElement, to.firstChild());
+    } else {
+        to.appendChild(newElement);
+    }
+
     return newElement;
 }
 
