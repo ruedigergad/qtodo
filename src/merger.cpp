@@ -145,17 +145,17 @@ void Merger::merge(QString incoming) {
 
     mergeDeletions();
 
-    maxId = incomingRoot.attribute("max_id", "-1").toInt();
+    maxId = ownRoot.attribute("max_id", "-1").toInt();
     qDebug() << "maxId: " << maxId;
 
     removeDeletedIds(incomingRoot);
     removeDeletedIds(ownRoot);
 
-    mergeElements(ownRoot, incomingRoot);
-    incomingRoot.setAttribute("max_id", maxId);
-    incomingRoot.setAttribute("deleted_ids", deletedIds.join(","));
+    mergeElements(incomingRoot, ownRoot);
+    ownRoot.setAttribute("max_id", maxId);
+    ownRoot.setAttribute("deleted_ids", deletedIds.join(","));
 
-    incomingStorage->save();
+    ownRoot->save();
 }
 
 void Merger::mergeDeletions() {
