@@ -142,6 +142,7 @@ void Merger::merge(QString incoming) {
     deletedIds = ownRoot.attribute("deleted_ids", "").split(",");
     deletedIds.append(incomingRoot.attribute("deleted_ids", "").split(","));
     deletedIds.removeDuplicates();
+    qDebug() << "Deleted Ids: " << deletedIds;
 
     mergeDeletions();
 
@@ -164,6 +165,7 @@ void Merger::mergeDeletions() {
     findMinId(ownRoot);
     qDebug() << "Found minId: " << minId;
     deleteOldNodes(incomingRoot);
+    deleteOldNodes(ownRoot);
 }
 
 void Merger::mergeElements(QDomElement own, QDomElement incoming) {

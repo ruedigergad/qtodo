@@ -237,17 +237,22 @@ void NodeListModel::cleanDone(){
     if(childNodes.at(0).isText())
         index++;
 
+    QStringList deleted = root.attribute("deleted_ids", "").split(",");
+
     for (int i = 0; i < childNodes.count(); i++) {
         QDomNode node = childNodes.at(i);
         if (! node.isText()) {
             QDomElement element = node.toElement();
             if (element.attribute("done", "false") == "true") {
+                QString id = element.attribute("id", "-1");
+                deleted.append(id);
                 parentElement.removeChild(element);
                 i--;
             }
         }
     }
 
+    root.setAttribute("deleted_ids", deleted.join(","));
     endResetModel();
     emit changed();
 }

@@ -1,6 +1,6 @@
 Name: qtodo
 Summary: Q ToDo -- A Todo List Organizer
-Version: 0.8.2
+Version: 0.9.0
 Release: 1
 Group: Applications/Productivity
 License: GPLv3
@@ -17,6 +17,7 @@ PkgConfigBR:
     - QtCore >= 4.7.0
     - QtGui
     - qdeclarative-boostable
+    - qmfclient
 Configure: none
 Builder: qmake 
 Files:
