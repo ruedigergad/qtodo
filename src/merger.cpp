@@ -154,7 +154,7 @@ void Merger::merge(QString incoming) {
 
     incomingMaxId = incomingRoot.attribute("max_id", "-1").toInt();
     ownMaxId = ownRoot.attribute("max_id", "-1").toInt();
-    qDebug() << "maxId: " << ownMaxId;
+    qDebug() << "ownMaxId: " << ownMaxId << " incomingMaxId: " << incomingMaxId;
 
     removeDeletedIds(incomingRoot);
     removeDeletedIds(ownRoot);
@@ -221,6 +221,7 @@ void Merger::removeDeletedIds(QDomElement parentElement) {
 
             if (deletedIds.contains(id)) {
                 parentElement.removeChild(element);
+                i--;
             } else if (element.hasChildNodes()) {
                 removeDeletedIds(element);
             }
