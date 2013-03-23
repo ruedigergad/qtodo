@@ -155,7 +155,7 @@ void Merger::merge(QString incoming) {
     ownRoot.setAttribute("max_id", maxId);
     ownRoot.setAttribute("deleted_ids", deletedIds.join(","));
 
-    ownRoot->save();
+    ownStorage->save();
 }
 
 void Merger::mergeDeletions() {
