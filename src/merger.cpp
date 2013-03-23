@@ -33,13 +33,19 @@ QDomElement Merger::copyElement(QDomElement from, QDomElement to) {
     QDomElement newElement = incomingStorage->getDocument().createElement(from.tagName());
     newElement.appendChild(incomingStorage->getDocument().createTextNode(from.firstChild().toText().nodeValue()));
 
+    int fromId = from.attribute("id", "-1").toInt();
+
     if(from.tagName() == "to-do"){
         newElement.setAttribute("color", from.attribute("color", "blue"));
         newElement.setAttribute("done", from.attribute("done", "false"));
     }
 
-    maxId++;;
-    newElement.setAttribute("id", maxId);
+    if(fromId > ownMaxId) {
+        newElement.setAttribute("id", fromId);
+    } else {
+        ownMaxId++;
+        newElement.setAttribute("id", ownMaxId);
+    }
 
     if(to.firstChild().isText()) {
         to.insertAfter(newElement, to.firstChild());
@@ -146,14 +152,20 @@ void Merger::merge(QString incoming) {
 
     mergeDeletions();
 
-    maxId = ownRoot.attribute("max_id", "-1").toInt();
-    qDebug() << "maxId: " << maxId;
+    incomingMaxId = incomingRoot.attribute("max_id", "-1").toInt();
+    ownMaxId = ownRoot.attribute("max_id", "-1").toInt();
+    qDebug() << "maxId: " << ownMaxId;
 
     removeDeletedIds(incomingRoot);
     removeDeletedIds(ownRoot);
 
     mergeElements(incomingRoot, ownRoot);
-    ownRoot.setAttribute("max_id", maxId);
+
+    if (ownMaxId >= incomingMaxId) {
+        ownRoot.setAttribute("max_id", ownMaxId);
+    } else {
+        ownRoot.setAttribute("max_id", incomingMaxId);
+    }
     ownRoot.setAttribute("deleted_ids", deletedIds.join(","));
 
     ownStorage->save();

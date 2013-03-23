@@ -44,7 +44,8 @@ private:
     ToDoStorage *ownStorage;
 
     QStringList deletedIds;
-    int maxId;
+    int incomingMaxId;
+    int ownMaxId;
     int minId;
 
     QDomElement copyElement(QDomElement from, QDomElement to);
