@@ -26,7 +26,7 @@ CommonDialog {
     property alias title: titleText.text
     property alias message: message.text
 
-    content:Item {
+    Item {
       anchors.fill: parent
         Text {
             id: titleText

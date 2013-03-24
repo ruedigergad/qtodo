@@ -7,6 +7,13 @@ contains(LIBS,-lsailfishsilicabackground): {
     DEFINES += MER_EDITION_SAILFISH
     MER_EDITION = sailfish
 
+    qmlSailfish.source = qml/sailfish
+    qmlSailfish.target = qml
+
+    qmlSailfishCommon.source = qml/sailfish/common
+    qmlSailfishCommon.target = qml
+
+    DEPLOYMENTFOLDERS += qmlSailfish qmlSailfishCommon
 } else:exists($$QMAKE_INCDIR_QT"/../applauncherd/MDeclarativeCache"): {
     message(MeeGo/Harmattan build)
     MEEGO_VERSION_MAJOR     = 1
@@ -120,7 +127,15 @@ OTHER_FILES += \
     qml/meego/common/CommonTextField.qml \
     qml/meego/common/CommonToolBar.qml \
     qml/meego/common/CommonToolIcon.qml \
-    qml/meego/common/ConfirmationDialog.qml
+    qml/meego/common/ConfirmationDialog.qml \
+    qml/sailfish/main.qml \
+    qml/sailfish/common/CommonButton.qml \
+    qml/sailfish/common/CommonDialog.qml \
+    qml/sailfish/common/CommonTextArea.qml \
+    qml/sailfish/common/CommonTextField.qml \
+    qml/sailfish/common/CommonToolBar.qml \
+    qml/sailfish/common/CommonToolIcon.qml \
+    qml/sailfish/common/ConfirmationDialog.qml
 
 
 
