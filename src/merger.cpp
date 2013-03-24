@@ -180,7 +180,7 @@ void Merger::merge(QString incoming) {
     removeDeletedIds(incomingRoot);
     removeDeletedIds(ownRoot);
 
-    mergeElements(incomingRoot, ownRoot);
+    mergeNewElements(incomingRoot, ownRoot);
 
     if (ownMaxId >= incomingMaxId) {
         ownRoot.setAttribute("max_id", ownMaxId);
@@ -201,7 +201,7 @@ void Merger::mergeDeletions() {
     deleteOldNodes(ownRoot);
 }
 
-void Merger::mergeElements(QDomElement own, QDomElement incoming) {
+void Merger::mergeNewElements(QDomElement own, QDomElement incoming) {
     if (! own.hasChildNodes()) {
         return;
     }
@@ -221,7 +221,7 @@ void Merger::mergeElements(QDomElement own, QDomElement incoming) {
                     deepCopy(ownElement, newElement);
                 }
             } else {
-                mergeElements(ownElement, foundElement);
+                mergeNewElements(ownElement, foundElement);
             }
         }
     }
