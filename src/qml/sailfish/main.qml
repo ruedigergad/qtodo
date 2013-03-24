@@ -35,4 +35,8 @@ ApplicationWindow {
             id: mainRectangle
         }
     }
+
+    Component.onCompleted: {
+        pageStack.depth = 2
+    }
 }

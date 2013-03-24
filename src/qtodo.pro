@@ -1,5 +1,13 @@
 # Add more folders to ship with the application, here
 
+qmlCommon.source = qml/common
+qmlCommon.target = qml
+
+iconDeployment.source = icons
+iconDeployment.target = qml
+
+DEPLOYMENTFOLDERS += qmlCommon iconDeployment
+
 load(sailfishsilicabackground)
 contains(LIBS,-lsailfishsilicabackground): {
     message(SailfishOS build)
@@ -40,14 +48,6 @@ contains(LIBS,-lsailfishsilicabackground): {
 
     DEPLOYMENTFOLDERS += qmlDesktop qmlDesktopCommon
 }
-
-qmlCommon.source = qml/common
-qmlCommon.target = qml
-
-iconDeployment.source = icons
-iconDeployment.target = qml
-
-DEPLOYMENTFOLDERS += qmlCommon iconDeployment
 
 # Additional import path used to resolve QML modules in Creator's code model
 QML_IMPORT_PATH =
