@@ -18,6 +18,7 @@
  */
 
 #include "nodelistmodel.h"
+#include <QDateTime>
 
 NodeListModel::NodeListModel(QObject *parent) :
     QAbstractListModel(parent)
@@ -157,6 +158,8 @@ void NodeListModel::updateElement(int index, QString type, QString text, QString
     if(type == "to-do"){
         element.setAttribute("color", color);
     }
+    element.setAttribute("mtime", QDateTime::currentDateTime().toString());
+
     endResetModel();
     emit changed();
 }
@@ -166,7 +169,9 @@ void NodeListModel::setAttribute(int index, QString name, QString value){
     if(childNodes.at(0).isText())
         index++;
 
-    childNodes.at(index).toElement().setAttribute(name, value);
+    QDomElement element = childNodes.at(index).toElement();
+    element.setAttribute(name, value);
+    element.setAttribute("mtime", QDateTime::currentDateTime().toString());
 
     endResetModel();
     emit changed();
