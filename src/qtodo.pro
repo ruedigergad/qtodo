@@ -1,6 +1,14 @@
 # Add more folders to ship with the application, here
 
-exists($$QMAKE_INCDIR_QT"/../applauncherd/MDeclarativeCache"): {
+load(sailfishsilicabackground)
+contains(LIBS,-lsailfishsilicabackground): {
+    message(SailfishOS build)
+
+    DEFINES += MER_EDITION_SAILFISH
+    MER_EDITION = sailfish
+
+} else:exists($$QMAKE_INCDIR_QT"/../applauncherd/MDeclarativeCache"): {
+    message(MeeGo/Harmattan build)
     MEEGO_VERSION_MAJOR     = 1
     MEEGO_VERSION_MINOR     = 2
     MEEGO_VERSION_PATCH     = 0
@@ -16,6 +24,7 @@ exists($$QMAKE_INCDIR_QT"/../applauncherd/MDeclarativeCache"): {
 
     DEPLOYMENTFOLDERS += qmlMeego qmlMeegoCommon
 } else {
+    message(Desktop build)
     qmlDesktop.source = qml/desktop
     qmlDesktop.target = qml
 
