@@ -55,6 +55,8 @@ private:
     QDomElement findById(QString id, QDomElement container);
     void findMinId(QDomElement element);
     void mergeDeletions();
+    void mergeElementData(QDomElement from, QDomElement to);
+    void mergeExistingElements(QDomElement from, QDomElement to);
     void mergeNewElements(QDomElement own, QDomElement incoming);
     void removeDeletedIds(QDomElement element);
 };

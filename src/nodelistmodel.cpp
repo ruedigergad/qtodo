@@ -158,7 +158,7 @@ void NodeListModel::updateElement(int index, QString type, QString text, QString
     if(type == "to-do"){
         element.setAttribute("color", color);
     }
-    element.setAttribute("mtime", QDateTime::currentDateTime().toString());
+    element.setAttribute("mtime", QDateTime::currentDateTime().toString(Qt::ISODate));
 
     endResetModel();
     emit changed();
@@ -171,7 +171,7 @@ void NodeListModel::setAttribute(int index, QString name, QString value){
 
     QDomElement element = childNodes.at(index).toElement();
     element.setAttribute(name, value);
-    element.setAttribute("mtime", QDateTime::currentDateTime().toString());
+    element.setAttribute("mtime", QDateTime::currentDateTime().toString(Qt::ISODate));
 
     endResetModel();
     emit changed();

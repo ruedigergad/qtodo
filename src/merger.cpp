@@ -21,6 +21,7 @@
 #include "todostorage.h"
 #include <limits>
 #include <QDebug>
+#include <QDateTime>
 
 Merger::Merger(QObject *parent) :
     QObject(parent)
@@ -180,6 +181,7 @@ void Merger::merge(QString incoming) {
     removeDeletedIds(incomingRoot);
     removeDeletedIds(ownRoot);
 
+    mergeExistingElements(incomingRoot, ownRoot);
     mergeNewElements(incomingRoot, ownRoot);
 
     if (ownMaxId >= incomingMaxId) {
@@ -199,6 +201,54 @@ void Merger::mergeDeletions() {
     qDebug() << "Found minId: " << minId;
     deleteOldNodes(incomingRoot);
     deleteOldNodes(ownRoot);
+}
+
+void Merger::mergeElementData(QDomElement from, QDomElement to) {
+    to.setTagName(from.tagName());
+    to.firstChild().toText().setNodeValue(from.firstChild().toText().nodeValue());
+
+    QDomNamedNodeMap fromAttributes = from.attributes();
+    for (int i = 0; i < fromAttributes.count(); i++) {
+        QDomNode attribute = fromAttributes.item(i);
+        to.setAttribute(attribute.nodeName(), attribute.nodeValue());
+    }
+}
+
+void Merger::mergeExistingElements(QDomElement from, QDomElement to) {
+    if (! to.hasChildNodes()) {
+        return;
+    }
+
+    QDomNodeList toChildNodes = to.childNodes();
+    for (int i = 0; i < toChildNodes.count(); i++) {
+        QDomNode toNode = toChildNodes.at(i);
+
+        if (toNode.isText()) {
+            continue;
+        }
+
+        QDomElement toElement = toNode.toElement();
+
+        QString id = toElement.attribute("id", "-1");
+        if (id != "-1") {
+            QDomElement fromElement = findById(id, from);
+
+            if (! fromElement.isNull()) {
+                QDateTime fromTime = QDateTime::fromString(fromElement.attribute("mtime", "1970-01-01T00:00:00"), Qt::ISODate);
+                QDateTime toTime = QDateTime::fromString(fromElement.attribute("mtime", "1970-01-01T00:00:00"), Qt::ISODate);
+
+                if (fromTime > toTime) {
+                    mergeElementData(fromElement, toElement);
+                } else if (toTime > fromTime) {
+                    mergeElementData(toElement, fromElement);
+                }
+            }
+        }
+
+        if (toElement.hasChildNodes()) {
+            mergeExistingElements(from, toElement);
+        }
+    }
 }
 
 void Merger::mergeNewElements(QDomElement own, QDomElement incoming) {
