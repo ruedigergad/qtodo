@@ -51,7 +51,8 @@ private:
     QDomElement copyElement(QDomElement from, QDomElement to);
     void deepCopy(QDomElement from, QDomElement to);
     void deleteOldNodes(QDomElement element);
-    QDomElement existsInElement(QDomElement searched, QDomElement container);
+    QDomElement findByExample(QDomElement searched, QDomElement container);
+    QDomElement findById(QString id, QDomElement container);
     void findMinId(QDomElement element);
     void mergeDeletions();
     void mergeElements(QDomElement own, QDomElement incoming);

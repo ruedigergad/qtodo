@@ -98,7 +98,7 @@ void Merger::deleteOldNodes(QDomElement parentElement) {
     }
 }
 
-QDomElement Merger::existsInElement(QDomElement searched, QDomElement container) {
+QDomElement Merger::findByExample(QDomElement searched, QDomElement container) {
     if (! container.hasChildNodes()) {
         return QDomElement();
     }
@@ -111,8 +111,29 @@ QDomElement Merger::existsInElement(QDomElement searched, QDomElement container)
             QDomElement element = node.toElement();
 
             if(element.tagName() == searched.tagName() &&
-                    element.attribute("id", "-1").toInt() == searched.attribute("id", "-1").toInt() &&
+                    element.attribute("id", "-1") == searched.attribute("id", "-1") &&
                     element.firstChild().toText().nodeValue() == searched.firstChild().toText().nodeValue()) {
+                return element;
+            }
+        }
+    }
+
+    return QDomElement();
+}
+
+QDomElement Merger::findById(QString id, QDomElement container) {
+    if (! container.hasChildNodes()) {
+        return QDomElement();
+    }
+
+    QDomNodeList childNodes = container.childNodes();
+    for (int i = 0; i < childNodes.count(); i++) {
+        QDomNode node = childNodes.at(i);
+
+        if (! node.isText()) {
+            QDomElement element = node.toElement();
+
+            if(element.attribute("id", "-1") == id) {
                 return element;
             }
         }
@@ -192,7 +213,7 @@ void Merger::mergeElements(QDomElement own, QDomElement incoming) {
         if (! ownNode.isText()) {
             QDomElement ownElement = ownNode.toElement();
 
-            QDomElement foundElement = existsInElement(ownElement, incoming);
+            QDomElement foundElement = findByExample(ownElement, incoming);
             if (foundElement.isNull()) {
                 QDomElement newElement = copyElement(ownElement, incoming);
 
