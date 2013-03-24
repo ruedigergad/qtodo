@@ -94,14 +94,35 @@ OTHER_FILES += \
     qml/common/AboutDialog.qml \
     qml/common/Drawing.qml \
     qml/common/FlowListView.qml \
-    qml/common/NodeListView.qml \
+    qml/common/MainRectangle.qml \
     qml/common/nodelisthelper.js \
+    qml/common/NodeListView.qml \
+    qml/common/ProgressDialog.qml \
+    qml/common/QToDoToolBar.qml \
     qml/common/TreeView.qml \
+    qml/desktop/EditToDoSheet.qml \
+    qml/desktop/main.qml \
+    qml/desktop/Menu.qml \
+    qml/desktop/common/CommonButton.qml \
+    qml/desktop/common/CommonDialog.qml \
+    qml/desktop/common/CommonTextArea.qml \
+    qml/desktop/common/CommonTextField.qml \
+    qml/desktop/common/CommonToolBar.qml \
+    qml/desktop/common/CommonToolIcon.qml \
+    qml/desktop/common/ConfirmationDialog.qml \
+    qml/desktop/common/Dialog.qml \
     qml/meego/EditSketchSheet.qml \
     qml/meego/EditToDoSheet.qml \
     qml/meego/main.qml \
-    qml/desktop/common/CommonToolBar.qml \
-    qml/common/QToDoToolBar.qml
+    qml/meego/common/CommonButton.qml \
+    qml/meego/common/CommonDialog.qml \
+    qml/meego/common/CommonTextArea.qml \
+    qml/meego/common/CommonTextField.qml \
+    qml/meego/common/CommonToolBar.qml \
+    qml/meego/common/CommonToolIcon.qml \
+    qml/meego/common/ConfirmationDialog.qml
+
+
 
 #RESOURCES += \
 #    res.qrc
