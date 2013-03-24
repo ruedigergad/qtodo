@@ -55,6 +55,8 @@ symbian {
         desktopfile.path = /usr/share/applications/hildon
     } else:contains( MER_EDITION, sailfish ) {
         desktopfile.path = /opt/sdk/share/applications
+        icon.path = /opt/sdk/share/icons/hicolor/64x64/apps
+        svg.path = /opt/sdk/share/icons/hicolor/scalable/apps
     } else {
         desktopfile.path = /usr/share/applications
         copyCommand =
@@ -96,9 +98,11 @@ symbian {
         INSTALLS += $$item
     }
     icon.files = $${TARGET}.png
-    icon.path = /usr/share/icons/hicolor/64x64/apps
     svg.files = $${TARGET}.svg
-    svg.path = /usr/share/icons/hicolor/scalable/apps
+    isEmpty(icon.path) {
+        icon.path = /usr/share/icons/hicolor/64x64/apps
+        svg.path = /usr/share/icons/hicolor/scalable/apps
+    }
     desktopfile.files = $${TARGET}.desktop
     target.path = $${installPrefix}/bin
     export(icon.files)
