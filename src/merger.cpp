@@ -31,24 +31,29 @@ Merger::Merger(QObject *parent) :
 }
 
 QDomElement Merger::copyElement(QDomElement from, QDomElement to) {
+    if (from.tagName() == "sketch") {
+        qDebug("copyElement: Skipping sketch...");
+        return QDomElement();
+    }
+
     QDomElement newElement = incomingStorage->getDocument().createElement(from.tagName());
     newElement.appendChild(incomingStorage->getDocument().createTextNode(from.firstChild().toText().nodeValue()));
 
     int fromId = from.attribute("id", "-1").toInt();
 
-    if(from.tagName() == "to-do"){
+    if (from.tagName() == "to-do") {
         newElement.setAttribute("color", from.attribute("color", "blue"));
         newElement.setAttribute("done", from.attribute("done", "false"));
     }
 
-    if(fromId > ownMaxId) {
+    if (fromId > ownMaxId) {
         newElement.setAttribute("id", fromId);
     } else {
         ownMaxId++;
         newElement.setAttribute("id", ownMaxId);
     }
 
-    if(to.firstChild().isText()) {
+    if (to.firstChild().isText()) {
         to.insertAfter(newElement, to.firstChild());
     } else if (! to.firstChild().isNull()){
         to.insertBefore(newElement, to.firstChild());
