@@ -41,10 +41,6 @@ function createNextView(parentView) {
         + "anchors.left: parent.right; "
         + "anchors.top: parent.top; "
         + "anchors.bottom: parent.bottom; "
-    /*
-     * TODO: Calling save here is quite ugly. This should better be done at a central place.
-     *       For the time being this should work though.
-     */
         + "model: NodeListModel{ id: elementListModel"+ treeView.listViewCount + " } "
         + "}"
 

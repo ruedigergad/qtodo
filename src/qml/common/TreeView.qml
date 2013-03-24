@@ -140,6 +140,8 @@ Item {
         anchors.fill: parent
         contentWidth: listsRectangle.width
 
+        flickableDirection: Flickable.HorizontalFlick
+
         /*
          * Disable flicking for now. There is some anoying issue that
          * selections are not correctly handled for about 0.8 - 1 seconds
