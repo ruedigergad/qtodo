@@ -53,6 +53,8 @@ symbian {
 } else:unix {
     maemo5 {
         desktopfile.path = /usr/share/applications/hildon
+    } else:contains( MER_EDITION, sailfish ) {
+        desktopfile.path = /opt/sdk/share/applications
     } else {
         desktopfile.path = /usr/share/applications
         copyCommand =
