@@ -20,7 +20,7 @@
 #include <QtGui/QApplication>
 #include <QtDeclarative>
 
-#ifdef MEEGO_EDITION_HARMATTAN
+#if defined(MEEGO_EDITION_HARMATTAN) || defined(MER_EDITION_SAILFISH)
 #include <applauncherd/MDeclarativeCache>
 #endif
 
@@ -35,7 +35,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QApplication *app;
     QDeclarativeView *view;
 
-#ifdef MEEGO_EDITION_HARMATTAN
+#if defined(MEEGO_EDITION_HARMATTAN) || defined(MER_EDITION_SAILFISH)
     app = MDeclarativeCache::qApplication(argc, argv);
     view = MDeclarativeCache::qDeclarativeView();
 #else
@@ -56,6 +56,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
 #ifdef MEEGO_EDITION_HARMATTAN
     view->setSource(QUrl("/opt/qtodo/qml/meego/main.qml"));
+    view->showFullScreen();
+#elif defined(MER_EDITION_SAILFISH)
+    view->setSource(QUrl("/opt/qtodo/qml/sailfish/main.qml"));
     view->showFullScreen();
 #else
     view->setSource(QUrl("qml/desktop/main.qml"));
