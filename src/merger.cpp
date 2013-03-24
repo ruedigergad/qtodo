@@ -204,12 +204,14 @@ void Merger::mergeDeletions() {
 }
 
 void Merger::mergeElementData(QDomElement from, QDomElement to) {
+    qDebug() << "Merging element data for id: " << from.attribute("id", "-1");
     to.setTagName(from.tagName());
     to.firstChild().toText().setNodeValue(from.firstChild().toText().nodeValue());
 
     QDomNamedNodeMap fromAttributes = from.attributes();
     for (int i = 0; i < fromAttributes.count(); i++) {
         QDomNode attribute = fromAttributes.item(i);
+        qDebug() << "Merging attribute: " << attribute.nodeName() << " : " << attribute.nodeValue();
         to.setAttribute(attribute.nodeName(), attribute.nodeValue());
     }
 }
@@ -223,30 +225,29 @@ void Merger::mergeExistingElements(QDomElement from, QDomElement to) {
     for (int i = 0; i < toChildNodes.count(); i++) {
         QDomNode toNode = toChildNodes.at(i);
 
-        if (toNode.isText()) {
-            continue;
-        }
+        if (! toNode.isText()) {
 
-        QDomElement toElement = toNode.toElement();
+            QDomElement toElement = toNode.toElement();
 
-        QString id = toElement.attribute("id", "-1");
-        if (id != "-1") {
-            QDomElement fromElement = findById(id, from);
+            QString id = toElement.attribute("id", "-1");
+            if (id != "-1") {
+                QDomElement fromElement = findById(id, from);
 
-            if (! fromElement.isNull()) {
-                QDateTime fromTime = QDateTime::fromString(fromElement.attribute("mtime", "1970-01-01T00:00:00"), Qt::ISODate);
-                QDateTime toTime = QDateTime::fromString(fromElement.attribute("mtime", "1970-01-01T00:00:00"), Qt::ISODate);
+                if (! fromElement.isNull()) {
+                    QDateTime fromTime = QDateTime::fromString(fromElement.attribute("mtime", "1970-01-01T00:00:00"), Qt::ISODate);
+                    QDateTime toTime = QDateTime::fromString(toElement.attribute("mtime", "1970-01-01T00:00:00"), Qt::ISODate);
 
-                if (fromTime > toTime) {
-                    mergeElementData(fromElement, toElement);
-                } else if (toTime > fromTime) {
-                    mergeElementData(toElement, fromElement);
+                    if (fromTime > toTime) {
+                        mergeElementData(fromElement, toElement);
+                    } else if (toTime > fromTime) {
+                        mergeElementData(toElement, fromElement);
+                    }
                 }
             }
-        }
 
-        if (toElement.hasChildNodes()) {
-            mergeExistingElements(from, toElement);
+            if (toElement.hasChildNodes()) {
+                mergeExistingElements(from, toElement);
+            }
         }
     }
 }
