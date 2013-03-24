@@ -37,6 +37,7 @@ Item {
     property alias currentIndex: nodeListView.currentIndex
     property alias currentItem: nodeListView.currentItem
     property int level;
+    property bool movingItem: false
     property int tempContentY
     property int tempIndex;
 
@@ -61,10 +62,12 @@ Item {
         target: model
 
         onChanged: {
-            storage.save()
-            currentIndex = -1
-            currentIndex = tempIndex
-            nodeListView.contentY = tempContentY
+            if (! movingItem) {
+                storage.save()
+                currentIndex = -1
+                currentIndex = tempIndex
+                nodeListView.contentY = tempContentY
+            }
         }
 
         onModelAboutToBeReset: {
@@ -115,7 +118,10 @@ Item {
         property real lastPosition: 0
         property real moveDelta: 40
 
-        onPinchStarted: lastPosition = pinch.startPoint2.y
+        onPinchStarted: {
+            movingItem = true
+            lastPosition = pinch.startPoint2.y
+        }
 
         onPinchUpdated: {
             var currentPosition = pinch.point2.y
@@ -132,7 +138,10 @@ Item {
             }
         }
 
-        onPinchFinished: storage.save()
+        onPinchFinished: {
+            movingItem = false
+            storage.save()
+        }
 
         function moveItem(targetIndex) {
             if(targetIndex >= 0 && targetIndex < nodeListView.count){
