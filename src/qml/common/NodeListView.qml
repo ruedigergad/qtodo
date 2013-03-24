@@ -37,6 +37,7 @@ Item {
     property alias currentIndex: nodeListView.currentIndex
     property alias currentItem: nodeListView.currentItem
     property int level;
+    property int tempContentY
     property int tempIndex;
 
     signal countChanged(int count)
@@ -63,9 +64,11 @@ Item {
             storage.save()
             currentIndex = -1
             currentIndex = tempIndex
+            nodeListView.contentY = tempContentY
         }
 
         onModelAboutToBeReset: {
+            tempContentY = nodeListView.contentY
             tempIndex = currentIndex
         }
     }
