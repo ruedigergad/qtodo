@@ -139,8 +139,15 @@ QDomElement Merger::findById(QString id, QDomElement container) {
         if (! node.isText()) {
             QDomElement element = node.toElement();
 
-            if(element.attribute("id", "-1") == id) {
+            if (element.attribute("id", "-1") == id) {
                 return element;
+            }
+
+            if (element.hasChildNodes()) {
+                QDomElement ret = findById(id, element);
+                if (! ret.isNull()) {
+                    return ret;
+                }
             }
         }
     }
