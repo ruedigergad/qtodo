@@ -136,24 +136,9 @@ Item {
         fileHelper.rm(imapSyncFile)
     }
 
-    Rectangle {
-        id: header
-        height: 72
-        color: "#00b000" //#0c61a8"
-        anchors{left: parent.left; right: parent.right; top: parent.top}
-        z: 48
-
-        Text {
-            text: "My To-Dos"
-            color: "#ffffff"
-            font{pixelSize: 32; family: "Nokia Pure Text Light"}
-            anchors{left: parent.left; leftMargin: 20; verticalCenter: parent.verticalCenter}
-        }
-    }
-
     TreeView {
         id: treeView
-        anchors{left: parent.left; right: parent.right; bottom: parent.bottom; top: header.bottom}
+        anchors.fill: parent
         model: rootElementModel
 
         onCurrentItemChanged: {
