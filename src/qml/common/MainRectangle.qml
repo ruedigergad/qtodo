@@ -20,13 +20,13 @@
 import QtQuick 1.1
 import qtodo 1.0
 
-Rectangle{
+Item {
     id: mainRectangle
 
     anchors.fill: parent
-    color: "lightgoldenrodyellow"
 
     property alias aboutDialog: aboutDialog
+    property alias color: treeView.color
     property alias confirmDeleteDialog: confirmDeleteDialog
     property alias confirmCleanDoneDialog: confirmCleanDoneDialog
     property alias confirmSyncToImapDialog: confirmSyncToImapDialog
@@ -155,7 +155,6 @@ Rectangle{
         id: treeView
         anchors{left: parent.left; right: parent.right; bottom: parent.bottom; top: header.bottom}
         model: rootElementModel
-        color: parent.color
 
         onCurrentItemChanged: {
             console.log(currentItem.type)

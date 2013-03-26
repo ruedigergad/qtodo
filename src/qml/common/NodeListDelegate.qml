@@ -74,7 +74,7 @@ Item {
         }
 
         Item {
-            id: textRectangle
+            id: textItem
             anchors.left: elementIcon.right
             anchors.right: parent.right
             height: textDelegate.height

@@ -138,7 +138,7 @@ Item {
     Flickable {
         id: flickable
         anchors.fill: parent
-        contentWidth: listsRectangle.width
+        contentWidth: listsItem.width
 
         flickableDirection: Flickable.HorizontalFlick
 
@@ -161,13 +161,12 @@ Item {
             }
         }
 
-        Rectangle {
-            id: listsRectangle
+        Item {
+            id: listsItem
             width: treeView.width * listViewCount
             anchors.left: parent.left
             anchors.top: parent.top
             anchors.bottom: parent.bottom
-            color: treeView.color
 
             NodeListView {
                 id: rootListView

@@ -78,7 +78,7 @@ Item {
 
     function updateLabels() {
         var listEmpty = (nodeListView.model.rowCount() <= 0)
-        emptyListRectangle.visible = listEmpty
+        emptyListItem.visible = listEmpty
     }
 
     onExpandTree: {
@@ -90,10 +90,9 @@ Item {
         treeView.clearSubLists()
     }
 
-    Rectangle {
-        id: emptyListRectangle
+    Item {
+        id: emptyListItem
         anchors.fill: parent
-        color: treeView.color
 
         Text {
             id: noContentLabel
