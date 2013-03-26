@@ -45,7 +45,6 @@ Rectangle {
             }
         }
 
-
         MainRectangle {
             anchors{left: parent.left; right: parent.right; top: header.bottom; bottom: parent.bottom}
 
