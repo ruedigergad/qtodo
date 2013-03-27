@@ -32,6 +32,7 @@ import QtQuick 1.1
 
 Item {
     id: nodeListItem
+    anchors.fill: parent
 
     property alias model: nodeListView.model
     property alias currentIndex: nodeListView.currentIndex

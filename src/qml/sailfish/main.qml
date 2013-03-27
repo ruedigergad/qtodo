@@ -33,10 +33,11 @@ ApplicationWindow {
 
         MainRectangle {
             id: mainRectangle
+            anchors {left: parent.left; right: parent.right; top: pageHeader.bottom; bottom: parent.bottom}
         }
     }
 
     Component.onCompleted: {
-        pageStack.depth = 2
+//        pageStack.depth = 2
     }
 }

@@ -37,6 +37,8 @@ SilicaFlickable {
     contentWidth: parent.width;
     contentHeight: flow.childrenRect.height
 
+    clip: true
+
     property alias count: repeater.count
     property int currentIndex: -1
     property variant currentItem;

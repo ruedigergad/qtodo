@@ -34,6 +34,7 @@ import "nodelisthelper.js" as NodeListHelper
 
 Item {
     id: treeView
+    anchors.fill: parent
 
     signal doubleClicked
     signal pressAndHold
