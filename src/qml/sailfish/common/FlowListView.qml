@@ -55,6 +55,26 @@ SilicaFlickable {
         currentItem = repeater.itemAt(currentIndex)
     }
 
+    PullDownMenu {
+        spacing: theme.paddingLarge
+
+        MenuItem {
+            text: "Add"
+        }
+    }
+
+    PushUpMenu {
+        spacing: theme.paddingLarge
+
+        MenuItem {
+            text: "Add"
+        }
+        MenuItem {
+            text: "Return to Top"
+            onClicked: flowListView.scrollToTop()
+        }
+    }
+
     Flow {
         id: flow
         width: parent.width
