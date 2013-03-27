@@ -31,32 +31,14 @@ import Sailfish.Silica 1.0
 import QtQuick 1.1
 
 SilicaFlickable {
-    id: flowListView
-    anchors.fill: parent
-
-    contentWidth: parent.width;
-    contentHeight: flow.childrenRect.height
-
-    clip: true
-
-    property alias count: repeater.count
-    property int currentIndex: -1
-    property variant currentItem;
-    property alias delegate: repeater.delegate
-    property alias flow: flow.flow
-    property alias model: repeater.model
-
-    onCurrentIndexChanged: {
-        // Note: in the "normal" FlowListView we do:
-        // currentItem = model.get(currentIndex)
-        // However, with our current model we need to do it as follows.
-        // Note that we are "re-exposing" the model properties via properties
-        // of our delegate.
-        currentItem = repeater.itemAt(currentIndex)
-    }
+    id: commonFlickable
 
     PullDownMenu {
         spacing: theme.paddingLarge
+
+        MenuItem {
+            text: "Sync to IMAP"
+        }
 
         MenuItem {
             text: "Add"
@@ -69,29 +51,14 @@ SilicaFlickable {
         MenuItem {
             text: "Add"
         }
+
+        MenuItem {
+            text: "Sync to IMAP"
+        }
+
         MenuItem {
             text: "Return to Top"
-            onClicked: flowListView.scrollToTop()
+            onClicked: commonFlickable.scrollToTop()
         }
     }
-
-    Flow {
-        id: flow
-        width: parent.width
-
-        Repeater {
-            id: repeater
-
-            onCountChanged: {
-                if (flowListView.currentIndex === -1 && count > 0) {
-                    flowListView.currentIndex = 0
-                }
-                if (flowListView.currentIndex >= count) {
-                    flowListView.currentIndex = count - 1
-                }
-            }
-        }
-    }
-
-    VerticalScrollDecorator {}
 }

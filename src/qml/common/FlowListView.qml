@@ -29,7 +29,7 @@
 
 import QtQuick 1.1
 
-Flickable {
+CommonFlickable {
     id: flowListView
     anchors.fill: parent
 
