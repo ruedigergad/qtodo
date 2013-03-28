@@ -24,6 +24,8 @@ import QtQuick 1.1
 SilicaFlickable {
     id: commonFlickable
 
+    clip: true
+
     PullDownMenu {
         spacing: theme.paddingLarge
 

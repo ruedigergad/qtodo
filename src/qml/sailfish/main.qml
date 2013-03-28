@@ -31,6 +31,11 @@ ApplicationWindow {
     Page {
         id: mainPage
 
+        PageHeader {
+            id: pageHeader
+            title: "My ToDos"
+        }
+
         MainRectangle {
             id: mainRectangle
             anchors {left: parent.left; right: parent.right; top: pageHeader.bottom; bottom: parent.bottom}
@@ -38,6 +43,6 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-//        pageStack.depth = 2
+        pageStack.depth = 2
     }
 }
