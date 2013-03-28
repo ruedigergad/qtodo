@@ -23,8 +23,6 @@ import qtodo 1.0
 Item {
     id: mainRectangle
 
-    anchors.fill: parent
-
     property alias aboutDialog: aboutDialog
     property alias color: treeView.color
     property alias confirmDeleteDialog: confirmDeleteDialog
