@@ -31,18 +31,27 @@ ApplicationWindow {
     Page {
         id: mainPage
 
-        PageHeader {
-            id: pageHeader
-            title: "My ToDos"
-        }
+//        PageHeader {
+//            id: pageHeader
+//            title: "My ToDos"
+//        }
 
         MainRectangle {
             id: mainRectangle
-            anchors {left: parent.left; right: parent.right; top: pageHeader.bottom; bottom: parent.bottom}
+            anchors.fill: parent
+//            anchors {left: parent.left; right: parent.right; top: pageHeader.bottom; bottom: parent.bottom}
         }
     }
 
-    Component.onCompleted: {
-        pageStack.depth = 2
-    }
+//    Connections {
+//        target: mainRectangle.treeView
+
+//        onCurrentLevelChanged: {
+//            pageStack.depth = mainRectangle.treeView.currentLevel + 2
+//        }
+//    }
+
+//    Component.onCompleted: {
+//        pageStack.depth = 2
+//    }
 }
