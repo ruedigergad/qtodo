@@ -51,13 +51,7 @@ CommonToolBar {
         text: "Done"
         enabled: mainRectangle.treeView.currentItem.type === "to-do"
         opacity: enabled ? 1 : 0.5
-        onClicked: {
-            if(mainRectangle.treeView.currentItem.done){
-                mainRectangle.treeView.currentModel.setAttribute(mainRectangle.treeView.currentIndex, "done", "false")
-            }else{
-                mainRectangle.treeView.currentModel.setAttribute(mainRectangle.treeView.currentIndex, "done", "true")
-            }
-        }
+        onClicked: mainRectangle.treeView.toggleDone()
     }
     CommonToolIcon {
         id: iconDelete

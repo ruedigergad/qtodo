@@ -200,11 +200,24 @@ Item {
         ContextMenu {
             id: menu
             MenuItem {
-                text: "Delete"
+                text: treeView.currentItem.done ? "Mark ToDo" : "Mark Done"
+                onClicked: treeView.toggleDone()
+            }
+            MenuItem {
+                text: "Edit"
                 onClicked: menu.parent.remove()
             }
             MenuItem {
-                text: "Second option"
+                text: "New Entry"
+                onClicked: menu.parent.remove()
+            }
+            MenuItem {
+                text: "New Sketch"
+                onClicked: menu.parent.remove()
+            }
+            MenuItem {
+                text: "Delete"
+                onClicked: menu.parent.remove()
             }
         }
     }

@@ -110,6 +110,14 @@ Item {
         NodeListHelper.views[currentLevel+1].model.setParentFromSelection(model, index)
     }
 
+    function toggleDone() {
+        if(currentItem.done){
+            currentModel.setAttribute(currentIndex, "done", "false")
+        }else{
+            currentModel.setAttribute(currentIndex, "done", "true")
+        }
+    }
+
     Component.onCompleted: {
         NodeListHelper.views.push(rootListView)
         listViewCount++
