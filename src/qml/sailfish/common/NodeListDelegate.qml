@@ -34,7 +34,12 @@ import Sailfish.Silica 1.0
 Item {
     id: nodeListDelegate
     width: tagName === "sketch" ? sketchContentDelegate.width : nodeListView.width
-    height: tagName === "sketch" ? sketchContentDelegate.height : textContentDelegate.height
+
+    property Item contextMenu: null
+    property bool menuOpen: contextMenu != null && contextMenu.parent === nodeListDelegate
+    property int tempHeight: tagName === "sketch" ? sketchContentDelegate.height : textContentDelegate.height
+
+    height: menuOpen ? contextMenu.height + tempHeight : tempHeight
 
     /*
      * Begin of custom code to display the data. Here the Q To-Do to-do or
@@ -60,13 +65,14 @@ Item {
     Item {
         id: textContentDelegate
         anchors.left: parent.left
-        anchors.right: nextButton.left
+        width: nodeListView.width
         height: elementIcon.height
 
         visible: tagName !== "sketch"
 
         Image {
             id: elementIcon
+            anchors.left: parent.left
             height: textDelegate.height
             fillMode: Image.PreserveAspectFit
             source: tagName === "to-do"
@@ -77,7 +83,7 @@ Item {
         Item {
             id: textItem
             anchors.left: elementIcon.right
-            anchors.right: parent.right
+            anchors.right: nextButton.left
             height: textDelegate.height
 
             Rectangle {
@@ -115,6 +121,44 @@ Item {
                 color: theme.primaryColor
             }
         }
+
+        Item {
+            id: nextButton
+            anchors.right: parent.right
+            width: (! isExpandable) ? 0 : 40
+            height: parent.height
+
+            Rectangle{
+                id: button
+                anchors.centerIn: parent
+                width: 30
+                height: 30
+
+                visible: isExpandable
+
+                radius: 10
+                color: nextMouseArea.pressed ? "gray" : "lightgray"
+
+                Image {
+                    id: nextIcon
+                    anchors.fill: parent
+                    fillMode: Image.PreserveAspectFit
+
+                    opacity: (isLeaf) ? 0.3 : 1
+                    source: "../icons/next.png"
+                }
+
+                MouseArea {
+                    id: nextMouseArea
+                    anchors.fill: parent
+
+                    onClicked: {
+                        selectItem()
+                        treeView.currentLevel++
+                    }
+                }
+            }
+        }
     }
     /*
      * End of custom code for displaying the data.
@@ -130,45 +174,9 @@ Item {
         }
         onPressAndHold: {
             selectItem()
-            treeView.pressAndHold()
-        }
-    }
-
-    Item {
-        id: nextButton
-        anchors.right: parent.right
-        width: (! isExpandable) ? 0 : 40
-        height: parent.height
-
-        Rectangle{
-            id: button
-            anchors.centerIn: parent
-            width: 30
-            height: 30
-
-            visible: isExpandable
-
-            radius: 10
-            color: nextMouseArea.pressed ? "gray" : "lightgray"
-
-            Image {
-                id: nextIcon
-                anchors.fill: parent
-                fillMode: Image.PreserveAspectFit
-
-                opacity: (isLeaf) ? 0.3 : 1
-                source: "../icons/next.png"
-            }
-
-            MouseArea {
-                id: nextMouseArea
-                anchors.fill: parent
-
-                onClicked: {
-                    selectItem()
-                    treeView.currentLevel++
-                }
-            }
+            if (!contextMenu)
+                contextMenu = contextMenuComponent.createObject(nodeListView)
+            contextMenu.show(nodeListDelegate)
         }
     }
 
@@ -185,5 +193,19 @@ Item {
         anchors.fill: parent
         color: "gray"
         opacity: nodeListView.currentIndex === index ? 0.5 : 0
+    }
+
+    Component {
+        id: contextMenuComponent
+        ContextMenu {
+            id: menu
+            MenuItem {
+                text: "Delete"
+                onClicked: menu.parent.remove()
+            }
+            MenuItem {
+                text: "Second option"
+            }
+        }
     }
 }
