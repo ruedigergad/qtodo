@@ -30,11 +30,19 @@ SilicaFlickable {
         spacing: theme.paddingLarge
 
         MenuItem {
+            text: "New Item"
+        }
+
+        MenuItem {
+            text: "New Sketch"
+        }
+
+        MenuItem {
             text: "Sync to IMAP"
         }
 
         MenuItem {
-            text: "Add"
+            text: "About"
         }
     }
 
@@ -42,11 +50,19 @@ SilicaFlickable {
         spacing: theme.paddingLarge
 
         MenuItem {
-            text: "Add"
+            text: "New Item"
+        }
+
+        MenuItem {
+            text: "New Sketch"
         }
 
         MenuItem {
             text: "Sync to IMAP"
+        }
+
+        MenuItem {
+            text: "About"
         }
 
         MenuItem {
