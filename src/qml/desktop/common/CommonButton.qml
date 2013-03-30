@@ -58,14 +58,12 @@ Rectangle {
     states: [
         State {
             name: "pressed"; when: mouseArea.pressed && mouseArea.containsMouse
-            PropertyChanges { target: topGrad; color: "#569ffd" }
-            PropertyChanges { target: bottomGrad; color: "#456aa2" }
+            PropertyChanges { target: commonButton; color: "#569ffd" }
             PropertyChanges { target: textItem; x: textItem.x + 1; y: textItem.y + 1; explicit: true }
         },
         State {
             name: "disabled"; when: !commonButton.enabled
-            PropertyChanges { target: topGrad; color: "white" }
-            PropertyChanges { target: bottomGrad; color: "lightgray" }
+            PropertyChanges { target: commonButton; color: "lightgray" }
         }
     ]
 }
