@@ -135,7 +135,8 @@ OTHER_FILES += \
     qml/sailfish/common/CommonTextField.qml \
     qml/sailfish/common/CommonToolBar.qml \
     qml/sailfish/common/CommonToolIcon.qml \
-    qml/sailfish/common/ConfirmationDialog.qml
+    qml/sailfish/common/ConfirmationDialog.qml \
+    qml/sailfish/common/CommonFlickable.qml
 
 
 
