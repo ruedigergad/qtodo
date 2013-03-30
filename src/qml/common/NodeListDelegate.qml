@@ -113,7 +113,7 @@ Item {
                 id: textDelegate
                 anchors.left: parent.left
                 anchors.leftMargin: 2
-                width: parent.width
+                anchors.right: parent.right
 
                 text: elementText
                 font.pixelSize: treeView.fontPixelSize
@@ -150,7 +150,7 @@ Item {
         Rectangle{
             id: button
             anchors.centerIn: parent
-            width: textDelegate.font.pixelSize + 2
+            width: treeView.fontPixelSize + 2
             height: width
 
             visible: isExpandable
