@@ -38,11 +38,18 @@ SilicaFlickable {
         }
 
         MenuItem {
+            text: "Clean Done"
+            onClicked: mainRectangle.confirmCleanDoneDialog.open()
+        }
+
+        MenuItem {
             text: "Sync to IMAP"
+            onClicked: mainRectangle.confirmSyncToImapDialog.open()
         }
 
         MenuItem {
             text: "About"
+            onClicked: mainRectangle.aboutDialog.open()
         }
     }
 
@@ -58,11 +65,18 @@ SilicaFlickable {
         }
 
         MenuItem {
+            text: "Clean Done"
+            onClicked: mainRectangle.confirmCleanDoneDialog.open()
+        }
+
+        MenuItem {
             text: "Sync to IMAP"
+            onClicked: mainRectangle.confirmSyncToImapDialog.open()
         }
 
         MenuItem {
             text: "About"
+            onClicked: mainRectangle.aboutDialog.open()
         }
 
         MenuItem {
