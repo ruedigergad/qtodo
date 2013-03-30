@@ -45,7 +45,10 @@ Rectangle {
 
     Image {
         id: iconImage
-
+        height: parent.height * 0.8
+        width: height
+        fillMode: Image.PreserveAspectFit
+        smooth: true
         anchors.centerIn: parent
     }
 

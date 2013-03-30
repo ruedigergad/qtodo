@@ -69,6 +69,7 @@ Item {
             height: textDelegate.height
             width: treeView.fontPixelSize + 2
             fillMode: Image.PreserveAspectFit
+            smooth: true
             source: tagName === "to-do"
                     ? "../icons/to-do_" + (isDone ? "done_" : "") + elementColor + ".png"
                     : "../icons/note.png"
@@ -163,7 +164,7 @@ Item {
                 id: nextIcon
                 anchors.fill: parent
                 fillMode: Image.PreserveAspectFit
-
+                smooth: true
                 opacity: (isLeaf) ? 0.3 : 1
                 source: "../icons/next.png"
             }
