@@ -39,6 +39,9 @@ Item {
     signal doubleClicked
     signal pressAndHold
 
+    signal levelDecrement
+    signal levelIncrement
+
     property string color: "white"
     property alias model: rootListView.model
 
@@ -55,6 +58,7 @@ Item {
      * be < listViewCount and >= 0.
      */
     property int currentLevel: 0
+    property int previousLevel: 0
 
     /*
      * The following properties are intended to access the data shown
@@ -150,6 +154,30 @@ Item {
             console.log("Invalid current level given: " + currentLevel)
             console.log("List view count is: " + listViewCount)
         }
+
+        if (previousLevel < currentLevel) {
+            levelIncrement()
+        } else if (previousLevel > currentLevel) {
+            levelDecrement()
+        }
+        previousLevel = currentLevel
+
+        /*
+         * Hack to properly update the selection when switching between levels.
+         * We force "reselection" of the currentIndex by setting it to an
+         * invalid value and re-set it back to the initial value.
+         */
+        var tempIndex = NodeListHelper.views[currentLevel].currentIndex
+        NodeListHelper.views[currentLevel].currentIndex = -1
+        NodeListHelper.views[currentLevel].currentIndex = tempIndex
+    }
+
+    onLevelDecrement: {
+        console.log("Level decremented...")
+    }
+
+    onLevelIncrement: {
+        console.log("Level incremented...")
     }
 
     Flickable {
