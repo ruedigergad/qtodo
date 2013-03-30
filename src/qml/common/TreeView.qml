@@ -111,9 +111,13 @@ Item {
     }
 
     function toggleDone() {
-        if(currentItem.done){
+        if (currentItem.type !== "to-do") {
+            return
+        }
+
+        if (currentItem.done) {
             currentModel.setAttribute(currentIndex, "done", "false")
-        }else{
+        } else {
             currentModel.setAttribute(currentIndex, "done", "true")
         }
     }

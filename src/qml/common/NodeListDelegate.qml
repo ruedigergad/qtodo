@@ -71,6 +71,14 @@ Item {
             source: tagName === "to-do"
                     ? "../icons/to-do_" + (isDone ? "done_" : "") + elementColor + ".png"
                     : "../icons/note.png"
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    selectItem()
+                    treeView.toggleDone()
+                }
+            }
         }
 
         Item {
@@ -113,25 +121,25 @@ Item {
                 wrapMode: Text.WordWrap
                 color: "black"
             }
+
+            MouseArea {
+                id: textItemMouseArea
+                anchors.fill: parent
+                onClicked: selectItem()
+                onDoubleClicked: {
+                    selectItem()
+                    treeView.doubleClicked()
+                }
+                onPressAndHold: {
+                    selectItem()
+                    treeView.pressAndHold()
+                }
+            }
         }
     }
     /*
      * End of custom code for displaying the data.
      */
-
-    MouseArea {
-        id: contentMouseArea
-        anchors.fill: parent
-        onClicked: selectItem()
-        onDoubleClicked: {
-            selectItem()
-            treeView.doubleClicked()
-        }
-        onPressAndHold: {
-            selectItem()
-            treeView.pressAndHold()
-        }
-    }
 
     Item {
         id: nextButton
@@ -176,7 +184,7 @@ Item {
         anchors.fill: parent
         color: "black"
         radius: 10
-        opacity: contentMouseArea.pressed ? 0.3 : 0
+        opacity: textItemMouseArea.pressed ? 0.3 : 0
     }
 
     Rectangle {
