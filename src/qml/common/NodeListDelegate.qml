@@ -67,6 +67,7 @@ Item {
         Image {
             id: elementIcon
             height: textDelegate.height
+            width: treeView.fontPixelSize + 2
             fillMode: Image.PreserveAspectFit
             source: tagName === "to-do"
                     ? "../icons/to-do_" + (isDone ? "done_" : "") + elementColor + ".png"
