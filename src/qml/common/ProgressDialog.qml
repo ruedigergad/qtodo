@@ -20,6 +20,8 @@
 import QtQuick 1.1
 
 CommonDialog {
+    id: progressDialog
+
     property double maxValue
     property double currentValue
 
@@ -60,7 +62,7 @@ CommonDialog {
         }
 
         Text {
-            id:message
+            id: message
 
             anchors.top: progressIndicatorBackground.bottom
             anchors.margins: 20
