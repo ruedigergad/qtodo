@@ -42,6 +42,8 @@ Item {
     property string color: "white"
     property alias model: rootListView.model
 
+    property int fontPixelSize: 28
+
     /*
      * Total number of currently opened ListViews.
      */

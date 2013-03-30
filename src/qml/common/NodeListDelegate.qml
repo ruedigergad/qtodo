@@ -116,7 +116,7 @@ Item {
                 width: parent.width
 
                 text: elementText
-                font.pixelSize: 28
+                font.pixelSize: treeView.fontPixelSize
                 horizontalAlignment: Text.AlignHLeft
                 wrapMode: Text.WordWrap
                 color: "black"
@@ -150,12 +150,12 @@ Item {
         Rectangle{
             id: button
             anchors.centerIn: parent
-            width: 30
-            height: 30
+            width: textDelegate.font.pixelSize + 2
+            height: width
 
             visible: isExpandable
 
-            radius: 10
+            radius: width / 3
             color: nextMouseArea.pressed ? "gray" : "lightgray"
 
             Image {

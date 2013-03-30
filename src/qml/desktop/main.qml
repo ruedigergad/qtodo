@@ -49,6 +49,10 @@ Rectangle {
             anchors{left: parent.left; right: parent.right; top: header.bottom; bottom: parent.bottom}
 
             id: mainRectangle
+
+            Component.onCompleted: {
+                treeView.fontPixelSize = 20
+            }
         }
     }
 
