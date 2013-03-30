@@ -203,6 +203,10 @@ Item {
         currentValue: 0
     }
 
+    MessageDialog {
+        id: messageDialog
+    }
+
     FileHelper { id: fileHelper }
 
     NodeListModel {
@@ -226,6 +230,12 @@ Item {
         onMessageListRetrieved: findAndRetrieveMessages()
         onMessageRetrieved: processMessage()
         onMessageUpdated: syncToImapProgressDialog.close()
+
+        onError: {
+            messageDialog.title = "Error"
+            messageDialog.message = "Sync failed: \"" + errorString + "\" Code: " + errorCode + " Action: " + currentAction
+            messageDialog.open()
+        }
     }
 
     Merger {
