@@ -146,7 +146,7 @@ Item {
     Item {
         id: nextButton
         anchors.right: parent.right
-        width: (! isExpandable) ? 0 : 40
+        width: (! isExpandable) ? 0 : button.width * 1.2
         height: parent.height
 
         Rectangle{
