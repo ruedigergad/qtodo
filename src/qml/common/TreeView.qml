@@ -135,6 +135,8 @@ Item {
     }
 
     onCurrentLevelChanged: {
+        console.log("CurrentLevelChanged: " + currentLevel)
+
         if(currentLevel >= 0 && currentLevel < listViewCount){
             flickable.contentX = currentLevel * treeView.width
             currentModel = NodeListHelper.views[currentLevel].model
