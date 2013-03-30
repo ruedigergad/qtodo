@@ -47,6 +47,7 @@ public:
     Q_INVOKABLE QString writeAttachmentTo(ulong msgId, QString attachmentLocation, QString path);
 
 signals:
+    void error(QString errorString, int errorCode, int currentAction);
     void folderCreated();
     void folderListRetrieved();
     void messageDeleted();

@@ -226,9 +226,14 @@ void ImapStorage::retrieveActivityChanged(QMailServiceAction::Activity activity)
         case MoveToTrashAction:
             qDebug() << "Message was successfully moved to trash.";
             currentAction = NoAction;
+            break;
         default:
             break;
         }
+        break;
+    case QMailServiceAction::Failed:
+        emit error(retrievalAction->status().text, retrievalAction->status().errorCode, currentAction);
+        currentAction = NoAction;
         break;
     default:
         break;
@@ -293,6 +298,7 @@ void ImapStorage::searchMessageActivityChanged(QMailServiceAction::Activity acti
             emit searchFinished(ret);
             break;
         case QMailServiceAction::Failed:
+            emit error(searchAction->status().text, searchAction->status().errorCode, -1);
             emit searchFinished(ret);
             break;
         default:
@@ -322,12 +328,12 @@ void ImapStorage::storageActivityChanged(QMailServiceAction::Activity activity) 
         default:
             break;
         }
+    case QMailServiceAction::Failed:
+        emit error(storageAction->status().text, storageAction->status().errorCode, currentAction);
+        currentAction = NoAction;
+        break;
     default:
         break;
-    }
-
-    if (activity == QMailServiceAction::Successful) {
-
     }
 }
 
