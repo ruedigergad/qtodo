@@ -31,18 +31,15 @@ Rectangle {
 
     width: textItem.width + 40; height: textItem.height + 10
     border.width: 1
-    radius: height/4
+    radius: height/3
     smooth: true
 
-    gradient: Gradient {
-        GradientStop { id: topGrad; position: 0.0; color: "#9acfff" }
-        GradientStop { id: bottomGrad; position: 1.0; color: "#79aeee" }
-    }
+    color: "#9acfff"
 
     Text {
         id: textItem
         x: parent.width/2 - width/2; y: parent.height/2 - height/2
-        font.pixelSize: 30
+        font.pixelSize: 22
         color: "black"
     }
 

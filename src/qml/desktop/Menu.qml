@@ -80,17 +80,16 @@ Item {
         Rectangle{
             id: menuArea
             anchors.centerIn: parent
-            width: parent.width - 20
-            height: 5 * about.height + 40
+            width: parent.width
+            height: children.length * about.height
 
-            color:"white"
-            radius: 20
+            color: "lightgray"
 
             CommonButton{
                 id: cleanDone
                 anchors.bottom: syncToImap.top
                 anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width - 40
+                width: parent.width
                 text: "Clean Done"
                 onClicked: {
                     mainRectangle.confirmCleanDoneDialog.open()
@@ -102,7 +101,7 @@ Item {
                 id: syncToImap
                 anchors.bottom: about.top
                 anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width - 40
+                width: parent.width
                 text: "Sync To IMAP"
                 onClicked: {
                     mainRectangle.confirmSyncToImapDialog.open()
@@ -114,7 +113,7 @@ Item {
                 id: about
                 anchors.bottom: parent.bottom
                 anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width - 40
+                width: parent.width
                 text: "About"
                 onClicked: {
                     mainRectangle.aboutDialog.open()

@@ -61,6 +61,8 @@ Rectangle {
         anchors {left: parent.left; right: parent.right; bottom: parent.bottom}
         height: toolBar.height
 
+        color: "lightgray"
+
         QToDoToolBar {
             id: toolBar
         }
