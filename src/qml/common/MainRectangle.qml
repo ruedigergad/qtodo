@@ -84,6 +84,21 @@ Item {
             console.log("IMAP account id is: " + accIds[0])
             imapAccountId = accIds[0]
             imapStorage.retrieveFolderList(imapAccountId)
+        } else if (accIds.length === 0) {
+            syncToImapProgressDialog.close()
+            messageDialog.title = "No IMAP Account"
+            messageDialog.message = "Please set up an IMAP e-mail account for syncing."
+            messageDialog.open()
+        } else if (accIds.length > 1) {
+            syncToImapProgressDialog.close()
+            messageDialog.title = "Multiple IMAP Accounts"
+            messageDialog.message = "Functionality for choosing from different IMAP accounts still needs to be implemented."
+            messageDialog.open()
+        } else {
+            syncToImapProgressDialog.close()
+            messageDialog.title = "Unexpected Error"
+            messageDialog.message = "Querying for IMAP accounts returned an unexpected value."
+            messageDialog.open()
         }
     }
 
@@ -119,6 +134,9 @@ Item {
             console.log("No message found. Performing initital upload.")
             imapStorage.addMessage(imapAccountId, imapFolderName, imapMessageSubject, "to-do-o/default.xml")
             syncToImapProgressDialog.close()
+            messageDialog.title = "Success"
+            messageDialog.message = "Successfully performed initial sync."
+            messageDialog.open()
         } else if (messageIds.length === 1) {
             console.log("Message found.")
             imapMessageId = messageIds[0]
@@ -143,6 +161,9 @@ Item {
             console.log("Initial sync, reloading storage...")
             storage.open()
             syncToImapProgressDialog.close()
+            messageDialog.title = "Success"
+            messageDialog.message = "Successfully performed initial sync."
+            messageDialog.open()
             return
         }
 
@@ -247,9 +268,15 @@ Item {
         onFolderListRetrieved: prepareImapFolder()
         onMessageListRetrieved: findAndRetrieveMessages()
         onMessageRetrieved: processMessage()
-        onMessageUpdated: syncToImapProgressDialog.close()
+        onMessageUpdated: {
+            syncToImapProgressDialog.close()
+            messageDialog.title = "Success"
+            messageDialog.message = "Sync was successful."
+            messageDialog.open()
+        }
 
         onError: {
+            syncToImapProgressDialog.close()
             messageDialog.title = "Error"
             messageDialog.message = "Sync failed: \"" + errorString + "\" Code: " + errorCode + " Action: " + currentAction
             messageDialog.open()
