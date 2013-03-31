@@ -206,17 +206,11 @@ Item {
             }
             MenuItem {
                 text: "Edit"
-                onClicked: menu.parent.remove()
+                onClicked: mainRectangle.editCurrentItem()
             }
             MenuItem {
                 text: "New Entry"
-                onClicked: {
-                   editToDoDialog.color = "blue"
-                   editToDoDialog.type = "to-do"
-                   editToDoDialog.text = ""
-                   editToDoDialog.edit = false
-                   editToDoDialog.open()
-               }
+                onClicked: mainRectangle.addItem()
             }
             MenuItem {
                 text: "New Sketch"
@@ -224,10 +218,7 @@ Item {
             }
             MenuItem {
                 text: "Delete"
-                onClicked: {
-                    mainRectangle.confirmDeleteDialog.message = "Delete \"" + mainRectangle.treeView.currentItem.text + "\"?"
-                    mainRectangle.confirmDeleteDialog.open()
-                }
+                onClicked: mainRectangle.deleteCurrentItem()
             }
         }
     }

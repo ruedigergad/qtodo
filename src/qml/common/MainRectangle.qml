@@ -39,6 +39,14 @@ Item {
     property string imapMessageSubject: "[QTODO] SimpleSync"
     property string imapSyncFile: ""
 
+    function addItem() {
+        editToDoItem.color = "blue"
+        editToDoItem.type = "to-do"
+        editToDoItem.text = ""
+        editToDoItem.edit = false
+        editToDoItem.open()
+    }
+
     function deleteCurrentItem() {
         confirmDeleteDialog.message = "Delete \"" + treeView.currentItem.text + "\"?"
         confirmDeleteDialog.open()
