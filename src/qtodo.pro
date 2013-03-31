@@ -136,7 +136,8 @@ OTHER_FILES += \
     qml/sailfish/common/CommonToolBar.qml \
     qml/sailfish/common/CommonToolIcon.qml \
     qml/sailfish/common/ConfirmationDialog.qml \
-    qml/sailfish/common/CommonFlickable.qml
+    qml/sailfish/common/CommonFlickable.qml \
+    qml/sailfish/EditToDoDialog.qml
 
 
 

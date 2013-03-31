@@ -43,6 +43,10 @@ ApplicationWindow {
         }
     }
 
+    EditToDoDialog {
+        id: editToDoDialog
+    }
+
 //    Connections {
 //        target: mainRectangle.treeView
 

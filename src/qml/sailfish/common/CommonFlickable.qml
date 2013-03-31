@@ -31,6 +31,13 @@ SilicaFlickable {
 
         MenuItem {
             text: "New Item"
+            onClicked: {
+                editToDoDialog.color = "blue"
+                editToDoDialog.type = "to-do"
+                editToDoDialog.text = ""
+                editToDoDialog.edit = false
+                editToDoDialog.open()
+            }
         }
 
         MenuItem {
@@ -58,6 +65,13 @@ SilicaFlickable {
 
         MenuItem {
             text: "New Item"
+            onClicked: {
+                editToDoDialog.color = "blue"
+                editToDoDialog.type = "to-do"
+                editToDoDialog.text = ""
+                editToDoDialog.edit = false
+                editToDoDialog.open()
+            }
         }
 
         MenuItem {
