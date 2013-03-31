@@ -39,18 +39,23 @@ Item {
     property string imapMessageSubject: "[QTODO] SimpleSync"
     property string imapSyncFile: ""
 
-    function editSelectedItem() {
+    function deleteCurrentItem() {
+        confirmDeleteDialog.message = "Delete \"" + treeView.currentItem.text + "\"?"
+        confirmDeleteDialog.open()
+    }
+
+    function editCurrentItem() {
         var currentItem = treeView.currentItem
         if (currentItem.type === "sketch") {
-            editSketchSheet.sketchPath = currentItem.text
-            editSketchSheet.edit = true
-            editSketchSheet.open()
+            editSketchItem.sketchPath = currentItem.text
+            editSketchItem.edit = true
+            editSketchItem.open()
         } else {
-            editToDoSheet.color = currentItem.itemColor
-            editToDoSheet.type = currentItem.type
-            editToDoSheet.text = currentItem.text
-            editToDoSheet.edit = true
-            editToDoSheet.open()
+            editToDoItem.color = currentItem.itemColor
+            editToDoItem.type = currentItem.type
+            editToDoItem.text = currentItem.text
+            editToDoItem.edit = true
+            editToDoItem.open()
         }
     }
 
@@ -147,7 +152,7 @@ Item {
                 mainRectangle.isTodo = currentItem.type === "to-do"
             }
         }
-        onDoubleClicked: editSelectedItem()
+        onDoubleClicked: editCurrentItem()
         onPressAndHold: contextMenu.open()
     }
 

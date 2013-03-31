@@ -24,9 +24,7 @@ Item {
     id: menu
 
     anchors.fill: parent
-
     visible: false
-
     z: 16
 
     /*
@@ -38,6 +36,10 @@ Item {
     onHeightChanged: {
         menuBorder.y = height
         isOpen = true
+    }
+
+    onChildrenChanged: {
+        menuArea.children = children
     }
 
     Rectangle{
@@ -81,45 +83,9 @@ Item {
             id: menuArea
             anchors.centerIn: parent
             width: parent.width
-            height: children.length * about.height
+            height: childrenRect.height
 
             color: "lightgray"
-
-            CommonButton{
-                id: cleanDone
-                anchors.bottom: syncToImap.top
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width
-                text: "Clean Done"
-                onClicked: {
-                    mainRectangle.confirmCleanDoneDialog.open()
-                    menu.close()
-                }
-            }
-
-            CommonButton{
-                id: syncToImap
-                anchors.bottom: about.top
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width
-                text: "Sync To IMAP"
-                onClicked: {
-                    mainRectangle.confirmSyncToImapDialog.open()
-                    menu.close()
-                }
-            }
-
-            CommonButton{
-                id: about
-                anchors.bottom: parent.bottom
-                anchors.horizontalCenter: parent.horizontalCenter
-                width: parent.width
-                text: "About"
-                onClicked: {
-                    mainRectangle.aboutDialog.open()
-                    menu.close()
-                }
-            }
         }
     }
 

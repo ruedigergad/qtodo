@@ -27,23 +27,13 @@ CommonToolBar {
         platformIconId: "toolbar-add"
         text: "+"
         opacity: enabled ? 1 : 0.5
-        onClicked: {
-            editToDoSheet.color = "blue"
-            editToDoSheet.type = "to-do"
-            editToDoSheet.text = ""
-            editToDoSheet.edit = false
-            editToDoSheet.open()
-        }
+        onClicked: mainRectangle.addItem()
     }
     CommonToolIcon {
         id: iconSketch
         iconSource: "../icons/sketch.png"
         opacity: enabled ? 1 : 0.5
-        onClicked: {
-            editSketchSheet.edit = false
-            editSketchSheet.sketchPath = storage.getPath() + "/sketches/" + (rootElementModel.getMaxId() + 1) + ".png"
-            editSketchSheet.open()
-        }
+        onClicked: mainRectangle.editCurrentItem()
     }
     CommonToolIcon {
         id: iconMarkDone
@@ -59,10 +49,7 @@ CommonToolBar {
         text: "Del"
         enabled: mainRectangle.treeView.currentIndex >= 0
         opacity: enabled ? 1 : 0.5
-        onClicked: {
-            mainRectangle.confirmDeleteDialog.message = "Delete \"" + mainRectangle.treeView.currentItem.text + "\"?"
-            mainRectangle.confirmDeleteDialog.open()
-        }
+        onClicked: mainRectangle.deleteCurrentItem()
     }
     CommonToolIcon {
         id: iconBack
@@ -76,7 +63,7 @@ CommonToolBar {
         platformIconId: "toolbar-view-menu"
         text: "Menu"
         anchors.right: parent === undefined ? undefined : parent.right
-        onClicked: ! myMenu.isOpen ? myMenu.open() : myMenu.close()
+        onClicked: ! mainMenu.isOpen ? mainMenu.open() : mainMenu.close()
         opacity: enabled ? 1 : 0.5
     }
 }

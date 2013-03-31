@@ -38,9 +38,9 @@ PageStackWindow {
         }
     }
 
-    EditToDoSheet { id: editToDoSheet }
+    EditToDoSheet { id: editToDoItem }
 
-    EditSketchSheet { id: editSketchSheet }
+    EditSketchSheet { id: editSketchItem }
 
     QToDoToolBar {
         id: commonTools
@@ -51,22 +51,17 @@ PageStackWindow {
         MenuLayout {
             MenuItem {
                 text: "Edit"
-                onClicked: {
-                    mainRectangle.editSelectedItem()
-                }
+                onClicked: mainRectangle.editCurrentItem()
             }
             MenuItem {
                 text: "Delete"
-                onClicked: {
-                    mainRectangle.confirmDeleteDialog.message = "Delete \"" + treeView.currentItem.text + "\"?"
-                    mainRectangle.confirmDeleteDialog.open()
-                }
+                onClicked: mainRectangle.deleteCurrentItem()
             }
         }
     }
 
     Menu {
-        id: myMenu
+        id: mainMenu
         visualParent: pageStack
         MenuLayout {
             MenuItem {

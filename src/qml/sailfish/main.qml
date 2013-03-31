@@ -44,7 +44,7 @@ ApplicationWindow {
     }
 
     EditToDoDialog {
-        id: editToDoDialog
+        id: editToDoItem
     }
 
 //    Connections {

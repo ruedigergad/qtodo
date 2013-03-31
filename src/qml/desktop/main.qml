@@ -69,10 +69,74 @@ Rectangle {
     }
 
     Menu {
-        id: myMenu
+        id: mainMenu
+
+        CommonButton{
+            id: cleanDone
+            anchors.bottom: syncToImap.top
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width
+            text: "Clean Done"
+            onClicked: {
+                mainRectangle.confirmCleanDoneDialog.open()
+                menu.close()
+            }
+        }
+
+        CommonButton{
+            id: syncToImap
+            anchors.bottom: about.top
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width
+            text: "Sync To IMAP"
+            onClicked: {
+                mainRectangle.confirmSyncToImapDialog.open()
+                menu.close()
+            }
+        }
+
+        CommonButton{
+            id: about
+            anchors.bottom: parent.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width
+            text: "About"
+            onClicked: {
+                mainRectangle.aboutDialog.open()
+                menu.close()
+            }
+        }
+    }
+
+    Menu {
+        id: contextMenu
+
+        CommonButton{
+            id: editItem
+            anchors.bottom: deleteItem.top
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width
+            text: "Edit"
+            onClicked: {
+                mainRectangle.editCurrentItem()
+                contextMenu.close()
+            }
+        }
+
+        CommonButton{
+            id: deleteItem
+            anchors.bottom: parent.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width
+            text: "Delete"
+            onClicked: {
+                mainRectangle.deleteCurrentItem()
+                contextMenu.close()
+            }
+        }
     }
 
     EditToDoSheet {
-        id: editToDoSheet
+        id: editToDoItem
     }
 }
