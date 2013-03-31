@@ -60,6 +60,25 @@ Item {
             height: sourceSize.height * (width / sourceSize.width)
             width: nodeListView.width * 0.5
         }
+
+        MouseArea {
+            anchors.fill: parent
+
+            onClicked: {
+                selectItem()
+                nodeListDelegate.clicked()
+            }
+            onDoubleClicked: {
+                selectItem()
+                nodeListDelegate.doubleClicked()
+                treeView.doubleClicked()
+            }
+            onPressAndHold: {
+                selectItem()
+                nodeListDelegate.pressAndHold()
+                treeView.pressAndHold()
+            }
+        }
     }
 
     Item {

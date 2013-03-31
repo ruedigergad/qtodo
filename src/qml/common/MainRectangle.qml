@@ -49,6 +49,7 @@ Item {
 
     function addSketch() {
         editSketchItem.edit = false
+        editSketchItem.sketchPath = storage.getPath() + "/sketches/" + (rootElementModel.getMaxId() + 1) + ".png"
         editSketchItem.open()
     }
 
