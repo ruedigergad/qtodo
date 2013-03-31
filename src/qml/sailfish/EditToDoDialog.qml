@@ -39,7 +39,6 @@ Dialog {
 
     DialogHeader {
         id: dialogHeader
-        acceptText: "OK"
     }
 
     Item {
@@ -88,44 +87,34 @@ Dialog {
                 ComboBox {
                     id: importanceComboBox
                     width: parent.width
-                    label: "Importance: "
+                    label: "Color: "
 
                     menu: ContextMenu {
                         MenuItem {
-                            Rectangle {
-                                anchors.fill: parent
-                                color: "blue"
-                            }
+                            text: "Blue"
+                            color: "blue"
+                        }
+
+                        MenuItem {
+                            text: "Green"
+                            color: "green"
+                        }
+
+                        MenuItem {
+                            text: "Yellow"
+                            color: "yellow"
+                        }
+
+                        MenuItem {
+                            text: "Red"
+                            color: "red"
                         }
                     }
 
-                    valueColor: "green"
-                    labelColor: "red"
-                }
-
-                Row {
-                    id: colorButtonRow
-                    width: parent.width
-
-                    CommonButton {
-                        id: blueButton
-                        iconSource: "../icons/to-do_blue.png"
-                        onClicked: editToDoDialog.color = "blue"
-                    }
-                    CommonButton {
-                        id: greenButton
-                        iconSource: "../icons/to-do_green.png"
-                        onClicked: editToDoDialog.color = "green"
-                    }
-                    CommonButton {
-                        id: yellowButton
-                        iconSource: "../icons/to-do_yellow.png"
-                        onClicked: editToDoDialog.color = "yellow"
-                    }
-                    CommonButton {
-                        id: redButton
-                        iconSource: "../icons/to-do_red.png"
-                        onClicked: editToDoDialog.color = "red"
+                    onCurrentItemChanged: {
+                        value = currentItem.text
+                        valueColor = currentItem.color
+                        editToDoDialog.color = value.toLowerCase()
                     }
                 }
 
