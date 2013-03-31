@@ -29,7 +29,8 @@ CommonDialog {
     property alias message: message.text
 
     content: Item {
-      anchors.fill: parent
+        anchors.fill: parent
+
         Text {
             id: titleText
             anchors.bottom: progressIndicatorBackground.top
@@ -72,6 +73,11 @@ CommonDialog {
             font.pointSize: 25
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.Wrap
+        }
+
+        MouseArea {
+            anchors.fill: parent
+
         }
     }
 }
