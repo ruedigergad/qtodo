@@ -59,7 +59,7 @@ Rectangle {
             radius: height * 0.5
             border.width: height * 0.2
             border.color: "white"
-            color: ((index + 1) === levelIndicator.count) ? "white" : header.color
+            color: ((index + 1) === levelIndicator.count || height < header.height * 0.18) ? "white" : header.color
 
             ListView.onAdd: SequentialAnimation {
                 PropertyAction { target: levelIndicatorDelegate; property: "height"; value: 0 }
