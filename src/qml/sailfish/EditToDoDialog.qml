@@ -59,26 +59,48 @@ Dialog {
 
                 anchors{top: parent.top; left: parent.left; right: parent.right; margins: 15}
 
-                Row {
-                    id: typeButtonRow
+                ComboBox {
+                    id: typeComboBox
                     width: parent.width
+                    label: "Type: "
 
-                    CommonButton {
-                        id: toDoButton
-                        text: "To-Do"
-                        onClicked: {
-                            type = "to-do"
-                            colorButtonRow.enabled = (type === "to-do")
+                    menu: ContextMenu {
+                        MenuItem {
+                            id: toDoItem
+                            text: "ToDo"
+                            onClicked: {
+                                type = "to-do"
+                                colorButtonRow.enabled = (type === "to-do")
+                            }
+                        }
+
+                        MenuItem {
+                            id: noteItem
+                            text: "Note"
+                            onClicked: {
+                                type = "note"
+                                colorButtonRow.enabled = (type === "to-do")
+                            }
                         }
                     }
-                    CommonButton {
-                        id: noteButton
-                        text: "Note"
-                        onClicked: {
-                            type = "note"
-                            colorButtonRow.enabled = (type === "to-do")
+                }
+
+                ComboBox {
+                    id: importanceComboBox
+                    width: parent.width
+                    label: "Importance: "
+
+                    menu: ContextMenu {
+                        MenuItem {
+                            Rectangle {
+                                anchors.fill: parent
+                                color: "blue"
+                            }
                         }
                     }
+
+                    valueColor: "green"
+                    labelColor: "red"
                 }
 
                 Row {
