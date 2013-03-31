@@ -52,6 +52,9 @@ Rectangle {
 
         delegate: Rectangle {
             id: levelIndicatorDelegate
+
+            property bool animationRunning: false
+
             height: header.height * 0.18
             width: height
             anchors.verticalCenter: parent.verticalCenter
@@ -59,17 +62,21 @@ Rectangle {
             radius: height * 0.5
             border.width: height * 0.2
             border.color: "white"
-            color: ((index + 1) === levelIndicator.count || opacity < 1) ? "white" : header.color
+            color: ((index + 1) === levelIndicator.count || animationRunning ) ? "white" : header.color
 
             ListView.onAdd: SequentialAnimation {
-                PropertyAction { target: levelIndicatorDelegate; property: "opacity"; value: 0 }
-                NumberAnimation { target: levelIndicatorDelegate; property: "opacity"; to: opacity; duration: 250; easing.type: Easing.InOutQuad }
+                PropertyAction { target: levelIndicatorDelegate; property: "animationRunning"; value: true }
+                PropertyAction { target: levelIndicatorDelegate; property: "x"; value: header.width + width }
+                NumberAnimation { target: levelIndicatorDelegate; property: "x"; to: x; duration: 250; easing.type: Easing.InOutQuad }
+                PropertyAction { target: levelIndicatorDelegate; property: "animationRunning"; value: false }
             }
 
             ListView.onRemove: SequentialAnimation {
+                PropertyAction { target: levelIndicatorDelegate; property: "animationRunning"; value: true }
                 PropertyAction { target: levelIndicatorDelegate; property: "ListView.delayRemove"; value: true }
-                NumberAnimation { target: levelIndicatorDelegate; property: "opacity"; to: 0; duration: 250; easing.type: Easing.InOutQuad }
+                NumberAnimation { target: levelIndicatorDelegate; property: "x"; to: header.width + width; duration: 250; easing.type: Easing.InOutQuad }
                 PropertyAction { target: levelIndicatorDelegate; property: "ListView.delayRemove"; value: false }
+                PropertyAction { target: levelIndicatorDelegate; property: "animationRunning"; value: false }
             }
         }
 
