@@ -59,16 +59,16 @@ Rectangle {
             radius: height * 0.5
             border.width: height * 0.2
             border.color: "white"
-            color: ((index + 1) === levelIndicator.count || height < header.height * 0.18) ? "white" : header.color
+            color: ((index + 1) === levelIndicator.count || opacity < 1) ? "white" : header.color
 
             ListView.onAdd: SequentialAnimation {
-                PropertyAction { target: levelIndicatorDelegate; property: "height"; value: 0 }
-                NumberAnimation { target: levelIndicatorDelegate; property: "height"; to: height; duration: 250; easing.type: Easing.InOutQuad }
+                PropertyAction { target: levelIndicatorDelegate; property: "opacity"; value: 0 }
+                NumberAnimation { target: levelIndicatorDelegate; property: "opacity"; to: opacity; duration: 250; easing.type: Easing.InOutQuad }
             }
 
             ListView.onRemove: SequentialAnimation {
                 PropertyAction { target: levelIndicatorDelegate; property: "ListView.delayRemove"; value: true }
-                NumberAnimation { target: levelIndicatorDelegate; property: "height"; to: 0; duration: 250; easing.type: Easing.Linear }
+                NumberAnimation { target: levelIndicatorDelegate; property: "opacity"; to: 0; duration: 250; easing.type: Easing.InOutQuad }
                 PropertyAction { target: levelIndicatorDelegate; property: "ListView.delayRemove"; value: false }
             }
         }
