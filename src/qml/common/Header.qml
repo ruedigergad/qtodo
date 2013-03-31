@@ -31,7 +31,7 @@ Rectangle {
         anchors{left: parent.left; leftMargin: 20; verticalCenter: parent.verticalCenter}
         text: "My To-Dos"
         color: "#ffffff"
-        font {pixelSize: header.height * 0.5; family: "Nokia Pure Text Light"}
+        font {pixelSize: header.height * 0.444; family: "Nokia Pure Text Light"}
     }
 
     ListView {
@@ -52,7 +52,7 @@ Rectangle {
 
         delegate: Rectangle {
             id: levelIndicatorDelegate
-            height: header.height * 0.2
+            height: header.height * 0.18
             width: height
             anchors.verticalCenter: parent.verticalCenter
 

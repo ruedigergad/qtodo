@@ -39,7 +39,7 @@ PageStackWindow {
 
             Header {
                 id: header
-                height: 60
+                height: 72
             }
 
             MainRectangle {
