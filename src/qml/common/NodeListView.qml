@@ -179,8 +179,8 @@ Item {
 
         delegate: Item {
             id: delegateItem
-            height: nodeListDelegate.height
-            width: nodeListDelegate.width
+            height: nodeListDelegateContainer.height
+            width: nodeListDelegateContainer.width
             
             /*
              * These properties are used to access the item properties/data of
@@ -220,8 +220,8 @@ Item {
                 return (1 - (notDone / nTodos))
             }
 
-            NodeListDelegate {
-                id: nodeListDelegate
+            NodeListDelegateContainer {
+                id: nodeListDelegateContainer
             }
         }
     }
