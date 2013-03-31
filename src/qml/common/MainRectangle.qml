@@ -47,6 +47,11 @@ Item {
         editToDoItem.open()
     }
 
+    function addSketch() {
+        editSketchItem.edit = false
+        editSketchItem.open()
+    }
+
     function deleteCurrentItem() {
         confirmDeleteDialog.message = "Delete \"" + treeView.currentItem.text + "\"?"
         confirmDeleteDialog.open()

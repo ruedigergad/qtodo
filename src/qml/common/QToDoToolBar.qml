@@ -33,7 +33,7 @@ CommonToolBar {
         id: iconSketch
         iconSource: "../icons/sketch.png"
         opacity: enabled ? 1 : 0.5
-        onClicked: mainRectangle.editCurrentItem()
+        onClicked: mainRectangle.addSketch()
     }
     CommonToolIcon {
         id: iconMarkDone

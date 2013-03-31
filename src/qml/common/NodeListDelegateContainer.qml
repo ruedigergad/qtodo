@@ -26,5 +26,9 @@ Item {
 
     NodeListDelegate {
         id: nodeListDelegate
+
+        onPressAndHold: {
+            contextMenu.open()
+        }
     }
 }
