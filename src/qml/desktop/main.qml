@@ -79,7 +79,7 @@ Rectangle {
             text: "Clean Done"
             onClicked: {
                 mainRectangle.confirmCleanDoneDialog.open()
-                menu.close()
+                mainMenu.close()
             }
         }
 
@@ -91,7 +91,7 @@ Rectangle {
             text: "Sync To IMAP"
             onClicked: {
                 mainRectangle.confirmSyncToImapDialog.open()
-                menu.close()
+                mainMenu.close()
             }
         }
 
@@ -103,7 +103,7 @@ Rectangle {
             text: "About"
             onClicked: {
                 mainRectangle.aboutDialog.open()
-                menu.close()
+                mainMenu.close()
             }
         }
     }
