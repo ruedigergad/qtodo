@@ -16,16 +16,6 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Q To-Do.  If not, see <http://www.gnu.org/licenses/>.
  *
- *  ###################
- *
- *  Note: The code of the TreeView is additionally released under the terms
- *  of the GNU Lesser General Public License (LGPL) as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *  Files considered part of the TreeView are: TreeView.qml, NodeListView.qml,
- *  and nodelisthelper.js. These files are additionally licensed under the
- *  terms of the LGPL.
- *
  */
 
 import QtQuick 1.1

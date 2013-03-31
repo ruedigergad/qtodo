@@ -161,7 +161,6 @@ Item {
             }
         }
         onDoubleClicked: editCurrentItem()
-        onPressAndHold: contextMenu.open()
     }
 
     AboutDialog {

@@ -35,6 +35,12 @@ Item {
     width: tagName === "sketch" ? sketchContentDelegate.width : nodeListView.width
     height: tagName === "sketch" ? sketchContentDelegate.height : textContentDelegate.height
 
+    signal clicked
+    signal doubleClicked
+    signal pressAndHold
+
+    property alias textColor: textDelegate.color
+
     /*
      * Begin of custom code to display the data. Here the Q To-Do to-do or
      * note elements are shown. Customize this to display your own stuff.
@@ -127,13 +133,18 @@ Item {
             MouseArea {
                 id: textItemMouseArea
                 anchors.fill: parent
-                onClicked: selectItem()
+                onClicked: {
+                    selectItem()
+                    nodeListDelegate.clicked()
+                }
                 onDoubleClicked: {
                     selectItem()
+                    nodeListDelegate.doubleClicked()
                     treeView.doubleClicked()
                 }
                 onPressAndHold: {
                     selectItem()
+                    nodeListDelegate.pressAndHold()
                     treeView.pressAndHold()
                 }
             }
