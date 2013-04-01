@@ -193,6 +193,7 @@ Item {
 
     onLevelIncrement: {
         console.log("Level incremented...")
+        expandTree()
     }
 
     Flickable {
