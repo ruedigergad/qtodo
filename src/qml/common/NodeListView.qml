@@ -191,6 +191,7 @@ Item {
             property string type: tagName
             property string itemColor: elementColor
             property bool done: isDone
+            property bool expandable: isExpandable
             property double progress: elementProgress
 
             property double displayedProgress: getProgress()

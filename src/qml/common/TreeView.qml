@@ -155,13 +155,6 @@ Item {
             console.log("List view count is: " + listViewCount)
         }
 
-        if (previousLevel < currentLevel) {
-            levelIncrement()
-        } else if (previousLevel > currentLevel) {
-            levelDecrement()
-        }
-        previousLevel = currentLevel
-
         /*
          * Hack to properly update the selection when switching between levels.
          * We force "reselection" of the currentIndex by setting it to an
@@ -170,6 +163,13 @@ Item {
         var tempIndex = NodeListHelper.views[currentLevel].currentIndex
         NodeListHelper.views[currentLevel].currentIndex = -1
         NodeListHelper.views[currentLevel].currentIndex = tempIndex
+
+        if (previousLevel < currentLevel) {
+            levelIncrement()
+        } else if (previousLevel > currentLevel) {
+            levelDecrement()
+        }
+        previousLevel = currentLevel
     }
 
     onLevelDecrement: {
@@ -178,6 +178,10 @@ Item {
 
     onLevelIncrement: {
         console.log("Level incremented...")
+        if (currentIndex >= 0 && currentItem.expandable) {
+            addView(NodeListHelper.views[currentLevel])
+            treeView.updateSubView(NodeListHelper.views[currentLevel].model, currentIndex)
+        }
     }
 
     Flickable {
