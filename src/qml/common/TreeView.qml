@@ -178,7 +178,9 @@ Item {
 
     onLevelIncrement: {
         console.log("Level incremented...")
-        if (currentIndex >= 0 && currentItem.expandable) {
+        if (currentIndex >= 0 &&
+                currentItem.expandable &&
+                ! NodeListHelper.views[currentLevel].model.rowCount() <= 0) {
             addView(NodeListHelper.views[currentLevel])
             treeView.updateSubView(NodeListHelper.views[currentLevel].model, currentIndex)
         }
