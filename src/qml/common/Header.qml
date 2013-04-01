@@ -45,6 +45,7 @@ Rectangle {
         height: header.height
 
         orientation: ListView.Horizontal
+        interactive: false
         spacing: header.height * 0.25
 
         model: ListModel {
