@@ -92,11 +92,12 @@ Item {
     }
 
     function expandTree() {
+        console.log("Expanding tree...")
         if (currentIndex >= 0 &&
                 currentItem.expandable &&
-                ! NodeListHelper.views[currentLevel].model.rowCount() <= 0) {
-            addView(NodeListHelper.views[currentLevel])
-            treeView.updateSubView(NodeListHelper.views[currentLevel].model, currentIndex)
+                ! currentNodeListView.model.rowCount() <= 0) {
+            addView(currentNodeListView)
+            treeView.updateSubView(currentNodeListView.model, currentIndex)
         }
     }
 

@@ -44,10 +44,19 @@ Rectangle {
         }
 
         focus: true
-        Keys.onDownPressed: mainRectangle.treeView.currentNodeListView.currentIndex++
-        Keys.onUpPressed: mainRectangle.treeView.currentNodeListView.currentIndex--
+        Keys.onDownPressed:{
+            mainRectangle.treeView.currentNodeListView.currentIndex++
+            mainRectangle.treeView.expandTree()
+        }
+        Keys.onUpPressed: {
+            mainRectangle.treeView.currentNodeListView.currentIndex--
+            mainRectangle.treeView.expandTree()
+        }
         Keys.onLeftPressed: mainRectangle.treeView.currentLevel--
-        Keys.onRightPressed: mainRectangle.treeView.currentLevel++
+        Keys.onRightPressed: {
+            mainRectangle.treeView.currentLevel++
+            mainRectangle.treeView.expandTree()
+        }
     }
 
     Rectangle {

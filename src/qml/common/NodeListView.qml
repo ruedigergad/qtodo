@@ -173,7 +173,6 @@ Item {
                 treeView.currentItem = currentItem
                 treeView.currentIndex = currentIndex
                 updateLabels()
-                treeView.expandTree()
             }
         }
 
