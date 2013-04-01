@@ -42,6 +42,12 @@ Rectangle {
                 treeView.fontPixelSize = 20
             }
         }
+
+        focus: true
+        Keys.onDownPressed: mainRectangle.treeView.currentNodeListView.currentIndex++
+        Keys.onUpPressed: mainRectangle.treeView.currentNodeListView.currentIndex--
+        Keys.onLeftPressed: mainRectangle.treeView.currentLevel--
+        Keys.onRightPressed: mainRectangle.treeView.currentLevel++
     }
 
     Rectangle {

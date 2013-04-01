@@ -44,6 +44,7 @@ Item {
 
     property string color: "white"
     property alias model: rootListView.model
+    property Item currentNodeListView
 
     property int fontPixelSize: 28
 
@@ -88,6 +89,15 @@ Item {
         }
         listViewCount = currentLevel + 1
         NodeListHelper.views.length = listViewCount
+    }
+
+    function expandTree() {
+        if (currentIndex >= 0 &&
+                currentItem.expandable &&
+                ! NodeListHelper.views[currentLevel].model.rowCount() <= 0) {
+            addView(NodeListHelper.views[currentLevel])
+            treeView.updateSubView(NodeListHelper.views[currentLevel].model, currentIndex)
+        }
     }
 
     function updateSubView(model, index) {
@@ -143,26 +153,30 @@ Item {
 
         if(currentLevel >= 0 && currentLevel < listViewCount){
             flickable.contentX = currentLevel * treeView.width
-            currentModel = NodeListHelper.views[currentLevel].model
-            if (NodeListHelper.views[currentLevel] >= 0) {
-                currentItem = NodeListHelper.views[currentLevel].currentItem
-            }
         } else if (currentLevel >= listViewCount) {
             console.log("Tried to exceed number of available levels.")
             currentLevel--
         } else {
             console.log("Invalid current level given: " + currentLevel)
             console.log("List view count is: " + listViewCount)
+            currentLevel = 0
         }
+
+        currentNodeListView = NodeListHelper.views[currentLevel]
+        currentModel = currentNodeListView.model
 
         /*
          * Hack to properly update the selection when switching between levels.
          * We force "reselection" of the currentIndex by setting it to an
          * invalid value and re-set it back to the initial value.
          */
-        var tempIndex = NodeListHelper.views[currentLevel].currentIndex
-        NodeListHelper.views[currentLevel].currentIndex = -1
-        NodeListHelper.views[currentLevel].currentIndex = tempIndex
+        var tempIndex = currentNodeListView.currentIndex
+        currentNodeListView.currentIndex = -1
+        currentNodeListView.currentIndex = tempIndex
+
+        if (currentNodeListView.currentIndex >= 0) {
+            currentItem = currentNodeListView.currentItem
+        }
 
         if (previousLevel < currentLevel) {
             levelIncrement()
@@ -178,12 +192,7 @@ Item {
 
     onLevelIncrement: {
         console.log("Level incremented...")
-        if (currentIndex >= 0 &&
-                currentItem.expandable &&
-                ! NodeListHelper.views[currentLevel].model.rowCount() <= 0) {
-            addView(NodeListHelper.views[currentLevel])
-            treeView.updateSubView(NodeListHelper.views[currentLevel].model, currentIndex)
-        }
+        expandTree()
     }
 
     Flickable {
@@ -225,6 +234,10 @@ Item {
                 anchors.left: parent.left
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
+
+                Component.onCompleted: {
+                    currentNodeListView = rootListView
+                }
             }
         }
 

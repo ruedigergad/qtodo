@@ -82,8 +82,7 @@ Item {
     }
 
     onExpandTree: {
-        treeView.addView(nodeListItem)
-        treeView.updateSubView(model, currentIndex)
+        treeView.expandTree()
     }
 
     onLeafNodeSelected: {
@@ -174,6 +173,7 @@ Item {
                 treeView.currentItem = currentItem
                 treeView.currentIndex = currentIndex
                 updateLabels()
+                treeView.expandTree()
             }
         }
 
