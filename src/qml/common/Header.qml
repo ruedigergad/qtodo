@@ -42,6 +42,7 @@ Rectangle {
             right: parent.right
             verticalCenter: parent.verticalCenter
         }
+        height: header.height
 
         orientation: ListView.Horizontal
         spacing: header.height * 0.25
@@ -57,7 +58,7 @@ Rectangle {
             // Hack to avoid item blinking up at target position at first.
             visible: false
 
-            height: header.height * 0.18
+            height: header.height * 0.175
             width: height
             anchors.verticalCenter: parent.verticalCenter
 
