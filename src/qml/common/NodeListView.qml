@@ -175,6 +175,10 @@ Item {
                 updateLabels()
             }
 
+            if (currentItem === undefined) {
+                return
+            }
+
             if (currentItem.currentY > (nodeListView.contentHeight * nodeListView.visibleArea.heightRatio) + nodeListView.contentY) {
                 nodeListView.contentY += currentItem.currentHeight
             } else if (currentItem.currentY < nodeListView.contentY) {
