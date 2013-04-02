@@ -57,6 +57,9 @@ Rectangle {
             mainRectangle.treeView.currentLevel++
             mainRectangle.treeView.expandTree()
         }
+        Keys.onSpacePressed: {
+            mainRectangle.treeView.toggleDone()
+        }
     }
 
     Rectangle {
