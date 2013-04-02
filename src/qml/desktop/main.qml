@@ -45,12 +45,16 @@ Rectangle {
 
         focus: true
         Keys.onDownPressed:{
-            mainRectangle.treeView.currentNodeListView.currentIndex++
-            mainRectangle.treeView.expandTree()
+            if (mainRectangle.treeView.currentNodeListView.currentIndex < (mainRectangle.treeView.currentModel.count - 1)) {
+                mainRectangle.treeView.currentNodeListView.currentIndex++
+                mainRectangle.treeView.expandTree()
+            }
         }
         Keys.onUpPressed: {
-            mainRectangle.treeView.currentNodeListView.currentIndex--
-            mainRectangle.treeView.expandTree()
+            if (mainRectangle.treeView.currentNodeListView.currentIndex > 0) {
+                mainRectangle.treeView.currentNodeListView.currentIndex--
+                mainRectangle.treeView.expandTree()
+            }
         }
         Keys.onLeftPressed: mainRectangle.treeView.currentLevel--
         Keys.onRightPressed: {

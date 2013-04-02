@@ -169,10 +169,16 @@ Item {
              * of the ListView from the TreeView. Hence, we do not want this change
              * to propagate back to the TreeView.
              */
-            if(currentIndex >= 0) {
+            if (currentIndex >= 0) {
                 treeView.currentItem = currentItem
                 treeView.currentIndex = currentIndex
                 updateLabels()
+            }
+
+            if (currentItem.currentY > (nodeListView.contentHeight * nodeListView.visibleArea.heightRatio) + nodeListView.contentY) {
+                nodeListView.contentY += currentItem.currentHeight
+            } else if (currentItem.currentY < nodeListView.contentY) {
+                nodeListView.contentY -= currentItem.currentHeight
             }
         }
 
@@ -181,6 +187,8 @@ Item {
             height: nodeListDelegateContainer.height
             width: nodeListDelegateContainer.width
             
+            property int currentY: y
+            property int currentHeight: height
             /*
              * These properties are used to access the item properties/data of
              * the current item as returned via the ListView currentItem property.
@@ -197,9 +205,9 @@ Item {
 
             function selectItem() {
                 currentIndex = index
-                if(isExpandable){
+                if (isExpandable) {
                     expandTree()
-                }else{
+                } else {
                     leafNodeSelected()
                 }
             }
