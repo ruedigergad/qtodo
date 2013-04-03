@@ -149,4 +149,8 @@ Rectangle {
     EditToDoSheet {
         id: editToDoItem
     }
+
+    EditSketchSheet {
+        id: editSketchItem
+    }
 }
