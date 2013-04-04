@@ -46,11 +46,13 @@ contains(LIBS,-lsailfishsilicabackground): {
     qmlDesktopCommon.source = qml/desktop/common
     qmlDesktopCommon.target = qml
 
-    DEPLOYMENTFOLDERS += qmlDesktop qmlDesktopCommon
-}
+    # TODO: Dynamically determine architecture.
+    qmlCanvasImportPath.source = lib/build/linux/x86_64/qmlcanvas
+    qmlCanvasImportPath.target = lib/imports
 
-# Additional import path used to resolve QML modules in Creator's code model
-QML_IMPORT_PATH =
+    DEPLOYMENTFOLDERS += qmlDesktop qmlDesktopCommon qmlCanvasImportPath
+    QML_IMPORT_PATH += lib/build/linux/x86_64
+}
 
 CONFIG += link_pkgconfig
 PKGCONFIG += qmfclient
