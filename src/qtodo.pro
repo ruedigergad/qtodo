@@ -57,8 +57,8 @@ contains(LIBS,-lsailfishsilicabackground): {
     DEPLOYMENTFOLDERS += qmlDesktop qmlDesktopCommon qmlCanvasImport qmfLibs
     QML_IMPORT_PATH += lib/build/linux/x86_64
 
-    wrapperScript.source = qtodo.sh
-    wrapperScript.target = /opt/$${TARGET}/bin
+    wrapperScript.files = qtodo.sh
+    wrapperScript.path = /opt/$${TARGET}/bin
     INSTALLS += wrapperScript
 }
 
@@ -100,6 +100,7 @@ SOURCES += main.cpp \
 
 OTHER_FILES += \
     qtodo.desktop \
+    qtodo.sh \
     qtodo.svg \
     qtodo.png \
     qtc_packaging/debian_harmattan/rules \
