@@ -56,6 +56,10 @@ contains(LIBS,-lsailfishsilicabackground): {
 
     DEPLOYMENTFOLDERS += qmlDesktop qmlDesktopCommon qmlCanvasImport qmfLibs
     QML_IMPORT_PATH += lib/build/linux/x86_64
+
+    wrapperScript.source = qtodo.sh
+    wrapperScript.target = /opt/$${TARGET}/bin
+    INSTALLS += wrapperScript
 }
 
 CONFIG += link_pkgconfig
