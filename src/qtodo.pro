@@ -47,10 +47,14 @@ contains(LIBS,-lsailfishsilicabackground): {
     qmlDesktopCommon.target = qml
 
     # TODO: Dynamically determine architecture.
-    qmlCanvasImportPath.source = lib/build/linux/x86_64/qmlcanvas
-    qmlCanvasImportPath.target = lib/imports
+    arch = x86_64
+    os = linux
+    qmlCanvasImport.source = lib/build/$${os}/$${arch}/qmlcanvas
+    qmlCanvasImport.target = lib/imports
+    qmfLibs.source = lib/build/$${os}/$${arch}/qmf
+    qmfLibs.target = lib
 
-    DEPLOYMENTFOLDERS += qmlDesktop qmlDesktopCommon qmlCanvasImportPath
+    DEPLOYMENTFOLDERS += qmlDesktop qmlDesktopCommon qmlCanvasImport qmfLibs
     QML_IMPORT_PATH += lib/build/linux/x86_64
 }
 
