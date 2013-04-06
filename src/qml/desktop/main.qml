@@ -64,6 +64,8 @@ Rectangle {
         Keys.onSpacePressed: {
             mainRectangle.treeView.toggleDone()
         }
+        Keys.onEnterPressed: mainRectangle.editCurrentItem()
+        Keys.onReturnPressed: mainRectangle.editCurrentItem()
     }
 
     Rectangle {
