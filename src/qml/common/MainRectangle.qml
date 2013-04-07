@@ -169,9 +169,9 @@ Item {
 
         merger.merge(imapSyncFile)
         storage.open()
+        fileHelper.rm(imapSyncFile)
 
         imapStorage.updateMessageAttachment(imapMessageId, "to-do-o/default.xml")
-        fileHelper.rm(imapSyncFile)
     }
 
     TreeView {
