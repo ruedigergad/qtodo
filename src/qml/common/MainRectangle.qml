@@ -28,16 +28,9 @@ Item {
     property alias confirmDeleteDialog: confirmDeleteDialog
     property alias confirmCleanDoneDialog: confirmCleanDoneDialog
     property alias confirmSyncToImapDialog: confirmSyncToImapDialog
-    property alias imapStorage: imapStorage
     property alias treeView: treeView
 
     property bool isTodo
-
-    property int imapAccountId: -1
-    property string imapFolderName: "qtodo"
-    property int imapMessageId: -1
-    property string imapMessageSubject: "[QTODO] SimpleSync"
-    property string imapSyncFile: ""
 
     function addItem() {
         editToDoItem.color = "blue"
@@ -71,107 +64,6 @@ Item {
             editToDoItem.edit = true
             editToDoItem.open()
         }
-    }
-
-    function syncToImap() {
-        var accIds = imapStorage.queryImapAccounts()
-        console.log("Found " + accIds.length + " IMAP account(s).")
-
-        syncToImapProgressDialog.currentValue++
-
-        if (accIds.length === 1) {
-            console.log("Found a single IMAP account. Using this for syncing.")
-            console.log("IMAP account id is: " + accIds[0])
-            imapAccountId = accIds[0]
-            imapStorage.retrieveFolderList(imapAccountId)
-        } else if (accIds.length === 0) {
-            syncToImapProgressDialog.close()
-            messageDialog.title = "No IMAP Account"
-            messageDialog.message = "Please set up an IMAP e-mail account for syncing."
-            messageDialog.open()
-        } else if (accIds.length > 1) {
-            syncToImapProgressDialog.close()
-            messageDialog.title = "Multiple IMAP Accounts"
-            messageDialog.message = "Functionality for choosing from different IMAP accounts still needs to be implemented."
-            messageDialog.open()
-        } else {
-            syncToImapProgressDialog.close()
-            messageDialog.title = "Unexpected Error"
-            messageDialog.message = "Querying for IMAP accounts returned an unexpected value."
-            messageDialog.open()
-        }
-    }
-
-    function prepareImapFolder() {
-        syncToImapProgressDialog.currentValue++
-
-        if (! imapStorage.folderExists(imapAccountId, imapFolderName)) {
-            console.log("Creating folder...")
-            imapStorage.createFolder(imapAccountId, imapFolderName)
-        } else {
-            processImapFolder()
-        }
-    }
-
-    function processImapFolder() {
-        console.log("Processing content of IMAP folder...")
-        syncToImapProgressDialog.currentValue++
-
-        if (! imapStorage.folderExists(imapAccountId, imapFolderName)) {
-            console.log("Error: IMAP folder does not exist!")
-            return
-        }
-
-        imapStorage.retrieveMessageList(imapAccountId, imapFolderName)
-    }
-
-    function findAndRetrieveMessages() {
-        console.log("Processing messages...")
-        syncToImapProgressDialog.currentValue++
-
-        var messageIds = imapStorage.queryMessages(imapAccountId, imapFolderName, imapMessageSubject)
-        if (messageIds.length === 0) {
-            console.log("No message found. Performing initital upload.")
-            imapStorage.addMessage(imapAccountId, imapFolderName, imapMessageSubject, "to-do-o/default.xml")
-            syncToImapProgressDialog.close()
-            messageDialog.title = "Success"
-            messageDialog.message = "Successfully performed initial sync."
-            messageDialog.open()
-        } else if (messageIds.length === 1) {
-            console.log("Message found.")
-            imapMessageId = messageIds[0]
-            console.log("Message id is: " + imapMessageId)
-            imapStorage.retrieveMessage(imapMessageId)
-        } else {
-            console.log("Error: Multiple messages found.")
-        }
-    }
-
-    function processMessage() {
-        console.log("Processing message...")
-        syncToImapProgressDialog.currentValue++
-
-        var attachmentLocations = imapStorage.getAttachmentLocations(imapMessageId)
-        console.log("Found the following attachment locations: " + attachmentLocations)
-
-        imapSyncFile = imapStorage.writeAttachmentTo(imapMessageId, attachmentLocations[0], "to-do-o")
-        console.log("Wrote attachment to: " + imapSyncFile)
-
-        if (imapSyncFile.indexOf("to-do-o/default.xml") > -1) {
-            console.log("Initial sync, reloading storage...")
-            storage.open()
-            syncToImapProgressDialog.close()
-            messageDialog.title = "Success"
-            messageDialog.message = "Successfully performed initial sync."
-            messageDialog.open()
-            return
-        }
-
-        merger.merge(imapSyncFile)
-        storage.open()
-        fileHelper.rm(imapSyncFile)
-
-        imapStorage.updateMessageAttachment(imapMessageId, "to-do-o/default.xml")
     }
 
     TreeView {
@@ -226,10 +118,22 @@ Item {
         message: "This may take some time."
 
         onAccepted: {
-            syncToImap();
-            syncToImapProgressDialog.currentValue = 0
-            syncToImapProgressDialog.open()
+            syncToImap.startSync()
         }
+    }
+
+    FileHelper { id: fileHelper }
+
+    Merger {
+        id: merger
+    }
+
+    NodeListModel {
+        id: rootElementModel
+    }
+
+    SyncToImap {
+        id: syncToImap
     }
 
     ProgressDialog {
@@ -246,12 +150,6 @@ Item {
         id: messageDialog
     }
 
-    FileHelper { id: fileHelper }
-
-    NodeListModel {
-        id: rootElementModel
-    }
-
     ToDoStorage {
         id: storage
 
@@ -259,32 +157,6 @@ Item {
             console.log("Document opened.")
             rootElementModel.setRoot(storage);
         }
-    }
-
-    ImapStorage {
-        id: imapStorage
-
-        onFolderCreated: processImapFolder()
-        onFolderListRetrieved: prepareImapFolder()
-        onMessageListRetrieved: findAndRetrieveMessages()
-        onMessageRetrieved: processMessage()
-        onMessageUpdated: {
-            syncToImapProgressDialog.close()
-            messageDialog.title = "Success"
-            messageDialog.message = "Sync was successful."
-            messageDialog.open()
-        }
-
-        onError: {
-            syncToImapProgressDialog.close()
-            messageDialog.title = "Error"
-            messageDialog.message = "Sync failed: \"" + errorString + "\" Code: " + errorCode + " Action: " + currentAction
-            messageDialog.open()
-        }
-    }
-
-    Merger {
-        id: merger
     }
 
     Component.onCompleted: {
