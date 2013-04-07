@@ -1,8 +1,8 @@
 #!/bin/sh
 
-export QML_IMPORT_PATH=lib/imports:$QML_IMPORT_PATH
-export QMF_PLUGINS=lib/qmf/plugins:$QMF_PLUGINS
-export LD_LIBRARY_PATH=lib/qmf/lib:$LD_LIBRARY_PATH
+export QML_IMPORT_PATH=lib/imports
+export QMF_PLUGINS=lib/qmf/plugins
+export LD_LIBRARY_PATH=lib/qmf/lib
 
 lib/qmf/bin/messageserver &
 bin/qtodo
