@@ -20,8 +20,8 @@
 import QtQuick 1.1
 import qtodo 1.0
 
-ImapStorage {
-    id: imapStorage
+Item {
+    id: syncToImapItem
 
     property int imapAccountId: -1
     property string imapFolderName: "qtodo"
@@ -29,32 +29,13 @@ ImapStorage {
     property string imapMessageSubject: "[QTODO] SimpleSync"
     property string imapSyncFile: ""
 
-    onFolderCreated: processImapFolder()
-    onFolderListRetrieved: prepareImapFolder()
-    onMessageListRetrieved: findAndRetrieveMessages()
-    onMessageRetrieved: processMessage()
-
-    onMessageUpdated: {
-        syncToImapProgressDialog.close()
-        messageDialog.title = "Success"
-        messageDialog.message = "Sync was successful."
-        messageDialog.open()
-    }
-
-    onError: {
-        syncToImapProgressDialog.close()
-        messageDialog.title = "Error"
-        messageDialog.message = "Sync failed: \"" + errorString + "\" Code: " + errorCode + " Action: " + currentAction
-        messageDialog.open()
-    }
-
     function startSync() {
         imapAccountId = -1
         imapMessageId = -1
         imapSyncFile = ""
         syncToImapProgressDialog.currentValue = 0
         syncToImapProgressDialog.open()
-        syncToImap();
+        syncToImap()
     }
 
     function syncToImap() {
@@ -156,5 +137,44 @@ ImapStorage {
         fileHelper.rm(imapSyncFile)
 
         imapStorage.updateMessageAttachment(imapMessageId, "to-do-o/default.xml")
+    }
+
+    ImapStorage {
+        id: imapStorage
+
+        onFolderCreated: processImapFolder()
+        onFolderListRetrieved: prepareImapFolder()
+        onMessageListRetrieved: findAndRetrieveMessages()
+        onMessageRetrieved: processMessage()
+
+        onMessageUpdated: {
+            syncToImapProgressDialog.close()
+            messageDialog.title = "Success"
+            messageDialog.message = "Sync was successful."
+            messageDialog.open()
+        }
+
+        onError: {
+            syncToImapProgressDialog.close()
+            messageDialog.title = "Error"
+            messageDialog.message = "Sync failed: \"" + errorString + "\" Code: " + errorCode + " Action: " + currentAction
+            messageDialog.open()
+        }
+    }
+
+    ProgressDialog {
+        id: syncToImapProgressDialog
+        parent: syncToImapItem.parent
+
+        title: "Syncing..."
+        message: "Sync to IMAP in progess"
+
+        maxValue: 5
+        currentValue: 0
+    }
+
+    MessageDialog {
+        id: messageDialog
+        parent: syncToImapItem.parent
     }
 }

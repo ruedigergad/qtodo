@@ -136,20 +136,6 @@ Item {
         id: syncToImap
     }
 
-    ProgressDialog {
-        id: syncToImapProgressDialog
-
-        title: "Syncing..."
-        message: "Sync to IMAP in progess"
-
-        maxValue: 5
-        currentValue: 0
-    }
-
-    MessageDialog {
-        id: messageDialog
-    }
-
     ToDoStorage {
         id: storage
 
