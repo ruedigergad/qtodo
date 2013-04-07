@@ -62,8 +62,10 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     view->showFullScreen();
 #else
     view->setSource(QUrl("qml/desktop/main.qml"));
+    view->rootContext()->setContextProperty("applicationWindow", view);
     view->setResizeMode(QDeclarativeView::SizeRootObjectToView);
     view->resize(500, 600);
+//    view->setWindowFlags(Qt::FramelessWindowHint);
     view->show();
 #endif
     return app->exec();

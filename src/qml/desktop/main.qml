@@ -32,6 +32,29 @@ Rectangle {
 
         Header {
             id: header
+
+            /*
+             * Thanks to alexisdm
+             * http://stackoverflow.com/questions/10203260/moving-the-window-on-holding-qml-mousearea
+             * for the hint on how to move the application window via QML
+             */
+            MouseArea {
+                anchors.fill: parent
+                property variant previousPosition
+
+                onPressed: {
+                    previousPosition = Qt.point(mouseX, mouseY)
+                }
+
+                onPositionChanged: {
+                    if (pressedButtons == Qt.LeftButton) {
+                        var dx = mouseX - previousPosition.x
+                        var dy = mouseY - previousPosition.y
+                        applicationWindow.pos = Qt.point(applicationWindow.pos.x + dx,
+                                                    applicationWindow.pos.y + dy)
+                    }
+                }
+            }
         }
 
         MainRectangle {
