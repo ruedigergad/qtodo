@@ -41,6 +41,8 @@ public:
     Q_INVOKABLE bool rm(QString const &file);
     Q_INVOKABLE bool rmdir(QString const &dir);
     Q_INVOKABLE bool mkdir(QString const &dir);
+
+    Q_INVOKABLE QString home();
     
 signals:
     

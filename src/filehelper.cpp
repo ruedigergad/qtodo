@@ -48,3 +48,7 @@ bool FileHelper::rmdir(const QString &dir){
 bool FileHelper::mkdir(const QString &dir){
     return QDir().mkpath(dir);
 }
+
+QString FileHelper::home(){
+    return QDir::homePath();
+}

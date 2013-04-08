@@ -122,8 +122,10 @@ Item {
         imapSyncFile = imapStorage.writeAttachmentTo(imapMessageId, attachmentLocations[0], "to-do-o")
         console.log("Wrote attachment to: " + imapSyncFile)
 
-        if (imapSyncFile.indexOf("to-do-o/default.xml") > -1) {
+        if (rootElementModel.rowCount() === 0) {
             console.log("Initial sync, reloading storage...")
+            fileHelper.rm(fileHelper.home() + "/to-do-o/default.xml")
+            imapStorage.writeAttachmentTo(imapMessageId, attachmentLocations[0], "to-do-o")
             storage.open()
             syncToImapProgressDialog.close()
             messageDialog.title = "Success"
