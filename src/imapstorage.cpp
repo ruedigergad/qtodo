@@ -141,6 +141,12 @@ QStringList ImapStorage::getAttachmentLocations(ulong msgId) {
     return ret;
 }
 
+QString ImapStorage::getAttachmentIdentifier(ulong msgId, QString attachmentLocation) {
+    QMailMessage *msg = new QMailMessage(QMailMessageId(msgId));
+    QMailMessagePart attachment = msg->partAt(QMailMessagePart::Location(attachmentLocation));
+    return attachment.identifier();
+}
+
 void ImapStorage::moveMessageToTrash(ulong msgId) {
     QMailDisconnected::moveToStandardFolder(QMailMessageIdList() << QMailMessageId(msgId), QMailFolder::TrashFolder);
     currentAction = MoveToTrashAction;
