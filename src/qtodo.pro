@@ -57,7 +57,7 @@ contains(LIBS,-lsailfishsilicabackground): {
     DEPLOYMENTFOLDERS += qmlDesktop qmlDesktopCommon qmlCanvasImport qmfLibs
     QML_IMPORT_PATH += lib/build/linux/x86_64
 
-    wrapperScript.files = qtodo.sh
+    wrapperScript.files = qtodo.sh accounts_gui.sh
     wrapperScript.path = /opt/$${TARGET}/bin
     INSTALLS += wrapperScript
 }
@@ -148,7 +148,8 @@ OTHER_FILES += \
     qml/sailfish/common/CommonToolIcon.qml \
     qml/sailfish/common/ConfirmationDialog.qml \
     qml/sailfish/common/CommonFlickable.qml \
-    qml/sailfish/EditToDoDialog.qml
+    qml/sailfish/EditToDoDialog.qml \
+    accounts_gui.sh
 
 
 
