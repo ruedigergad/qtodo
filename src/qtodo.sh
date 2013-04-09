@@ -7,5 +7,5 @@ export LD_LIBRARY_PATH="${QTODO_DIR}/lib/qmf/lib"
 
 eval "${QTODO_DIR}/lib/qmf/bin/messageserver &"
 MESSAGESERVER_PID=$!
-bin/qtodo
+${QTODO_DIR}/bin/qtodo
 kill $MESSAGESERVER_PID
