@@ -9,4 +9,3 @@ lib/qmf/bin/messageserver &
 bin/qtodo
 # TODO: Should only kill pid of above messageserver process here.
 killall messageserver
-
