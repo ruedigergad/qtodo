@@ -30,7 +30,7 @@ Merger::Merger(QObject *parent) :
     ownStorage = new ToDoStorage();
 }
 
-QDomElement Merger::copyElement(QDomElement from, QDomElement to) {
+QDomElement Merger::copyElement(const QDomElement &from, QDomElement &to) {
     if (from.tagName() == "sketch") {
         qDebug("copyElement: Skipping sketch...");
         return QDomElement();
@@ -64,7 +64,7 @@ QDomElement Merger::copyElement(QDomElement from, QDomElement to) {
     return newElement;
 }
 
-void Merger::deepCopy(QDomElement from, QDomElement to) {
+void Merger::deepCopy(const QDomElement &from, QDomElement &to) {
     if (! from.hasChildNodes()) {
         return;
     }
@@ -84,7 +84,7 @@ void Merger::deepCopy(QDomElement from, QDomElement to) {
     }
 }
 
-void Merger::deleteOldNodes(QDomElement parentElement) {
+void Merger::deleteOldNodes(QDomElement &parentElement) {
     QDomNodeList childNodes = parentElement.childNodes();
     for (int i = 0; i < childNodes.count(); i++) {
         QDomNode node = childNodes.at(i);
@@ -104,7 +104,7 @@ void Merger::deleteOldNodes(QDomElement parentElement) {
     }
 }
 
-QDomElement Merger::findByExample(QDomElement searched, QDomElement container) {
+QDomElement Merger::findByExample(const QDomElement &searched, const QDomElement &container) {
     if (! container.hasChildNodes()) {
         return QDomElement();
     }
@@ -127,7 +127,7 @@ QDomElement Merger::findByExample(QDomElement searched, QDomElement container) {
     return QDomElement();
 }
 
-QDomElement Merger::findById(QString id, QDomElement container) {
+QDomElement Merger::findById(QString id, const QDomElement &container) {
     if (! container.hasChildNodes()) {
         return QDomElement();
     }
@@ -155,7 +155,7 @@ QDomElement Merger::findById(QString id, QDomElement container) {
     return QDomElement();
 }
 
-void Merger::findMinId(QDomElement parentElement) {
+void Merger::findMinId(const QDomElement &parentElement) {
     QDomNodeList childNodes = parentElement.childNodes();
 
     for (int i = 0; i < childNodes.count(); i++) {
@@ -215,7 +215,7 @@ void Merger::mergeDeletions() {
     deleteOldNodes(ownRoot);
 }
 
-void Merger::mergeElementData(QDomElement from, QDomElement to) {
+void Merger::mergeElementData(const QDomElement &from, QDomElement &to) {
     qDebug() << "Merging element data for id: " << from.attribute("id", "-1");
     to.setTagName(from.tagName());
     to.firstChild().toText().setNodeValue(from.firstChild().toText().nodeValue());
@@ -228,7 +228,7 @@ void Merger::mergeElementData(QDomElement from, QDomElement to) {
     }
 }
 
-void Merger::mergeExistingElements(QDomElement from, QDomElement to) {
+void Merger::mergeExistingElements(const QDomElement &from, const QDomElement &to) {
     if (! to.hasChildNodes()) {
         return;
     }
@@ -264,7 +264,7 @@ void Merger::mergeExistingElements(QDomElement from, QDomElement to) {
     }
 }
 
-void Merger::mergeNewElements(QDomElement own, QDomElement incoming) {
+void Merger::mergeNewElements(const QDomElement &own, QDomElement &incoming) {
     if (! own.hasChildNodes()) {
         return;
     }
@@ -290,7 +290,7 @@ void Merger::mergeNewElements(QDomElement own, QDomElement incoming) {
     }
 }
 
-void Merger::removeDeletedIds(QDomElement parentElement) {
+void Merger::removeDeletedIds(QDomElement &parentElement) {
     if (! parentElement.hasChildNodes()) {
         return;
     }

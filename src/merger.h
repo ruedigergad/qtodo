@@ -48,17 +48,17 @@ private:
     int ownMaxId;
     int minId;
 
-    QDomElement copyElement(QDomElement from, QDomElement to);
-    void deepCopy(QDomElement from, QDomElement to);
-    void deleteOldNodes(QDomElement element);
-    QDomElement findByExample(QDomElement searched, QDomElement container);
-    QDomElement findById(QString id, QDomElement container);
-    void findMinId(QDomElement element);
+    QDomElement copyElement(const QDomElement &from, QDomElement &to);
+    void deepCopy(const QDomElement &from, QDomElement &to);
+    void deleteOldNodes(QDomElement &element);
+    QDomElement findByExample(const QDomElement &searched, const QDomElement &container);
+    QDomElement findById(QString id, const QDomElement &container);
+    void findMinId(const QDomElement &element);
     void mergeDeletions();
-    void mergeElementData(QDomElement from, QDomElement to);
-    void mergeExistingElements(QDomElement from, QDomElement to);
-    void mergeNewElements(QDomElement own, QDomElement incoming);
-    void removeDeletedIds(QDomElement element);
+    void mergeElementData(const QDomElement &from, QDomElement &to);
+    void mergeExistingElements(const QDomElement &from, const QDomElement &to);
+    void mergeNewElements(const QDomElement &own, QDomElement &incoming);
+    void removeDeletedIds(QDomElement &element);
 };
 
 #endif // MERGER_H
