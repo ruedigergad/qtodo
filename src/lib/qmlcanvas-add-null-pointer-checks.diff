@@ -1,0 +1,140 @@
+diff --git a/src/canvas.cpp b/src/canvas.cpp
+index 73adff3..f5aeb1b 100644
+--- a/src/canvas.cpp
++++ b/src/canvas.cpp
+@@ -59,6 +59,11 @@ Canvas::Canvas(QDeclarativeItem *parent)
+ 
+ void Canvas::componentComplete()
+ {
++    if (!m_context) {
++        qDebug("Canvas::componentComplete, m_context is null, doing nothing.");
++        return;
++    }
++
+     if (m_canvasWidth == 0 && m_canvasHeight == 0)
+         m_context->setSize(width(), height());
+     else
+@@ -71,6 +76,15 @@ void Canvas::componentComplete()
+ 
+ void Canvas::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
+ {
++    if (!painter) {
++        qDebug("Canvas::paint, painter is null, doing nothing.");
++        return;
++    }
++    if (!m_context) {
++        qDebug("Canvas::paint, m_context is null, doing nothing.");
++        return;
++    }
++
+     m_context->setInPaint(true);
+     emit paint();
+ 
+@@ -166,6 +180,11 @@ void Canvas::requestPaint()
+ 
+ void Canvas::geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry)
+ {
++    if (!m_context) {
++        qDebug("Canvas::geometry, m_context is null, doing nothing.");
++        return;
++    }
++
+     if (m_canvasWidth == 0 && m_canvasHeight == 0
+         && newGeometry.width() > 0 && newGeometry.height() > 0) {
+         m_context->setSize(width(), height());
+@@ -175,6 +194,11 @@ void Canvas::geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometr
+ 
+ void Canvas::setCanvasWidth(int newWidth)
+ {
++    if (!m_context) {
++        qDebug("Canvas::setCanvasWidth, m_context is null, doing nothing.");
++        return;
++    }
++
+     if (m_canvasWidth != newWidth) {
+         m_canvasWidth = newWidth;
+         m_context->setSize(m_canvasWidth, m_canvasHeight);
+@@ -184,6 +208,11 @@ void Canvas::setCanvasWidth(int newWidth)
+ 
+ void Canvas::setCanvasHeight(int newHeight)
+ {
++    if (!m_context) {
++        qDebug("Canvas::setCanvasHeight, m_context is null, doing nothing.");
++        return;
++    }
++
+     if (m_canvasHeight != newHeight) {
+         m_canvasHeight = newHeight;
+         m_context->setSize(m_canvasWidth, m_canvasHeight);
+@@ -221,11 +250,21 @@ Canvas::FillMode Canvas::fillMode() const
+ 
+ bool Canvas::save(const QString &filename) const
+ {
++    if (!m_context) {
++        qDebug("Canvas::save, m_context is null, doing nothing.");
++        return;
++    }
++
+     return m_context->pixmap().save(filename);
+ }
+ 
+ CanvasImage *Canvas::toImage() const
+ {
++    if (!m_context) {
++        qDebug("Canvas::toImage, m_context is null, doing nothing.");
++        return;
++    }
++
+     return new CanvasImage(m_context->pixmap());
+ }
+ 
+diff --git a/src/canvastimer.cpp b/src/canvastimer.cpp
+index e3492fd..08c2d98 100644
+--- a/src/canvastimer.cpp
++++ b/src/canvastimer.cpp
+@@ -61,8 +61,17 @@ void CanvasTimer::handleTimeout()
+ 
+ void CanvasTimer::createTimer(QObject *parent, const QScriptValue &val, long timeout, bool singleshot)
+ {
++    if (!parent) {
++        qDebug("CanvasTimer::createTimer, parent is null, doing nothing.");
++        return;
++    }
+ 
+     CanvasTimer *timer = new CanvasTimer(parent, val);
++    if (!timer) {
++        qDebug("CanvasTimer::createTimer, creation of timer failed, aborting.");
++        return;
++    }
++
+     timer->setInterval(timeout);
+     timer->setSingleShot(singleshot);
+     connect(timer, SIGNAL(timeout()), timer, SLOT(handleTimeout()));
+@@ -72,6 +81,11 @@ void CanvasTimer::createTimer(QObject *parent, const QScriptValue &val, long tim
+ 
+ void CanvasTimer::removeTimer(CanvasTimer *timer)
+ {
++    if (!timer) {
++        qDebug("CanvasTimer::removeTimer, timer is null, doing nothing.");
++        return;
++    }
++
+     activeTimers()->removeAll(timer);
+     timer->deleteLater();
+ }
+diff --git a/src/context2d.cpp b/src/context2d.cpp
+index b18dd34..243cd39 100644
+--- a/src/context2d.cpp
++++ b/src/context2d.cpp
+@@ -1086,6 +1086,11 @@ void Context2D::scheduleChange()
+ 
+ void Context2D::timerEvent(QTimerEvent *e)
+ {
++    if (!e) {
++        qDebug("Context2D::timerEvent, e is null, doing nothing.");
++        return;
++    }
++
+     if (e->timerId() == m_changeTimerId) {
+         killTimer(m_changeTimerId);
+         m_changeTimerId = -1;
