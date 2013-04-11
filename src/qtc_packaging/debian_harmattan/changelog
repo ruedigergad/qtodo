@@ -1,7 +1,14 @@
+qtodo (0.10.0) unstable; urgency=low
+
+  * Improve sync.
+
+ -- Ruediger Gad <r.c.g@gmx.de>  Fri, 12 Apr 2013 00:11:00 +0200
+
 qtodo (0.9.0) unstable; urgency=low
 
   * Add sync support.
   * Change color theme.
+  * Functionality to batch delete items marked as done.
 
  -- Ruediger Gad <r.c.g@gmx.de>  Sat, 23 Mar 2013 12:54:00 +0200
 
