@@ -1,5 +1,5 @@
 diff --git a/src/canvas.cpp b/src/canvas.cpp
-index 73adff3..f5aeb1b 100644
+index 73adff3..b179937 100644
 --- a/src/canvas.cpp
 +++ b/src/canvas.cpp
 @@ -59,6 +59,11 @@ Canvas::Canvas(QDeclarativeItem *parent)
@@ -72,7 +72,7 @@ index 73adff3..f5aeb1b 100644
  {
 +    if (!m_context) {
 +        qDebug("Canvas::save, m_context is null, doing nothing.");
-+        return;
++        return false;
 +    }
 +
      return m_context->pixmap().save(filename);
@@ -82,7 +82,7 @@ index 73adff3..f5aeb1b 100644
  {
 +    if (!m_context) {
 +        qDebug("Canvas::toImage, m_context is null, doing nothing.");
-+        return;
++        return 0;
 +    }
 +
      return new CanvasImage(m_context->pixmap());
