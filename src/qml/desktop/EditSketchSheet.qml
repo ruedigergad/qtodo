@@ -63,6 +63,8 @@ Item {
         state = "open"
     }
 
+    onClosed: drawing.init()
+
     onOpened: {
         if (edit) {
             drawing.load(sketchPath)
