@@ -79,7 +79,6 @@ CommonDialog {
 
         MouseArea {
             anchors.fill: parent
-
         }
     }
 }
