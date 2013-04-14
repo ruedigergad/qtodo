@@ -171,7 +171,7 @@ Item {
         title: "Syncing..."
         message: "Sync to IMAP in progess"
 
-        maxValue: 5
+        maxValue: 6
         currentValue: 0
     }
 
