@@ -22,6 +22,8 @@ import QtQuick 1.1
 CommonDialog {
     id: progressDialog
 
+    anchors.fill: parent
+
     property double maxValue
     property double currentValue
 
