@@ -23,11 +23,15 @@ import qtodo 1.0
 Item {
     id: syncToImapItem
 
-    property int imapAccountId: -1
     property string imapFolderName: "qtodo"
-    property int imapMessageId: -1
     property string imapMessageSubject: "[QTODO] SimpleSync"
+
+    property int imapAccountId: -1
+    property int imapMessageId: -1
     property string imapSyncFile: ""
+
+    signal succeeded
+    signal progress
 
     function startSync() {
         imapAccountId = -1
@@ -35,14 +39,14 @@ Item {
         imapSyncFile = ""
         syncToImapProgressDialog.currentValue = 0
         syncToImapProgressDialog.open()
-        syncToImap()
+        _syncToImap()
     }
 
-    function syncToImap() {
+    function _syncToImap() {
         var accIds = imapStorage.queryImapAccounts()
         console.log("Found " + accIds.length + " IMAP account(s).")
 
-        syncToImapProgressDialog.currentValue++
+        progress()
 
         if (accIds.length === 1) {
             console.log("Found a single IMAP account. Using this for syncing.")
@@ -67,20 +71,20 @@ Item {
         }
     }
 
-    function prepareImapFolder() {
-        syncToImapProgressDialog.currentValue++
+    function _prepareImapFolder() {
+        progress()
 
         if (! imapStorage.folderExists(imapAccountId, imapFolderName)) {
             console.log("Creating folder...")
             imapStorage.createFolder(imapAccountId, imapFolderName)
         } else {
-            processImapFolder()
+            _processImapFolder()
         }
     }
 
-    function processImapFolder() {
+    function _processImapFolder() {
         console.log("Processing content of IMAP folder...")
-        syncToImapProgressDialog.currentValue++
+        progress()
 
         if (! imapStorage.folderExists(imapAccountId, imapFolderName)) {
             console.log("Error: IMAP folder does not exist!")
@@ -92,16 +96,13 @@ Item {
 
     function findAndRetrieveMessages() {
         console.log("Processing messages...")
-        syncToImapProgressDialog.currentValue++
+        progress()
 
         var messageIds = imapStorage.queryMessages(imapAccountId, imapFolderName, imapMessageSubject)
         if (messageIds.length === 0) {
             console.log("No message found. Performing initital upload.")
             imapStorage.addMessage(imapAccountId, imapFolderName, imapMessageSubject, "to-do-o/default.xml")
-            syncToImapProgressDialog.close()
-            messageDialog.title = "Success"
-            messageDialog.message = "Successfully performed initial sync."
-            messageDialog.open()
+            reportSuccess()
         } else if (messageIds.length === 1) {
             console.log("Message found.")
             imapMessageId = messageIds[0]
@@ -114,7 +115,7 @@ Item {
 
     function processMessage() {
         console.log("Processing message...")
-        syncToImapProgressDialog.currentValue++
+        progress()
 
         var attachmentLocations = imapStorage.getAttachmentLocations(imapMessageId)
         console.log("Found the following attachment locations: " + attachmentLocations)
@@ -122,38 +123,44 @@ Item {
         imapSyncFile = imapStorage.writeAttachmentTo(imapMessageId, attachmentLocations[0], "to-do-o")
         console.log("Wrote attachment to: " + imapSyncFile)
 
+        reportSuccess()
+        // Begin: not part of s2i
         if (rootElementModel.rowCount() === 0) {
             console.log("Initial sync, reloading storage...")
             fileHelper.rm(fileHelper.home() + "/to-do-o/default.xml")
             imapStorage.writeAttachmentTo(imapMessageId, attachmentLocations[0], "to-do-o")
             storage.open()
-            syncToImapProgressDialog.close()
-            messageDialog.title = "Success"
-            messageDialog.message = "Successfully performed initial sync."
-            messageDialog.open()
             return
         }
 
         merger.merge(imapSyncFile)
         storage.open()
         fileHelper.rm(imapSyncFile)
+        // End: not part of s2i
+        // TODO: Extract from s2i to qtodo.
 
+        // TODO: Move into own method. E.g., "uploadFile" or "updateFile".
         imapStorage.updateMessageAttachment(imapMessageId, "to-do-o/default.xml")
+    }
+
+    function reportSuccess() {
+        succeeded()
+        syncToImapProgressDialog.close()
+        messageDialog.title = "Success"
+        messageDialog.message = "Sync was successful."
+        messageDialog.open()
     }
 
     ImapStorage {
         id: imapStorage
 
-        onFolderCreated: processImapFolder()
-        onFolderListRetrieved: prepareImapFolder()
+        onFolderCreated: _processImapFolder()
+        onFolderListRetrieved: _prepareImapFolder()
         onMessageListRetrieved: findAndRetrieveMessages()
         onMessageRetrieved: processMessage()
 
         onMessageUpdated: {
-            syncToImapProgressDialog.close()
-            messageDialog.title = "Success"
-            messageDialog.message = "Sync was successful."
-            messageDialog.open()
+            reportSuccess()
         }
 
         onError: {
@@ -162,6 +169,10 @@ Item {
             messageDialog.message = "Sync failed: \"" + errorString + "\" Code: " + errorCode + " Action: " + currentAction
             messageDialog.open()
         }
+    }
+
+    onProgress: {
+        syncToImapProgressDialog.currentValue++
     }
 
     ProgressDialog {
