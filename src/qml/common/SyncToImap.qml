@@ -134,8 +134,8 @@ Item {
         }
 
         merger.merge(imapSyncFile)
-        storage.open()
         fileHelper.rm(imapSyncFile)
+        storage.open()
         // End: not part of s2i
         // TODO: Extract from s2i to qtodo.
 
