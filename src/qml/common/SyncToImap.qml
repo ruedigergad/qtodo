@@ -131,7 +131,7 @@ Item {
         console.log("Wrote attachment to: " + imapSyncFile)
 
         if (merger.merge()) {
-            console.log("Updating attachment...")
+            console.log("Merger reported changes, updating attachment...")
             imapStorage.updateMessageAttachment(imapMessageId, "to-do-o/default.xml")
         } else {
             reportSuccess()
