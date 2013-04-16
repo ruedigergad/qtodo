@@ -26,6 +26,7 @@ Item {
     property string imapFolderName: ""
     property string imapMessageSubject: "[QTODO] SimpleSync"
     property QtObject merger
+    property bool useBuiltInDialogs: true
 
     property int _imapAccountId: -1
     property int _imapMessageId: -1
@@ -44,8 +45,12 @@ Item {
         _imapAccountId = -1
         _imapMessageId = -1
         _imapSyncFile = ""
-        syncToImapProgressDialog.currentValue = 0
-        syncToImapProgressDialog.open()
+
+        if (useBuiltInDialogs) {
+            _syncToImapProgressDialog.currentValue = 0
+            _syncToImapProgressDialog.open()
+        }
+
         _syncToImap()
     }
 
@@ -61,17 +66,17 @@ Item {
             _imapAccountId = accIds[0]
             imapStorage.retrieveFolderList(_imapAccountId)
         } else if (accIds.length === 0) {
-            syncToImapProgressDialog.close()
+            _syncToImapProgressDialog.close()
             messageDialog.title = "No IMAP Account"
             messageDialog.message = "Please set up an IMAP e-mail account for syncing."
             messageDialog.open()
         } else if (accIds.length > 1) {
-            syncToImapProgressDialog.close()
+            _syncToImapProgressDialog.close()
             messageDialog.title = "Multiple IMAP Accounts"
             messageDialog.message = "Functionality for choosing from different IMAP accounts still needs to be implemented."
             messageDialog.open()
         } else {
-            syncToImapProgressDialog.close()
+            _syncToImapProgressDialog.close()
             messageDialog.title = "Unexpected Error"
             messageDialog.message = "Querying for IMAP accounts returned an unexpected value."
             messageDialog.open()
@@ -140,10 +145,20 @@ Item {
 
     function reportSuccess() {
         succeeded()
-        syncToImapProgressDialog.close()
-        messageDialog.title = "Success"
-        messageDialog.message = "Sync was successful."
-        messageDialog.open()
+
+        if (useBuiltInDialogs) {
+            _syncToImapProgressDialog.close()
+            messageDialog.title = "Success"
+            messageDialog.message = "Sync was successful."
+            messageDialog.open()
+        }
+    }
+
+
+    onProgress: {
+        if (useBuiltInDialogs) {
+            _syncToImapProgressDialog.currentValue++
+        }
     }
 
     ImapStorage {
@@ -159,19 +174,15 @@ Item {
         }
 
         onError: {
-            syncToImapProgressDialog.close()
+            _syncToImapProgressDialog.close()
             messageDialog.title = "Error"
             messageDialog.message = "Sync failed: \"" + errorString + "\" Code: " + errorCode + " Action: " + currentAction
             messageDialog.open()
         }
     }
 
-    onProgress: {
-        syncToImapProgressDialog.currentValue++
-    }
-
     ProgressDialog {
-        id: syncToImapProgressDialog
+        id: _syncToImapProgressDialog
         parent: syncToImapItem.parent
 
         title: "Syncing..."
