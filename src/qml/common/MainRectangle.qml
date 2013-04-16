@@ -134,6 +134,8 @@ Item {
 
     SyncToImap {
         id: syncToImap
+
+        imapFolderName: "qtodo"
     }
 
     ToDoStorage {

@@ -23,7 +23,7 @@ import qtodo 1.0
 Item {
     id: syncToImapItem
 
-    property string imapFolderName: "qtodo"
+    property string imapFolderName: ""
     property string imapMessageSubject: "[QTODO] SimpleSync"
 
     property int imapAccountId: -1
@@ -34,6 +34,11 @@ Item {
     signal progress
 
     function startSync() {
+        if (imapFolderName === null || imapFolderName === "") {
+            console.log("Error: imapFolderName not set. Stopping sync.")
+            return
+        }
+
         imapAccountId = -1
         imapMessageId = -1
         imapSyncFile = ""
