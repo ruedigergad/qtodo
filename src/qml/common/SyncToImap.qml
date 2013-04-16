@@ -131,24 +131,12 @@ Item {
         console.log("Wrote attachment to: " + imapSyncFile)
 
 
-        // Begin: not part of s2i
-        if (rootElementModel.rowCount() === 0) {
+        if (merger.merge()) {
+            console.log("Updating attachment...")
+            imapStorage.updateMessageAttachment(imapMessageId, "to-do-o/default.xml")
+        } else {
             reportSuccess()
-            console.log("Initial sync, reloading storage...")
-            fileHelper.rm(fileHelper.home() + "/to-do-o/default.xml")
-            imapStorage.writeAttachmentTo(imapMessageId, attachmentLocations[0], "to-do-o")
-            storage.open()
-            return
         }
-
-        merger.merge(imapSyncFile)
-        fileHelper.rm(imapSyncFile)
-        storage.open()
-        // End: not part of s2i
-        // TODO: Extract from s2i to qtodo.
-
-        // TODO: Move into own method. E.g., "uploadFile" or "updateFile".
-        imapStorage.updateMessageAttachment(imapMessageId, "to-do-o/default.xml")
     }
 
     function reportSuccess() {

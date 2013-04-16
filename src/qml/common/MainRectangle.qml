@@ -126,6 +126,22 @@ Item {
 
     Merger {
         id: todoMerger
+
+        function merge (syncFileName) {
+            if (rootElementModel.rowCount() === 0) {
+                console.log("Initial sync, reloading storage...")
+                fileHelper.rm(fileHelper.home() + "/to-do-o/default.xml")
+//                imapStorage.writeAttachmentTo(imapMessageId, attachmentLocations[0], "to-do-o")
+                //TODO: Copy sync file to original file.
+                storage.open()
+                return false
+            } else {
+                mergeTodoStorage(syncFileName)
+                fileHelper.rm(syncFileName)
+                storage.open()
+                return true
+            }
+        }
     }
 
     NodeListModel {

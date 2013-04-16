@@ -173,7 +173,7 @@ void Merger::findMinId(const QDomElement &parentElement) {
     }
 }
 
-void Merger::merge(QString incoming) {
+void Merger::mergeTodoStorage(QString incoming) {
     incomingStorage->open(incoming);
     incomingRoot = incomingStorage->getRootElement();
 

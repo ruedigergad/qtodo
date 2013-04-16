@@ -30,7 +30,7 @@ class Merger : public QObject
 public:
     explicit Merger(QObject *parent = 0);
     
-    Q_INVOKABLE void merge(QString incoming);
+    Q_INVOKABLE void mergeTodoStorage(QString incoming);
 
 signals:
     
