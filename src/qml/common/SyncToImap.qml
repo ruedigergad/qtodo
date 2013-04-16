@@ -25,11 +25,11 @@ Item {
 
     property string imapFolderName: ""
     property string imapMessageSubject: "[QTODO] SimpleSync"
-
-    property int imapAccountId: -1
-    property int imapMessageId: -1
-    property string imapSyncFile: ""
     property QtObject merger
+
+    property int _imapAccountId: -1
+    property int _imapMessageId: -1
+    property string _imapSyncFile: ""
 
     signal succeeded
     signal progress
@@ -41,9 +41,9 @@ Item {
         }
         //TODO: Add check if merger was set.
 
-        imapAccountId = -1
-        imapMessageId = -1
-        imapSyncFile = ""
+        _imapAccountId = -1
+        _imapMessageId = -1
+        _imapSyncFile = ""
         syncToImapProgressDialog.currentValue = 0
         syncToImapProgressDialog.open()
         _syncToImap()
@@ -58,8 +58,8 @@ Item {
         if (accIds.length === 1) {
             console.log("Found a single IMAP account. Using this for syncing.")
             console.log("IMAP account id is: " + accIds[0])
-            imapAccountId = accIds[0]
-            imapStorage.retrieveFolderList(imapAccountId)
+            _imapAccountId = accIds[0]
+            imapStorage.retrieveFolderList(_imapAccountId)
         } else if (accIds.length === 0) {
             syncToImapProgressDialog.close()
             messageDialog.title = "No IMAP Account"
@@ -81,9 +81,9 @@ Item {
     function _prepareImapFolder() {
         progress()
 
-        if (! imapStorage.folderExists(imapAccountId, imapFolderName)) {
+        if (! imapStorage.folderExists(_imapAccountId, imapFolderName)) {
             console.log("Creating folder...")
-            imapStorage.createFolder(imapAccountId, imapFolderName)
+            imapStorage.createFolder(_imapAccountId, imapFolderName)
         } else {
             _processImapFolder()
         }
@@ -93,28 +93,28 @@ Item {
         console.log("Processing content of IMAP folder...")
         progress()
 
-        if (! imapStorage.folderExists(imapAccountId, imapFolderName)) {
+        if (! imapStorage.folderExists(_imapAccountId, imapFolderName)) {
             console.log("Error: IMAP folder does not exist!")
             return
         }
 
-        imapStorage.retrieveMessageList(imapAccountId, imapFolderName)
+        imapStorage.retrieveMessageList(_imapAccountId, imapFolderName)
     }
 
     function findAndRetrieveMessages() {
         console.log("Processing messages...")
         progress()
 
-        var messageIds = imapStorage.queryMessages(imapAccountId, imapFolderName, imapMessageSubject)
+        var messageIds = imapStorage.queryMessages(_imapAccountId, imapFolderName, imapMessageSubject)
         if (messageIds.length === 0) {
             console.log("No message found. Performing initital upload.")
-            imapStorage.addMessage(imapAccountId, imapFolderName, imapMessageSubject, "to-do-o/default.xml")
+            imapStorage.addMessage(_imapAccountId, imapFolderName, imapMessageSubject, "to-do-o/default.xml")
             reportSuccess()
         } else if (messageIds.length === 1) {
             console.log("Message found.")
-            imapMessageId = messageIds[0]
-            console.log("Message id is: " + imapMessageId)
-            imapStorage.retrieveMessage(imapMessageId)
+            _imapMessageId = messageIds[0]
+            console.log("Message id is: " + _imapMessageId)
+            imapStorage.retrieveMessage(_imapMessageId)
         } else {
             console.log("Error: Multiple messages found.")
         }
@@ -124,15 +124,15 @@ Item {
         console.log("Processing message...")
         progress()
 
-        var attachmentLocations = imapStorage.getAttachmentLocations(imapMessageId)
+        var attachmentLocations = imapStorage.getAttachmentLocations(_imapMessageId)
         console.log("Found the following attachment locations: " + attachmentLocations)
 
-        imapSyncFile = imapStorage.writeAttachmentTo(imapMessageId, attachmentLocations[0], "to-do-o")
-        console.log("Wrote attachment to: " + imapSyncFile)
+        _imapSyncFile = imapStorage.writeAttachmentTo(_imapMessageId, attachmentLocations[0], "to-do-o")
+        console.log("Wrote attachment to: " + _imapSyncFile)
 
         if (merger.merge()) {
             console.log("Merger reported changes, updating attachment...")
-            imapStorage.updateMessageAttachment(imapMessageId, "to-do-o/default.xml")
+            imapStorage.updateMessageAttachment(_imapMessageId, "to-do-o/default.xml")
         } else {
             reportSuccess()
         }
