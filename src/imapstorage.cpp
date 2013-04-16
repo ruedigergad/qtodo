@@ -88,7 +88,7 @@ void ImapStorage::addMessage(ulong accId, QString folder, QString subject, QStri
     msg.setDate(QMailTimeStamp(QDateTime::currentDateTime()));
     msg.setStatus(QMailMessage::LocalOnly, true);
     if (attachment != "") {
-        msg.setAttachments(QStringList() << QDir::homePath() + "/" + attachment);
+        msg.setAttachments(QStringList() << attachment);
     }
 
     QMailStore::instance()->addMessage(&msg);
@@ -360,7 +360,7 @@ void ImapStorage::updateMessageAttachment(ulong msgId, QString attachment) {
     msg.setMessageType(oldMsg->messageType());
     msg.setDate(QMailTimeStamp(QDateTime::currentDateTime()));
     msg.setStatus(QMailMessage::LocalOnly, true);
-    msg.setAttachments(QStringList() << QDir::homePath() + "/" + attachment);
+    msg.setAttachments(QStringList() << attachment);
 
     QMailStore::instance()->addMessage(&msg);
     QMailStore::instance()->removeMessage(oldMsg->id(), QMailStore::CreateRemovalRecord);
@@ -371,7 +371,7 @@ void ImapStorage::updateMessageAttachment(ulong msgId, QString attachment) {
      * Ideally, we would just update the message as can be seen below.
      * However, this results in a copy of the old message being retained on the server.
      */
-//    oldMsg->setAttachments(QStringList() << QDir::homePath() + "/" + attachment);
+//    oldMsg->setAttachments(QStringList() << attachment);
 //    oldMsg->setDate(QMailTimeStamp(QDateTime::currentDateTime()));
 //    oldMsg->setStatus(QMailMessage::LocalOnly, true);
 //    QMailStore::instance()->updateMessage(oldMsg);
@@ -383,6 +383,6 @@ void ImapStorage::updateMessageAttachment(ulong msgId, QString attachment) {
 QString ImapStorage::writeAttachmentTo(ulong msgId, QString attachmentLocation, QString path) {
     QMailMessage *msg = new QMailMessage(QMailMessageId(msgId));
     QMailMessagePart attachment = msg->partAt(QMailMessagePart::Location(attachmentLocation));
-    QString ret = attachment.writeBodyTo(QDir::homePath() + "/" + path);
+    QString ret = attachment.writeBodyTo(path);
     return ret;
 }

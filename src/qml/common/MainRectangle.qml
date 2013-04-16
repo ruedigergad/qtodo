@@ -118,7 +118,7 @@ Item {
         message: "This may take some time."
 
         onAccepted: {
-            syncToImap.startSync()
+            syncToImap.syncFile(fileHelper.home() + "/to-do-o", "default.xml")
         }
     }
 

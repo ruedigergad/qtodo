@@ -24,27 +24,40 @@ Item {
     id: syncToImapItem
 
     property string imapFolderName: ""
-    property string imapMessageSubject: "[QTODO] SimpleSync"
     property QtObject merger
     property bool useBuiltInDialogs: true
 
+    property string _baseDir: ""
     property int _imapAccountId: -1
     property int _imapMessageId: -1
+    property string _imapMessageSubject: ""
     property string _imapSyncFile: ""
+    property string _localFileName
 
     signal succeeded
     signal progress
 
-    function startSync() {
+    function syncFile(dirName, fileName) {
         if (imapFolderName === "") {
             console.log("Error: imapFolderName not set. Stopping sync.")
             return
         }
+        if (fileName === "") {
+            console.log("Error: fileName is not set. Stopping sync.")
+            return
+        }
+        if (dirName === "") {
+            console.log("Error: dirName is not set. Stopping sync.")
+            return
+        }
         //TODO: Add check if merger was set.
 
+        _baseDir = dirName
         _imapAccountId = -1
         _imapMessageId = -1
+        _imapMessageSubject = fileName
         _imapSyncFile = ""
+        _localFileName = fileName
 
         if (useBuiltInDialogs) {
             _syncToImapProgressDialog.currentValue = 0
@@ -110,10 +123,10 @@ Item {
         console.log("Processing messages...")
         progress()
 
-        var messageIds = _imapStorage.queryMessages(_imapAccountId, imapFolderName, imapMessageSubject)
+        var messageIds = _imapStorage.queryMessages(_imapAccountId, imapFolderName, _imapMessageSubject)
         if (messageIds.length === 0) {
             console.log("No message found. Performing initital upload.")
-            _imapStorage.addMessage(_imapAccountId, imapFolderName, imapMessageSubject, "to-do-o/default.xml")
+            _imapStorage.addMessage(_imapAccountId, imapFolderName, _imapMessageSubject, _baseDir + "/" + _localFileName )
             _reportSuccess()
         } else if (messageIds.length === 1) {
             console.log("Message found.")
@@ -132,12 +145,12 @@ Item {
         var attachmentLocations = _imapStorage.getAttachmentLocations(_imapMessageId)
         console.log("Found the following attachment locations: " + attachmentLocations)
 
-        _imapSyncFile = _imapStorage.writeAttachmentTo(_imapMessageId, attachmentLocations[0], "to-do-o")
+        _imapSyncFile = _imapStorage.writeAttachmentTo(_imapMessageId, attachmentLocations[0], _baseDir)
         console.log("Wrote attachment to: " + _imapSyncFile)
 
         if (merger.merge()) {
             console.log("Merger reported changes, updating attachment...")
-            _imapStorage.updateMessageAttachment(_imapMessageId, "to-do-o/default.xml")
+            _imapStorage.updateMessageAttachment(_imapMessageId, _baseDir + "/" + _localFileName)
         } else {
             _reportSuccess()
         }
