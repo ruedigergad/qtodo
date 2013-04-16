@@ -130,7 +130,6 @@ Item {
         imapSyncFile = imapStorage.writeAttachmentTo(imapMessageId, attachmentLocations[0], "to-do-o")
         console.log("Wrote attachment to: " + imapSyncFile)
 
-
         if (merger.merge()) {
             console.log("Updating attachment...")
             imapStorage.updateMessageAttachment(imapMessageId, "to-do-o/default.xml")
