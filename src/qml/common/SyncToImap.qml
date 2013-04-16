@@ -55,7 +55,7 @@ Item {
     }
 
     function _syncToImap() {
-        var accIds = imapStorage.queryImapAccounts()
+        var accIds = _imapStorage.queryImapAccounts()
         console.log("Found " + accIds.length + " IMAP account(s).")
 
         progress()
@@ -64,31 +64,31 @@ Item {
             console.log("Found a single IMAP account. Using this for syncing.")
             console.log("IMAP account id is: " + accIds[0])
             _imapAccountId = accIds[0]
-            imapStorage.retrieveFolderList(_imapAccountId)
+            _imapStorage.retrieveFolderList(_imapAccountId)
         } else if (accIds.length === 0) {
             _syncToImapProgressDialog.close()
-            messageDialog.title = "No IMAP Account"
-            messageDialog.message = "Please set up an IMAP e-mail account for syncing."
-            messageDialog.open()
+            _messageDialog.title = "No IMAP Account"
+            _messageDialog.message = "Please set up an IMAP e-mail account for syncing."
+            _messageDialog.open()
         } else if (accIds.length > 1) {
             _syncToImapProgressDialog.close()
-            messageDialog.title = "Multiple IMAP Accounts"
-            messageDialog.message = "Functionality for choosing from different IMAP accounts still needs to be implemented."
-            messageDialog.open()
+            _messageDialog.title = "Multiple IMAP Accounts"
+            _messageDialog.message = "Functionality for choosing from different IMAP accounts still needs to be implemented."
+            _messageDialog.open()
         } else {
             _syncToImapProgressDialog.close()
-            messageDialog.title = "Unexpected Error"
-            messageDialog.message = "Querying for IMAP accounts returned an unexpected value."
-            messageDialog.open()
+            _messageDialog.title = "Unexpected Error"
+            _messageDialog.message = "Querying for IMAP accounts returned an unexpected value."
+            _messageDialog.open()
         }
     }
 
     function _prepareImapFolder() {
         progress()
 
-        if (! imapStorage.folderExists(_imapAccountId, imapFolderName)) {
+        if (! _imapStorage.folderExists(_imapAccountId, imapFolderName)) {
             console.log("Creating folder...")
-            imapStorage.createFolder(_imapAccountId, imapFolderName)
+            _imapStorage.createFolder(_imapAccountId, imapFolderName)
         } else {
             _processImapFolder()
         }
@@ -98,59 +98,59 @@ Item {
         console.log("Processing content of IMAP folder...")
         progress()
 
-        if (! imapStorage.folderExists(_imapAccountId, imapFolderName)) {
+        if (! _imapStorage.folderExists(_imapAccountId, imapFolderName)) {
             console.log("Error: IMAP folder does not exist!")
             return
         }
 
-        imapStorage.retrieveMessageList(_imapAccountId, imapFolderName)
+        _imapStorage.retrieveMessageList(_imapAccountId, imapFolderName)
     }
 
-    function findAndRetrieveMessages() {
+    function _findAndRetrieveMessages() {
         console.log("Processing messages...")
         progress()
 
-        var messageIds = imapStorage.queryMessages(_imapAccountId, imapFolderName, imapMessageSubject)
+        var messageIds = _imapStorage.queryMessages(_imapAccountId, imapFolderName, imapMessageSubject)
         if (messageIds.length === 0) {
             console.log("No message found. Performing initital upload.")
-            imapStorage.addMessage(_imapAccountId, imapFolderName, imapMessageSubject, "to-do-o/default.xml")
-            reportSuccess()
+            _imapStorage.addMessage(_imapAccountId, imapFolderName, imapMessageSubject, "to-do-o/default.xml")
+            _reportSuccess()
         } else if (messageIds.length === 1) {
             console.log("Message found.")
             _imapMessageId = messageIds[0]
             console.log("Message id is: " + _imapMessageId)
-            imapStorage.retrieveMessage(_imapMessageId)
+            _imapStorage.retrieveMessage(_imapMessageId)
         } else {
             console.log("Error: Multiple messages found.")
         }
     }
 
-    function processMessage() {
+    function _processMessage() {
         console.log("Processing message...")
         progress()
 
-        var attachmentLocations = imapStorage.getAttachmentLocations(_imapMessageId)
+        var attachmentLocations = _imapStorage.getAttachmentLocations(_imapMessageId)
         console.log("Found the following attachment locations: " + attachmentLocations)
 
-        _imapSyncFile = imapStorage.writeAttachmentTo(_imapMessageId, attachmentLocations[0], "to-do-o")
+        _imapSyncFile = _imapStorage.writeAttachmentTo(_imapMessageId, attachmentLocations[0], "to-do-o")
         console.log("Wrote attachment to: " + _imapSyncFile)
 
         if (merger.merge()) {
             console.log("Merger reported changes, updating attachment...")
-            imapStorage.updateMessageAttachment(_imapMessageId, "to-do-o/default.xml")
+            _imapStorage.updateMessageAttachment(_imapMessageId, "to-do-o/default.xml")
         } else {
-            reportSuccess()
+            _reportSuccess()
         }
     }
 
-    function reportSuccess() {
+    function _reportSuccess() {
         succeeded()
 
         if (useBuiltInDialogs) {
             _syncToImapProgressDialog.close()
-            messageDialog.title = "Success"
-            messageDialog.message = "Sync was successful."
-            messageDialog.open()
+            _messageDialog.title = "Success"
+            _messageDialog.message = "Sync was successful."
+            _messageDialog.open()
         }
     }
 
@@ -162,22 +162,22 @@ Item {
     }
 
     ImapStorage {
-        id: imapStorage
+        id: _imapStorage
 
         onFolderCreated: _processImapFolder()
         onFolderListRetrieved: _prepareImapFolder()
-        onMessageListRetrieved: findAndRetrieveMessages()
-        onMessageRetrieved: processMessage()
+        onMessageListRetrieved: _findAndRetrieveMessages()
+        onMessageRetrieved: _processMessage()
 
         onMessageUpdated: {
-            reportSuccess()
+            _reportSuccess()
         }
 
         onError: {
             _syncToImapProgressDialog.close()
-            messageDialog.title = "Error"
-            messageDialog.message = "Sync failed: \"" + errorString + "\" Code: " + errorCode + " Action: " + currentAction
-            messageDialog.open()
+            _messageDialog.title = "Error"
+            _messageDialog.message = "Sync failed: \"" + errorString + "\" Code: " + errorCode + " Action: " + currentAction
+            _messageDialog.open()
         }
     }
 
@@ -193,7 +193,7 @@ Item {
     }
 
     MessageDialog {
-        id: messageDialog
+        id: _messageDialog
         parent: syncToImapItem.parent
     }
 }
