@@ -148,7 +148,7 @@ Item {
         _imapSyncFile = _imapStorage.writeAttachmentTo(_imapMessageId, attachmentLocations[0], _baseDir)
         console.log("Wrote attachment to: " + _imapSyncFile)
 
-        if (merger.merge()) {
+        if (merger.merge(_imapSyncFile)) {
             console.log("Merger reported changes, updating attachment...")
             _imapStorage.updateMessageAttachment(_imapMessageId, _baseDir + "/" + _localFileName)
         } else {
@@ -166,7 +166,6 @@ Item {
             _messageDialog.open()
         }
     }
-
 
     onProgress: {
         if (useBuiltInDialogs) {
