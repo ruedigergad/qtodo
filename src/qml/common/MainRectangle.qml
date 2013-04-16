@@ -125,7 +125,7 @@ Item {
     FileHelper { id: fileHelper }
 
     Merger {
-        id: merger
+        id: todoMerger
     }
 
     NodeListModel {
@@ -136,6 +136,7 @@ Item {
         id: syncToImap
 
         imapFolderName: "qtodo"
+        merger: todoMerger
     }
 
     ToDoStorage {

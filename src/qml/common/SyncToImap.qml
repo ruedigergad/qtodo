@@ -29,15 +29,17 @@ Item {
     property int imapAccountId: -1
     property int imapMessageId: -1
     property string imapSyncFile: ""
+    property QtObject merger
 
     signal succeeded
     signal progress
 
     function startSync() {
-        if (imapFolderName === null || imapFolderName === "") {
+        if (imapFolderName === "") {
             console.log("Error: imapFolderName not set. Stopping sync.")
             return
         }
+        //TODO: Add check if merger was set.
 
         imapAccountId = -1
         imapMessageId = -1
@@ -128,9 +130,10 @@ Item {
         imapSyncFile = imapStorage.writeAttachmentTo(imapMessageId, attachmentLocations[0], "to-do-o")
         console.log("Wrote attachment to: " + imapSyncFile)
 
-        reportSuccess()
+
         // Begin: not part of s2i
         if (rootElementModel.rowCount() === 0) {
+            reportSuccess()
             console.log("Initial sync, reloading storage...")
             fileHelper.rm(fileHelper.home() + "/to-do-o/default.xml")
             imapStorage.writeAttachmentTo(imapMessageId, attachmentLocations[0], "to-do-o")
