@@ -31,25 +31,44 @@ Item {
     property int _imapAccountId: -1
     property int _imapMessageId: -1
     property string _imapMessageSubject: ""
+    property string _imapMessageSubjectPrefix: ""
     property string _imapSyncFile: ""
     property string _localFileName
+    property bool _syncDir
 
     signal succeeded
     signal progress
 
-    function syncFile(dirName, fileName) {
-        if (fileName === "") {
-            console.log("Error: fileName is not set. Stopping sync.")
-            return
-        }
+    function syncDir(dirName, messageSubjectPrefix) {
         if (dirName === "") {
             console.log("Error: dirName is not set. Stopping sync.")
             return
         }
 
         _baseDir = dirName
-        _imapMessageSubject = fileName
+        _imapMessageSubject = ""
+        _imapMessageSubjectPrefix = ""
+        _localFileName = ""
+        _syncDir = true
+
+        _syncToImap()
+    }
+
+    function syncFile(dirName, fileName) {
+        if (dirName === "") {
+            console.log("Error: dirName is not set. Stopping sync.")
+            return
+        }
+        if (fileName === "") {
+            console.log("Error: fileName is not set. Stopping sync.")
+            return
+        }
+
+        _baseDir = dirName
         _localFileName = fileName
+        _imapMessageSubject = _localFileName
+        _imapMessageSubjectPrefix = _imapMessageSubject
+        _syncDir = false
 
         _syncToImap()
     }
@@ -126,7 +145,30 @@ Item {
         console.log("Processing messages...")
         progress()
 
-        var messageIds = _imapStorage.queryMessages(_imapAccountId, imapFolderName, _imapMessageSubject)
+        var messageIds = _imapStorage.queryMessages(_imapAccountId, imapFolderName, _imapMessageSubjectPrefix)
+
+        if (_syncDir) {
+            _performDirSync(messageIds)
+        } else {
+            _performFileSync(messageIds)
+        }
+
+    }
+
+    function _performDirSync(messageIds) {
+        if (messageIds.length === 0) {
+            console.log("No message found. Performing initital upload.")
+            _imapStorage.addMessage(_imapAccountId, imapFolderName, _imapMessageSubject, _baseDir + "/" + _localFileName )
+            _reportSuccess()
+        } else {
+            console.log("Message(s) found.")
+            _imapMessageId = messageIds[0]
+            console.log("Message id is: " + _imapMessageId)
+            _imapStorage.retrieveMessage(_imapMessageId)
+        }
+    }
+
+    function _performFileSync(messageIds) {
         if (messageIds.length === 0) {
             console.log("No message found. Performing initital upload.")
             _imapStorage.addMessage(_imapAccountId, imapFolderName, _imapMessageSubject, _baseDir + "/" + _localFileName )
