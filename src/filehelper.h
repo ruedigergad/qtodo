@@ -38,9 +38,10 @@ class FileHelper : public QObject
 public:
     explicit FileHelper(QObject *parent = 0);
 
-    Q_INVOKABLE bool rm(QString const &file);
-    Q_INVOKABLE bool rmdir(QString const &dir);
-    Q_INVOKABLE bool mkdir(QString const &dir);
+    Q_INVOKABLE bool cp(const QString &source, const QString &destination);
+    Q_INVOKABLE bool rm(const QString &file);
+    Q_INVOKABLE bool rmdir(const QString &dir);
+    Q_INVOKABLE bool mkdir(const QString &dir);
 
     Q_INVOKABLE QString home();
     

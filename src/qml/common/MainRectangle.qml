@@ -133,8 +133,8 @@ Item {
             if (rootElementModel.rowCount() === 0) {
                 console.log("Initial sync, reloading storage...")
                 fileHelper.rm(fileHelper.home() + "/to-do-o/default.xml")
-//                imapStorage.writeAttachmentTo(imapMessageId, attachmentLocations[0], "to-do-o")
-                //TODO: Copy sync file to original file.
+                console.log("Copying " + syncFileName + " to " + fileHelper.home() + "/to-do-o/default.xml")
+                fileHelper.cp(syncFileName, fileHelper.home() + "/to-do-o/default.xml")
                 storage.open()
                 return false
             } else {
@@ -168,6 +168,11 @@ Item {
 
     Component.onCompleted: {
         storage.open()
+
+        if (rootElementModel.rowCount() === 0) {
+            storage.save()
+        }
+
 //        storage.open("/opt/qtodo/sample.xml")
     }
 }

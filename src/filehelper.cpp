@@ -37,6 +37,19 @@ FileHelper::FileHelper(QObject *parent) :
 {
 }
 
+bool FileHelper::cp(const QString &source, const QString &destination) {
+    if (source == "") {
+        qDebug("No source given. Please provide a valid source.");
+        return false;
+    }
+    if (destination == "") {
+        qDebug("No destination given. Please provide a valid destination.");
+        return false;
+    }
+
+    return QFile::copy(source, destination);
+}
+
 bool FileHelper::rm(const QString &file){
     return QFile(file).remove();
 }
