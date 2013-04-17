@@ -190,7 +190,7 @@ QVariantList ImapStorage::queryMessages(ulong accId, QString folder, QString sub
 
     QMailMessageKey accountKey(QMailMessageKey::parentAccountId(QMailAccountId(accId)));
     QMailMessageKey folderKey(QMailMessageKey::parentFolderId(folders.at(0)));
-    QMailMessageKey subjectKey(QMailMessageKey::subject(subject));
+    QMailMessageKey subjectKey(QMailMessageKey::subject(subject, QMailDataComparator::Includes));
 
     QMailMessageIdList messageIds = QMailStore::instance()->queryMessages(accountKey & folderKey & subjectKey);
 
