@@ -31,6 +31,7 @@
 #define FILEHELPER_H
 
 #include <QObject>
+#include <QCryptographicHash>
 
 class FileHelper : public QObject
 {
@@ -38,10 +39,13 @@ class FileHelper : public QObject
 public:
     explicit FileHelper(QObject *parent = 0);
 
+    Q_INVOKABLE QString chksum(const QString &fileName, QCryptographicHash::Algorithm algorithm);
     Q_INVOKABLE bool cp(const QString &source, const QString &destination);
+    Q_INVOKABLE QString md5sum(const QString &fileName);
+    Q_INVOKABLE bool mkdir(const QString &dir);
     Q_INVOKABLE bool rm(const QString &file);
     Q_INVOKABLE bool rmdir(const QString &dir);
-    Q_INVOKABLE bool mkdir(const QString &dir);
+    Q_INVOKABLE QString sha1sum(const QString &fileName);
 
     Q_INVOKABLE QString home();
     

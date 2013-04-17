@@ -29,12 +29,28 @@
 
 #include "filehelper.h"
 
+#include <QDebug>
 #include <QDir>
 #include <QFile>
 
 FileHelper::FileHelper(QObject *parent) :
     QObject(parent)
 {
+}
+
+QString FileHelper::chksum(const QString &fileName, QCryptographicHash::Algorithm algorithm) {
+    if (fileName == "") {
+        qWarning("No file name given.");
+        return "";
+    }
+
+    QFile file(fileName);
+    QCryptographicHash hash(algorithm);
+
+    QByteArray data = file.readAll();
+    hash.addData(data.data(), data.length());
+
+    return QString(hash.result().toHex());
 }
 
 bool FileHelper::cp(const QString &source, const QString &destination) {
@@ -50,6 +66,18 @@ bool FileHelper::cp(const QString &source, const QString &destination) {
     return QFile::copy(source, destination);
 }
 
+QString FileHelper::home(){
+    return QDir::homePath();
+}
+
+QString FileHelper::md5sum(const QString &fileName) {
+    return chksum(fileName, QCryptographicHash::Md5);
+}
+
+bool FileHelper::mkdir(const QString &dir){
+    return QDir().mkpath(dir);
+}
+
 bool FileHelper::rm(const QString &file){
     return QFile(file).remove();
 }
@@ -58,10 +86,6 @@ bool FileHelper::rmdir(const QString &dir){
     return QDir().rmpath(dir);
 }
 
-bool FileHelper::mkdir(const QString &dir){
-    return QDir().mkpath(dir);
-}
-
-QString FileHelper::home(){
-    return QDir::homePath();
+QString FileHelper::sha1sum(const QString &fileName) {
+    return chksum(fileName, QCryptographicHash::Sha1);
 }
