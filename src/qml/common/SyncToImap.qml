@@ -80,6 +80,10 @@ Item {
         _imapMessageSubjectPrefix = _imapMessageSubject
         _syncDir = false
 
+        if (useBuiltInDialogs) {
+            _syncToImapProgressDialog.maxValue = 6
+        }
+
         _syncToImap()
     }
 
@@ -175,9 +179,12 @@ Item {
             console.log("Uploading: " + _dirSyncFiles)
             _dirSyncIndex = 0
 
+            if (useBuiltInDialogs) {
+                _syncToImapProgressDialog.maxValue = _dirSyncFiles.length
+                _syncToImapProgressDialog.currentValue = 0
+            }
+
             _dirSyncPerformFileSync()
-//            _imapStorage.addMessage(_imapAccountId, imapFolderName, _imapMessageSubject, _baseDir + "/" + _localFileName )
-//            _reportSuccess()
         } else {
             console.log("Message(s) found.")
             console.log(messageIds)
@@ -196,6 +203,7 @@ Item {
             _imapStorage.addMessage(_imapAccountId, imapFolderName, _imapMessageSubjectPrefix + file, _baseDir + "/" + file)
         } else {
             console.log("Processed all messages.")
+            _reportSuccess()
         }
     }
 
@@ -283,6 +291,7 @@ Item {
         onMessageAdded: {
             if (_syncDir) {
                 console.log("Message uploaded. Proceeding...")
+                progress()
                 _dirSyncPerformFileSync()
             } else {
                 _reportSuccess()
