@@ -148,12 +148,37 @@ Item {
         _imapSyncFile = _imapStorage.writeAttachmentTo(_imapMessageId, attachmentLocations[0], _baseDir)
         console.log("Wrote attachment to: " + _imapSyncFile)
 
-        if (merger.merge(_imapSyncFile)) {
-            console.log("Merger reported changes, updating attachment...")
-            _imapStorage.updateMessageAttachment(_imapMessageId, _baseDir + "/" + _localFileName)
+        if (!_filesAreEqual(_baseDir + "/" + _localFileName, _imapSyncFile)) {
+            console.log("Files differ, merging.")
+
+            if (merger.merge(_imapSyncFile)) {
+                console.log("Merger reported changes, updating attachment...")
+                _imapStorage.updateMessageAttachment(_imapMessageId, _baseDir + "/" + _localFileName)
+            } else {
+                _reportSuccess()
+            }
         } else {
+            console.log("Files are equal, not merging.")
             _reportSuccess()
         }
+    }
+
+    function _filesAreEqual(fileNameA, fileNameB) {
+        if (fileNameA === "" || fileNameB === "") {
+            return false;
+        }
+
+        var md5A = _fileHelper.md5sum(fileNameA)
+        var sha1A = _fileHelper.sha1sum(fileNameA)
+
+        var md5B = _fileHelper.md5sum(fileNameB)
+        var sha1B = _fileHelper.sha1sum(fileNameB)
+
+        console.log("md5sum " + fileNameA + " " + md5A)
+        console.log("md5sum " + fileNameB + " " + md5B)
+        console.log("sha1sum " + fileNameA + " " + sha1A)
+        console.log("sha1sum " + fileNameB + " " + sha1B)
+        return md5A === md5B && sha1A === sha1B
     }
 
     function _reportSuccess() {
@@ -192,6 +217,8 @@ Item {
             _messageDialog.open()
         }
     }
+
+    FileHelper { id: _fileHelper }
 
     ProgressDialog {
         id: _syncToImapProgressDialog
