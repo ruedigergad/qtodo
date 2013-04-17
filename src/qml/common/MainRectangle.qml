@@ -119,7 +119,7 @@ Item {
         message: "This may take some time."
 
         onAccepted: {
-            syncToImap.syncFile(fileHelper.home() + "/to-do-o", "default.xml")
+            syncFileToImap.syncFile(fileHelper.home() + "/to-do-o", "default.xml")
         }
     }
 
@@ -130,7 +130,7 @@ Item {
         message: "This may take some time."
 
         onAccepted: {
-            syncToImap.syncDir(fileHelper.home() + "/to-do-o/sketches", "sketch:")
+            syncDirToImap.syncDir(fileHelper.home() + "/to-do-o/sketches", "sketch:")
         }
     }
 
@@ -162,8 +162,16 @@ Item {
         id: rootElementModel
     }
 
+
+    SyncDirToImap {
+        id: syncDirToImap
+
+        imapFolderName: "qtodo"
+        merger: todoMerger
+    }
+
     SyncFileToImap {
-        id: syncToImap
+        id: syncFileToImap
 
         imapFolderName: "qtodo"
         merger: todoMerger
