@@ -128,6 +128,8 @@ Item {
         id: todoMerger
 
         function merge (syncFileName) {
+            console.log("Merging sync file: " + syncFileName)
+
             if (rootElementModel.rowCount() === 0) {
                 console.log("Initial sync, reloading storage...")
                 fileHelper.rm(fileHelper.home() + "/to-do-o/default.xml")
