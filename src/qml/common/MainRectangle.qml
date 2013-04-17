@@ -162,7 +162,7 @@ Item {
         id: rootElementModel
     }
 
-    SyncToImap {
+    SyncFileToImap {
         id: syncToImap
 
         imapFolderName: "qtodo"
