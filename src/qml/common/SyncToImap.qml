@@ -38,10 +38,6 @@ Item {
     signal progress
 
     function syncFile(dirName, fileName) {
-        if (imapFolderName === "") {
-            console.log("Error: imapFolderName not set. Stopping sync.")
-            return
-        }
         if (fileName === "") {
             console.log("Error: fileName is not set. Stopping sync.")
             return
@@ -50,24 +46,31 @@ Item {
             console.log("Error: dirName is not set. Stopping sync.")
             return
         }
-        //TODO: Add check if merger was set.
 
         _baseDir = dirName
-        _imapAccountId = -1
-        _imapMessageId = -1
         _imapMessageSubject = fileName
-        _imapSyncFile = ""
         _localFileName = fileName
+
+        _syncToImap()
+    }
+
+    function _syncToImap() {
+        if (imapFolderName === "") {
+            console.log("Error: imapFolderName not set. Stopping sync.")
+            return
+        }
+
+        //TODO: Add check if merger was set.
 
         if (useBuiltInDialogs) {
             _syncToImapProgressDialog.currentValue = 0
             _syncToImapProgressDialog.open()
         }
 
-        _syncToImap()
-    }
+        _imapAccountId = -1
+        _imapMessageId = -1
+        _imapSyncFile = ""
 
-    function _syncToImap() {
         var accIds = _imapStorage.queryImapAccounts()
         console.log("Found " + accIds.length + " IMAP account(s).")
 
