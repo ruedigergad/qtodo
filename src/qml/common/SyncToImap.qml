@@ -36,6 +36,7 @@ Item {
     property string _imapMessageSubjectPrefix: ""
     property string _imapSyncFile: ""
     property string _localFileName
+    property variant _messageIds
     property bool _syncDir
 
     signal succeeded
@@ -159,20 +160,19 @@ Item {
         console.log("Processing messages...")
         progress()
 
-        var messageIds = _imapStorage.queryMessages(_imapAccountId, imapFolderName, _imapMessageSubjectPrefix)
+        _messageIds = _imapStorage.queryMessages(_imapAccountId, imapFolderName, _imapMessageSubjectPrefix)
 
         if (_syncDir) {
-            _performDirSync(messageIds)
+            _performDirSync()
         } else {
-            _performFileSync(messageIds)
+            _performFileSync()
         }
-
     }
 
     function _performDirSync(messageIds) {
         console.log("Performing dir sync.")
 
-        if (messageIds.length === 0) {
+        if (_messageIds.length === 0) {
             console.log("No message(s) found. Performing initital upload.")
 
             _dirSyncFiles = _fileHelper.ls(_baseDir)
@@ -186,11 +186,9 @@ Item {
 
             _dirSyncPerformFileSync()
         } else {
-            console.log("Message(s) found.")
-            console.log(messageIds)
-//            _imapMessageId = messageIds[0]
-//            console.log("Message id is: " + _imapMessageId)
-//            _imapStorage.retrieveMessage(_imapMessageId)
+            console.log("Message(s) found: Retrieving " + _messageIds)
+            _dirSyncIndex = 0
+            _dirSyncRetrieveMessage()
         }
     }
 
@@ -207,15 +205,26 @@ Item {
         }
     }
 
+    function _dirSyncRetrieveMessage() {
+        if (_dirSyncIndex < _messageIds.length) {
+            var msgId = _messageIds[_dirSyncIndex]
+            console.log("Retrieving: " + msgId)
+            _dirSyncIndex++
+            _imapStorage.retrieveMessage(msgId)
+        } else {
+            console.log("Retrieved all messages.")
+        }
+    }
+
     function _performFileSync(messageIds) {
         console.log("Performing file sync.")
 
-        if (messageIds.length === 0) {
+        if (_messageIds.length === 0) {
             console.log("No message found. Performing initital upload.")
             _imapStorage.addMessage(_imapAccountId, imapFolderName, _imapMessageSubject, _baseDir + "/" + _localFileName)
-        } else if (messageIds.length === 1) {
+        } else if (_messageIds.length === 1) {
             console.log("Message found.")
-            _imapMessageId = messageIds[0]
+            _imapMessageId = _messageIds[0]
             console.log("Message id is: " + _imapMessageId)
             _imapStorage.retrieveMessage(_imapMessageId)
         } else {
@@ -299,7 +308,13 @@ Item {
         }
         onMessageListRetrieved: _findAndRetrieveMessages()
         onMessageRetrieved: {
+            if (_syncDir) {
+                console.log("Message retrieved. Proceeding...")
+                progress()
+                _dirSyncRetrieveMessage()
+            } else {
                 _processMessage()
+            }
         }
         onMessageUpdated: {
                 _reportSuccess()
