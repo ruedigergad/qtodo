@@ -30,8 +30,9 @@
 #ifndef FILEHELPER_H
 #define FILEHELPER_H
 
-#include <QObject>
 #include <QCryptographicHash>
+#include <QObject>
+#include <QStringList>
 
 class FileHelper : public QObject
 {
@@ -41,6 +42,8 @@ public:
 
     Q_INVOKABLE QString chksum(const QString &fileName, QCryptographicHash::Algorithm algorithm);
     Q_INVOKABLE bool cp(const QString &source, const QString &destination);
+    Q_INVOKABLE QStringList ls (const QString &dirName);
+    Q_INVOKABLE QStringList ls (const QString &dirName, const QString &filter);
     Q_INVOKABLE QString md5sum(const QString &fileName);
     Q_INVOKABLE bool mkdir(const QString &dir);
     Q_INVOKABLE bool rm(const QString &file);

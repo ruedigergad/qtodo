@@ -70,6 +70,20 @@ QString FileHelper::home(){
     return QDir::homePath();
 }
 
+QStringList FileHelper::ls(const QString &dirName) {
+    return ls(dirName, "*");
+}
+
+QStringList FileHelper::ls(const QString &dirName, const QString &filter) {
+    if (dirName == "") {
+        qDebug("No directory given.");
+        return QStringList();
+    }
+
+    QDir dir(dirName);
+    return dir.entryList(QStringList() << filter);
+}
+
 QString FileHelper::md5sum(const QString &fileName) {
     return chksum(fileName, QCryptographicHash::Md5);
 }
