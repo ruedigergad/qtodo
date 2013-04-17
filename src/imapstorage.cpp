@@ -182,14 +182,13 @@ QVariantList ImapStorage::queryImapAccounts() {
 }
 
 QVariantList ImapStorage::queryMessages(ulong accId, QString folder, QString subject) {
-    QMailMessageKey accountKey(QMailMessageKey::parentAccountId(QMailAccountId(accId)));
-
     QMailFolderIdList folders = queryFolders(accId, folder);
     if (folders.count() != 1) {
         qDebug("Error retrieving folder for query!");
         return QVariantList();
     }
 
+    QMailMessageKey accountKey(QMailMessageKey::parentAccountId(QMailAccountId(accId)));
     QMailMessageKey folderKey(QMailMessageKey::parentFolderId(folders.at(0)));
     QMailMessageKey subjectKey(QMailMessageKey::subject(subject));
 
