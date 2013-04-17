@@ -28,6 +28,7 @@ Item {
     property alias confirmDeleteDialog: confirmDeleteDialog
     property alias confirmCleanDoneDialog: confirmCleanDoneDialog
     property alias confirmSyncToImapDialog: confirmSyncToImapDialog
+    property alias confirmSyncSketchesToImapDialog: confirmSyncSketchesToImapDialog
     property alias treeView: treeView
 
     property bool isTodo
@@ -119,6 +120,17 @@ Item {
 
         onAccepted: {
             syncToImap.syncFile(fileHelper.home() + "/to-do-o", "default.xml")
+        }
+    }
+
+    ConfirmationDialog {
+        id: confirmSyncSketchesToImapDialog
+
+        titleText: "Sync sketches to IMAP?"
+        message: "This may take some time."
+
+        onAccepted: {
+            syncToImap.syncDir(fileHelper.home() + "/to-do-o/sketches", "sketch:")
         }
     }
 

@@ -28,6 +28,8 @@ Item {
     property bool useBuiltInDialogs: true
 
     property string _baseDir: ""
+    property variant _dirSyncFiles
+    property int _dirSyncIndex
     property int _imapAccountId: -1
     property int _imapMessageId: -1
     property string _imapMessageSubject: ""
@@ -40,14 +42,20 @@ Item {
     signal progress
 
     function syncDir(dirName, messageSubjectPrefix) {
+        console.log("Syncing dir " + dirName + ". Using prefix " + messageSubjectPrefix + ".")
+
         if (dirName === "") {
             console.log("Error: dirName is not set. Stopping sync.")
+            return
+        }
+        if (messageSubjectPrefix === "") {
+            console.log("Error: messageSubjectPrefix is not set. Stopping sync.")
             return
         }
 
         _baseDir = dirName
         _imapMessageSubject = ""
-        _imapMessageSubjectPrefix = ""
+        _imapMessageSubjectPrefix = messageSubjectPrefix
         _localFileName = ""
         _syncDir = true
 
@@ -55,6 +63,8 @@ Item {
     }
 
     function syncFile(dirName, fileName) {
+        console.log("Syncing file " + fileName + " in " + dirName)
+
         if (dirName === "") {
             console.log("Error: dirName is not set. Stopping sync.")
             return
@@ -156,23 +166,45 @@ Item {
     }
 
     function _performDirSync(messageIds) {
+        console.log("Performing dir sync.")
+
         if (messageIds.length === 0) {
-            console.log("No message found. Performing initital upload.")
-            _imapStorage.addMessage(_imapAccountId, imapFolderName, _imapMessageSubject, _baseDir + "/" + _localFileName )
-            _reportSuccess()
+            console.log("No message(s) found. Performing initital upload.")
+
+            _dirSyncFiles = _fileHelper.ls(_baseDir)
+            console.log("Uploading: " + _dirSyncFiles)
+            _dirSyncIndex = 0
+
+            _dirSyncPerformFileSync()
+//            _imapStorage.addMessage(_imapAccountId, imapFolderName, _imapMessageSubject, _baseDir + "/" + _localFileName )
+//            _reportSuccess()
         } else {
             console.log("Message(s) found.")
-            _imapMessageId = messageIds[0]
-            console.log("Message id is: " + _imapMessageId)
-            _imapStorage.retrieveMessage(_imapMessageId)
+            console.log(messageIds)
+//            _imapMessageId = messageIds[0]
+//            console.log("Message id is: " + _imapMessageId)
+//            _imapStorage.retrieveMessage(_imapMessageId)
+        }
+    }
+
+    function _dirSyncPerformFileSync() {
+        if (_dirSyncIndex < _dirSyncFiles.length) {
+            var file = _dirSyncFiles[_dirSyncIndex]
+            console.log("Uploading: " + _baseDir + "/" + file)
+            console.log("Subject: " + _imapMessageSubjectPrefix + file)
+            _dirSyncIndex++
+            _imapStorage.addMessage(_imapAccountId, imapFolderName, _imapMessageSubjectPrefix + file, _baseDir + "/" + file)
+        } else {
+            console.log("Processed all messages.")
         }
     }
 
     function _performFileSync(messageIds) {
+        console.log("Performing file sync.")
+
         if (messageIds.length === 0) {
             console.log("No message found. Performing initital upload.")
-            _imapStorage.addMessage(_imapAccountId, imapFolderName, _imapMessageSubject, _baseDir + "/" + _localFileName )
-            _reportSuccess()
+            _imapStorage.addMessage(_imapAccountId, imapFolderName, _imapMessageSubject, _baseDir + "/" + _localFileName)
         } else if (messageIds.length === 1) {
             console.log("Message found.")
             _imapMessageId = messageIds[0]
@@ -248,11 +280,20 @@ Item {
 
         onFolderCreated: _processImapFolder()
         onFolderListRetrieved: _prepareImapFolder()
+        onMessageAdded: {
+            if (_syncDir) {
+                console.log("Message uploaded. Proceeding...")
+                _dirSyncPerformFileSync()
+            } else {
+                _reportSuccess()
+            }
+        }
         onMessageListRetrieved: _findAndRetrieveMessages()
-        onMessageRetrieved: _processMessage()
-
+        onMessageRetrieved: {
+                _processMessage()
+        }
         onMessageUpdated: {
-            _reportSuccess()
+                _reportSuccess()
         }
 
         onError: {

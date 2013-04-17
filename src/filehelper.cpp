@@ -81,7 +81,7 @@ QStringList FileHelper::ls(const QString &dirName, const QString &filter) {
     }
 
     QDir dir(dirName);
-    return dir.entryList(QStringList() << filter);
+    return dir.entryList(QStringList() << filter, QDir::Files);
 }
 
 QString FileHelper::md5sum(const QString &fileName) {

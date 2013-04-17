@@ -51,6 +51,7 @@ signals:
     void error(QString errorString, int errorCode, int currentAction);
     void folderCreated();
     void folderListRetrieved();
+    void messageAdded();
     void messageDeleted();
     void messageListRetrieved();
     void messageRetrieved();

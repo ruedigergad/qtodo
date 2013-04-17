@@ -211,6 +211,10 @@ void ImapStorage::retrieveActivityChanged(QMailServiceAction::Activity activity)
     switch (activity) {
     case QMailServiceAction::Successful:
         switch (currentAction) {
+        case AddMessageAction:
+            qDebug("Message added.");
+            emit messageAdded();
+            break;
         case RetrieveFolderListAction:
             currentAction = NoAction;
             emit folderListRetrieved();

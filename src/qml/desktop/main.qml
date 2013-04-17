@@ -107,6 +107,18 @@ Rectangle {
         id: mainMenu
 
         CommonButton{
+            id: syncSketchesToImap
+            anchors.bottom: cleanDone.top
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width
+            text: "Sync Sketches To IMAP"
+            onClicked: {
+                mainRectangle.confirmSyncSketchesToImapDialog.open()
+                mainMenu.close()
+            }
+        }
+
+        CommonButton{
             id: cleanDone
             anchors.bottom: syncToImap.top
             anchors.horizontalCenter: parent.horizontalCenter
