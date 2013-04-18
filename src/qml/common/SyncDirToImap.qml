@@ -78,6 +78,8 @@ SyncToImapBase {
          * This function may also be called asynchronously.
          * Thus, we start at _dirSyncCurrentIndex to avoid
          * starting all over when being called asynchronously.
+         * Note: before calling this for the first time,
+         *       _dirSyncCurrentIndex must be set to 0.
          */
         for (var i = _dirSyncCurrentIndex; i < _messageIds.length; i++) {
             var msgId = _messageIds[i]
