@@ -94,7 +94,18 @@ SyncToImapBase {
             console.log("Processing attachment: " + attachmentIdentifier)
 
             if (fileHelper.exists(_baseDir + "/" + attachmentIdentifier)) {
-                console.log("File " + _baseDir + "/" + attachmentIdentifier + " exits. Merging...")
+                var ownFile = _baseDir + "/" + attachmentIdentifier
+
+                console.log("File " + ownFile + " exits.")
+
+                var incomingFile = _imapStorage.writeAttachmentTo(msgId, attachmentLocation, _baseDir)
+
+                if (! _filesAreEqual(ownFile, incomingFile)) {
+                    console.log("Files differ, merging...")
+                } else {
+                    console.log("Files are equal, removing temp file.")
+                    fileHelper.rm(incomingFile)
+                }
             } else {
                 console.log("File " + _baseDir + "/" + attachmentIdentifier + " not found. Extracting attachment in-place...")
                 _imapStorage.writeAttachmentTo(msgId, attachmentLocation, _baseDir)
