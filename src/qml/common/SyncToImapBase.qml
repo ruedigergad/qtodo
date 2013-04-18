@@ -142,6 +142,17 @@ Item {
         return md5A === md5B && sha1A === sha1B
     }
 
+    function _getFirstAttachmenLocation(msgId) {
+        var attachmentLocations = _imapStorage.getAttachmentLocations(msgId)
+
+        if (! attachmentLocations.length >= 1) {
+            console.log("Error getting attachment locations: " + attachmentLocations)
+            return ""
+        }
+
+        return attachmentLocations[0]
+    }
+
     function _reportSuccess() {
         succeeded()
 

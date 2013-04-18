@@ -66,7 +66,35 @@ SyncToImapBase {
             _imapStorage.retrieveMessage(msgId)
         } else {
             console.log("Retrieved all messages.")
+            _dirSyncIndex = 0
+            _processMessages()
         }
+    }
+
+    function _processMessages() {
+        console.log("Processing messages: " + _messageIds)
+
+        for (var i = _dirSyncIndex; i < _messageIds.length; i++) {
+            var msgId = _messageIds[i]
+            var attachmentLocation = _getFirstAttachmenLocation(msgId)
+
+            if (attachmentLocation === "") {
+                console.log("Invalid attachment location.")
+                continue
+            }
+
+            var attachmentIdentifier = _imapStorage.getAttachmentIdentifier(msgId, attachmentLocation)
+            console.log("Processing attachment: " + attachmentIdentifier)
+
+            if (fileHelper.exists(_baseDir + "/" + attachmentIdentifier)) {
+                console.log("File " + _baseDir + "/" + attachmentIdentifier + " exits. Merging...")
+            } else {
+                console.log("File " + _baseDir + "/" + attachmentIdentifier + " not found. Extracting attachment in-place...")
+                _imapStorage.writeAttachmentTo(msgId, attachmentLocation, _baseDir)
+            }
+        }
+
+        _reportSuccess()
     }
 
     onMessageAdded: _addFiles()
