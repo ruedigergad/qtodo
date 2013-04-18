@@ -27,6 +27,12 @@ Item {
     property QtObject merger
     property bool useBuiltInDialogs: true
 
+    signal messageAdded
+    signal messageIdsQueried
+    signal messageRetrieved
+    signal progress
+    signal succeeded
+
     property string _baseDir: ""
     property int _imapAccountId: -1
     property int _imapMessageId: -1
@@ -39,13 +45,6 @@ Item {
     property alias _fileHelper: _fileHelper
     property alias _imapStorage: _imapStorage
     property alias _syncToImapProgressDialog: _syncToImapProgressDialog
-
-    signal messageAdded
-    signal messageIdsQueried
-    signal messageRetrieved
-    signal progress
-    signal succeeded
-
 
     function _syncToImap() {
         if (imapFolderName === "") {
