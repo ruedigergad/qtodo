@@ -29,6 +29,7 @@
 
 #include "filehelper.h"
 
+#include <QDateTime>
 #include <QDebug>
 #include <QDir>
 #include <QFile>
@@ -97,6 +98,10 @@ QString FileHelper::md5sum(const QString &fileName) {
 
 bool FileHelper::mkdir(const QString &dir){
     return QDir().mkpath(dir);
+}
+
+QString FileHelper::mtimeString(const QString &fileName) {
+    return QFileInfo(fileName).lastModified().toString(Qt::ISODate);
 }
 
 bool FileHelper::rm(const QString &file){

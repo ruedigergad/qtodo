@@ -47,6 +47,7 @@ public:
     Q_INVOKABLE QStringList ls (const QString &dirName, const QString &filter);
     Q_INVOKABLE QString md5sum(const QString &fileName);
     Q_INVOKABLE bool mkdir(const QString &dir);
+    Q_INVOKABLE QString mtimeString(const QString &fileName);
     Q_INVOKABLE bool rm(const QString &file);
     Q_INVOKABLE bool rmdir(const QString &dir);
     Q_INVOKABLE QString sha1sum(const QString &fileName);
