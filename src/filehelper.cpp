@@ -66,6 +66,13 @@ bool FileHelper::cp(const QString &source, const QString &destination) {
     return QFile::copy(source, destination);
 }
 
+bool FileHelper::exists(const QString &fileName) {
+    if (fileName == "") {
+        return false;
+    }
+    return QFile::exists(fileName);
+}
+
 QString FileHelper::home(){
     return QDir::homePath();
 }

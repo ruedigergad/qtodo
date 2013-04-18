@@ -42,6 +42,7 @@ public:
 
     Q_INVOKABLE QString chksum(const QString &fileName, QCryptographicHash::Algorithm algorithm);
     Q_INVOKABLE bool cp(const QString &source, const QString &destination);
+    Q_INVOKABLE bool exists(const QString &fileName);
     Q_INVOKABLE QStringList ls (const QString &dirName);
     Q_INVOKABLE QStringList ls (const QString &dirName, const QString &filter);
     Q_INVOKABLE QString md5sum(const QString &fileName);
