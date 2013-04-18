@@ -147,6 +147,11 @@ QStringList ImapStorage::getAttachmentLocations(ulong msgId) {
     return ret;
 }
 
+QString ImapStorage::getDateString(ulong msgId) {
+    QMailMessage *msg = new QMailMessage(QMailMessageId(msgId));
+    return msg->date().toLocalTime().toString(Qt::ISODate);
+}
+
 QString ImapStorage::getSubject(ulong msgId) {
     QMailMessage *msg = new QMailMessage(QMailMessageId(msgId));
     return msg->subject();
