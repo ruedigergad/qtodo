@@ -23,7 +23,7 @@ import qtodo 1.0
 SyncToImapBase {
 
     property variant _dirSyncFiles
-    property int _dirSyncIndex
+    property int _dirSyncCurrentIndex
 
     function syncDir(dirName, messageSubjectPrefix) {
         console.log("Syncing dir " + dirName + ". Using prefix " + messageSubjectPrefix + ".")
@@ -46,11 +46,11 @@ SyncToImapBase {
     }
 
     function _addFiles() {
-        if (_dirSyncIndex < _dirSyncFiles.length) {
-            var file = _dirSyncFiles[_dirSyncIndex]
+        if (_dirSyncCurrentIndex < _dirSyncFiles.length) {
+            var file = _dirSyncFiles[_dirSyncCurrentIndex]
             console.log("Uploading: " + _baseDir + "/" + file)
             console.log("Subject: " + _imapMessageSubjectPrefix + file)
-            _dirSyncIndex++
+            _dirSyncCurrentIndex++
             _imapStorage.addMessage(_imapAccountId, imapFolderName, _imapMessageSubjectPrefix + file, _baseDir + "/" + file)
         } else {
             console.log("Processed all messages.")
@@ -59,14 +59,14 @@ SyncToImapBase {
     }
 
     function _retrieveMessages() {
-        if (_dirSyncIndex < _messageIds.length) {
-            var msgId = _messageIds[_dirSyncIndex]
+        if (_dirSyncCurrentIndex < _messageIds.length) {
+            var msgId = _messageIds[_dirSyncCurrentIndex]
             console.log("Retrieving: " + msgId)
-            _dirSyncIndex++
+            _dirSyncCurrentIndex++
             _imapStorage.retrieveMessage(msgId)
         } else {
             console.log("Retrieved all messages.")
-            _dirSyncIndex = 0
+            _dirSyncCurrentIndex = 0
             _processMessages()
         }
     }
@@ -74,7 +74,12 @@ SyncToImapBase {
     function _processMessages() {
         console.log("Processing messages: " + _messageIds)
 
-        for (var i = _dirSyncIndex; i < _messageIds.length; i++) {
+        /*
+         * This function may also be called asynchronously.
+         * Thus, we start at _dirSyncCurrentIndex to avoid
+         * starting all over when being called asynchronously.
+         */
+        for (var i = _dirSyncCurrentIndex; i < _messageIds.length; i++) {
             var msgId = _messageIds[i]
             var attachmentLocation = _getFirstAttachmenLocation(msgId)
 
@@ -106,7 +111,7 @@ SyncToImapBase {
 
             _dirSyncFiles = _fileHelper.ls(_baseDir)
             console.log("Uploading: " + _dirSyncFiles)
-            _dirSyncIndex = 0
+            _dirSyncCurrentIndex = 0
 
             if (useBuiltInDialogs) {
                 _syncToImapProgressDialog.maxValue = _dirSyncFiles.length
@@ -116,7 +121,7 @@ SyncToImapBase {
             _addFiles()
         } else {
             console.log("Message(s) found: Retrieving " + _messageIds)
-            _dirSyncIndex = 0
+            _dirSyncCurrentIndex = 0
             _retrieveMessages()
         }
     }
