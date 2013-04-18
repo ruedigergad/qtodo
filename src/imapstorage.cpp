@@ -129,6 +129,12 @@ bool ImapStorage::folderExists(ulong accId, QString path) {
     return (queryFolders(accId, path).count() == 1);
 }
 
+QString ImapStorage::getAttachmentIdentifier(ulong msgId, QString attachmentLocation) {
+    QMailMessage *msg = new QMailMessage(QMailMessageId(msgId));
+    QMailMessagePart attachment = msg->partAt(QMailMessagePart::Location(attachmentLocation));
+    return attachment.identifier();
+}
+
 QStringList ImapStorage::getAttachmentLocations(ulong msgId) {
     QMailMessage *msg = new QMailMessage(QMailMessageId(msgId));
     QList<QMailMessagePartContainer::Location> locations = msg->findAttachmentLocations();
@@ -141,10 +147,9 @@ QStringList ImapStorage::getAttachmentLocations(ulong msgId) {
     return ret;
 }
 
-QString ImapStorage::getAttachmentIdentifier(ulong msgId, QString attachmentLocation) {
+QString ImapStorage::getSubject(ulong msgId) {
     QMailMessage *msg = new QMailMessage(QMailMessageId(msgId));
-    QMailMessagePart attachment = msg->partAt(QMailMessagePart::Location(attachmentLocation));
-    return attachment.identifier();
+    return msg->subject();
 }
 
 void ImapStorage::moveMessageToTrash(ulong msgId) {

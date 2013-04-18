@@ -34,8 +34,9 @@ public:
     Q_INVOKABLE void createFolder(ulong accId, QString name);
     Q_INVOKABLE void deleteMessage(ulong msgId);
     Q_INVOKABLE bool folderExists(ulong accId, QString path);
-    Q_INVOKABLE QStringList getAttachmentLocations(ulong msgId);
     Q_INVOKABLE QString getAttachmentIdentifier(ulong msgId, QString attachmentLocation);
+    Q_INVOKABLE QStringList getAttachmentLocations(ulong msgId);
+    Q_INVOKABLE QString getSubject(ulong msgId);
     Q_INVOKABLE void moveMessageToTrash(ulong msgId);
     Q_INVOKABLE QVariantList queryImapAccounts();
     Q_INVOKABLE QVariantList queryMessages(ulong accId, QString folder, QString subject);
