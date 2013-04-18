@@ -46,6 +46,7 @@ QString FileHelper::chksum(const QString &fileName, QCryptographicHash::Algorith
     }
 
     QFile file(fileName);
+    file.open(QFile::ReadOnly);
     QCryptographicHash hash(algorithm);
 
     QByteArray data = file.readAll();

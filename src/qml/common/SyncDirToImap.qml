@@ -102,6 +102,19 @@ SyncToImapBase {
 
                 if (! _filesAreEqual(ownFile, incomingFile)) {
                     console.log("Files differ, merging...")
+
+                    var ownMtime = _fileHelper.mtimeString(ownFile)
+                    var incomingDate = _imapStorage.getDateString(msgId)
+                    console.log("Own mtime: " + ownMtime + " Incoming date: " + incomingDate)
+
+                    if (ownMtime < incomingDate) {
+                        console.log("Incoming file is newer. Updating...")
+                        _fileHelper.rm(ownFile)
+                        _fileHelper.cp(incomingFile, ownFile)
+                    }
+
+                    _fileHelper.rm(incomingFile)
+                    _imapStorage.updateMessageAttachment(msgId, ownFile)
                 } else {
                     console.log("Files are equal, removing temp file.")
                     fileHelper.rm(incomingFile)
