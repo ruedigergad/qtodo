@@ -84,6 +84,10 @@ PageStackWindow {
                 text: "Sync To IMAP"
                 onClicked: mainRectangle.confirmSyncToImapDialog.open()
             }
+            MenuItem {
+                text: "Sync Sketches to Imap"
+                onClicked: mainRectangle.confirmSyncSketchesToImapDialog.open()
+            }
             MenuItem { 
                 text: "About"
                 onClicked: mainRectangle.aboutDialog.open()
