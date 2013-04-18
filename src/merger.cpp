@@ -31,10 +31,10 @@ Merger::Merger(QObject *parent) :
 }
 
 QDomElement Merger::copyElement(const QDomElement &from, QDomElement &to) {
-    if (from.tagName() == "sketch") {
-        qDebug("copyElement: Skipping sketch...");
-        return QDomElement();
-    }
+//    if (from.tagName() == "sketch") {
+//        qDebug("copyElement: Skipping sketch...");
+//        return QDomElement();
+//    }
 
     QDomElement newElement = incomingStorage->getDocument().createElement(from.tagName());
     newElement.appendChild(incomingStorage->getDocument().createTextNode(from.firstChild().toText().nodeValue()));
