@@ -59,10 +59,11 @@ SyncToImapBase {
         if (!_filesAreEqual(_baseDir + "/" + _localFileName, _imapSyncFile)) {
             console.log("Files differ, merging.")
 
-            if (merger.merge(_imapSyncFile)) {
+            if (merger.mergeFile(_imapSyncFile)) {
                 console.log("Merger reported changes, updating attachment...")
                 _imapStorage.updateMessageAttachment(_imapMessageId, _baseDir + "/" + _localFileName)
             } else {
+                console.log("No changes reported by merger. Sync finished successfully.")
                 _reportSuccess()
             }
         } else {

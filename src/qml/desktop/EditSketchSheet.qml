@@ -31,7 +31,7 @@ Item {
     z: 1
 
     property bool edit: false
-    property string sketchPath: ""
+    property string sketchFileName: ""
 
     signal closed()
     signal closing()
@@ -67,7 +67,7 @@ Item {
 
     onOpened: {
         if (edit) {
-            drawing.load(sketchPath)
+            drawing.load(mainRectangle._sketchPath + "/" + sketchFileName)
         } else {
             drawing.init()
         }
@@ -179,14 +179,15 @@ Item {
     }
 
     onAccepted: {
-        console.log("Saving sketch to: " + sketchPath)
+        var fullFileName = mainRectangle._sketchPath + "/" + sketchFileName
+        console.log("Saving sketch to: " + fullFileName)
 
-        drawing.save(sketchPath)
+        drawing.save(fullFileName)
 
         if (edit) {
-            mainRectangle.treeView.currentModel.updateElement(mainRectangle.treeView.currentIndex, "sketch", sketchPath, "na")
+            mainRectangle.treeView.currentModel.updateElement(mainRectangle.treeView.currentIndex, "sketch", sketchFileName, "na")
         } else {
-            mainRectangle.treeView.currentModel.addElement("sketch", sketchPath, "na")
+            mainRectangle.treeView.currentModel.addElement("sketch", sketchFileName, "na")
         }
 
         editSketchSheet.close();

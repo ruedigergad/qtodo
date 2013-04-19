@@ -56,7 +56,7 @@ Item {
             id: sketchImage
             fillMode: Image.PreserveAspectFit
             cache: false
-            source: tagName === "sketch" ? elementText : ""
+            source: tagName === "sketch" ? mainRectangle._sketchPath + "/" + elementText : ""
             height: sourceSize.height * (width / sourceSize.width)
             width: nodeListView.width * 0.5
         }

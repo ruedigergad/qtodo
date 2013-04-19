@@ -31,6 +31,9 @@ Item {
     property alias confirmSyncSketchesToImapDialog: confirmSyncSketchesToImapDialog
     property alias treeView: treeView
 
+    property string _todoPath: fileHelper.home() + "/to-do-o"
+    property string _sketchPath: _todoPath + "/sketches"
+
     property bool isTodo
 
     function addItem() {
@@ -43,7 +46,7 @@ Item {
 
     function addSketch() {
         editSketchItem.edit = false
-        editSketchItem.sketchPath = storage.getPath() + "/sketches/" + (rootElementModel.getMaxId() + 1) + ".png"
+        editSketchItem.sketchFileName = (rootElementModel.getMaxId() + 1) + ".png"
         editSketchItem.open()
     }
 
@@ -55,7 +58,7 @@ Item {
     function editCurrentItem() {
         var currentItem = treeView.currentItem
         if (currentItem.type === "sketch") {
-            editSketchItem.sketchPath = currentItem.text
+            editSketchItem.sketchFileName = currentItem.text
             editSketchItem.edit = true
             editSketchItem.open()
         } else {
@@ -94,8 +97,11 @@ Item {
 
         onAccepted: {
             var currentItem = treeView.currentItem
+            console.log("Deleting item: " + currentItem)
             if (currentItem.type === "sketch") {
-                fileHelper.rm(currentItem.text)
+                var sketchFileName = fileHelper.home() + "/todo/sketches" + currentItem.text
+                console.log("Item is a sketch. Removing file: " +  sketchFileName)
+                fileHelper.rm(sketchFileName)
             }
             treeView.currentModel.deleteElement(treeView.currentIndex)
         }
@@ -139,7 +145,11 @@ Item {
     Merger {
         id: todoMerger
 
-        function merge (syncFileName) {
+        function mergeDir (dirName) {
+            console.log("Merging directory: " + dirName)
+        }
+
+        function mergeFile (syncFileName) {
             console.log("Merging sync file: " + syncFileName)
 
             if (rootElementModel.rowCount() === 0) {
@@ -147,6 +157,7 @@ Item {
                 fileHelper.rm(fileHelper.home() + "/to-do-o/default.xml")
                 console.log("Copying " + syncFileName + " to " + fileHelper.home() + "/to-do-o/default.xml")
                 fileHelper.cp(syncFileName, fileHelper.home() + "/to-do-o/default.xml")
+                fileHelper.rm(syncFileName)
                 storage.open()
                 return false
             } else {
