@@ -99,9 +99,9 @@ Item {
             var currentItem = treeView.currentItem
             console.log("Deleting item: " + currentItem)
             if (currentItem.type === "sketch") {
-                var sketchFileName = fileHelper.home() + "/todo/sketches" + currentItem.text
-                console.log("Item is a sketch. Removing file: " +  sketchFileName)
-                fileHelper.rm(sketchFileName)
+                var fullFileName = _sketchPath + "/" + currentItem.text
+                console.log("Item is a sketch. Removing file: " +  fullFileName)
+                fileHelper.rm(fullFileName)
             }
             treeView.currentModel.deleteElement(treeView.currentIndex)
         }
