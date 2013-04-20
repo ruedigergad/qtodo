@@ -56,6 +56,7 @@ public:
     Q_INVOKABLE void addElement(QString type, QString text, QString color);
     Q_INVOKABLE void deleteElement(int index);
     Q_INVOKABLE int getMaxId(){ return root.attribute("max_id", "0").toInt(); }
+    Q_INVOKABLE QStringList getSketchNamesForIndex(int index = -1);
     Q_INVOKABLE void move(int from, int to, int n);
     Q_INVOKABLE void setAttribute(int index, QString name, QString value);
     Q_INVOKABLE void updateElement(int index, QString type, QString text, QString color);
@@ -79,6 +80,7 @@ private:
     QDomNodeList childNodes;
 
     int countSubNodeTodos(QDomNodeList subNodes, bool todoOnly, bool recursive);
+    Q_INVOKABLE QStringList getSketchNames(QDomElement element);
 
 };
 

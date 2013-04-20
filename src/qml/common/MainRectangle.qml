@@ -98,11 +98,23 @@ Item {
         onAccepted: {
             var currentItem = treeView.currentItem
             console.log("Deleting item: " + currentItem)
-            if (currentItem.type === "sketch") {
+
+            if (currentItem.type === "to-do") {
+                console.log("Item is a to-do entry. Searching for nested sketches.")
+                var nestedSketches = treeView.currentModel.getSketchNamesForIndex(treeView.currentIndex)
+                console.log("nestedSketches: " + nestedSketches)
+
+                for (var i = 0; i < nestedSketches.length; i++) {
+                    var fullFileName = _sketchPath + "/" + nestedSketches[i]
+                    console.log("Deleting: " + fullFileName)
+                    fileHelper.rm(fullFileName)
+                }
+            } else if (currentItem.type === "sketch") {
                 var fullFileName = _sketchPath + "/" + currentItem.text
                 console.log("Item is a sketch. Removing file: " +  fullFileName)
                 fileHelper.rm(fullFileName)
             }
+
             treeView.currentModel.deleteElement(treeView.currentIndex)
         }
     }

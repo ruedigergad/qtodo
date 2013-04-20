@@ -19,6 +19,7 @@
 
 #include "nodelistmodel.h"
 #include <QDateTime>
+#include <QDebug>
 
 NodeListModel::NodeListModel(QObject *parent) :
     QAbstractListModel(parent)
@@ -144,6 +145,42 @@ void NodeListModel::deleteElement(int index){
 
     root.setAttribute("deleted_ids", deleted.join(","));
     emit changed();
+}
+QStringList NodeListModel::getSketchNamesForIndex(int index) {
+    qDebug() << "Searching for sketches at index: " << index;
+    if (childNodes.at(0).isText())
+        index++;
+
+    QDomElement element = childNodes.at(index).toElement();
+    return getSketchNames(element);
+}
+
+QStringList NodeListModel::getSketchNames(QDomElement element) {
+    QStringList ret;
+
+    if (element.tagName() != "to-do")
+        return ret;
+
+    QDomNodeList subNodes = element.childNodes();
+
+    if (subNodes.count() <= 0)
+        return ret;
+
+    for (int i = subNodes.at(0).isText() ? 1 : 0; i < subNodes.count(); i++) {
+        QDomElement subElement = subNodes.at(i).toElement();
+
+        if (subElement.tagName() == "sketch") {
+            QString sketchName = subElement.text();
+            qDebug() << "Found sketch " + sketchName;
+            ret << sketchName;
+        }
+
+        if (subElement.tagName() == "to-do") {
+            ret << getSketchNames(subElement);
+        }
+    }
+
+    return ret;
 }
 
 void NodeListModel::updateElement(int index, QString type, QString text, QString color){
