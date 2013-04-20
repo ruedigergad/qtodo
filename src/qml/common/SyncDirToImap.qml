@@ -108,8 +108,8 @@ SyncToImapBase {
             if (_acceptedFiles.length !== 0) {
                 var skip = true
 
-                for (var i = 0; i < _acceptedFiles.length; i++) {
-                    if (_acceptedFiles[i] === attachmentIdentifier) {
+                for (var j = 0; j < _acceptedFiles.length; j++) {
+                    if (_acceptedFiles[j] === attachmentIdentifier) {
                         console.log("Going to merge: " + attachmentIdentifier)
                         skip = false
                         break
@@ -163,6 +163,10 @@ SyncToImapBase {
     }
 
     onMessageAdded: _addFiles()
+    onMessageDeleted: {
+        console.log("Message deleted. Going on with processing.")
+        _processMessages()
+    }
     onMessageIdsQueried: {
         console.log("Performing dir sync.")
 
@@ -186,4 +190,8 @@ SyncToImapBase {
         }
     }
     onMessageRetrieved: _retrieveMessages()
+    onMessageUpdated: {
+        console.log("Message updated. Going on with processing.")
+        _processMessages()
+    }
 }

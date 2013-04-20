@@ -76,6 +76,9 @@ SyncToImapBase {
     onMessageRetrieved: {
         _processMessage()
     }
+    onMessageUpdated: {
+        _reportSuccess()
+    }
 
     onMessageIdsQueried:  {
         console.log("Performing file sync.")

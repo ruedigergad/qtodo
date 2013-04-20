@@ -251,6 +251,7 @@ void ImapStorage::retrieveActivityChanged(QMailServiceAction::Activity activity)
         }
         break;
     case QMailServiceAction::Failed:
+        qDebug("Retrieval action failed.");
         emit error(retrievalAction->status().text, retrievalAction->status().errorCode, currentAction);
         currentAction = NoAction;
         break;
@@ -317,6 +318,7 @@ void ImapStorage::searchMessageActivityChanged(QMailServiceAction::Activity acti
             emit searchFinished(ret);
             break;
         case QMailServiceAction::Failed:
+            qDebug("Search action failed.");
             emit error(searchAction->status().text, searchAction->status().errorCode, -1);
             emit searchFinished(ret);
             break;
@@ -347,7 +349,9 @@ void ImapStorage::storageActivityChanged(QMailServiceAction::Activity activity) 
         default:
             break;
         }
+        break;
     case QMailServiceAction::Failed:
+        qDebug("Storage action failed.");
         emit error(storageAction->status().text, storageAction->status().errorCode, currentAction);
         currentAction = NoAction;
         break;

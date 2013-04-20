@@ -28,8 +28,10 @@ Item {
     property bool useBuiltInDialogs: true
 
     signal messageAdded
+    signal messageDeleted
     signal messageIdsQueried
     signal messageRetrieved
+    signal messageUpdated
     signal progress
     signal succeeded
 
@@ -175,9 +177,10 @@ Item {
         onFolderCreated: _processImapFolder()
         onFolderListRetrieved: _prepareImapFolder()
         onMessageAdded: syncToImapBase.messageAdded()
+        onMessageDeleted: syncToImapBase.messageDeleted()
         onMessageListRetrieved: _queryMessages()
         onMessageRetrieved: syncToImapBase.messageRetrieved()
-        onMessageUpdated: _reportSuccess()
+        onMessageUpdated: syncToImapBase.messageUpdated()
 
         onError: {
             _syncToImapProgressDialog.close()
