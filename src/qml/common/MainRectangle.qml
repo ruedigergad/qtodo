@@ -148,7 +148,7 @@ Item {
         message: "This may take some time."
 
         onAccepted: {
-            syncDirToImap.syncDir(fileHelper.home() + "/to-do-o/sketches", "sketch:")
+            syncDirToImap.syncDir(fileHelper.home() + "/to-do-o/sketches", "sketch:", rootElementModel.getSketchNamesForIndex(-1))
         }
     }
 
