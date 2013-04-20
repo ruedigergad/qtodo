@@ -119,6 +119,7 @@ SyncToImapBase {
                 if (skip) {
                     console.log("Message with attachment " + attachmentIdentifier + " is not accepted anymore.")
                     console.log("Deleting message.")
+                    _dirSyncCurrentIndex = i + 1;
                     _imapStorage.deleteMessage(msgId)
                     return
                 }
@@ -145,6 +146,7 @@ SyncToImapBase {
                     }
 
                     _fileHelper.rm(incomingFile)
+                    _dirSyncCurrentIndex = i + 1;
                     _imapStorage.updateMessageAttachment(msgId, ownFile)
                     return
                 } else {
