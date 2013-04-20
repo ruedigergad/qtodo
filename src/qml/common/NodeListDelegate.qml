@@ -49,16 +49,37 @@ Item {
         id: sketchContentDelegate
         anchors.left: parent.left
         visible: tagName === "sketch"
-        height: sketchImage.height
-        width: sketchImage.width
+        height: imgExists ? sketchImage.height : width
+        width: nodeListView.width * 0.5
+
+        property string imgSource: tagName === "sketch" ? mainRectangle._sketchPath + "/" + elementText : ""
+        property bool imgExists: fileHelper.exists(imgSource)
 
         Image {
             id: sketchImage
             fillMode: Image.PreserveAspectFit
             cache: false
-            source: tagName === "sketch" ? mainRectangle._sketchPath + "/" + elementText : ""
-            height: sourceSize.height * (width / sourceSize.width)
-            width: nodeListView.width * 0.5
+            source: parent.imgSource
+            height: sourceSize.height * (parent.width / sourceSize.width)
+            width: parent.width
+            visible: parent.imgExists
+        }
+
+        Item {
+            id: noImageFoundText
+            anchors.fill: parent
+            visible: ! parent.imgExists
+
+            Text {
+                anchors.centerIn: parent
+                width: parent.width
+                text: "Image not synced yet."
+
+                horizontalAlignment: Text.AlignHCenter
+                wrapMode: Text.WordWrap
+                font.pixelSize: 24
+                color: "gray"
+            }
         }
 
         MouseArea {
