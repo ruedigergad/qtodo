@@ -192,6 +192,30 @@ Item {
 
         imapFolderName: "qtodo"
         merger: todoMerger
+
+        onSucceeded: {
+            console.log("Sync succeeded. Cleaning remaining sketch files.")
+
+            var sketchFiles = fileHelper.ls(_sketchPath)
+            var usedSketches = rootElementModel.getSketchNamesForIndex(-1)
+
+            for (var i = 0; i < sketchFiles.length; i++) {
+                var sketch = sketchFiles[i]
+                var deleteSketch = true
+
+                for (var j = 0; j < usedSketches.length; j++) {
+                    if (usedSketches[j] === sketch) {
+                        deleteSketch = false
+                        break
+                    }
+                }
+
+                if (deleteSketch) {
+                    console.log("Cleaning " + sketch + ".")
+                    fileHelper.rm(_sketchPath + "/" + sketch)
+                }
+            }
+        }
     }
 
     SyncFileToImap {
