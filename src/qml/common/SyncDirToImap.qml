@@ -22,10 +22,15 @@ import qtodo 1.0
 
 SyncToImapBase {
 
+    property variant _acceptedFiles
     property variant _dirSyncFiles
     property int _dirSyncCurrentIndex
 
     function syncDir(dirName, messageSubjectPrefix) {
+        syncDirFiltered(dirName, messageSubjectPrefix, [])
+    }
+
+    function syncDirFiltered(dirName, messageSubjectPrefix, acceptedFiles) {
         console.log("Syncing dir " + dirName + ". Using prefix " + messageSubjectPrefix + ".")
 
         if (dirName === "") {
@@ -37,6 +42,7 @@ SyncToImapBase {
             return
         }
 
+        _acceptedFiles = acceptedFiles
         _baseDir = dirName
         _imapMessageSubject = ""
         _imapMessageSubjectPrefix = messageSubjectPrefix
@@ -93,6 +99,25 @@ SyncToImapBase {
             var attachmentIdentifier = _imapStorage.getAttachmentIdentifier(msgId, attachmentLocation)
             console.log("Processing attachment: " + attachmentIdentifier)
 
+            if (_acceptedFiles.length !== 0) {
+                var skip = true
+
+                for (var i = 0; i < _acceptedFiles.length; i++) {
+                    if (_acceptedFiles[i] === attachmentIdentifier) {
+                        console.log("Going to merge: " + attachmentIdentifier)
+                        skip = false
+                        break
+                    }
+                }
+
+                if (skip) {
+                    console.log("Message with attachment " + attachmentIdentifier + " is not accepted anymore.")
+                    console.log("Deleting message.")
+                    _imapStorage.deleteMessage(msgId)
+                    return
+                }
+            }
+
             if (fileHelper.exists(_baseDir + "/" + attachmentIdentifier)) {
                 var ownFile = _baseDir + "/" + attachmentIdentifier
 
@@ -101,7 +126,7 @@ SyncToImapBase {
                 var incomingFile = _imapStorage.writeAttachmentTo(msgId, attachmentLocation, _baseDir)
 
                 if (! _filesAreEqual(ownFile, incomingFile)) {
-                    console.log("Files differ, merging...")
+                    console.log("Files differ, using newest version...")
 
                     var ownMtime = _fileHelper.mtimeString(ownFile)
                     var incomingDate = _imapStorage.getDateString(msgId)
@@ -115,6 +140,7 @@ SyncToImapBase {
 
                     _fileHelper.rm(incomingFile)
                     _imapStorage.updateMessageAttachment(msgId, ownFile)
+                    return
                 } else {
                     console.log("Files are equal, removing temp file.")
                     fileHelper.rm(incomingFile)
