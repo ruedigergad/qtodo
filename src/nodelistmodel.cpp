@@ -151,8 +151,12 @@ QStringList NodeListModel::getSketchNamesForIndex(int index) {
     if (childNodes.at(0).isText())
         index++;
 
-    QDomElement element = childNodes.at(index).toElement();
-    return getSketchNames(element);
+    if (index >= 0) {
+        QDomElement element = childNodes.at(index).toElement();
+        return getSketchNames(element);
+    } else {
+        return getSketchNames(root);
+    }
 }
 
 QStringList NodeListModel::getSketchNames(QDomElement element) {
