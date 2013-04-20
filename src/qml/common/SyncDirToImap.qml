@@ -58,16 +58,22 @@ SyncToImapBase {
     }
 
     function _addFiles() {
-        if (_dirSyncCurrentIndex < _dirSyncFiles.length) {
-            var file = _dirSyncFiles[_dirSyncCurrentIndex]
+        for (var i = _dirSyncCurrentIndex; i < _dirSyncFiles.length; i++) {
+            var file = _dirSyncFiles[i]
+
+            if (_testSkip(file)) {
+                console.log("File " + file + " is not accepted anymore.")
+                continue
+            }
+
             console.log("Uploading: " + _baseDir + "/" + file)
             console.log("Subject: " + _imapMessageSubjectPrefix + file)
-            _dirSyncCurrentIndex++
+            _dirSyncCurrentIndex = i + 1
             _imapStorage.addMessage(_imapAccountId, imapFolderName, _imapMessageSubjectPrefix + file, _baseDir + "/" + file)
-        } else {
-            console.log("Processed all messages.")
-            _reportSuccess()
         }
+
+        console.log("Processed all messages.")
+        _reportSuccess()
     }
 
     function _retrieveMessages() {
@@ -105,24 +111,12 @@ SyncToImapBase {
             var attachmentIdentifier = _imapStorage.getAttachmentIdentifier(msgId, attachmentLocation)
             console.log("Processing attachment: " + attachmentIdentifier)
 
-            if (_acceptedFiles.length !== 0) {
-                var skip = true
-
-                for (var j = 0; j < _acceptedFiles.length; j++) {
-                    if (_acceptedFiles[j] === attachmentIdentifier) {
-                        console.log("Going to merge: " + attachmentIdentifier)
-                        skip = false
-                        break
-                    }
-                }
-
-                if (skip) {
-                    console.log("Message with attachment " + attachmentIdentifier + " is not accepted anymore.")
-                    console.log("Deleting message.")
-                    _dirSyncCurrentIndex = i + 1;
-                    _imapStorage.deleteMessage(msgId)
-                    return
-                }
+            if (_testSkip(attachmentIdentifier)) {
+                console.log("Message with attachment " + attachmentIdentifier + " is not accepted anymore.")
+                console.log("Deleting message.")
+                _dirSyncCurrentIndex = i + 1;
+                _imapStorage.deleteMessage(msgId)
+                return
             }
 
             if (fileHelper.exists(_baseDir + "/" + attachmentIdentifier)) {
@@ -160,6 +154,23 @@ SyncToImapBase {
         }
 
         _reportSuccess()
+    }
+
+    function _testSkip(name) {
+        if (_acceptedFiles.length !== 0) {
+            var skip = true
+
+            for (var j = 0; j < _acceptedFiles.length; j++) {
+                if (_acceptedFiles[j] === name) {
+                    skip = false
+                    break
+                }
+            }
+
+            return skip
+        }
+
+        return false
     }
 
     onMessageAdded: _addFiles()
