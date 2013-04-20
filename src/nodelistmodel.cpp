@@ -163,7 +163,7 @@ QStringList NodeListModel::getSketchNamesForIndex(int index) {
 QStringList NodeListModel::getSketchNames(QDomElement element) {
     QStringList ret;
 
-    if (element.tagName() != "to-do")
+    if (element.tagName() != "to-do" && element.tagName() != "root")
         return ret;
 
     QDomNodeList subNodes = element.childNodes();
