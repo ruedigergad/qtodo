@@ -107,18 +107,6 @@ Rectangle {
         id: mainMenu
 
         CommonButton{
-            id: syncSketchesToImap
-            anchors.bottom: cleanDone.top
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width
-            text: "Sync Sketches To IMAP"
-            onClicked: {
-                mainRectangle.confirmSyncSketchesToImapDialog.open()
-                mainMenu.close()
-            }
-        }
-
-        CommonButton{
             id: cleanDone
             anchors.bottom: syncToImap.top
             anchors.horizontalCenter: parent.horizontalCenter
@@ -132,12 +120,24 @@ Rectangle {
 
         CommonButton{
             id: syncToImap
-            anchors.bottom: about.top
+            anchors.bottom: syncSketchesToImap.top
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
             text: "Sync To IMAP"
             onClicked: {
                 mainRectangle.confirmSyncToImapDialog.open()
+                mainMenu.close()
+            }
+        }
+
+        CommonButton{
+            id: syncSketchesToImap
+            anchors.bottom: about.top
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width
+            text: "Sync Sketches To IMAP"
+            onClicked: {
+                mainRectangle.confirmSyncSketchesToImapDialog.open()
                 mainMenu.close()
             }
         }
