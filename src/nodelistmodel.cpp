@@ -146,6 +146,7 @@ void NodeListModel::deleteElement(int index){
     root.setAttribute("deleted_ids", deleted.join(","));
     emit changed();
 }
+
 QStringList NodeListModel::getSketchNamesForIndex(int index) {
     qDebug() << "Searching for sketches at index: " << index;
     if (childNodes.at(0).isText())
