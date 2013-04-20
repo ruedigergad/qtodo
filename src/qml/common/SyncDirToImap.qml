@@ -27,11 +27,17 @@ SyncToImapBase {
     property int _dirSyncCurrentIndex
 
     function syncDir(dirName, messageSubjectPrefix) {
+        console.log("Going to accept all files.")
         syncDirFiltered(dirName, messageSubjectPrefix, [])
     }
 
     function syncDirFiltered(dirName, messageSubjectPrefix, acceptedFiles) {
         console.log("Syncing dir " + dirName + ". Using prefix " + messageSubjectPrefix + ".")
+        if (acceptedFiles.length === 0) {
+            console.log("Accepting all files.")
+        } else {
+            console.log("Accepting files: " + acceptedFiles)
+        }
 
         if (dirName === "") {
             console.log("Error: dirName is not set. Stopping sync.")
