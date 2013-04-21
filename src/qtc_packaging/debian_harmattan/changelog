@@ -1,3 +1,11 @@
+qtodo (0.11.0) unstable; urgency=low
+
+  * Add functionality to sync sketches.
+  * Add place holder for sketches that had not been synced.
+  * Improve sync stability.
+
+ -- Ruediger Gad <r.c.g@gmx.de>  Mon, 22 Apr 2013 00:10:00 +0200
+
 qtodo (0.10.0) unstable; urgency=low
 
   * Improve sync.
