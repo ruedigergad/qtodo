@@ -240,8 +240,6 @@ Item {
         if (rootElementModel.rowCount() === 0) {
             storage.save()
         }
-
-//        storage.open("/opt/qtodo/sample.xml")
     }
 }
 
