@@ -30,10 +30,25 @@ Rectangle {
 
     z: 32
 
+    signal closed()
+    signal closing()
     signal opened()
+    signal opening()
     signal rejected()
 
-    Behavior on opacity { PropertyAnimation { duration: 200 } }
+    Behavior on opacity {
+        SequentialAnimation {
+            PropertyAnimation { duration: 200 }
+            ScriptAction {script: {
+                    if (opacity === 0) {
+                        closed()
+                    } else {
+                        opened()
+                    }
+                }
+            }
+        }
+    }
 
     MouseArea{
         id: area
@@ -47,12 +62,13 @@ Rectangle {
     }
 
     function close(){
+        closing()
         opacity = 0
     }
 
     function open(){
+        opening()
         opacity = 0.9
-        opened()
     }
 
     property Item content: Item{}
