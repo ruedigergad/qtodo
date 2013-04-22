@@ -29,20 +29,35 @@ Rectangle {
 
     z: 32
 
+    signal closed()
+    signal closing()
     signal opened()
-    signal rejected()
+    signal opening()
 
-    Behavior on opacity { PropertyAnimation { duration: 200 } }
+    Behavior on opacity {
+        SequentialAnimation {
+            PropertyAnimation { duration: 200 }
+            ScriptAction {script: {
+                    if (opacity === 0) {
+                        closed()
+                    } else {
+                        opened()
+                    }
+                }
+            }
+        }
+    }
 
     function close(){
+        closing()
         opacity = 0
         commonTools.enabled = true
     }
 
     function open(){
+        opening()
         commonTools.enabled = false
         opacity = 0.9
-        opened()
     }
 
 
