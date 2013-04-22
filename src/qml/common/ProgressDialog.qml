@@ -19,10 +19,33 @@
 
 import QtQuick 1.1
 
-CommonDialog {
+Rectangle {
     id: progressDialog
 
     anchors.fill: parent
+    visible: true
+    color: "black"
+    opacity: 0
+
+    z: 32
+
+    signal opened()
+    signal rejected()
+
+    Behavior on opacity { PropertyAnimation { duration: 200 } }
+
+    function close(){
+        opacity = 0
+        commonTools.enabled = true
+    }
+
+    function open(){
+        commonTools.enabled = false
+        opacity = 0.9
+        opened()
+    }
+
+
 
     property double maxValue
     property double currentValue
@@ -30,7 +53,7 @@ CommonDialog {
     property alias title: titleText.text
     property alias message: message.text
 
-    content: Item {
+    Item {
         anchors.fill: parent
 
         Text {

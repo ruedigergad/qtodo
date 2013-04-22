@@ -94,12 +94,12 @@ Rectangle {
     Rectangle {
         id: toolBarItem
         anchors {left: parent.left; right: parent.right; bottom: parent.bottom}
-        height: toolBar.height
+        height: commonTools.height
 
         color: "lightgray"
 
         QToDoToolBar {
-            id: toolBar
+            id: commonTools
         }
     }
 
