@@ -193,7 +193,7 @@ Item {
         imapFolderName: "qtodo"
         merger: todoMerger
 
-        onSucceeded: {
+        onSuccess: {
             console.log("Sync succeeded. Cleaning remaining sketch files.")
 
             var sketchFiles = fileHelper.ls(_sketchPath)
