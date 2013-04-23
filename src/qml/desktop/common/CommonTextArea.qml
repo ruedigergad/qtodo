@@ -44,6 +44,7 @@ Rectangle {
         font.pointSize: 17
         color: "black"
         textFormat: textArea.textFormat
+        wrapMode: TextEdit.WrapAnywhere
 
         onTextChanged: textArea.textChanged(text)
 
