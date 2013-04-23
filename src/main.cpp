@@ -70,7 +70,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     view->rootContext()->setContextProperty("applicationWindow", view);
     view->setResizeMode(QDeclarativeView::SizeRootObjectToView);
     view->resize(500, 600);
-//    view->setWindowFlags(Qt::FramelessWindowHint);
+    view->setWindowFlags(Qt::FramelessWindowHint);
 
     QObject::connect((QObject*)view->engine(), SIGNAL(quit()), app, SLOT(quit()));
 
