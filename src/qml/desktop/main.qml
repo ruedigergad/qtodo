@@ -58,7 +58,7 @@ Rectangle {
 
             Text {
                 anchors.right: parent.right
-                anchors.rightMargin: 20
+                anchors.rightMargin: 10
                 anchors.verticalCenter: parent.verticalCenter
 
                 text: "x"
@@ -117,6 +117,37 @@ Rectangle {
 
         QToDoToolBar {
             id: commonTools
+            anchors.right: resizeItem.left
+            anchors.rightMargin: 10
+        }
+
+        Text {
+            id: resizeItem
+            anchors.right: parent.right
+            anchors.rightMargin: 10
+            anchors.verticalCenter: parent.verticalCenter
+
+            font.bold: true
+            font.pixelSize: 24
+            text: "o"
+
+            MouseArea {
+                anchors.fill: parent
+                property variant previousPosition
+
+                onPressed: {
+                    previousPosition = Qt.point(mouseX, mouseY)
+                }
+
+                onPositionChanged: {
+                    if (pressedButtons == Qt.LeftButton) {
+                        var dx = mouseX - previousPosition.x
+                        var dy = mouseY - previousPosition.y
+                        applicationWindow.size = Qt.size(applicationWindow.size.width + dx,
+                                                    applicationWindow.size.height + dy)
+                    }
+                }
+            }
         }
     }
 
