@@ -184,10 +184,14 @@ Item {
         onMessageUpdated: syncToImapBase.messageUpdated()
 
         onError: {
-            _syncToImapProgressDialog.close()
-            _messageDialog.title = "Error"
-            _messageDialog.message = "Sync failed: \"" + errorString + "\" Code: " + errorCode + " Action: " + currentAction
-            _messageDialog.open()
+            error(errorString, errorCode, currentAction)
+
+            if (useBuiltInDialogs) {
+                _syncToImapProgressDialog.close()
+                _messageDialog.title = "Error"
+                _messageDialog.message = "Sync failed: \"" + errorString + "\" Code: " + errorCode + " Action: " + currentAction
+                _messageDialog.open()
+            }
         }
     }
 
