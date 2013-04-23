@@ -55,6 +55,23 @@ Rectangle {
                     }
                 }
             }
+
+            Text {
+                anchors.right: parent.right
+                anchors.rightMargin: 20
+                anchors.verticalCenter: parent.verticalCenter
+
+                text: "x"
+                font.pixelSize: 20
+                color: "white"
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        Qt.quit()
+                    }
+                }
+            }
         }
 
         MainRectangle {
