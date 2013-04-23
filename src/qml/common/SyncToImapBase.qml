@@ -27,13 +27,14 @@ Item {
     property QtObject merger
     property bool useBuiltInDialogs: true
 
+    signal error
     signal messageAdded
     signal messageDeleted
     signal messageIdsQueried
     signal messageRetrieved
     signal messageUpdated
     signal progress
-    signal succeeded
+    signal success
 
     property string _baseDir: ""
     property int _imapAccountId: -1
@@ -155,7 +156,7 @@ Item {
     }
 
     function _reportSuccess() {
-        succeeded()
+        success()
 
         if (useBuiltInDialogs) {
             _syncToImapProgressDialog.close()
