@@ -60,6 +60,9 @@ contains(LIBS,-lsailfishsilicabackground): {
     wrapperScripts.files = qtodo.sh accounts_gui.sh qtmail.sh
     wrapperScripts.path = /opt/$${TARGET}/bin
     INSTALLS += wrapperScripts
+
+    RESOURCES += \
+        icon.qrc
 }
 
 CONFIG += link_pkgconfig

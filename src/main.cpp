@@ -22,6 +22,8 @@
 
 #if defined(MEEGO_EDITION_HARMATTAN) || defined(MER_EDITION_SAILFISH)
 #include <applauncherd/MDeclarativeCache>
+#else
+#include <QIcon>
 #endif
 
 #include <filehelper.h>
@@ -61,6 +63,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     view->setSource(QUrl("/opt/qtodo/qml/sailfish/main.qml"));
     view->showFullScreen();
 #else
+    app->setApplicationName("Q To-Do");
+    app->setWindowIcon(QIcon(":/icon/icon.png"));
+    view->viewport()->setWindowIconText("bar");
     view->setSource(QUrl("qml/desktop/main.qml"));
     view->rootContext()->setContextProperty("applicationWindow", view);
     view->setResizeMode(QDeclarativeView::SizeRootObjectToView);
