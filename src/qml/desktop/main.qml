@@ -112,6 +112,11 @@ Rectangle {
             }
             Keys.onEnterPressed: mainRectangle.editCurrentItem()
             Keys.onReturnPressed: mainRectangle.editCurrentItem()
+            Keys.onPressed: {
+                if (event.key === Qt.Key_Plus) {
+                    mainRectangle.addItem()
+                }
+            }
         }
     }
 
