@@ -68,6 +68,8 @@ Item {
 
         opening()
         state = "open"
+
+        textInput.focus = true
     }
 
     onStateChanged: {

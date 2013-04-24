@@ -34,12 +34,16 @@ Rectangle {
 
     signal textChanged(string text)
 
+    function forceActiveFocus() {
+        textEdit.forceActiveFocus()
+    }
 
     TextEdit {
         id: textEdit
 
         anchors.centerIn: parent
         width: parent.width - (2 * font.pointSize)
+        focus: parent.focus
 
         font.pointSize: 17
         color: "black"
