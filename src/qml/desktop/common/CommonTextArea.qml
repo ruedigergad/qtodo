@@ -55,6 +55,7 @@ Rectangle {
         onFocusChanged: {
             if(focus){
                 textArea.border.color = "#569ffd";
+                textEdit.cursorPosition = textEdit.text.length
             }else{
                 textArea.border.color = "lightgray";
             }
