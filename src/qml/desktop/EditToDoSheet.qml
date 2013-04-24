@@ -202,6 +202,7 @@ Item {
                     textFormat: TextEdit.PlainText
 
                     Keys.onEscapePressed: editToDoSheet.close()
+                    onEnter: accepted()
                 }
             }
         }
