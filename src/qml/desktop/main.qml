@@ -25,13 +25,20 @@ Rectangle {
 
     anchors.fill: parent
     color: "white"
+    opacity: 0.75
+    radius: 20
+
 
     Rectangle {
         anchors {top: parent.top; left: parent.left; right: parent.right; bottom: toolBarItem.top}
         color: "lightgoldenrodyellow"
 
+        radius: parent.radius
+
         Header {
             id: header
+
+            radius: parent.radius
 
             /*
              * Thanks to alexisdm
@@ -114,6 +121,7 @@ Rectangle {
         height: commonTools.height
 
         color: "lightgray"
+        radius: parent.radius
 
         QToDoToolBar {
             id: commonTools

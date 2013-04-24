@@ -73,6 +73,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     view->resize(500, 600);
     view->setWindowFlags(Qt::FramelessWindowHint);
 
+    view->setAttribute(Qt::WA_TranslucentBackground);
+    view->setStyleSheet("background: transparent;");
+
     QObject::connect((QObject*)view->engine(), SIGNAL(quit()), app, SLOT(quit()));
 
     view->show();
