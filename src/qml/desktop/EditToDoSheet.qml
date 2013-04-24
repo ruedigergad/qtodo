@@ -200,6 +200,8 @@ Item {
                     id: textInput
                     width: parent.width
                     textFormat: TextEdit.PlainText
+
+                    Keys.onEscapePressed: editToDoSheet.close()
                 }
             }
         }
