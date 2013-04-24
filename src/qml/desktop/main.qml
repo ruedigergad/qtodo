@@ -84,35 +84,35 @@ Rectangle {
         MainRectangle {
             id: mainRectangle
             anchors{left: parent.left; right: parent.right; top: header.bottom; bottom: parent.bottom}
+            focus: true
 
             Component.onCompleted: {
                 treeView.fontPixelSize = 20
             }
-        }
 
-        focus: true
-        Keys.onDownPressed:{
-            if (mainRectangle.treeView.currentNodeListView.currentIndex < (mainRectangle.treeView.currentModel.count - 1)) {
-                mainRectangle.treeView.currentNodeListView.currentIndex++
+            Keys.onDownPressed:{
+                if (mainRectangle.treeView.currentNodeListView.currentIndex < (mainRectangle.treeView.currentModel.count - 1)) {
+                    mainRectangle.treeView.currentNodeListView.currentIndex++
+                    mainRectangle.treeView.expandTree()
+                }
+            }
+            Keys.onUpPressed: {
+                if (mainRectangle.treeView.currentNodeListView.currentIndex > 0) {
+                    mainRectangle.treeView.currentNodeListView.currentIndex--
+                    mainRectangle.treeView.expandTree()
+                }
+            }
+            Keys.onLeftPressed: mainRectangle.treeView.currentLevel--
+            Keys.onRightPressed: {
+                mainRectangle.treeView.currentLevel++
                 mainRectangle.treeView.expandTree()
             }
-        }
-        Keys.onUpPressed: {
-            if (mainRectangle.treeView.currentNodeListView.currentIndex > 0) {
-                mainRectangle.treeView.currentNodeListView.currentIndex--
-                mainRectangle.treeView.expandTree()
+            Keys.onSpacePressed: {
+                mainRectangle.treeView.toggleDone()
             }
+            Keys.onEnterPressed: mainRectangle.editCurrentItem()
+            Keys.onReturnPressed: mainRectangle.editCurrentItem()
         }
-        Keys.onLeftPressed: mainRectangle.treeView.currentLevel--
-        Keys.onRightPressed: {
-            mainRectangle.treeView.currentLevel++
-            mainRectangle.treeView.expandTree()
-        }
-        Keys.onSpacePressed: {
-            mainRectangle.treeView.toggleDone()
-        }
-        Keys.onEnterPressed: mainRectangle.editCurrentItem()
-        Keys.onReturnPressed: mainRectangle.editCurrentItem()
     }
 
     Rectangle {
@@ -241,6 +241,10 @@ Rectangle {
 
     EditToDoSheet {
         id: editToDoItem
+
+        onClosed: {
+            mainRectangle.focus = true
+        }
     }
 
     EditSketchSheet {
