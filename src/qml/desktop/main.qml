@@ -125,6 +125,8 @@ Rectangle {
         anchors {left: parent.left; right: parent.right; bottom: parent.bottom}
         height: commonTools.height
 
+        property int minWidth: commonTools.minWidth + resizeItem.width
+
         color: "lightgray"
         radius: parent.radius
 
@@ -156,7 +158,10 @@ Rectangle {
                     if (pressedButtons == Qt.LeftButton) {
                         var dx = mouseX - previousPosition.x
                         var dy = mouseY - previousPosition.y
-                        applicationWindow.size = Qt.size(applicationWindow.size.width + dx,
+
+                        var newWidth = applicationWindow.size.width + dx
+
+                        applicationWindow.size = Qt.size(newWidth < toolBarItem.minWidth ? toolBarItem.minWidth : newWidth,
                                                     applicationWindow.size.height + dy)
                     }
                 }

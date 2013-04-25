@@ -22,6 +22,8 @@ import QtQuick 1.1
 CommonToolBar {
     id: toolBar
 
+    property int minWidth: iconAdd.width + iconSketch.width + iconMarkDone.width + iconDelete.width + iconBack.width + iconMenu.width
+
     CommonToolIcon {
         id: iconAdd
         platformIconId: "toolbar-add"
