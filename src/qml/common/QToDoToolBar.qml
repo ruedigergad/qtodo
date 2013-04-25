@@ -37,8 +37,7 @@ CommonToolBar {
     }
     CommonToolIcon {
         id: iconMarkDone
-        platformIconId: "toolbar-done"
-        text: "Done"
+        iconSource: "../icons/to-do_done.png"
         enabled: mainRectangle.treeView.currentItem.type === "to-do"
         opacity: enabled ? 1 : 0.5
         onClicked: mainRectangle.treeView.toggleDone()
