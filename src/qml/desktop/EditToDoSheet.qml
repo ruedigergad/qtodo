@@ -156,6 +156,7 @@ Item {
                         id: toDoButton
                         width: parent.width / 2
                         text: "To-Do"
+                        enabled: editToDoSheet.type !== "to-do"
                         onClicked: {
                             type = "to-do"
                             colorButtonRow.enabled = (type === "to-do")
@@ -165,6 +166,7 @@ Item {
                         id: noteButton
                         width: parent.width / 2
                         text: "Note"
+                        enabled: editToDoSheet.type !== "note"
                         onClicked: {
                             type = "note"
                             colorButtonRow.enabled = (type === "to-do")
@@ -180,24 +182,28 @@ Item {
                         id: blueButton
                         width: parent.width / 4
                         iconSource: "../icons/to-do_blue.png"
+                        enabled: editToDoSheet.color !== "blue"
                         onClicked: editToDoSheet.color = "blue"
                     }
                     CommonButton {
                         id: greenButton
                         width: parent.width / 4
                         iconSource: "../icons/to-do_green.png"
+                        enabled: editToDoSheet.color !== "green"
                         onClicked: editToDoSheet.color = "green"
                     }
                     CommonButton {
                         id: yellowButton
                         width: parent.width / 4
                         iconSource: "../icons/to-do_yellow.png"
+                        enabled: editToDoSheet.color !== "yellow"
                         onClicked: editToDoSheet.color = "yellow"
                     }
                     CommonButton {
                         id: redButton
                         width: parent.width / 4
                         iconSource: "../icons/to-do_red.png"
+                        enabled: editToDoSheet.color !== "red"
                         onClicked: editToDoSheet.color = "red"
                     }
                 }
