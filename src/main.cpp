@@ -70,7 +70,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     view->setSource(QUrl(QCoreApplication::applicationDirPath() + "/../qml/desktop/main.qml"));
     view->rootContext()->setContextProperty("applicationWindow", view);
     view->setResizeMode(QDeclarativeView::SizeRootObjectToView);
-    view->resize(500, 600);
+    view->resize(400, 700);
     view->setWindowFlags(Qt::FramelessWindowHint);
 
     view->setAttribute(Qt::WA_TranslucentBackground);
