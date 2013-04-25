@@ -67,7 +67,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     app->setWindowIcon(QIcon(":/icon/icon.png"));
     view->setWindowTitle("Q To-Do");
 
-    view->setSource(QUrl("qml/desktop/main.qml"));
+    view->setSource(QUrl(QCoreApplication::applicationDirPath() + "/../qml/desktop/main.qml"));
     view->rootContext()->setContextProperty("applicationWindow", view);
     view->setResizeMode(QDeclarativeView::SizeRootObjectToView);
     view->resize(500, 600);
