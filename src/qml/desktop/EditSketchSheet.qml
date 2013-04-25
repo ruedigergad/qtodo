@@ -144,26 +144,37 @@ Item {
 
                 CommonButton {
                     id: blackButton
+                    width: parent.width / 6
                     iconSource: "../icons/sketch_black.png"
+                    enabled: drawing.drawColor !== "black"
                     onClicked: drawing.drawColor = "black"
                 }
                 CommonButton {
+                    width: parent.width / 6
                     iconSource: "../icons/sketch_blue.png"
+                    enabled: drawing.drawColor !== "blue"
                     onClicked: drawing.drawColor = "blue"
                 }
                 CommonButton {
+                    width: parent.width / 6
                     iconSource: "../icons/sketch_green.png"
+                    enabled: drawing.drawColor !== "green"
                     onClicked: drawing.drawColor = "green"
                 }
                 CommonButton {
+                    width: parent.width / 6
                     iconSource: "../icons/sketch_yellow.png"
+                    enabled: drawing.drawColor !== "yellow"
                     onClicked: drawing.drawColor = "yellow"
                 }
                 CommonButton {
+                    width: parent.width / 6
                     iconSource: "../icons/sketch_red.png"
+                    enabled: drawing.drawColor !== "red"
                     onClicked: drawing.drawColor = "red"
                 }
                 CommonButton {
+                    width: parent.width / 6
                     iconSource: "../icons/sketch_erase.png"
                     onClicked: drawing.drawColor = drawing.backgroundColor
                 }
