@@ -154,6 +154,7 @@ Item {
 
                     CommonButton {
                         id: toDoButton
+                        width: parent.width / 2
                         text: "To-Do"
                         onClicked: {
                             type = "to-do"
@@ -162,6 +163,7 @@ Item {
                     }
                     CommonButton {
                         id: noteButton
+                        width: parent.width / 2
                         text: "Note"
                         onClicked: {
                             type = "note"
@@ -176,21 +178,25 @@ Item {
 
                     CommonButton {
                         id: blueButton
+                        width: parent.width / 4
                         iconSource: "../icons/to-do_blue.png"
                         onClicked: editToDoSheet.color = "blue"
                     }
                     CommonButton {
                         id: greenButton
+                        width: parent.width / 4
                         iconSource: "../icons/to-do_green.png"
                         onClicked: editToDoSheet.color = "green"
                     }
                     CommonButton {
                         id: yellowButton
+                        width: parent.width / 4
                         iconSource: "../icons/to-do_yellow.png"
                         onClicked: editToDoSheet.color = "yellow"
                     }
                     CommonButton {
                         id: redButton
+                        width: parent.width / 4
                         iconSource: "../icons/to-do_red.png"
                         onClicked: editToDoSheet.color = "red"
                     }
