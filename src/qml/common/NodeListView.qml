@@ -96,14 +96,20 @@ Item {
         Text {
             id: noContentLabel
             text: "No entries yet"
+            width: parent.width
             font.pixelSize: 60; anchors.bottom: explanationLabel.top; anchors.bottomMargin: 50; anchors.horizontalCenter: parent.horizontalCenter
+            wrapMode: Text.WordWrap
+            horizontalAlignment: Text.AlignHCenter
             color: "gray"
         }
 
         Text {
             id: explanationLabel
             text: "Use + to add entries."
+            width: parent.width
             font.pixelSize: 40
+            wrapMode: Text.WordWrap
+            horizontalAlignment: Text.AlignHCenter
             color: "gray"
             anchors.centerIn: parent
         }
