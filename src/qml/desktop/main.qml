@@ -113,8 +113,30 @@ Rectangle {
             Keys.onEnterPressed: mainRectangle.editCurrentItem()
             Keys.onReturnPressed: mainRectangle.editCurrentItem()
             Keys.onPressed: {
-                if (event.key === Qt.Key_Plus) {
+                switch (event.key) {
+                case Qt.Key_H:
+                    mainRectangle.treeView.currentLevel--
+                    break
+                case Qt.Key_J:
+                    if (mainRectangle.treeView.currentNodeListView.currentIndex < (mainRectangle.treeView.currentModel.count - 1)) {
+                        mainRectangle.treeView.currentNodeListView.currentIndex++
+                        mainRectangle.treeView.expandTree()
+                    }
+                    break
+                case Qt.Key_K:
+                    if (mainRectangle.treeView.currentNodeListView.currentIndex > 0) {
+                        mainRectangle.treeView.currentNodeListView.currentIndex--
+                        mainRectangle.treeView.expandTree()
+                    }
+                    break
+                case Qt.Key_L:
+                    mainRectangle.treeView.currentLevel++
+                    mainRectangle.treeView.expandTree()
+                    break
+                case Qt.Key_Plus:
+                case Qt.Key_I:
                     mainRectangle.addItem()
+                    break
                 }
             }
         }
