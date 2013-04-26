@@ -133,6 +133,15 @@ Rectangle {
                     mainRectangle.treeView.currentLevel++
                     mainRectangle.treeView.expandTree()
                     break
+                case Qt.Key_S:
+                    if (event.modifiers & Qt.ControlModifier) {
+                        if (event.modifiers & Qt.ShiftModifier) {
+                            mainRectangle.confirmSyncSketchesToImapDialog.open()
+                        } else {
+                            mainRectangle.confirmSyncToImapDialog.open()
+                        }
+                    }
+                    break
                 case Qt.Key_Plus:
                 case Qt.Key_I:
                     mainRectangle.addItem()
