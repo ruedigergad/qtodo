@@ -25,6 +25,7 @@
 #else
 #include <QIcon>
 #include <qtodotrayicon.h>
+#include <qtodoview.h>
 #endif
 
 #include <filehelper.h>
@@ -43,7 +44,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     view = MDeclarativeCache::qDeclarativeView();
 #else
     app = new QApplication(argc, argv);
-    view = new QDeclarativeView();
+    view = new QToDoView();
 #endif
 
     qmlRegisterType<FileHelper>("qtodo", 1, 0, "FileHelper");

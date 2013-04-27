@@ -26,11 +26,13 @@ Rectangle {
     anchors{left: parent.left; right: parent.right; top: parent.top}
     z: 48
 
+    property alias textColor: headerText.color
+
     Text {
         id: headerText
         anchors{left: parent.left; leftMargin: 20; verticalCenter: parent.verticalCenter}
         text: "My To-Dos"
-        color: "#ffffff"
+        color: "white"
         font {pixelSize: header.height * 0.444; family: "Nokia Pure Text Light"}
     }
 
@@ -65,8 +67,8 @@ Rectangle {
 
             radius: height * 0.5
             border.width: height * 0.2
-            border.color: "white"
-            color: ((index + 1) === levelIndicator.count || animationRunning ) ? "white" : header.color
+            border.color: headerText.color
+            color: ((index + 1) === levelIndicator.count || animationRunning ) ? headerText.color : header.color
 
             ListView.onAdd: SequentialAnimation {
                 PropertyAction { target: levelIndicatorDelegate; property: "animationRunning"; value: true }

@@ -39,6 +39,7 @@ Rectangle {
             id: header
 
             radius: parent.radius
+            textColor: applicationWindow.windowFocus ? "white" : "black"
 
             /*
              * Thanks to alexisdm

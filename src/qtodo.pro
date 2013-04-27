@@ -61,8 +61,11 @@ contains(LIBS,-lsailfishsilicabackground): {
     wrapperScripts.path = /opt/$${TARGET}/bin
     INSTALLS += wrapperScripts
 
-    HEADERS += qtodotrayicon.h
-    SOURCES += qtodotrayicon.cpp
+    HEADERS += qtodotrayicon.h \
+        qtodoview.h
+
+    SOURCES += qtodotrayicon.cpp \
+        qtodoview.cpp
 
     RESOURCES += \
         icon.qrc
