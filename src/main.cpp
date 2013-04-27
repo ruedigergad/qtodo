@@ -24,6 +24,7 @@
 #include <applauncherd/MDeclarativeCache>
 #else
 #include <QIcon>
+#include <QxtGui/QxtGlobalShortcut>
 #include <qtodotrayicon.h>
 #include <qtodoview.h>
 #endif
@@ -70,8 +71,12 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     app->setWindowIcon(icon);
     view->setWindowTitle("Q To-Do");
 
-    QTodoTrayIcon trayIcon(icon, view);
-    trayIcon.show();
+    QTodoTrayIcon *trayIcon = new QTodoTrayIcon(icon, view);
+    trayIcon->show();
+
+    QxtGlobalShortcut *globalShortcut = new QxtGlobalShortcut(view);
+    globalShortcut->setShortcut(QKeySequence("Ctrl+Shift+Q"));
+    globalShortcut->connect(globalShortcut, SIGNAL(activated()), trayIcon, SLOT(toggleViewHide()));
 
     view->setSource(QUrl(QCoreApplication::applicationDirPath() + "/../qml/desktop/main.qml"));
     view->rootContext()->setContextProperty("applicationWindow", view);

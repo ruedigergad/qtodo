@@ -59,16 +59,23 @@ contains(LIBS,-lsailfishsilicabackground): {
 
     wrapperScripts.files = qtodo.sh accounts_gui.sh qtmail.sh
     wrapperScripts.path = /opt/$${TARGET}/bin
-    INSTALLS += wrapperScripts
+    libqtx.files = lib/build/$${os}/$${arch}/libQxtCore.so lib/build/$${os}/$${arch}/libQxtGui.so
+    libqtx.path = /opt/$${TARGET}/lib
+    INSTALLS += wrapperScripts libqtx
 
-    HEADERS += qtodotrayicon.h \
+    HEADERS += \
+        qtodotrayicon.h \
         qtodoview.h
 
-    SOURCES += qtodotrayicon.cpp \
+    SOURCES += \
+        qtodotrayicon.cpp \
         qtodoview.cpp
 
     RESOURCES += \
         icon.qrc
+
+    CONFIG  += qxt
+    QXT     += core gui
 }
 
 CONFIG += link_pkgconfig
