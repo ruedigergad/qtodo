@@ -120,6 +120,9 @@ Rectangle {
                         mainRectangle.confirmCleanDoneDialog.open()
                     }
                     break
+                case Qt.Key_D:
+                    mainRectangle.confirmDeleteDialog.open()
+                    break
                 case Qt.Key_H:
                     mainRectangle.treeView.currentLevel--
                     break
