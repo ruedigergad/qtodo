@@ -27,7 +27,12 @@ Dialog {
 
     signal accepted();
 
-    Text{
+    function accept() {
+        close()
+        accepted()
+    }
+
+    Text {
         id: titleText
         anchors.bottom: message.top
         anchors.margins: 20
@@ -39,7 +44,7 @@ Dialog {
         wrapMode: Text.Wrap
     }
 
-    Text{
+    Text {
         id:message
         anchors.centerIn: parent
         width: parent.width
@@ -49,7 +54,7 @@ Dialog {
         wrapMode: Text.Wrap
     }
 
-    CommonButton{
+    CommonButton {
         id: acceptButton
         text: "OK"
         anchors.top: message.bottom
@@ -57,12 +62,11 @@ Dialog {
         anchors.horizontalCenter: parent.horizontalCenter
         width: parent.width * 0.5
         onClicked: {
-            close();
-            accepted();
+            accept()
         }
     }
 
-    CommonButton{
+    CommonButton {
         id: rejectButton
         text: "Cancel"
         anchors.top: acceptButton.bottom
@@ -70,8 +74,19 @@ Dialog {
         anchors.horizontalCenter: parent.horizontalCenter
         width: parent.width * 0.5
         onClicked: {
-            close();
-            rejected();
+            reject()
         }
+    }
+
+    Keys.onEscapePressed: {
+        reject()
+    }
+
+    Keys.onEnterPressed: {
+        accept()
+    }
+
+    Keys.onReturnPressed: {
+        accept()
     }
 }

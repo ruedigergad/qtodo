@@ -56,8 +56,7 @@ Rectangle {
         visible: dialog.visible
 
         onClicked: {
-            close();
-            rejected();
+            reject()
         }
     }
 
@@ -68,10 +67,20 @@ Rectangle {
 
     function open(){
         opening()
+        focus = true
         opacity = 0.9
+    }
+
+    function reject() {
+        close();
+        rejected();
     }
 
     property Item content: Item{}
 
     onContentChanged: content.parent = dialog
+
+    Keys.onPressed: {
+        reject()
+    }
 }
