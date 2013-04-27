@@ -75,6 +75,13 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QTodoTrayIcon *trayIcon = new QTodoTrayIcon(icon, view);
     trayIcon->show();
 
+    QMenu *trayMenu = new QMenu();
+    QAction *quitAction = new QAction("Quit", 0);
+    trayMenu->addAction(quitAction);
+    view->connect(quitAction, SIGNAL(triggered()), app, SLOT(quit()));
+    trayIcon->setContextMenu(trayMenu);
+
+
     QxtGlobalShortcut *globalShortcut = new QxtGlobalShortcut(view);
     globalShortcut->setShortcut(QKeySequence("Ctrl+Shift+Y"));
     globalShortcut->connect(globalShortcut, SIGNAL(activated()), trayIcon, SLOT(toggleViewHide()));
