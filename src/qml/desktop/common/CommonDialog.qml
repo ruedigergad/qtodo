@@ -17,6 +17,6 @@
  *  along with Q To-Do.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-Dialog{
+Dialog {
     id: simpleDialog
 }

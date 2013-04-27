@@ -63,6 +63,21 @@ Item {
         state = "open"
     }
 
+    onAccepted: {
+        var fullFileName = mainRectangle._sketchPath + "/" + sketchFileName
+        console.log("Saving sketch to: " + fullFileName)
+
+        drawing.save(fullFileName)
+
+        if (edit) {
+            mainRectangle.treeView.currentModel.updateElement(mainRectangle.treeView.currentIndex, "sketch", sketchFileName, "na")
+        } else {
+            mainRectangle.treeView.currentModel.addElement("sketch", sketchFileName, "na")
+        }
+
+        editSketchSheet.close();
+    }
+
     onClosed: drawing.init()
 
     onOpened: {
@@ -187,20 +202,5 @@ Item {
                 lineWidth: (drawColor === backgroundColor) ? 35 : 3
             }
         }
-    }
-
-    onAccepted: {
-        var fullFileName = mainRectangle._sketchPath + "/" + sketchFileName
-        console.log("Saving sketch to: " + fullFileName)
-
-        drawing.save(fullFileName)
-
-        if (edit) {
-            mainRectangle.treeView.currentModel.updateElement(mainRectangle.treeView.currentIndex, "sketch", sketchFileName, "na")
-        } else {
-            mainRectangle.treeView.currentModel.addElement("sketch", sketchFileName, "na")
-        }
-
-        editSketchSheet.close();
     }
 }

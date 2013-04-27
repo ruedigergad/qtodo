@@ -72,6 +72,16 @@ Item {
         textInput.focus = true
     }
 
+    onAccepted: {
+        if(edit){
+            mainRectangle.treeView.currentModel.updateElement(mainRectangle.treeView.currentIndex, type, text, color)
+        }else{
+            mainRectangle.treeView.currentModel.addElement(type, text, color)
+        }
+
+        editToDoSheet.close();
+    }
+
     onStateChanged: {
         console.log("Edit entry dialog state changed: " + state)
     }
@@ -218,15 +228,5 @@ Item {
                 }
             }
         }
-    }
-
-    onAccepted: {
-        if(edit){
-            mainRectangle.treeView.currentModel.updateElement(mainRectangle.treeView.currentIndex, type, text, color)
-        }else{
-            mainRectangle.treeView.currentModel.addElement(type, text, color)
-        }
-
-        editToDoSheet.close();
     }
 }

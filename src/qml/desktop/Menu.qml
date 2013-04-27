@@ -27,6 +27,15 @@ Item {
     visible: false
     z: 16
 
+    function close(){
+        menuBorder.y = height
+    }
+
+    function open(){
+        menu.visible = true
+        menuBorder.y = height - menuBorder.height
+    }
+
     /*
      * The following is a quite ugly hack to animate the menu.
      * This should be done via States rather than this hack.
@@ -87,14 +96,5 @@ Item {
 
             color: "lightgray"
         }
-    }
-
-    function close(){
-        menuBorder.y = height
-    }
-
-    function open(){
-        menu.visible = true
-        menuBorder.y = height - menuBorder.height
     }
 }
