@@ -76,7 +76,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     view->rootContext()->setContextProperty("applicationWindow", view);
     view->setResizeMode(QDeclarativeView::SizeRootObjectToView);
     view->resize(400, 700);
-    view->setWindowFlags(Qt::FramelessWindowHint | Qt::SplashScreen);
+    view->setWindowFlags(Qt::FramelessWindowHint);
 
     view->setAttribute(Qt::WA_TranslucentBackground);
     view->setStyleSheet("background: transparent;");
