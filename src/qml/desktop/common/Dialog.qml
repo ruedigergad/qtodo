@@ -57,6 +57,7 @@ Rectangle {
     onContentChanged: content.parent = dialog
 
     Keys.onPressed: {
+        event.accepted = true
         reject()
     }
 
