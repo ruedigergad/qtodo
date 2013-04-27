@@ -17,12 +17,20 @@
  *  along with Q To-Do.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QAction>
+#include <QMenu>
 #include "qtodotrayicon.h"
 
 QTodoTrayIcon::QTodoTrayIcon(const QIcon &icon, QDeclarativeView *view) :
     QSystemTrayIcon(icon),
     view(view)
 {
+    QMenu *trayMenu = new QMenu();
+    QAction *quitAction = new QAction("Quit", 0);
+    trayMenu->addAction(quitAction);
+    connect(quitAction, SIGNAL(triggered()), view, SLOT(close()));
+    setContextMenu(trayMenu);
+
     connect(this, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(handleActivation(QSystemTrayIcon::ActivationReason)));
 }
 
