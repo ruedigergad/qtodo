@@ -30,11 +30,35 @@ Rectangle {
 
     z: 32
 
+    property Item content: Item{}
+
     signal closed()
     signal closing()
     signal opened()
     signal opening()
     signal rejected()
+
+    function close(){
+        closing()
+        opacity = 0
+    }
+
+    function open(){
+        opening()
+        focus = true
+        opacity = 0.9
+    }
+
+    function reject() {
+        close();
+        rejected();
+    }
+
+    onContentChanged: content.parent = dialog
+
+    Keys.onPressed: {
+        reject()
+    }
 
     Behavior on opacity {
         SequentialAnimation {
@@ -58,29 +82,5 @@ Rectangle {
         onClicked: {
             reject()
         }
-    }
-
-    function close(){
-        closing()
-        opacity = 0
-    }
-
-    function open(){
-        opening()
-        focus = true
-        opacity = 0.9
-    }
-
-    function reject() {
-        close();
-        rejected();
-    }
-
-    property Item content: Item{}
-
-    onContentChanged: content.parent = dialog
-
-    Keys.onPressed: {
-        reject()
     }
 }
