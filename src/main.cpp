@@ -75,7 +75,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     trayIcon->show();
 
     QxtGlobalShortcut *globalShortcut = new QxtGlobalShortcut(view);
-    globalShortcut->setShortcut(QKeySequence("Ctrl+Shift+Q"));
+    globalShortcut->setShortcut(QKeySequence("Ctrl+Shift+Y"));
     globalShortcut->connect(globalShortcut, SIGNAL(activated()), trayIcon, SLOT(toggleViewHide()));
 
     view->setSource(QUrl(QCoreApplication::applicationDirPath() + "/../qml/desktop/main.qml"));
