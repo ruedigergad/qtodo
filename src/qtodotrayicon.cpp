@@ -28,7 +28,7 @@ QTodoTrayIcon::QTodoTrayIcon(const QIcon &icon, QDeclarativeView *view) :
 
 void QTodoTrayIcon::handleActivation(QSystemTrayIcon::ActivationReason reason) {
     switch(reason) {
-    case QSystemTrayIcon::Trigger:
+    case QSystemTrayIcon::DoubleClick:
         toggleViewHide();
         break;
     default:

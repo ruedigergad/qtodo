@@ -24,6 +24,7 @@
 #include <applauncherd/MDeclarativeCache>
 #else
 #include <QIcon>
+#include <QMenu>
 #include <QxtGui/QxtGlobalShortcut>
 #include <qtodotrayicon.h>
 #include <qtodoview.h>
