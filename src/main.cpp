@@ -41,6 +41,10 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QApplication *app;
     QDeclarativeView *view;
 
+    QCoreApplication::setOrganizationName("ruedigergad.com");
+    QCoreApplication::setOrganizationDomain("ruedigergad.com");
+    QCoreApplication::setApplicationName("qtodo");
+
 #if defined(MEEGO_EDITION_HARMATTAN) || defined(MER_EDITION_SAILFISH)
     app = MDeclarativeCache::qApplication(argc, argv);
     view = MDeclarativeCache::qDeclarativeView();
@@ -83,7 +87,13 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     view->rootContext()->setContextProperty("applicationWindow", view);
     view->setResizeMode(QDeclarativeView::SizeRootObjectToView);
     view->resize(400, 700);
-    view->setWindowFlags(Qt::FramelessWindowHint);
+    if (QSettings().value("alwaysOnTop", true).toBool()) {
+        view->setWindowFlags(view->windowFlags() | Qt::WindowStaysOnTopHint);
+    }
+    if (QSettings().value("hideDecorations", true).toBool()) {
+        view->setWindowFlags(view->windowFlags() | Qt::FramelessWindowHint);
+    }
+
 
     view->setAttribute(Qt::WA_TranslucentBackground);
     view->setStyleSheet("background: transparent;");

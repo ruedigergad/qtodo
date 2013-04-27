@@ -41,6 +41,8 @@ private:
 
 private slots:
     void handleActivation(QSystemTrayIcon::ActivationReason reason);
+    void toggleAlwaysOnTop(bool val);
+    void toggleHideDecoration(bool val);
     
 };
 

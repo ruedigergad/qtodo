@@ -19,6 +19,7 @@
 
 #include <QAction>
 #include <QMenu>
+#include <QSettings>
 #include "qtodotrayicon.h"
 
 QTodoTrayIcon::QTodoTrayIcon(const QIcon &icon, QDeclarativeView *view) :
@@ -26,9 +27,23 @@ QTodoTrayIcon::QTodoTrayIcon(const QIcon &icon, QDeclarativeView *view) :
     view(view)
 {
     QMenu *trayMenu = new QMenu();
-    QAction *quitAction = new QAction("Quit", 0);
+
+    QAction *alwaysOnTopAction = new QAction("Always on Top", this);
+    alwaysOnTopAction->setCheckable(true);
+    alwaysOnTopAction->setChecked(QSettings().value("alwaysOnTop", true).toBool());
+    connect(alwaysOnTopAction, SIGNAL(triggered(bool)), this, SLOT(toggleAlwaysOnTop(bool)));
+    trayMenu->addAction(alwaysOnTopAction);
+
+    QAction *hideDecorationAction = new QAction("Hide Window Decoration", this);
+    hideDecorationAction->setCheckable(true);
+    hideDecorationAction->setChecked(QSettings().value("hideDecoration", true).toBool());
+    connect(hideDecorationAction, SIGNAL(triggered(bool)), this, SLOT(toggleHideDecoration(bool)));
+    trayMenu->addAction(hideDecorationAction);
+
+    QAction *quitAction = new QAction("Quit", this);
     trayMenu->addAction(quitAction);
     connect(quitAction, SIGNAL(triggered()), view, SLOT(close()));
+
     setContextMenu(trayMenu);
 
     connect(this, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(handleActivation(QSystemTrayIcon::ActivationReason)));
@@ -41,6 +56,28 @@ void QTodoTrayIcon::handleActivation(QSystemTrayIcon::ActivationReason reason) {
         break;
     default:
         break;
+    }
+}
+
+void QTodoTrayIcon::toggleAlwaysOnTop(bool val) {
+    QSettings().setValue("alwaysOnTop", val);
+    if (val) {
+        view->setWindowFlags(view->windowFlags() | Qt::WindowStaysOnTopHint);
+        view->show();
+    } else {
+        view->setWindowFlags(view->windowFlags() & (~ Qt::WindowStaysOnTopHint));
+        view->show();
+    }
+}
+
+void QTodoTrayIcon::toggleHideDecoration(bool val) {
+    QSettings().setValue("hideDecoration", val);
+    if (val) {
+        view->setWindowFlags(view->windowFlags() | Qt::FramelessWindowHint);
+        view->show();
+    } else {
+        view->setWindowFlags(view->windowFlags() & (~ Qt::FramelessWindowHint));
+        view->show();
     }
 }
 
