@@ -115,6 +115,11 @@ Rectangle {
             Keys.onReturnPressed: mainRectangle.editCurrentItem()
             Keys.onPressed: {
                 switch (event.key) {
+                case Qt.Key_C:
+                    if (event.modifiers & Qt.ControlModifier) {
+                        mainRectangle.confirmCleanDoneDialog.open()
+                    }
+                    break
                 case Qt.Key_H:
                     mainRectangle.treeView.currentLevel--
                     break
