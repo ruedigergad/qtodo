@@ -24,6 +24,7 @@
 #include <applauncherd/MDeclarativeCache>
 #else
 #include <QIcon>
+#include <qtodotrayicon.h>
 #endif
 
 #include <filehelper.h>
@@ -63,9 +64,13 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     view->setSource(QUrl("/opt/qtodo/qml/sailfish/main.qml"));
     view->showFullScreen();
 #else
+    QIcon icon(":/icon/icon.png");
     app->setApplicationName("Q To-Do");
-    app->setWindowIcon(QIcon(":/icon/icon.png"));
+    app->setWindowIcon(icon);
     view->setWindowTitle("Q To-Do");
+
+    QTodoTrayIcon trayIcon(icon, view);
+    trayIcon.show();
 
     view->setSource(QUrl(QCoreApplication::applicationDirPath() + "/../qml/desktop/main.qml"));
     view->rootContext()->setContextProperty("applicationWindow", view);
