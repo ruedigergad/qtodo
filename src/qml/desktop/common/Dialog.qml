@@ -56,6 +56,10 @@ Rectangle {
 
     onContentChanged: content.parent = dialog
 
+    onClosed: {
+        parent.focus = true
+    }
+
     Keys.onPressed: {
         event.accepted = true
         reject()
