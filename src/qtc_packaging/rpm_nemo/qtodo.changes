@@ -1,3 +1,6 @@
+* Sun Apr 28 2013 Ruediger Gad <r.c.g@gmx.de> - 0.11.1
+- Improve stability.
+
 * Mon Apr 22 2013 Ruediger Gad <r.c.g@gmx.de> - 0.11.0
 - Add functionality to sync sketches.
 - Add place holder for sketches that had not been synced.
