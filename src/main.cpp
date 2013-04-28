@@ -65,7 +65,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     view->viewport()->setAttribute(Qt::WA_NoSystemBackground);
 
 #ifdef MEEGO_EDITION_HARMATTAN
-    view->setSource(QUrl("/opt/qtodo/qml/meego/main.qml"));
+    view->setSource(QUrl(QCoreApplication::applicationDirPath() + "/../qml/meego/main.qml"));
     view->showFullScreen();
 #elif defined(MER_EDITION_SAILFISH)
     view->setSource(QUrl("/opt/qtodo/qml/sailfish/main.qml"));

@@ -31,13 +31,23 @@ contains(LIBS,-lsailfishsilicabackground): {
 
     DEFINES += MEEGO_EDITION_HARMATTAN
 
+    arch = armv7hl
+    os = linux/harmattan
+    qmlCanvasImport.source = lib/build/$${os}/$${arch}/qmlcanvas
+    qmlCanvasImport.target = lib/imports
+
     qmlMeego.source = qml/meego
     qmlMeego.target = qml
 
     qmlMeegoCommon.source = qml/meego/common
     qmlMeegoCommon.target = qml
 
-    DEPLOYMENTFOLDERS += qmlMeego qmlMeegoCommon
+    DEPLOYMENTFOLDERS += qmlMeego qmlMeegoCommon qmlCanvasImport
+
+    wrapperScripts.files = qtodo_harmattan.sh
+    wrapperScripts.path = /opt/$${TARGET}/bin
+
+    INSTALLS += wrapperScripts
 } else {
     message(Desktop build)
     qmlDesktop.source = qml/desktop
@@ -117,6 +127,7 @@ SOURCES += main.cpp \
 OTHER_FILES += \
     qtodo.desktop \
     qtodo.sh \
+    qtodo_harmattan.sh \
     qtodo.svg \
     qtodo.png \
     qtc_packaging/debian_harmattan/rules \
