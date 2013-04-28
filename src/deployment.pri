@@ -59,6 +59,9 @@ symbian {
         svg.path = /opt/sdk/share/icons/hicolor/scalable/apps
     } else {
         desktopfile.path = /usr/share/applications
+        desktopfile.files = qtc_packaging/desktop_version_files/$${TARGET}.desktop
+        icon.files = qtc_packaging/desktop_version_files/64x64/$${TARGET}.png
+
         copyCommand =
         for(deploymentfolder, DEPLOYMENTFOLDERS) {
             source = $$MAINPROFILEPWD/$$eval($${deploymentfolder}.source)
@@ -97,13 +100,22 @@ symbian {
         export($$itempath)
         INSTALLS += $$item
     }
-    icon.files = $${TARGET}.png
-    svg.files = $${TARGET}.svg
+
+    isEmpty(icon.files) {
+        icon.files = $${TARGET}.png
+    }
+    isEmpty(svg.files) {
+        svg.files = $${TARGET}.svg
+    }
     isEmpty(icon.path) {
         icon.path = /usr/share/icons/hicolor/64x64/apps
+    }
+    isEmpty(svg.path) {
         svg.path = /usr/share/icons/hicolor/scalable/apps
     }
-    desktopfile.files = $${TARGET}.desktop
+    isEmpty(desktopfile.files) {
+        desktopfile.files = $${TARGET}.desktop
+    }
     target.path = $${installPrefix}/bin
     export(icon.files)
     export(icon.path)
