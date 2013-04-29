@@ -69,7 +69,7 @@ contains(LIBS,-lsailfishsilicabackground): {
 
     wrapperScripts.files = qtodo.sh accounts_gui.sh qtmail.sh
     wrapperScripts.path = /opt/$${TARGET}/bin
-    libqtx.files = lib/build/$${os}/$${arch}/libQxtCore.so lib/build/$${os}/$${arch}/libQxtGui.so
+    libqtx.files = lib/build/$${os}/$${arch}/libQxtCore.so.0 lib/build/$${os}/$${arch}/libQxtGui.so.0
     libqtx.path = /opt/$${TARGET}/lib
     INSTALLS += wrapperScripts libqtx
 
