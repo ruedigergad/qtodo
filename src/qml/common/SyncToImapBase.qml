@@ -184,7 +184,7 @@ Item {
         onMessageUpdated: syncToImapBase.messageUpdated()
 
         onError: {
-            error(errorString, errorCode, currentAction)
+            syncToImapBase.error(errorString, errorCode, currentAction)
 
             if (useBuiltInDialogs) {
                 _syncToImapProgressDialog.close()
