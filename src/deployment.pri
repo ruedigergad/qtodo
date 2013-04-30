@@ -57,10 +57,16 @@ symbian {
         desktopfile.path = /opt/sdk/share/applications
         icon.path = /opt/sdk/share/icons/hicolor/64x64/apps
         svg.path = /opt/sdk/share/icons/hicolor/scalable/apps
+    } else:contains( MEEGO_EDITION, harmattan ) {
+        desktopfile.files = $${TARGET}.desktop
+        desktopfile.path = /usr/share/applications
+        icon.files = $${TARGET}80.png
+        icon.path = /usr/share/icons/hicolor/80x80/apps
+        svg.path = /opt/sdk/share/icons/hicolor/scalable/apps
     } else {
         desktopfile.path = /usr/share/applications
-        desktopfile.files = qtc_packaging/desktop_version_files/$${TARGET}.desktop
-        icon.files = qtc_packaging/desktop_version_files/64x64/$${TARGET}.png
+        desktopfile.files = $${TARGET}.desktop
+        icon.files = $${TARGET}.png
 
         copyCommand =
         for(deploymentfolder, DEPLOYMENTFOLDERS) {
