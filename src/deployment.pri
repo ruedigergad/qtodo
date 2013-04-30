@@ -58,7 +58,7 @@ symbian {
         icon.path = /opt/sdk/share/icons/hicolor/64x64/apps
         svg.path = /opt/sdk/share/icons/hicolor/scalable/apps
     } else:contains( MEEGO_EDITION, harmattan ) {
-        desktopfile.files = $${TARGET}.desktop
+        desktopfile.files = $${TARGET}_harmattan.desktop
         desktopfile.path = /usr/share/applications
         icon.files = $${TARGET}80.png
         icon.path = /usr/share/icons/hicolor/80x80/apps
