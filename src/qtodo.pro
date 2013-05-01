@@ -53,6 +53,10 @@ contains(LIBS,-lsailfishsilicabackground): {
 
     DEFINES += WINDOWS_DESKTOP
 
+    INCLUDEPATH += \
+        lib/include \
+        lib/include/QxtCore \
+        lib/include/QxtGui
 
     HEADERS += \
         qtodotrayicon.h \
