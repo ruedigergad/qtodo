@@ -52,8 +52,9 @@ contains(LIBS,-lsailfishsilicabackground): {
     message(Windows Build)
 
     DEFINES += WINDOWS_DESKTOP
+    DEFINES += _UNICODE
 
-    CONFIG += console
+#    CONFIG += console
 
     INCLUDEPATH += \
         lib/include \
