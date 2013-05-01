@@ -1,0 +1,34 @@
+<RCC>
+    <qresource prefix="/qml">
+        <file alias="AboutDialog.qml">qml/common/AboutDialog.qml</file>
+        <file alias="CommonFlickable.qml">qml/common/CommonFlickable.qml</file>
+        <file alias="Drawing.qml">qml/common/Drawing.qml</file>
+        <file alias="FlowListView.qml">qml/common/FlowListView.qml</file>
+        <file alias="Header.qml">qml/common/Header.qml</file>
+        <file alias="MainRectangle.qml">qml/common/MainRectangle.qml</file>
+        <file alias="MessageDialog.qml">qml/common/MessageDialog.qml</file>
+        <file alias="NodeListDelegate.qml">qml/common/NodeListDelegate.qml</file>
+        <file alias="NodeListDelegateContainer.qml">qml/common/NodeListDelegateContainer.qml</file>
+        <file alias="nodelisthelper.js">qml/common/nodelisthelper.js</file>
+        <file alias="NodeListView.qml">qml/common/NodeListView.qml</file>
+        <file alias="ProgressDialog.qml">qml/common/ProgressDialog.qml</file>
+        <file alias="QToDoToolBar.qml">qml/common/QToDoToolBar.qml</file>
+        <file alias="SyncDirToImap.qml">qml/common/SyncDirToImap.qml</file>
+        <file alias="SyncFileToImap.qml">qml/common/SyncFileToImap.qml</file>
+        <file alias="SyncToImap.qml">qml/common/SyncToImap.qml</file>
+        <file alias="SyncToImapBase.qml">qml/common/SyncToImapBase.qml</file>
+        <file alias="TreeView.qml">qml/common/TreeView.qml</file>
+        <file alias="EditSketchSheet.qml">qml/desktop/EditSketchSheet.qml</file>
+        <file alias="EditToDoSheet.qml">qml/desktop/EditToDoSheet.qml</file>
+        <file alias="main.qml">qml/desktop/main.qml</file>
+        <file alias="Menu.qml">qml/desktop/Menu.qml</file>
+        <file alias="CommonButton.qml">qml/desktop/common/CommonButton.qml</file>
+        <file alias="CommonDialog.qml">qml/desktop/common/CommonDialog.qml</file>
+        <file alias="CommonTextArea.qml">qml/desktop/common/CommonTextArea.qml</file>
+        <file alias="CommonTextField.qml">qml/desktop/common/CommonTextField.qml</file>
+        <file alias="CommonToolBar.qml">qml/desktop/common/CommonToolBar.qml</file>
+        <file alias="CommonToolIcon.qml">qml/desktop/common/CommonToolIcon.qml</file>
+        <file alias="ConfirmationDialog.qml">qml/desktop/common/ConfirmationDialog.qml</file>
+        <file alias="Dialog.qml">qml/desktop/common/Dialog.qml</file>
+    </qresource>
+</RCC>

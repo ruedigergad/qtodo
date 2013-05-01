@@ -63,7 +63,9 @@ contains(LIBS,-lsailfishsilicabackground): {
         qtodoview.cpp
 
     RESOURCES += \
-        icon.qrc
+        icon.qrc \
+        windows_resources.qrc
+
 } else {
     message(Defaulting to Linux desktop build.)
 
@@ -100,11 +102,11 @@ contains(LIBS,-lsailfishsilicabackground): {
         qtodotrayicon.cpp \
         qtodoview.cpp
 
-    RESOURCES += \
-        icon.qrc
-
     CONFIG  += qxt
     QXT     += core gui
+
+    RESOURCES += \
+        icon.qrc
 }
 
 !win32 {
@@ -226,3 +228,5 @@ exists($$QMAKE_INCDIR_QT"/../applauncherd/MDeclarativeCache"): {
     QMAKE_CXXFLAGS += -fPIC -fvisibility=hidden -fvisibility-inlines-hidden
     QMAKE_LFLAGS += -pie -rdynamic
 }
+
+RESOURCES +=
