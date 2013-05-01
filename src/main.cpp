@@ -31,8 +31,7 @@
 #endif
 
 #ifdef WINDOWS_DESKTOP
-#include <windows.h>
-#include <tchar.h>
+#include <QProcess>
 #endif
 
 #include "filehelper.h"
@@ -47,13 +46,8 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     putenv("QMF_PLUGINS=plugins");
     putenv("QML_IMPORT_PATH=imports");
     system("taskkill /F /FI \"imagename eq messageserver.exe\"");
-
-    STARTUPINFO si;
-    PROCESS_INFORMATION pi;
-    ZeroMemory( &si, sizeof(si) );
-    si.cb = sizeof(si);
-    ZeroMemory( &pi, sizeof(pi) );
-    CreateProcess(NULL, TEXT("messageserver.exe"), NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi);
+    QProcess messageServerProcess;
+    messageServerProcess.start("messageserver.exe");
 #endif
 
     QApplication *app;
@@ -131,7 +125,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     int ret = app->exec();
 
 #ifdef WINDOWS_DESKTOP
-    system("taskkill /F /FI \"imagename eq messageserver.exe\"");
+    messageServerProcess.start("messageserver.exe");
 #endif
 
     return ret;
