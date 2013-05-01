@@ -75,6 +75,8 @@ contains(LIBS,-lsailfishsilicabackground): {
         qtodotrayicon.cpp \
         qtodoview.cpp
 
+    RC_FILE = qtc_packaging/windows/qtodo.rc
+
     RESOURCES += \
         icon.qrc \
         windows_resources.qrc
