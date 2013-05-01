@@ -83,7 +83,13 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     globalShortcut->setShortcut(QKeySequence("Ctrl+Shift+Y"));
     globalShortcut->connect(globalShortcut, SIGNAL(activated()), trayIcon, SLOT(toggleViewHide()));
 
+#ifdef WINDOWS_DESKTOP
+    view->setSource(QUrl("qrc:///qml/main.qml"));
+#else
     view->setSource(QUrl(QCoreApplication::applicationDirPath() + "/../qml/desktop/main.qml"));
+#endif
+
+
     view->rootContext()->setContextProperty("applicationWindow", view);
     view->setResizeMode(QDeclarativeView::SizeRootObjectToView);
     view->resize(400, 700);
