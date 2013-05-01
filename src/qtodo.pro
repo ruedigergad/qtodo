@@ -48,8 +48,27 @@ contains(LIBS,-lsailfishsilicabackground): {
     wrapperScripts.path = /opt/$${TARGET}/bin
 
     INSTALLS += wrapperScripts
+} else:win32 {
+    message(Windows Build)
+
+    DEFINES += WINDOWS_DESKTOP
+
+
+    HEADERS += \
+        qtodotrayicon.h \
+        qtodoview.h
+
+    SOURCES += \
+        qtodotrayicon.cpp \
+        qtodoview.cpp
+
+    RESOURCES += \
+        icon.qrc
 } else {
-    message(Desktop build)
+    message(Defaulting to Linux desktop build.)
+
+    DEFINES += LINUX_DESKTOP
+
     qmlDesktop.source = qml/desktop
     qmlDesktop.target = qml
 
@@ -88,8 +107,10 @@ contains(LIBS,-lsailfishsilicabackground): {
     QXT     += core gui
 }
 
-CONFIG += link_pkgconfig
-PKGCONFIG += qmfclient
+!win32 {
+    CONFIG += link_pkgconfig
+    PKGCONFIG += qmfclient
+}
 
 QT+= declarative xml
 symbian:TARGET.UID3 = 0xE1CCA219
