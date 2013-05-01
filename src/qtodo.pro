@@ -228,7 +228,10 @@ splash.path = /opt/$${TARGET}
 sampleXml.files = sample.xml
 sampleXml.path = /opt/$${TARGET}
 
-INSTALLS += logoFiles splash
+licenseInfo.files = LICENSES
+licenseInfo.path = /opt/$${TARGET}
+
+INSTALLS += logoFiles splash licenseInfo
 #sampleXml
 
 # Please do not modify the following two lines. Required for deployment.
