@@ -53,6 +53,8 @@ contains(LIBS,-lsailfishsilicabackground): {
 
     DEFINES += WINDOWS_DESKTOP
 
+    CONFIG += console
+
     INCLUDEPATH += \
         lib/include \
         lib/include/QxtCore \
