@@ -30,6 +30,11 @@
 #include "qtodoview.h"
 #endif
 
+#ifdef WINDOWS_DESKTOP
+#include <windows.h>
+#include <tchar.h>
+#endif
+
 #include "filehelper.h"
 #include "imapstorage.h"
 #include "merger.h"
@@ -39,10 +44,8 @@
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
 #ifdef WINDOWS_DESKTOP
-    putenv("QMF_PLUGINS=plugins");
+//    putenv("QMF_PLUGINS=plugins");
     putenv("QML_IMPORT_PATH=imports");
-    system("taskkill /F /FI \"imagename eq messageserver.exe\"");
-    popen("messageserver.exe", "r");
 #endif
 
     QApplication *app;
@@ -118,10 +121,5 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     view->show();
 #endif
     int ret = app->exec();
-
-#ifdef WINDOWS_DESKTOP
-    system("taskkill /F /FI \"imagename eq messageserver.exe\"");
-#endif
-
     return ret;
 }
