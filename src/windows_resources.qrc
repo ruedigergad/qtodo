@@ -31,4 +31,46 @@
         <file alias="ConfirmationDialog.qml">qml/desktop/common/ConfirmationDialog.qml</file>
         <file alias="Dialog.qml">qml/desktop/common/Dialog.qml</file>
     </qresource>
+    <qresource prefix="/">
+        <file>icons/back.png</file>
+        <file>icons/back.svg</file>
+        <file>icons/logo.png</file>
+        <file>icons/logo.svg</file>
+        <file>icons/next.png</file>
+        <file>icons/next.svg</file>
+        <file>icons/note.png</file>
+        <file>icons/note.svg</file>
+        <file>icons/sketch_black.png</file>
+        <file>icons/sketch_black.svg</file>
+        <file>icons/sketch_blue.png</file>
+        <file>icons/sketch_blue.svg</file>
+        <file>icons/sketch_erase.png</file>
+        <file>icons/sketch_erase.svg</file>
+        <file>icons/sketch_green.png</file>
+        <file>icons/sketch_green.svg</file>
+        <file>icons/sketch_red.png</file>
+        <file>icons/sketch_red.svg</file>
+        <file>icons/sketch_yellow.png</file>
+        <file>icons/sketch_yellow.svg</file>
+        <file>icons/sketch.png</file>
+        <file>icons/sketch.svg</file>
+        <file>icons/to-do_blue.png</file>
+        <file>icons/to-do_blue.svg</file>
+        <file>icons/to-do_done_blue.png</file>
+        <file>icons/to-do_done_blue.svg</file>
+        <file>icons/to-do_done_green.png</file>
+        <file>icons/to-do_done_green.svg</file>
+        <file>icons/to-do_done_red.png</file>
+        <file>icons/to-do_done_red.svg</file>
+        <file>icons/to-do_done_yellow.png</file>
+        <file>icons/to-do_done_yellow.svg</file>
+        <file>icons/to-do_done.png</file>
+        <file>icons/to-do_done.svg</file>
+        <file>icons/to-do_green.png</file>
+        <file>icons/to-do_green.svg</file>
+        <file>icons/to-do_red.png</file>
+        <file>icons/to-do_red.svg</file>
+        <file>icons/to-do_yellow.png</file>
+        <file>icons/to-do_yellow.svg</file>
+    </qresource>
 </RCC>
