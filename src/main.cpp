@@ -104,7 +104,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     view->rootContext()->setContextProperty("applicationWindow", view);
     view->setResizeMode(QDeclarativeView::SizeRootObjectToView);
-    view->resize(400, 600);
+    view->resize(400, 500);
     if (QSettings().value("alwaysOnTop", true).toBool()) {
         view->setWindowFlags(view->windowFlags() | Qt::WindowStaysOnTopHint);
     }
