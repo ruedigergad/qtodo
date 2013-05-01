@@ -26,15 +26,15 @@
 #include <QIcon>
 #include <QMenu>
 #include <QxtGui/QxtGlobalShortcut>
-#include <qtodotrayicon.h>
-#include <qtodoview.h>
+#include "qtodotrayicon.h"
+#include "qtodoview.h"
 #endif
 
-#include <filehelper.h>
-#include <imapstorage.h>
-#include <merger.h>
-#include <nodelistmodel.h>
-#include <todostorage.h>
+#include "filehelper.h"
+#include "imapstorage.h"
+#include "merger.h"
+#include "nodelistmodel.h"
+#include "todostorage.h"
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
