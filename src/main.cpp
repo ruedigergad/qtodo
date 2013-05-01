@@ -38,6 +38,11 @@
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
+#ifdef WINDOWS_DESKTOP
+    putenv("QMF_PLUGINS=plugins");
+    putenv("QML_IMPORT_PATH=imports");
+#endif
+
     QApplication *app;
     QDeclarativeView *view;
 
