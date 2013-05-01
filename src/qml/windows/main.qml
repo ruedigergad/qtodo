@@ -143,8 +143,6 @@ Rectangle {
         anchors {left: parent.left; right: parent.right; bottom: parent.bottom}
         height: commonTools.height
 
-        property int minWidth: commonTools.minWidth + resizeItem.width + 20
-
         color: "lightgray"
 
         QToDoToolBar {
