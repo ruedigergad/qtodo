@@ -9,7 +9,7 @@ Name:       qtodo
 # << macros
 
 Summary:    Q ToDo -- A Todo List Organizer
-Version:    0.11.2
+Version:    0.11.3
 Release:    1
 Group:      Applications/Productivity
 License:    GPLv3
