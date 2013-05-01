@@ -90,10 +90,12 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     if (QSettings().value("alwaysOnTop", true).toBool()) {
         view->setWindowFlags(view->windowFlags() | Qt::WindowStaysOnTopHint);
     }
+
+#ifdef LINUX_DESKTOP
     if (QSettings().value("hideDecorations", true).toBool()) {
         view->setWindowFlags(view->windowFlags() | Qt::FramelessWindowHint);
     }
-
+#endif
 
     view->setAttribute(Qt::WA_TranslucentBackground);
     view->setStyleSheet("background: transparent;");

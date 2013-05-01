@@ -34,11 +34,13 @@ QTodoTrayIcon::QTodoTrayIcon(const QIcon &icon, QDeclarativeView *view) :
     connect(alwaysOnTopAction, SIGNAL(triggered(bool)), this, SLOT(toggleAlwaysOnTop(bool)));
     trayMenu->addAction(alwaysOnTopAction);
 
+#ifdef LINUX_DESKTOP
     QAction *hideDecorationAction = new QAction("Hide Window Decoration", this);
     hideDecorationAction->setCheckable(true);
     hideDecorationAction->setChecked(QSettings().value("hideDecoration", true).toBool());
     connect(hideDecorationAction, SIGNAL(triggered(bool)), this, SLOT(toggleHideDecoration(bool)));
     trayMenu->addAction(hideDecorationAction);
+#endif
 
     QAction *quitAction = new QAction("Quit", this);
     trayMenu->addAction(quitAction);
