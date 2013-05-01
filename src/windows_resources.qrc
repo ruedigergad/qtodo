@@ -20,7 +20,6 @@
         <file alias="TreeView.qml">qml/common/TreeView.qml</file>
         <file alias="EditSketchSheet.qml">qml/desktop/EditSketchSheet.qml</file>
         <file alias="EditToDoSheet.qml">qml/desktop/EditToDoSheet.qml</file>
-        <file alias="main.qml">qml/desktop/main.qml</file>
         <file alias="Menu.qml">qml/desktop/Menu.qml</file>
         <file alias="CommonButton.qml">qml/desktop/common/CommonButton.qml</file>
         <file alias="CommonDialog.qml">qml/desktop/common/CommonDialog.qml</file>
@@ -30,6 +29,7 @@
         <file alias="CommonToolIcon.qml">qml/desktop/common/CommonToolIcon.qml</file>
         <file alias="ConfirmationDialog.qml">qml/desktop/common/ConfirmationDialog.qml</file>
         <file alias="Dialog.qml">qml/desktop/common/Dialog.qml</file>
+        <file alias="main.qml">qml/windows/main.qml</file>
     </qresource>
     <qresource prefix="/">
         <file>icons/back.png</file>

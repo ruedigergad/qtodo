@@ -41,6 +41,8 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 #ifdef WINDOWS_DESKTOP
     putenv("QMF_PLUGINS=plugins");
     putenv("QML_IMPORT_PATH=imports");
+    system("taskkill /F /FI \"imagename eq messageserver.exe\"");
+    popen("messageserver.exe", "r");
 #endif
 
     QApplication *app;
@@ -115,5 +117,11 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     view->show();
 #endif
-    return app->exec();
+    int ret = app->exec();
+
+#ifdef WINDOWS_DESKTOP
+    system("taskkill /F /FI \"imagename eq messageserver.exe\"");
+#endif
+
+    return ret;
 }

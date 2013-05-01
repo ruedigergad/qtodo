@@ -53,7 +53,7 @@ contains(LIBS,-lsailfishsilicabackground): {
 
     DEFINES += WINDOWS_DESKTOP
 
-    CONFIG += console
+#    CONFIG += console
 
     INCLUDEPATH += \
         lib/include \
