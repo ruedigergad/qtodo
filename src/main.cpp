@@ -30,11 +30,6 @@
 #include "qtodoview.h"
 #endif
 
-#ifdef WINDOWS_DESKTOP
-#include <windows.h>
-#include <tchar.h>
-#endif
-
 #include "filehelper.h"
 #include "imapstorage.h"
 #include "merger.h"
