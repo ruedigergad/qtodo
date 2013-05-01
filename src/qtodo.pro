@@ -58,6 +58,12 @@ contains(LIBS,-lsailfishsilicabackground): {
         lib/include/QxtCore \
         lib/include/QxtGui
 
+    LIBS += \
+        -Llib/build/windows/x86 \
+        -lqmfclient \
+        -lQxtCore \
+        -lQxtGui
+
     HEADERS += \
         qtodotrayicon.h \
         qtodoview.h
