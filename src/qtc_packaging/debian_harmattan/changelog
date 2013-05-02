@@ -1,3 +1,9 @@
+qtodo (0.11.4) unstable; urgency=low
+
+  * Force UTF-8 for all string operations.
+
+ -- Ruediger Gad <r.c.g@gmx.de>  Fri, 03 May 2013 01:38:00 +0200
+
 qtodo (0.11.3) unstable; urgency=low
 
   * Add license information.
