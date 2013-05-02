@@ -91,7 +91,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
      * Desktop versions may need to start messageserver.
      */
 #ifdef WINDOWS_DESKTOP
-    QString messageServerRunningQuery = "tasklist | find /n \"messageserver.exe\"";
+    QString messageServerRunningQuery = "tasklist | find /N \"messageserver.exe\"";
     QString messageServerExecutable = "messageserver.exe";
 #endif
 #ifdef LINUX_DESKTOP
