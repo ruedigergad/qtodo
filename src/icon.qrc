@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/icon">
         <file>icon.png</file>
+        <file>splash_desktop.png</file>
     </qresource>
 </RCC>

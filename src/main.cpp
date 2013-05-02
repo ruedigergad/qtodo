@@ -34,6 +34,11 @@
 #include <QProcess>
 #endif
 
+#if defined(LINUX_DESKTOP) || defined(WINDOWS_DESKTOP)
+#include <QPixmap>
+#include <QSplashScreen>
+#endif
+
 #include "filehelper.h"
 #include "imapstorage.h"
 #include "merger.h"
@@ -42,14 +47,17 @@
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
+    /*
+     * Set environment variables.
+     */
 #ifdef WINDOWS_DESKTOP
     putenv("QMF_PLUGINS=plugins");
     putenv("QML_IMPORT_PATH=imports");
-    system("taskkill /F /FI \"imagename eq messageserver.exe\"");
-    QProcess messageServerProcess;
-    messageServerProcess.start("messageserver.exe");
 #endif
 
+    /*
+     * Init Application
+     */
     QApplication *app;
     QDeclarativeView *view;
 
@@ -65,6 +73,46 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     view = new QToDoView();
 #endif
 
+    /*
+     * Splash screen for desktop versions.
+     */
+#if defined(LINUX_DESKTOP) || defined(WINDOWS_DESKTOP)
+    QPixmap pixmap(":/icon/splash_desktop.png");
+    QSplashScreen splash(pixmap);
+    splash.show();
+    app->processEvents();
+#endif
+
+    /*
+     * Desktop versions may need to start messageserver.
+     */
+#ifdef WINDOWS_DESKTOP
+    QString messageServerRunningQuery = "tasklist | find /n \"messageserver.exe\"";
+    QString messageServerExecutable = "messageserver.exe";
+#endif
+#ifdef LINUX_DESKTOP
+    QString messageServerRunningQuery = "ps -el | grep messageserver";
+    QString messageServerExecutable = QCoreApplication::applicationDirPath() + "/../lib/qmf/bin/messageserver";
+#endif
+#if defined(LINUX_DESKTOP) || defined(WINDOWS_DESKTOP)
+    QProcess queryMessageServerRunning;
+    queryMessageServerRunning.start(messageServerRunningQuery);
+    queryMessageServerRunning.waitForFinished(-1);
+
+    bool messageServerStarted = false;
+    QProcess messageServerProcess;
+    if (queryMessageServerRunning.exitCode() != 0) {
+        qDebug("Starting messageserver...");
+        messageServerProcess.start(messageServerExecutable);
+        messageServerStarted = true;
+    } else {
+        qDebug("Messageserver is already running.");
+    }
+#endif
+
+    /*
+     * Setup application.
+     */
     qmlRegisterType<FileHelper>("qtodo", 1, 0, "FileHelper");
     qmlRegisterType<ImapStorage>("qtodo", 1, 0, "ImapStorage");
     qmlRegisterType<Merger>("qtodo", 1, 0, "Merger");
@@ -76,6 +124,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     view->viewport()->setAttribute(Qt::WA_OpaquePaintEvent);
     view->viewport()->setAttribute(Qt::WA_NoSystemBackground);
 
+    /*
+     * Startup QML view.
+     */
 #ifdef MEEGO_EDITION_HARMATTAN
     view->setSource(QUrl(QCoreApplication::applicationDirPath() + "/../qml/meego/main.qml"));
     view->showFullScreen();
@@ -101,7 +152,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     view->setSource(QUrl(QCoreApplication::applicationDirPath() + "/../qml/desktop/main.qml"));
 #endif
 
-
     view->rootContext()->setContextProperty("applicationWindow", view);
     view->setResizeMode(QDeclarativeView::SizeRootObjectToView);
     view->resize(400, 500);
@@ -113,19 +163,24 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     if (QSettings().value("hideDecorations", true).toBool()) {
         view->setWindowFlags(view->windowFlags() | Qt::FramelessWindowHint);
     }
-#endif
-
     view->setAttribute(Qt::WA_TranslucentBackground);
     view->setStyleSheet("background: transparent;");
+#endif
 
     QObject::connect((QObject*)view->engine(), SIGNAL(quit()), app, SLOT(quit()));
 
+    splash.close();
     view->show();
 #endif
     int ret = app->exec();
 
-#ifdef WINDOWS_DESKTOP
-    messageServerProcess.start("messageserver.exe");
+#if defined(LINUX_DESKTOP) || defined(WINDOWS_DESKTOP)
+    if (messageServerStarted) {
+        splash.show();
+        qDebug("Stopping messageserver...");
+        messageServerProcess.kill();
+        splash.close();
+    }
 #endif
 
     return ret;
