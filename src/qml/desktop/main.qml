@@ -65,6 +65,25 @@ Rectangle {
             }
 
             Text {
+                anchors.right: closeText.left
+                anchors.rightMargin: 10
+                anchors.verticalCenter: parent.verticalCenter
+
+                text: "-"
+                font.pixelSize: 40
+                color: "white"
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        trayIcon.toggleViewHide()
+                    }
+                }
+            }
+
+            Text {
+                id: closeText
+
                 anchors.right: parent.right
                 anchors.rightMargin: 10
                 anchors.verticalCenter: parent.verticalCenter

@@ -35,7 +35,6 @@
 #ifdef WINDOWS_DESKTOP
 #include <QProcess>
 #endif
-
 #include "filehelper.h"
 #include "imapstorage.h"
 #include "merger.h"
@@ -158,6 +157,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 #endif
 
     view->rootContext()->setContextProperty("applicationWindow", view);
+    view->rootContext()->setContextProperty("trayIcon", trayIcon);
     view->setResizeMode(QDeclarativeView::SizeRootObjectToView);
     view->resize(400, 500);
     if (QSettings().value("alwaysOnTop", true).toBool()) {
