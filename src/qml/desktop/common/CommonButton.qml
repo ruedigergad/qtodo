@@ -30,11 +30,11 @@ Rectangle {
     signal clicked
 
     width: textItem.width + 40; height: textItem.height + 10
-    border.width: 1
+//    border.width: 1
     radius: height/3
     smooth: true
 
-    color: "#9acfff"
+    color: "#00d000" //"#9acfff"
 
     Text {
         id: textItem
@@ -61,7 +61,7 @@ Rectangle {
     states: [
         State {
             name: "pressed"; when: mouseArea.pressed && mouseArea.containsMouse
-            PropertyChanges { target: commonButton; color: "#569ffd" }
+            PropertyChanges { target: commonButton; color: "#50e050" } //"#569ffd"
             PropertyChanges { target: textItem; x: textItem.x + 1; y: textItem.y + 1; explicit: true }
         },
         State {
