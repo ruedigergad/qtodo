@@ -80,6 +80,10 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QPixmap pixmap(":/icon/splash_desktop.png");
     QSplashScreen splash(pixmap);
     splash.show();
+    splash.setAttribute(Qt::WA_TranslucentBackground);
+    splash.setStyleSheet("background: transparent;");
+    app->processEvents();
+    splash.showMessage("   ");
     app->processEvents();
 #endif
 
