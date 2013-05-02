@@ -47,8 +47,6 @@
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
-    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
-
     /*
      * Set environment variables.
      */
@@ -74,6 +72,8 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     app = new QApplication(argc, argv);
     view = new QToDoView();
 #endif
+
+    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
 
     /*
      * Splash screen for desktop versions.
