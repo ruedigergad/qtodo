@@ -214,6 +214,7 @@ OTHER_FILES += \
     qml/sailfish/common/ConfirmationDialog.qml \
     qml/sailfish/common/CommonFlickable.qml \
     qml/sailfish/EditToDoDialog.qml \
+    qml/windows/main.qml \
     accounts_gui.sh \
     qtmail.sh
 
