@@ -68,7 +68,7 @@ Rectangle {
             radius: height * 0.5
             border.width: height * 0.2
             border.color: headerText.color
-            color: ((index + 1) === levelIndicator.count || animationRunning ) ? headerText.color : header.color
+            color: ((index + 1) === levelIndicator.count || animationRunning ) ? headerText.color : "transparent"
 
             ListView.onAdd: SequentialAnimation {
                 PropertyAction { target: levelIndicatorDelegate; property: "animationRunning"; value: true }
