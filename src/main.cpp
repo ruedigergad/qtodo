@@ -25,6 +25,8 @@
 #else
 #include <QIcon>
 #include <QMenu>
+#include <QPixmap>
+#include <QSplashScreen>
 #include <QxtGui/QxtGlobalShortcut>
 #include "qtodotrayicon.h"
 #include "qtodoview.h"
@@ -32,11 +34,6 @@
 
 #ifdef WINDOWS_DESKTOP
 #include <QProcess>
-#endif
-
-#if defined(LINUX_DESKTOP) || defined(WINDOWS_DESKTOP)
-#include <QPixmap>
-#include <QSplashScreen>
 #endif
 
 #include "filehelper.h"
