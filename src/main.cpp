@@ -47,6 +47,8 @@
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
+    QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
+
     /*
      * Set environment variables.
      */
