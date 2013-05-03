@@ -76,12 +76,12 @@ private:
     QDomDocument document;
     QDomElement root;
 
+    NodeListModel *parentModel;
     QDomElement parentElement;
     QDomNodeList childNodes;
 
     int countSubNodeTodos(QDomNodeList subNodes, bool todoOnly, bool recursive);
     Q_INVOKABLE QStringList getSketchNames(QDomElement element);
-
 };
 
 #endif // NODELISTMODEL_H

@@ -22,7 +22,8 @@
 #include <QDebug>
 
 NodeListModel::NodeListModel(QObject *parent) :
-    QAbstractListModel(parent)
+    QAbstractListModel(parent),
+    parentModel(NULL)
 {
     QHash<int, QByteArray> roles;
     roles[TagNameRole] = "tagName";
@@ -84,9 +85,10 @@ void NodeListModel::setParentFromSelection(NodeListModel *model, int selectionIn
     if(model->childNodes.at(0).isText())
         selectionIndex++;
 
-    document = model->document;
-    root = model->root;
-    parentElement = model->getElementAt(selectionIndex);
+    parentModel = model;
+    document = parentModel->document;
+    root = parentModel->root;
+    parentElement = parentModel->getElementAt(selectionIndex);
     childNodes = parentElement.childNodes();
     endResetModel();
 
@@ -107,6 +109,9 @@ void NodeListModel::setRoot(ToDoStorage *storage){
 }
 
 void NodeListModel::addElement(QString type, QString text, QString color){
+    if (parentModel != NULL) {
+        parentModel->beginResetModel();
+    }
     beginResetModel();
 
     QDomElement element = document.createElement(type);
@@ -127,12 +132,19 @@ void NodeListModel::addElement(QString type, QString text, QString color){
         parentElement.insertBefore(element, firstChild);
     }
     endResetModel();
+    if (parentModel != NULL) {
+        parentModel->endResetModel();
+    }
 
     emit changed();
 }
 
 void NodeListModel::deleteElement(int index){
+    if (parentModel != NULL) {
+        parentModel->beginResetModel();
+    }
     beginResetModel();
+
     if(childNodes.at(0).isText())
         index++;
 
@@ -142,6 +154,9 @@ void NodeListModel::deleteElement(int index){
 
     parentElement.removeChild(childNodes.at(index));
     endResetModel();
+    if (parentModel != NULL) {
+        parentModel->endResetModel();
+    }
 
     root.setAttribute("deleted_ids", deleted.join(","));
     emit changed();
