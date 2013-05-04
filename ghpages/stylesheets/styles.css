@@ -20,12 +20,16 @@ h1, h2, h3 {
   line-height:1.1;
 }
 
-h1 {
+section h1 {
   font-size:28px;
+  border-bottom: 1px solid #000000;
+  margin: 0em;
+  padding: 0em;
 }
 
 h2 {
   color:#393939;
+  font-size:18px;
 }
 
 h3, h4, h5, h6 {
@@ -33,7 +37,7 @@ h3, h4, h5, h6 {
 }
 
 a {
-  color:#39c;
+  color:#00b000;
   font-weight:400;
   text-decoration:none;
 }
@@ -107,7 +111,12 @@ header img {
 
 header h1 {
     display: inline;
-    font-size:42px;
+    font-size: 42px;
+}
+
+header h2 {
+  line-height: 0.8;
+  font-size: 24px;
 }
 
 header ul {
