@@ -32,6 +32,10 @@ h2 {
   font-size:18px;
 }
 
+h3 {
+    font-size: 14px;
+}
+
 h3, h4, h5, h6 {
   color:#494949;
 }
@@ -115,7 +119,7 @@ header h1 {
 }
 
 header h2 {
-  line-height: 0.8;
+  line-height: 0.25;
   font-size: 24px;
 }
 
