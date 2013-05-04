@@ -101,6 +101,15 @@ header {
   position:fixed;
 }
 
+header img {
+    vertical-align: middle;
+}
+
+header h1 {
+    display: inline;
+    font-size:42px;
+}
+
 header ul {
   list-style:none;
   height:40px;
