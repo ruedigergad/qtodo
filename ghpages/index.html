@@ -41,6 +41,25 @@
 
 <p>Furthermore, you can easily synchronize your to-dos with your desktop. Please note that you need to have an e-mail account that supports IMAP and the Q To-Do desktop version for this.</p>
 
+<h2>Features</h2>
+<p>Q To-Do offers the following features:</p>
+
+<ul>
+    <li>Simple and Easy to Use User Interface</li>
+    <li>Optimized for Touch Screens</li>
+    <li>Nested To-Dos</li>
+    <li>Progress Bar</li>
+    <li>Indicator for Nesting Level</li>
+    <li>Draw and Edit Sketches</li>
+    <li>Support for Smartphone (N9) and Desktops</li>
+    <li>Sync To-Dos between Smartphone and Desktop</li>
+    <li>Keyboard Shortcuts for Desktop Version</li>
+    <li>Batch Delete of Done Items</li>
+    <li>Different Colors for To-Dos</li>
+    <li>System Tray Icon (Desktop Version)</li>
+</ul>
+
+
 <h1>Screenshots<a name="screenshots"></a></h1>
 
 <h2>Nokia N9</h2>
@@ -64,29 +83,70 @@
 <h1>Usage<a name="usage"></a></h1>
 
 <h2>Getting Started</h2>
-<p>On the first start no entries will be present. To add new entries simply click &quot;+&quot; in the toolbar. Please note: there are two types (For now, we skip sketches.) of entries "to-dos" and "notes". To-dos can have subentries, notes don't.</p>
+<p>On the first start no entries will be present. To add new entries simply click &quot;+&quot; in the toolbar. Please note: there are two types of text entries (For now, we skip sketches.) "to-dos" and "notes". To-dos can have subentries, notes don't.</p>
 
 <h2>Subentries</h2>
 <p>To-dos can have subentries. This way entries can be grouped logically. One use case is to create an overall task and define the subtasks as nested elements. Q To-Do allows an arbitrary depth of nested elements. The &quot;dot indicator&quot; in the titlebar shows the currently displayed level.</p>
 
-<p>To navigate to subentries of a to-do simply mark the to-do and swipe from right to left. You should see the list move side-ways as you do it. Alternatively, you can click the small arrow button on the right side of a to-do entry. To navigate to the parent items simply swipe from left to right or click the arrow pointing to the left in the toolbar.</p>
+<p>To navigate to subentries of a to-do mark the to-do and swipe from right to left. You should see the list move side-ways as you do it. Alternatively, you can click the small arrow button on the right side of a to-do entry. To navigate to the parent items simply swipe from left to right or click the arrow pointing to the left in the toolbar.</p>
 
 <p>To add sub-entries to a new todo entry simply navigate to the list showing the sub-entries as described above. You will see an empty list. There you can then add new entries the same way you did before after Q To-Do was started for the first time.</p>
 
 <h2>Progress Bar</h2>
 <p>A "progress" bar indicates the progress of to-dos containing other to-dos. See also the screenshots above.</p>
 
+<h2>Sketches</h2>
+<p>It is possible to add simple sketches. To add a sketch press the button showing the pencil and drawing pictogram right of the &quit;+&quot; button in the toolbar.</p>
+
+<p>In the to-do list view, sketches will be displayed downsized to a quarter of the original size (half width and half height). Sketches can be moved, edited, and deleted like all other elements.</p>
+
 <h2>Reorder Entries</h2>
 <p>To reorder entries use a two finger gesture. Select the entry you want to move, keep it pressed, and with a second finger move up or down.</p>
 
-
+<h2>Double-click/Long-press</h2>
 <p>Double-clicking an entry opens the edit field. Long-pressing opens a menu with more options.</p>
+
+<h2>Synchronization</h2>
+<p>Q To-Do offers a synchronization feature. With this synchronization feature it is possible to synchronize data between different Q To-Do instances. The probably most common use case for the synchronization feature is to synchronize to-dos between smartphones and desktop computers. However, synchronizing between different desktop computers, e.g., at home and at work, is also very handy.</p>
+
+<p> The synchronization process is initiated via the main menu. There exist two options: synchronize the to-do list and synchronize the sketch files. It is recommended to first synchronize the to-do list and, if desired, synchronize the sketches afterwards. Please note that synchronizing the sketches is optional as it takes more time and requires more space. </p>
+
+<p> Before the synchronization feature can be used some requirements must be fulfilled and settings need to be set up. Below are the instructions for setting up the synchronization functionality. </p>
+
+<h3>General Requirements</h3>
+<p> Q To-Do uses the IMAP protocol for its synchronization feature. IMAP is most commonly used in the context of e-mails. So, the basic requirement for using the Q To-Do synchronization functionality is an e-mail account with IMAP support. </p>
+
+<h3>Nokia N9 (MeeGo/Harmattan)</h3>
+<p> In order to use the synchronization feature on the Nokia N9 (MeeGo/Harmattan) it is required to set up an e-mail account that supports IMAP. This is done via the Nokia N9 accounts app. Once an e-mail account with support for the IMAP protocol was set up, the synchronization feature can be used out of the box. </p>
+
+<h3> Desktop (Linux, Windows) </h3>
+<p> For the desktop versions the IMAP account needs to be set up separately from existing e-mail accounts. Unfortunately, there is no better integration yet. </p>
+
+<p> In order to set up the required account details, first start Q To-Do. Next the account settings application needs to be started. For Linux this is done via the &quot;accounts_gui.sh&quot; script. For Windows the &quot;messagingaccounts&quot; application has to be started. </p>
+
+<p> In the GUI application a new account has to be added. In the account setting it is sufficient to solely configure an incoming account. Choose IMAP as type and fill the remaining fields according to your e-mail account settings. It is strongly recommended to enable encryption for the connection. Feel free to contact me if you are unsure what to do. </p>
+
+<h2> Keyboard Interaction (Desktop Versions) </h2>
+The desktop versions allow interaction via the keyboard. In the following the basic shortcuts are introduced.
+
+<ul>
+    <li>Navigating the List View: Arrow Keys (and h,j,k,l vi-like Bindings)</li>
+    <li>Add a new entry: i or +</li>
+    <li>Delete an entry: d</li>
+    <li>Cancel an action: ESC</li>
+    <li>Confirm an action: ENTER or RETURN</li>
+    <li>Synchronize: CTRL+S</li>
+    <li>Synchronize sketches: CTRL+SHIFT+S</li>
+    <li>Clean items marked done: CTRL+C</li>
+    <li>Toggle hide: CTRL+SHIFT+Y</li>
+</ul>
+
 
 <h1>License<a name="license"></a></h1>
 <p>This section is intended to give an overview of the software and technologies used in Q To-Do. Additionally, a list of licenses, copyrights, and trademarks is given. Though, no claim for completeness is made.</p>
 
 <h2>Q To-Do</h2>
-<p>Copyright 2011-2013, Ruediger Gad</p>
+<p>Copyright 2011-2013, Ruediger Gad &lt;r.c.g@gmx.de&gt; </p>
 
 <p>Q To-Do is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
 
@@ -153,7 +213,6 @@ Additionally to above mentioned libraries the git repository of Q To-Do contains
 <p>Windows is a registered trademark of Microsoft Corporation in the United States and other countries. </p>
 
 <p>All other trademarks are property of their respective owners. </p>
-
 
 
       </section>
