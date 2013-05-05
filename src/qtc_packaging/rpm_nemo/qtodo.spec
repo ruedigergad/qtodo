@@ -59,9 +59,9 @@ desktop-file-install --delete-original       \
 
 %files
 %defattr(-,root,root,-)
-%{_datadir}/applications/%{name}.desktop
+%{_datadir}/applications/%{name}_mer.desktop
 /opt/%{name}
-%{_datadir}/icons/hicolor/*/apps/%{name}.png
-%{_datadir}/icons/hicolor/*/apps/%{name}.svg
+%{_datadir}/icons/hicolor/80x80/apps/%{name}80.png
+%{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
 # >> files
 # << files
