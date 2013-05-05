@@ -16,9 +16,8 @@
 import qmlcanvas 1.0
 import QtQuick 1.1
 
-
 Canvas {
-    id:canvas
+    id: canvas
     color: "white"
     property int paintX
     property int paintY
@@ -26,7 +25,7 @@ Canvas {
     property int lineWidth: 2
     property string drawColor: "black"
     property string backgroundColor: "white"
-    property variant ctx: getContext("2d");
+    property variant ctx
 
     MouseArea {
         id:mousearea
@@ -66,10 +65,12 @@ Canvas {
     // Added by Ruediger Gad
     // Code comes without warranty but is free for use without any further requirements.
     function load(path) {
+        ctx = getContext("2d")
         var img = ctx.createImage(path)
         ctx.drawImage(img, 0, 0, width, height)
     }
     function init(){
+        ctx = getContext("2d")
         clear()
         ctx.lineWidth = 1
         ctx.strokeStyle = "salmon"
