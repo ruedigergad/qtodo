@@ -1,0 +1,26 @@
+diff --git a/src/canvas.cpp b/src/canvas.cpp
+index b179937..764bb35 100644
+--- a/src/canvas.cpp
++++ b/src/canvas.cpp
+@@ -167,8 +167,20 @@ void Canvas::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget
+ 
+ Context2D *Canvas::getContext(const QString &contextId)
+ {
+-    if (contextId == QLatin1String("2d"))
++    if (contextId == QLatin1String("2d")) {
++        /*
++         * Force recreation of context when getting the context.
++         * This is a hack to workaround a segfault on Harmattan.
++         */
++        m_context = new Context2D(this);
++        if (m_canvasWidth == 0 && m_canvasHeight == 0)
++            m_context->setSize(width(), height());
++        else
++            m_context->setSize(m_canvasWidth, m_canvasHeight);
++        connect(m_context, SIGNAL(changed()), this, SLOT(requestPaint()));
++
+         return m_context;
++    }
+     qDebug("Canvas:requesting unsupported context");
+     return 0;
+ }
