@@ -20,7 +20,7 @@
 #include <QtGui/QApplication>
 #include <QtDeclarative>
 
-#ifdef MEEGO_EDITION_HARMATTAN
+#if defined(MEEGO_EDITION_HARMATTAN) || defined(MER_EDITION_SAILFISH)
 #include <applauncherd/MDeclarativeCache>
 #elif defined(QDECLARATIVE_BOOSTER)
 #include <mdeclarativecache/MDeclarativeCache>
