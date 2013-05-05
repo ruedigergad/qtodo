@@ -22,8 +22,22 @@ contains(LIBS,-lsailfishsilicabackground): {
     qmlSailfishCommon.target = qml
 
     DEPLOYMENTFOLDERS += qmlSailfish qmlSailfishCommon
+} else:exists($$QMAKE_INCDIR_QT"/../mdeclarativecache/MDeclarativeCache"): {
+    message(Nemomobile build)
+
+    DEFINES += MER_EDITION_NEMO
+    MER_EDITION = nemo
+
+    qmlMeego.source = qml/meego
+    qmlMeego.target = qml
+
+    qmlMeegoCommon.source = qml/meego/common
+    qmlMeegoCommon.target = qml
+
+    DEPLOYMENTFOLDERS += qmlMeego qmlMeegoCommon
 } else:exists($$QMAKE_INCDIR_QT"/../applauncherd/MDeclarativeCache"): {
     message(MeeGo/Harmattan build)
+
     MEEGO_VERSION_MAJOR     = 1
     MEEGO_VERSION_MINOR     = 2
     MEEGO_VERSION_PATCH     = 0
@@ -132,7 +146,7 @@ contains(LIBS,-lsailfishsilicabackground): {
 QT+= declarative xml
 symbian:TARGET.UID3 = 0xE1CCA219
 
-# Smart Installer package's UID
+# Smart Installer packages UID
 # This UID is from the protected range and therefore the package will
 # fail to install if self-signed. By default qmake uses the unprotected
 # range value if unprotected UID is defined for the application and
@@ -164,10 +178,12 @@ SOURCES += main.cpp \
 
 OTHER_FILES += \
     qtodo.desktop \
-    qtodo.sh \
-    qtodo_harmattan.sh \
-    qtodo.svg \
     qtodo.png \
+    qtodo.sh \
+    qtodo.svg \
+    qtodo_harmattan.desktop \
+    qtodo_harmattan.sh \
+    qtodo_mer.desktop \
     qtc_packaging/debian_harmattan/rules \
     qtc_packaging/debian_harmattan/README \
     qtc_packaging/debian_harmattan/copyright \
@@ -242,7 +258,8 @@ INSTALLS += logoFiles splash licenseInfo
 include(deployment.pri)
 qtcAddDeployment()
 
-exists($$QMAKE_INCDIR_QT"/../applauncherd/MDeclarativeCache"): {
+contains(MEEGO_EDITION, harmattan) || contains(MER_EDITION, nemo) || contains(MER_EDITION, sailfish) {
+    DEFINES += QDECLARATIVE_BOOSTER
     CONFIG += qdeclarative-boostable
     QMAKE_CXXFLAGS += -fPIC -fvisibility=hidden -fvisibility-inlines-hidden
     QMAKE_LFLAGS += -pie -rdynamic

@@ -20,8 +20,10 @@
 #include <QtGui/QApplication>
 #include <QtDeclarative>
 
-#if defined(MEEGO_EDITION_HARMATTAN) || defined(MER_EDITION_SAILFISH)
+#ifdef MEEGO_EDITION_HARMATTAN
 #include <applauncherd/MDeclarativeCache>
+#elif defined(QDECLARATIVE_BOOSTER)
+#include <mdeclarativecache/MDeclarativeCache>
 #else
 #include <QIcon>
 #include <QMenu>
@@ -61,7 +63,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QCoreApplication::setOrganizationDomain("ruedigergad.com");
     QCoreApplication::setApplicationName("qtodo");
 
-#if defined(MEEGO_EDITION_HARMATTAN) || defined(MER_EDITION_SAILFISH)
+#ifdef QDECLARATIVE_BOOSTER
     app = MDeclarativeCache::qApplication(argc, argv);
     view = MDeclarativeCache::qDeclarativeView();
 #else
@@ -131,11 +133,11 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     /*
      * Startup QML view.
      */
-#ifdef MEEGO_EDITION_HARMATTAN
+#if defined(MEEGO_EDITION_HARMATTAN) || defined(MER_EDITION_NEMO)
     view->setSource(QUrl(QCoreApplication::applicationDirPath() + "/../qml/meego/main.qml"));
     view->showFullScreen();
 #elif defined(MER_EDITION_SAILFISH)
-    view->setSource(QUrl("/opt/qtodo/qml/sailfish/main.qml"));
+    view->setSource(QUrl(QCoreApplication::applicationDirPath() + "/../qml/sailfish/main.qml"));
     view->showFullScreen();
 #else
     QIcon icon(":/icon/icon.png");
