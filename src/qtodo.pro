@@ -12,6 +12,7 @@ load(sailfishsilicabackground)
 contains(LIBS,-lsailfishsilicabackground): {
     message(SailfishOS build)
 
+    DEFINES += QDECLARATIVE_BOOSTER
     DEFINES += MER_EDITION_SAILFISH
     MER_EDITION = sailfish
 
@@ -25,6 +26,7 @@ contains(LIBS,-lsailfishsilicabackground): {
 } else:exists($$QMAKE_INCDIR_QT"/../mdeclarativecache/MDeclarativeCache"): {
     message(Nemomobile build)
 
+    DEFINES += QDECLARATIVE_BOOSTER
     DEFINES += MER_EDITION_NEMO
     MER_EDITION = nemo
 
@@ -43,6 +45,7 @@ contains(LIBS,-lsailfishsilicabackground): {
     MEEGO_VERSION_PATCH     = 0
     MEEGO_EDITION           = harmattan
 
+    DEFINES += QDECLARATIVE_BOOSTER
     DEFINES += MEEGO_EDITION_HARMATTAN
 
     arch = armv7hl
@@ -258,8 +261,8 @@ INSTALLS += logoFiles splash licenseInfo
 include(deployment.pri)
 qtcAddDeployment()
 
-contains(MEEGO_EDITION, harmattan) || contains(MER_EDITION, nemo) || contains(MER_EDITION, sailfish) {
-    DEFINES += QDECLARATIVE_BOOSTER
+contains(DEFINES, QDECLARATIVE_BOOSTER): {
+    message(Enabling qdeclarative booster.)
     CONFIG += qdeclarative-boostable
     QMAKE_CXXFLAGS += -fPIC -fvisibility=hidden -fvisibility-inlines-hidden
     QMAKE_LFLAGS += -pie -rdynamic
