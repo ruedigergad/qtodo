@@ -1,36 +1,18 @@
 * Fri May 03 2013 Ruediger Gad <r.c.g@gmx.de> - 0.11.5
-- Fix startup when default.xml does not exist but directory does.
-- Fix update of parent model.
-
-* Fri May 03 2013 Ruediger Gad <r.c.g@gmx.de> - 0.11.4
-- Force UTF-8 for all string operations.
-
-* Wed May 01 2013 Ruediger Gad <r.c.g@gmx.de> - 0.11.3
-- Add license information.
-
-* Tue Apr 30 2013 Ruediger Gad <r.c.g@gmx.de> - 0.11.2
-- Fix regression in error handling.
-
-* Sun Apr 28 2013 Ruediger Gad <r.c.g@gmx.de> - 0.11.1
-- Improve stability.
-
-* Mon Apr 22 2013 Ruediger Gad <r.c.g@gmx.de> - 0.11.0
-- Add functionality to sync sketches.
-- Add place holder for sketches that had not been synced.
-- Improve sync stability.
-
-* Fri Apr 12 2013 Ruediger Gad <r.c.g@gmx.de> - 0.10.0
-- Improve sync.
-
-* Sat Mar 23 2013 Ruediger Gad <r.c.g@gmx.de> - 0.9.0
 - Add sync functionality.
 - Change color theme.
 - Add functionality to batch delete items marked as done.
+- Fix startup when default.xml does not exist but directory does.
+- Fix update of parent model.
+- Add license information.
 
-* Sun Nov 28 2012 Ruediger Gad <r.c.g@gmx.de> - 0.8.2
-- Use FlowListView.
-- Place two figures side-by-side.
-- Delete figure when deleting a sketch entry.
+* Sun Feb 03 2013 Ruediger Gad <r.c.g@gmx.de> - 0.8.2
+- Update to 0.8.2.
+- Improve stability.
+- Downsize sketches to 1/4 for display.
+
+* Thu Jan 10 2013 Marko Saukko <marko.saukko@jollamobile.com> - 0.7.1
+- Updated packaging.
 
 * Sun Nov 11 2012 Ruediger Gad <r.c.g@gmx.de> - 0.8.1
 - Update to 0.8.1.
@@ -42,4 +24,5 @@
 
 * Sun May 20 2012 Ruediger Gad <r.c.g@gmx.de> - 0.7.1
 - First try on getting a release for Nemo done.
+
 
