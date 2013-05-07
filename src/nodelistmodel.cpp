@@ -234,7 +234,7 @@ void NodeListModel::setAttribute(int index, QString name, QString value){
     emit changed();
 }
 
-void NodeListModel::move(int from, int to, int /*n*/){
+void NodeListModel::move(int from, int to){
     beginResetModel();
     if(childNodes.at(0).isText()){
         from++;

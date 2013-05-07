@@ -149,7 +149,7 @@ Item {
 
         function moveItem(targetIndex) {
             if(targetIndex >= 0 && targetIndex < nodeListView.count){
-                nodeListView.model.move(nodeListView.currentIndex, targetIndex, 1)
+                nodeListView.model.move(nodeListView.currentIndex, targetIndex)
                 nodeListView.currentIndex = targetIndex
             }
         }
