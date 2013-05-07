@@ -70,6 +70,14 @@ Item {
         }
     }
 
+    function moveCurrentItemToTop() {
+        treeView.currentModel.move(treeView.currentIndex, 0)
+    }
+
+    function moveCurrentItemToBottom() {
+        treeView.currentModel.move(treeView.currentIndex, treeView.currentModel.count)
+    }
+
     TreeView {
         id: treeView
         anchors.fill: parent

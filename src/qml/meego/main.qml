@@ -62,6 +62,14 @@ PageStackWindow {
         id: contextMenu
         MenuLayout {
             MenuItem {
+                text: "Move to Top"
+                onClicked: mainRectangle.moveCurrentItemToTop()
+            }
+            MenuItem {
+                text: "Move to Bottom"
+                onClicked: mainRectangle.moveCurrentItemToBottom()
+            }
+            MenuItem {
                 text: "Edit"
                 onClicked: mainRectangle.editCurrentItem()
             }

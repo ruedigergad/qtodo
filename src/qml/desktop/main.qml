@@ -284,6 +284,30 @@ Rectangle {
         id: contextMenu
 
         CommonButton{
+            id: moveToTopItem
+            anchors.bottom: moveToBottomItem.top
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width
+            text: "Move to Top"
+            onClicked: {
+                mainRectangle.moveCurrentItemToTop()
+                contextMenu.close()
+            }
+        }
+
+        CommonButton{
+            id: moveToBottomItem
+            anchors.bottom: editItem.top
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width
+            text: "Move to Bottom"
+            onClicked: {
+                mainRectangle.moveCurrentItemToBottom()
+                contextMenu.close()
+            }
+        }
+
+        CommonButton{
             id: editItem
             anchors.bottom: deleteItem.top
             anchors.horizontalCenter: parent.horizontalCenter
