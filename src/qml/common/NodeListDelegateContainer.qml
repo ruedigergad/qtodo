@@ -22,13 +22,43 @@ import QtQuick 1.1
 
 Item {
     width: nodeListDelegate.width
-    height: nodeListDelegate.height
+    height: (atTop || atBottom) ? nodeListDelegate.height + indicatorHeight : nodeListDelegate.height
+
+    property bool atBottom: index === nodeListView.count - 1
+    property bool atTop: index === 0
+    property int indicatorHeight: 4
+
+    Rectangle {
+        id: topIndicator
+
+        anchors.top: parent.top
+        width: parent.width
+        height: atTop ? indicatorHeight : 0
+
+        color: "black"
+        opacity: 0
+        visible: atTop
+    }
 
     NodeListDelegate {
         id: nodeListDelegate
 
+        anchors.top: topIndicator.bottom
+
         onPressAndHold: {
             contextMenu.open()
         }
+    }
+
+    Rectangle {
+        id: bottomIndicator
+
+        anchors.top: nodeListDelegate.bottom
+        width: parent.width
+        height: atBottom ? indicatorHeight : 0
+
+        color: "black"
+        opacity: 0
+        visible: atBottom
     }
 }
