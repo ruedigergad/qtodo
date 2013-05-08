@@ -72,10 +72,12 @@ Item {
 
     function moveCurrentItemToTop() {
         treeView.currentModel.move(treeView.currentIndex, 0)
+        storage.save()
     }
 
     function moveCurrentItemToBottom() {
         treeView.currentModel.move(treeView.currentIndex, treeView.currentModel.count)
+        storage.save()
     }
 
     TreeView {
