@@ -33,6 +33,7 @@ Rectangle {
     property int textFormat: TextEdit.PlainText
 
     signal enter()
+    signal keyPressed(variant event)
     signal textChanged(string text)
 
     function forceActiveFocus() {
@@ -50,6 +51,13 @@ Rectangle {
         color: "black"
         textFormat: textArea.textFormat
         wrapMode: TextEdit.WordWrap
+
+        Keys.onPressed: {
+            if (event.modifiers & Qt.AltModifier) {
+                event.accepted = true
+                keyPressed(event)
+            }
+        }
 
         Keys.onEnterPressed: {
             if (event.modifiers & Qt.ShiftModifier) {

@@ -223,6 +223,25 @@ Item {
                     width: parent.width
                     textFormat: TextEdit.PlainText
 
+                    onKeyPressed: {
+                        if (event.modifiers & Qt.AltModifier) {
+                            switch (event.key) {
+                            case Qt.Key_1:
+                                blueButton.clicked()
+                                break
+                            case Qt.Key_2:
+                                greenButton.clicked()
+                                break
+                            case Qt.Key_3:
+                                yellowButton.clicked()
+                                break
+                            case Qt.Key_4:
+                                redButton.clicked()
+                                break
+                            }
+                        }
+                    }
+
                     Keys.onEscapePressed: editToDoSheet.close()
                     onEnter: accepted()
                 }
