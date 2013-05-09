@@ -149,7 +149,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     trayIcon->show();
 
     QxtGlobalShortcut *globalShortcut = new QxtGlobalShortcut(view);
-    globalShortcut->setShortcut(QKeySequence("Ctrl+Shift+Y"));
+    globalShortcut->setShortcut(QKeySequence("Ctrl+Shift+X"));
     globalShortcut->connect(globalShortcut, SIGNAL(activated()), trayIcon, SLOT(toggleViewHide()));
 
 #ifdef WINDOWS_DESKTOP
