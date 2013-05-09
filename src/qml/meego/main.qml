@@ -89,7 +89,7 @@ PageStackWindow {
                 onClicked: mainRectangle.confirmCleanDoneDialog.open()
             }
             MenuItem {
-                text: "Sync To IMAP"
+                text: "Sync to IMAP"
                 onClicked: mainRectangle.confirmSyncToImapDialog.open()
             }
             MenuItem {
