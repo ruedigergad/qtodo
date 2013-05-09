@@ -97,10 +97,15 @@ Item {
             id: noContentLabel
             text: "No entries yet"
             width: parent.width
-            font.pixelSize: 60; anchors.bottom: explanationLabel.top; anchors.bottomMargin: 50; anchors.horizontalCenter: parent.horizontalCenter
+            font.pixelSize: 60; anchors.bottom: anchorBase.top; anchors.bottomMargin: 20; anchors.horizontalCenter: parent.horizontalCenter
             wrapMode: Text.WordWrap
             horizontalAlignment: Text.AlignHCenter
             color: "gray"
+        }
+
+        Item {
+            id: anchorBase
+            anchors.centerIn: parent
         }
 
         Text {
@@ -111,7 +116,7 @@ Item {
             wrapMode: Text.WordWrap
             horizontalAlignment: Text.AlignHCenter
             color: "gray"
-            anchors.centerIn: parent
+            anchors.top: anchorBase.bottom
         }
     }
 
