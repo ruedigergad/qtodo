@@ -224,14 +224,18 @@ OTHER_FILES += \
     qml/meego/common/CommonToolIcon.qml \
     qml/meego/common/ConfirmationDialog.qml \
     qml/sailfish/main.qml \
+    qml/sailfish/common/AboutDialog.qml \
     qml/sailfish/common/CommonButton.qml \
     qml/sailfish/common/CommonDialog.qml \
+    qml/sailfish/common/CommonFlickable.qml \
     qml/sailfish/common/CommonTextArea.qml \
     qml/sailfish/common/CommonTextField.qml \
     qml/sailfish/common/CommonToolBar.qml \
     qml/sailfish/common/CommonToolIcon.qml \
     qml/sailfish/common/ConfirmationDialog.qml \
-    qml/sailfish/common/CommonFlickable.qml \
+    qml/sailfish/common/MessageDialog.qml \
+    qml/sailfish/common/NodeListDelegateContainer.qml \
+    qml/sailfish/common/ProgressDialog.qml \
     qml/sailfish/EditToDoDialog.qml \
     qml/windows/main.qml \
     accounts_gui.sh \
