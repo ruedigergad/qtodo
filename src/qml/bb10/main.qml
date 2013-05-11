@@ -19,7 +19,7 @@ Rectangle {
             id: mainRectangle
 
             Component.onCompleted: {
-                treeView.fontPixelSize = 80
+                treeView.fontPixelSize = 52
             }
         }
 
