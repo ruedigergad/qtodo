@@ -69,6 +69,9 @@ contains(LIBS,-lsailfishsilicabackground): {
     INSTALLS += wrapperScripts
 } else:exists($$QMAKE_INCDIR_QT"/../bbndk.h"): {
     message(BB10 Build)
+
+    DEFINES += BB10_BUILD
+
 } else:win32 {
     message(Windows Build)
 

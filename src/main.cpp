@@ -24,7 +24,7 @@
 #include <applauncherd/MDeclarativeCache>
 #elif defined(QDECLARATIVE_BOOSTER)
 #include <mdeclarativecache/MDeclarativeCache>
-#else
+#elif defined(LINUX_DESKTOP) || defined(WINDOWS_DESKTOP)
 #include <QIcon>
 #include <QMenu>
 #include <QPixmap>
@@ -38,8 +38,12 @@
 #include <QProcess>
 #endif
 #include "filehelper.h"
+
+#ifndef BB10_BUILD
 #include "imapstorage.h"
 #include "merger.h"
+#endif
+
 #include "nodelistmodel.h"
 #include "todostorage.h"
 
@@ -120,8 +124,10 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
      * Setup application.
      */
     qmlRegisterType<FileHelper>("qtodo", 1, 0, "FileHelper");
+#ifndef BB10_BUILD
     qmlRegisterType<ImapStorage>("qtodo", 1, 0, "ImapStorage");
     qmlRegisterType<Merger>("qtodo", 1, 0, "Merger");
+#endif
     qmlRegisterType<NodeListModel>("qtodo", 1, 0, "NodeListModel");
     qmlRegisterType<ToDoStorage>("qtodo", 1, 0, "ToDoStorage");
 
