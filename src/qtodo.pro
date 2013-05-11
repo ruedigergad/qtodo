@@ -74,6 +74,19 @@ contains(LIBS,-lsailfishsilicabackground): {
 
     LIBS += -lbbdata -lbb -lbbcascades
     QT += declarative xml
+
+    qmlCanvasImport.source = lib/build/bb10/qmlcanvas
+    qmlCanvasImport.target = lib/imports
+
+    qmlBB10.source = qml/bb10
+    qmlBB10.target = qml
+
+    DEPLOYMENTFOLDERS += qmlBB10 qmlCanvasImport
+
+    barDescriptor.files = bar-descriptor.xml
+    barDescriptor.path = $${TARGET}
+
+    INSTALLS += barDescriptor
 } else:win32 {
     message(Windows Build)
 
@@ -212,6 +225,7 @@ OTHER_FILES += \
     qtc_packaging/debian_harmattan/control \
     qtc_packaging/debian_harmattan/compat \
     qtc_packaging/debian_harmattan/changelog \
+    qml/bb10/main.qml \
     qml/common/AboutDialog.qml \
     qml/common/Drawing.qml \
     qml/common/FlowListView.qml \

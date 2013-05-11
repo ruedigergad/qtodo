@@ -192,12 +192,14 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     splash.close();
     view->show();
 #elif defined(BB10_BUILD)
-    bb::cascades::QmlDocument *qml = bb::cascades::QmlDocument::create("asset:///main.qml").parent(0);
+    QString mainQmlFile = "asset:///main.qml";
+    qDebug("Loading main QML file: %s", mainQmlFile.toAscii().constData());
+    bb::cascades::QmlDocument *qml = bb::cascades::QmlDocument::create(mainQmlFile);
     bb::cascades::AbstractPane *root = qml->createRootObject<bb::cascades::AbstractPane>();
     app->setScene(root);
 #endif
 
-
+    qDebug("Starting Q To-Do...");
     int ret = app->exec();
 
 #if defined(LINUX_DESKTOP) || defined(WINDOWS_DESKTOP)
