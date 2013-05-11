@@ -113,7 +113,7 @@ Item {
         Image {
             id: elementIcon
             height: textDelegate.height
-            width: treeView.fontPixelSize + 2
+            width: primaryFontSize
             fillMode: Image.PreserveAspectFit
             smooth: true
             source: tagName === "to-do"
@@ -203,7 +203,7 @@ Item {
         Rectangle{
             id: button
             anchors.centerIn: parent
-            width: treeView.fontPixelSize + 2
+            width: primaryFontSize
             height: width
 
             visible: isExpandable
