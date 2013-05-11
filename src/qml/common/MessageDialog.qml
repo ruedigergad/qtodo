@@ -30,10 +30,10 @@ CommonDialog {
         Text {
             id: titleText
             anchors.bottom: message.top
-            anchors.margins: 20
+            anchors.margins: primaryFontSize
             width: parent.width
             color: "white"
-            font.pointSize: 40
+            font.pointSize: primaryFontSize * 1.5
             font.bold: true
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.Wrap
@@ -46,7 +46,7 @@ CommonDialog {
 
             width: parent.width
             color: "white"
-            font.pointSize: 25
+            font.pointSize: primaryFontSize
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.Wrap
         }

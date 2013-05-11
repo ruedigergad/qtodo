@@ -38,7 +38,7 @@ Dialog {
         anchors.margins: 20
         width: parent.width
         color: "white"
-        font.pointSize: primaryFontSize * 1.5
+        font.pointSize: primaryFontSize * 1.25
         font.bold: true
         horizontalAlignment: Text.AlignHCenter
         wrapMode: Text.Wrap
@@ -49,7 +49,7 @@ Dialog {
         anchors.centerIn: parent
         width: parent.width
         color: "white"
-        font.pointSize: primaryFontSize
+        font.pointSize: primaryFontSize * 0.75
         horizontalAlignment: Text.AlignHCenter
         wrapMode: Text.Wrap
     }

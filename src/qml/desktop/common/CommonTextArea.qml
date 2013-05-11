@@ -26,7 +26,7 @@ Rectangle {
 
     border.width: primaryFontSize / 8
     border.color: "lightgrey"
-    radius: textEdit.font.pointSize
+    radius: textEdit.font.pointSize * 0.75
     smooth: true
 
     property alias text: textEdit.text
@@ -47,7 +47,7 @@ Rectangle {
         width: parent.width - (2 * font.pointSize)
         focus: parent.focus
 
-        font.pointSize: primaryFontSize
+        font.pointSize: primaryFontSize * 0.75
         color: "black"
         textFormat: textArea.textFormat
         wrapMode: TextEdit.WordWrap

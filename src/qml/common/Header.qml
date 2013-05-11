@@ -21,7 +21,7 @@ import QtQuick 1.1
 
 Rectangle {
     id: header
-    height: primaryFontSize * 2
+    height: primaryFontSize * 1.75
     color: "#00b000" //#0c61a8"
     anchors{left: parent.left; right: parent.right; top: parent.top}
     z: 48

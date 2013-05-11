@@ -46,8 +46,6 @@ Item {
     property alias model: rootListView.model
     property Item currentNodeListView
 
-    property int fontPixelSize: 28
-
     /*
      * Total number of currently opened ListViews.
      */
