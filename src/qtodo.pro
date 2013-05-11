@@ -84,7 +84,10 @@ contains(LIBS,-lsailfishsilicabackground): {
     qmlBB10Common.source = qml/bb10/common
     qmlBB10Common.target = qml
 
-    DEPLOYMENTFOLDERS += qmlBB10 qmlBB10Common qmlCanvasImport
+    qmlDesktopCommon.source = qml/desktop/common
+    qmlDesktopCommon.target = qml
+
+    DEPLOYMENTFOLDERS += qmlBB10 qmlBB10Common qmlCanvasImport qmlDesktopCommon
 
     barDescriptor.files = bar-descriptor.xml
     barDescriptor.path = $${TARGET}
