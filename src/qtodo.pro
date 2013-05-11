@@ -72,6 +72,8 @@ contains(LIBS,-lsailfishsilicabackground): {
 
     DEFINES += BB10_BUILD
 
+    LIBS += -lbbdata -lbb -lbbcascades
+    QT += declarative xml
 } else:win32 {
     message(Windows Build)
 
@@ -148,11 +150,6 @@ contains(LIBS,-lsailfishsilicabackground): {
         icon.qrc
 }
 
-!win32 {
-    CONFIG += link_pkgconfig
-    PKGCONFIG += qmfclient
-}
-
 QT+= declarative xml
 symbian:TARGET.UID3 = 0xE1CCA219
 
@@ -175,16 +172,31 @@ symbian:TARGET.CAPABILITY += NetworkServices
 HEADERS += \
     todostorage.h \
     nodelistmodel.h \
-    filehelper.h \
-    imapstorage.h \
-    merger.h
+    filehelper.h
 
 SOURCES += main.cpp \
     todostorage.cpp \
     nodelistmodel.cpp \
-    filehelper.cpp \
-    imapstorage.cpp \
-    merger.cpp
+    filehelper.cpp
+
+!contains(DEFINES, BB10_BUILD): {
+    message(Building sync support...)
+
+    DEFINES += QTODO_SYNC_SUPPORT
+
+    HEADERS += \
+        imapstorage.h \
+        merger.h
+
+    SOURCES += \
+        imapstorage.cpp \
+        merger.cpp
+
+    !win32 {
+        CONFIG += link_pkgconfig
+        PKGCONFIG += qmfclient
+    }
+}
 
 OTHER_FILES += \
     qtodo.desktop \

@@ -17,8 +17,14 @@
  *  along with Q To-Do.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifdef BB10_BUILD
+#include <bb/cascades/Application>
+#include <bb/cascades/QmlDocument>
+#include <bb/cascades/AbstractPane>
+#else
 #include <QtGui/QApplication>
 #include <QtDeclarative>
+#endif
 
 #if defined(MEEGO_EDITION_HARMATTAN) || defined(MER_EDITION_SAILFISH)
 #include <applauncherd/MDeclarativeCache>
@@ -35,7 +41,7 @@
 #endif
 
 #include "filehelper.h"
-#ifndef BB10_BUILD
+#ifdef QTODO_SYNC_SUPPORT
 #include "imapstorage.h"
 #include "merger.h"
 #endif
@@ -55,17 +61,21 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     /*
      * Init Application
      */
+#ifdef BB10_BUILD
+    bb::cascades::Application *app = new bb::cascades::Application(argc, argv);
+#else
     QApplication *app;
     QDeclarativeView *view;
 
     QCoreApplication::setOrganizationName("ruedigergad.com");
     QCoreApplication::setOrganizationDomain("ruedigergad.com");
     QCoreApplication::setApplicationName("qtodo");
+#endif
 
 #ifdef QDECLARATIVE_BOOSTER
     app = MDeclarativeCache::qApplication(argc, argv);
     view = MDeclarativeCache::qDeclarativeView();
-#else
+#elif ! defined(BB10_BUILD)
     app = new QApplication(argc, argv);
     view = new QToDoView();
 #endif
@@ -119,17 +129,19 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
      * Setup application.
      */
     qmlRegisterType<FileHelper>("qtodo", 1, 0, "FileHelper");
-#ifndef BB10_BUILD
+#ifdef QTODO_SYNC_SUPPORT
     qmlRegisterType<ImapStorage>("qtodo", 1, 0, "ImapStorage");
     qmlRegisterType<Merger>("qtodo", 1, 0, "Merger");
 #endif
     qmlRegisterType<NodeListModel>("qtodo", 1, 0, "NodeListModel");
     qmlRegisterType<ToDoStorage>("qtodo", 1, 0, "ToDoStorage");
 
+#ifndef BB10_BUILD
     view->setAttribute(Qt::WA_OpaquePaintEvent);
     view->setAttribute(Qt::WA_NoSystemBackground);
     view->viewport()->setAttribute(Qt::WA_OpaquePaintEvent);
     view->viewport()->setAttribute(Qt::WA_NoSystemBackground);
+#endif
 
     /*
      * Startup QML view.
@@ -140,7 +152,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 #elif defined(MER_EDITION_SAILFISH)
     view->setSource(QUrl(QCoreApplication::applicationDirPath() + "/../qml/sailfish/main.qml"));
     view->showFullScreen();
-#else
+#elif defined(LINUX_DESKTOP) || defined(WINDOWS_DESKTOP)
     QIcon icon(":/icon/icon.png");
     app->setApplicationName("Q To-Do");
     app->setWindowIcon(icon);
@@ -179,7 +191,13 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     splash.close();
     view->show();
+#elif defined(BB10_BUILD)
+    bb::cascades::QmlDocument *qml = bb::cascades::QmlDocument::create("asset:///main.qml").parent(0);
+    bb::cascades::AbstractPane *root = qml->createRootObject<bb::cascades::AbstractPane>();
+    app->setScene(root);
 #endif
+
+
     int ret = app->exec();
 
 #if defined(LINUX_DESKTOP) || defined(WINDOWS_DESKTOP)
