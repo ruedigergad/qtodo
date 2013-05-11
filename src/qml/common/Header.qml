@@ -33,7 +33,7 @@ Rectangle {
         anchors{left: parent.left; leftMargin: primaryFontSize; verticalCenter: parent.verticalCenter}
         text: "My To-Dos"
         color: "white"
-        font {pixelSize: header.height * 0.444; family: "Nokia Pure Text Light"}
+        font {pointSize: header.height * 0.444; family: "Nokia Pure Text Light"}
     }
 
     ListView {

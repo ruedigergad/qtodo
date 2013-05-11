@@ -77,7 +77,7 @@ Item {
 
                 horizontalAlignment: Text.AlignHCenter
                 wrapMode: Text.WordWrap
-                font.pixelSize: 24
+                font.pointSize: 24
                 color: "gray"
             }
         }
@@ -164,7 +164,7 @@ Item {
                 anchors.right: parent.right
 
                 text: elementText
-                font.pixelSize: treeView.fontPixelSize
+                font.pointSize: treeView.fontPixelSize
                 horizontalAlignment: Text.AlignHLeft
                 wrapMode: Text.WordWrap
                 color: "black"

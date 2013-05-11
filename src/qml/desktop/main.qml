@@ -71,7 +71,7 @@ Rectangle {
                 anchors.verticalCenter: parent.verticalCenter
 
                 text: "-"
-                font.pixelSize: primaryFontSize * 2
+                font.pointSize: primaryFontSize * 2
                 color: "white"
 
                 MouseArea {
@@ -90,7 +90,7 @@ Rectangle {
                 anchors.verticalCenter: parent.verticalCenter
 
                 text: "x"
-                font.pixelSize: primaryFontSize
+                font.pointSize: primaryFontSize
                 color: "white"
 
                 MouseArea {
@@ -199,7 +199,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
 
             font.bold: true
-            font.pixelSize: 24
+            font.pointSize: 24
             text: "o"
 
             MouseArea {

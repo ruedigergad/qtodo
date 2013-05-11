@@ -30,14 +30,14 @@ CommonDialog {
             text: "<a href=\"http://ruedigergad.github.com/qtodo\" style=\"text-decoration:none; color:#00b000\">Q To-Do<br /><img src=\"../icons/logo.png\" /><br />Version 0.9.0</a>"
             textFormat: Text.RichText;
             onLinkActivated: { Qt.openUrlExternally(link); }
-            font.pixelSize: 25; horizontalAlignment: Text.AlignHCenter;
+            font.pointSize: 25; horizontalAlignment: Text.AlignHCenter;
             anchors.horizontalCenter: parent.horizontalCenter; anchors.bottom: description.top; anchors.bottomMargin: 8
         }
 
         Text {
             id: description
             text: "A Simple To-Do List Organizer"
-            font.pixelSize: 25; font.bold: true; anchors.horizontalCenter: parent.horizontalCenter; anchors.bottom: author.top; anchors.bottomMargin: 12; color: "white"
+            font.pointSize: 25; font.bold: true; anchors.horizontalCenter: parent.horizontalCenter; anchors.bottom: author.top; anchors.bottomMargin: 12; color: "white"
         }
 
         Text {
@@ -46,7 +46,7 @@ CommonDialog {
                   + "Ruediger Gad - <a href=\"mailto:r.c.g@gmx.de\" style=\"text-decoration:none; color:#00b000\" >r.c.g@gmx.de</a><br />"
             textFormat: Text.RichText;
             onLinkActivated: { Qt.openUrlExternally(link); }
-            font.pixelSize: 20; anchors.centerIn: parent; color: "lightgray"; horizontalAlignment: Text.AlignHCenter
+            font.pointSize: 20; anchors.centerIn: parent; color: "lightgray"; horizontalAlignment: Text.AlignHCenter
         }
 
         Text {
@@ -57,7 +57,7 @@ CommonDialog {
                   + "(at your option) any later version.";
             textFormat: Text.RichText;
             onLinkActivated: { Qt.openUrlExternally(link); }
-            font.pixelSize: 18;
+            font.pointSize: 18;
             anchors.horizontalCenter: parent.horizontalCenter;
             anchors.top: author.bottom;
             anchors.topMargin: 12;

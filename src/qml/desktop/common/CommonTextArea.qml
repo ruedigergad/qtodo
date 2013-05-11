@@ -47,7 +47,7 @@ Rectangle {
         width: parent.width - (2 * font.pointSize)
         focus: parent.focus
 
-        font.pixelSize: primaryFontSize
+        font.pointSize: primaryFontSize
         color: "black"
         textFormat: textArea.textFormat
         wrapMode: TextEdit.WordWrap

@@ -75,7 +75,7 @@ Rectangle {
             anchors.margins: primaryFontSize
             width: parent.width
             color: "white"
-            font.pixelSize: primaryFontSize * 2
+            font.pointSize: primaryFontSize * 2
             font.bold: true
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.Wrap
