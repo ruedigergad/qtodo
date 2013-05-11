@@ -34,7 +34,7 @@ Rectangle {
     radius: height/3
     smooth: true
 
-    color: "#00d000" //"#9acfff"
+    color: text === "" ? "transparent" : "#00d000" //"#9acfff"
 
     Text {
         id: textItem
@@ -61,12 +61,12 @@ Rectangle {
     states: [
         State {
             name: "pressed"; when: mouseArea.pressed && mouseArea.containsMouse
-            PropertyChanges { target: commonButton; color: "#50e050" } //"#569ffd"
+            PropertyChanges { target: commonButton; color: commonButton.text === "" ? "lightgray" : "#50e050" } //"#569ffd"
             PropertyChanges { target: textItem; x: textItem.x + 1; y: textItem.y + 1; explicit: true }
         },
         State {
             name: "disabled"; when: !commonButton.enabled
-            PropertyChanges { target: commonButton; color: "lightgray" }
+            PropertyChanges { target: commonButton; opacity: 0.5 }
         }
     ]
 }

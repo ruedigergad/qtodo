@@ -26,8 +26,7 @@ CommonToolBar {
 
     CommonToolIcon {
         id: iconAdd
-        platformIconId: "toolbar-add"
-        text: "+"
+        iconSource: "../icons/add.png"
         opacity: enabled ? 1 : 0.5
         onClicked: mainRectangle.addItem()
     }
@@ -46,8 +45,7 @@ CommonToolBar {
     }
     CommonToolIcon {
         id: iconDelete
-        platformIconId: "toolbar-delete"
-        text: "Del"
+        iconSource: "../icons/delete.png"
         enabled: mainRectangle.treeView.currentIndex >= 0
         opacity: enabled ? 1 : 0.5
         onClicked: mainRectangle.deleteCurrentItem()
@@ -61,8 +59,7 @@ CommonToolBar {
     }
     CommonToolIcon {
         id: iconMenu
-        platformIconId: "toolbar-view-menu"
-        text: "Menu"
+        iconSource: "../icons/menu.png"
         anchors.right: parent === undefined ? undefined : parent.right
         onClicked: ! mainMenu.isOpen ? mainMenu.open() : mainMenu.close()
         opacity: enabled ? 1 : 0.5
