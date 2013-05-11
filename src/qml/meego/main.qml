@@ -27,6 +27,8 @@ PageStackWindow {
 
     initialPage: mainPage
 
+    property int primaryFontSize: 35
+
     Page {
         id: mainPage
         tools: commonTools
@@ -39,7 +41,6 @@ PageStackWindow {
 
             Header {
                 id: header
-                height: 72
             }
 
             MainRectangle {

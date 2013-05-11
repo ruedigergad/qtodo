@@ -24,4 +24,15 @@ QueryDialog {
 
     acceptButtonText: "OK"
     rejectButtonText: "Cancel"
+
+    signal closed
+    signal opened
+
+    onStatusChanged: {
+        if (status === DialogStatus.Opened) {
+            opened()
+        } else if (status === DialogStatus.Closed) {
+            closed()
+        }
+    }
 }
