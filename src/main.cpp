@@ -50,6 +50,8 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 #ifdef WINDOWS_DESKTOP
     putenv("QMF_PLUGINS=plugins");
     putenv("QML_IMPORT_PATH=imports");
+#elif defined(BB10_BUILD)
+    putenv("QML_IMPORT_PATH=app/native/lib/imports");
 #endif
 
     /*

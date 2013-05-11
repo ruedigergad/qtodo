@@ -39,7 +39,7 @@ Rectangle {
     Text {
         id: textItem
         x: parent.width/2 - width/2; y: parent.height/2 - height/2
-        font.pixelSize: 22
+        font.pixelSize: 64
         color: "black"
     }
 

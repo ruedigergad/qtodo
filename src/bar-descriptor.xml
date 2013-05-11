@@ -24,4 +24,6 @@
     <asset path="%SRC_DIR%/qml/common">qml/common</asset>
     <asset path="%SRC_DIR%/qml/bb10">qml/bb10</asset>
     <asset path="%SRC_DIR%/qml/bb10/common">qml/common</asset>
+    <asset path="%SRC_DIR%/icons">qml/icons</asset>
+    <asset path="%SRC_DIR%/lib/build/bb10/qmlcanvas">lib/imports/qmlcanvas</asset>
 </qnx>
