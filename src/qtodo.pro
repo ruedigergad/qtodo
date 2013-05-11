@@ -8,6 +8,8 @@ iconDeployment.target = qml
 
 DEPLOYMENTFOLDERS += qmlCommon iconDeployment
 
+message($$QMAKE_INCDIR_QT)
+
 load(sailfishsilicabackground)
 contains(LIBS,-lsailfishsilicabackground): {
     message(SailfishOS build)
@@ -65,6 +67,8 @@ contains(LIBS,-lsailfishsilicabackground): {
     wrapperScripts.path = /opt/$${TARGET}/bin
 
     INSTALLS += wrapperScripts
+} else:exists($$QMAKE_INCDIR_QT"/../bbndk.h"): {
+    message(BB10 Build)
 } else:win32 {
     message(Windows Build)
 
@@ -239,7 +243,8 @@ OTHER_FILES += \
     qml/sailfish/EditToDoDialog.qml \
     qml/windows/main.qml \
     accounts_gui.sh \
-    qtmail.sh
+    qtmail.sh \
+    bar-descriptor.xml
 
 
 
