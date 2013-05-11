@@ -28,12 +28,14 @@ Item {
     property bool useBuiltInDialogs: true
 
     signal error
+    signal finished
     signal messageAdded
     signal messageDeleted
     signal messageIdsQueried
     signal messageRetrieved
     signal messageUpdated
     signal progress
+    signal started
     signal success
 
     property string _baseDir: ""
@@ -50,6 +52,7 @@ Item {
     property alias _syncToImapProgressDialog: _syncToImapProgressDialog
 
     function _syncToImap() {
+        started()
         if (imapFolderName === "") {
             console.log("Error: imapFolderName not set. Stopping sync.")
             return
@@ -156,6 +159,7 @@ Item {
     }
 
     function _reportSuccess() {
+        finished()
         success()
 
         if (useBuiltInDialogs) {
@@ -184,6 +188,7 @@ Item {
         onMessageUpdated: syncToImapBase.messageUpdated()
 
         onError: {
+            finished()
             syncToImapBase.error(errorString, errorCode, currentAction)
 
             if (useBuiltInDialogs) {

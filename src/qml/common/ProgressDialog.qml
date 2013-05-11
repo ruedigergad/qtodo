@@ -60,8 +60,6 @@ Rectangle {
         opacity = 0.9
     }
 
-
-
     property double maxValue
     property double currentValue
 

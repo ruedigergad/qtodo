@@ -226,6 +226,9 @@ Item {
                 }
             }
         }
+
+        onFinished: commonTools.enabled = true
+        onStarted: commonTools.enabled = false
     }
 
     SyncFileToImap {
@@ -233,6 +236,9 @@ Item {
 
         imapFolderName: "qtodo"
         merger: todoMerger
+
+        onFinished: commonTools.enabled = true
+        onStarted: commonTools.enabled = false
     }
 
     ToDoStorage {

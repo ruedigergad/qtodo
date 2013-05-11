@@ -31,7 +31,7 @@ Rectangle {
     property int primaryFontSize: 20
 
     Rectangle {
-        anchors {top: parent.top; left: parent.left; right: parent.right; bottom: toolBarItem.top}
+        anchors {top: parent.top; left: parent.left; right: parent.right; bottom: commonTools.top}
         color: "lightgoldenrodyellow"
 
         radius: parent.radius
@@ -177,17 +177,17 @@ Rectangle {
     }
 
     Rectangle {
-        id: toolBarItem
+        id: commonTools
         anchors {left: parent.left; right: parent.right; bottom: parent.bottom}
-        height: commonTools.height
+        height: qtodoToolBar.height
 
-        property int minWidth: commonTools.minWidth + resizeItem.width + 20
+        property int minWidth: qtodoToolBar.minWidth + resizeItem.width + 20
 
         color: "white"
         radius: parent.radius
 
         QToDoToolBar {
-            id: commonTools
+            id: qtodoToolBar
             anchors.right: resizeItem.left
             anchors.rightMargin: 10
         }
@@ -217,7 +217,7 @@ Rectangle {
 
                         var newWidth = applicationWindow.size.width + dx
 
-                        applicationWindow.size = Qt.size(newWidth < toolBarItem.minWidth ? toolBarItem.minWidth : newWidth,
+                        applicationWindow.size = Qt.size(newWidth < commonTools.minWidth ? commonTools.minWidth : newWidth,
                                                     applicationWindow.size.height + dy)
                     }
                 }
@@ -228,10 +228,10 @@ Rectangle {
     Menu {
         id: mainMenu
 
-        anchors.bottomMargin: toolBarItem.height
+        anchors.bottomMargin: commonTools.height
 
-        onClosed: toolBarItem.enabled = true
-        onOpened: toolBarItem.enabled = false
+        onClosed: commonTools.enabled = true
+        onOpened: commonTools.enabled = false
 
         CommonButton{
             id: cleanDone
@@ -289,10 +289,10 @@ Rectangle {
     Menu {
         id: contextMenu
 
-        anchors.bottomMargin: toolBarItem.height
+        anchors.bottomMargin: commonTools.height
 
-        onClosed: toolBarItem.enabled = true
-        onOpened: toolBarItem.enabled = false
+        onClosed: commonTools.enabled = true
+        onOpened: commonTools.enabled = false
 
         CommonButton{
             id: moveToTopItem
