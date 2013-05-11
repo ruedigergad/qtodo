@@ -34,16 +34,11 @@
 #include "qtodoview.h"
 #endif
 
-#ifdef WINDOWS_DESKTOP
-#include <QProcess>
-#endif
 #include "filehelper.h"
-
 #ifndef BB10_BUILD
 #include "imapstorage.h"
 #include "merger.h"
 #endif
-
 #include "nodelistmodel.h"
 #include "todostorage.h"
 
