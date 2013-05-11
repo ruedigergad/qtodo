@@ -74,10 +74,10 @@ Rectangle {
         Text {
             id: titleText
             anchors.bottom: progressIndicatorBackground.top
-            anchors.margins: 20
+            anchors.margins: primaryFontSize
             width: parent.width
             color: "white"
-            font.pointSize: 40
+            font.pointSize: primaryFontSize * 2
             font.bold: true
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.Wrap
@@ -88,7 +88,7 @@ Rectangle {
             anchors.centerIn: parent
 
             width: parent.width * 0.8
-            height: 80
+            height: primaryFontSize * 4
 
             color: "white"
 
@@ -106,11 +106,11 @@ Rectangle {
             id: message
 
             anchors.top: progressIndicatorBackground.bottom
-            anchors.margins: 20
+            anchors.margins: primaryFontSize
 
             width: parent.width
             color: "white"
-            font.pointSize: 25
+            font.pointSize: primaryFontSize * 1.25
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.Wrap
         }

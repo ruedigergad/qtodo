@@ -250,6 +250,8 @@ Item {
         if (rootElementModel.rowCount() === 0) {
             storage.save()
         }
+
+        treeView.fontPixelSize = primaryFontSize
     }
 }
 

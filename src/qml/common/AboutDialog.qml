@@ -30,14 +30,18 @@ CommonDialog {
             text: "<a href=\"http://ruedigergad.github.com/qtodo\" style=\"text-decoration:none; color:#00b000\">Q To-Do<br /><img src=\"../icons/logo.png\" /><br />Version 0.11.5</a>"
             textFormat: Text.RichText;
             onLinkActivated: { Qt.openUrlExternally(link); }
-            font.pixelSize: 25; horizontalAlignment: Text.AlignHCenter;
-            anchors.horizontalCenter: parent.horizontalCenter; anchors.bottom: description.top; anchors.bottomMargin: 8
+            font.pixelSize: primaryFontSize
+            horizontalAlignment: Text.AlignHCenter;
+            anchors.horizontalCenter: parent.horizontalCenter; anchors.bottom: description.top; anchors.bottomMargin: primaryFontSize / 3
         }
 
         Text {
             id: description
             text: "A Simple To-Do List Organizer"
-            font.pixelSize: 25; font.bold: true; anchors.horizontalCenter: parent.horizontalCenter; anchors.bottom: author.top; anchors.bottomMargin: 12; color: "white"
+            font.pixelSize: primaryFontSize
+            font.bold: true;
+            anchors.centerIn: parent
+            color: "white"
         }
 
         Text {
@@ -46,7 +50,8 @@ CommonDialog {
                   + "Ruediger Gad - <a href=\"mailto:r.c.g@gmx.de\" style=\"text-decoration:none; color:#00b000\" >r.c.g@gmx.de</a><br />"
             textFormat: Text.RichText;
             onLinkActivated: { Qt.openUrlExternally(link); }
-            font.pixelSize: 20; anchors.centerIn: parent; color: "lightgray"; horizontalAlignment: Text.AlignHCenter
+            anchors.horizontalCenter: parent.horizontalCenter; anchors.top: description.bottom; anchors.topMargin: primaryFontSize / 2
+            font.pixelSize: primaryFontSize; color: "lightgray"; horizontalAlignment: Text.AlignHCenter
         }
 
         Text {
@@ -57,10 +62,10 @@ CommonDialog {
                   + "(at your option) any later version.";
             textFormat: Text.RichText;
             onLinkActivated: { Qt.openUrlExternally(link); }
-            font.pixelSize: 18;
+            font.pixelSize: primaryFontSize * 0.75;
             anchors.horizontalCenter: parent.horizontalCenter;
             anchors.top: author.bottom;
-            anchors.topMargin: 12;
+            anchors.topMargin: primaryFontSize / 3;
             width: parent.width;
             color: "lightgray";
             horizontalAlignment: Text.AlignHCenter;

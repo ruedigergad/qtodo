@@ -21,7 +21,7 @@ import QtQuick 1.1
 
 Rectangle {
     id: header
-    height: 40
+    height: primaryFontSize * 2
     color: "#00b000" //#0c61a8"
     anchors{left: parent.left; right: parent.right; top: parent.top}
     z: 48
@@ -30,7 +30,7 @@ Rectangle {
 
     Text {
         id: headerText
-        anchors{left: parent.left; leftMargin: 20; verticalCenter: parent.verticalCenter}
+        anchors{left: parent.left; leftMargin: primaryFontSize; verticalCenter: parent.verticalCenter}
         text: "My To-Dos"
         color: "white"
         font {pixelSize: header.height * 0.444; family: "Nokia Pure Text Light"}

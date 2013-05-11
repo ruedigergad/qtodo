@@ -28,6 +28,7 @@ Rectangle {
     opacity: 0.75
     radius: 20
 
+    property int primaryFontSize: 20
 
     Rectangle {
         anchors {top: parent.top; left: parent.left; right: parent.right; bottom: toolBarItem.top}
@@ -66,11 +67,11 @@ Rectangle {
 
             Text {
                 anchors.right: closeText.left
-                anchors.rightMargin: 10
+                anchors.rightMargin: primaryFontSize - (primaryFontSize / 2)
                 anchors.verticalCenter: parent.verticalCenter
 
                 text: "-"
-                font.pixelSize: 40
+                font.pixelSize: primaryFontSize * 2
                 color: "white"
 
                 MouseArea {
@@ -85,11 +86,11 @@ Rectangle {
                 id: closeText
 
                 anchors.right: parent.right
-                anchors.rightMargin: 10
+                anchors.rightMargin: primaryFontSize - (primaryFontSize / 2)
                 anchors.verticalCenter: parent.verticalCenter
 
                 text: "x"
-                font.pixelSize: 20
+                font.pixelSize: primaryFontSize
                 color: "white"
 
                 MouseArea {
@@ -105,10 +106,6 @@ Rectangle {
             id: mainRectangle
             anchors{left: parent.left; right: parent.right; top: header.bottom; bottom: parent.bottom}
             focus: true
-
-            Component.onCompleted: {
-                treeView.fontPixelSize = 20
-            }
 
             Keys.onDownPressed:{
                 if (mainRectangle.treeView.currentNodeListView.currentIndex < (mainRectangle.treeView.currentModel.count - 1)) {
@@ -186,7 +183,7 @@ Rectangle {
 
         property int minWidth: commonTools.minWidth + resizeItem.width + 20
 
-        color: "lightgray"
+        color: "white"
         radius: parent.radius
 
         QToDoToolBar {

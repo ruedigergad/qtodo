@@ -122,7 +122,7 @@ Item {
             onClicked: editToDoSheet.close();
         }
 
-        Text {id: entryLabel; text: "Entry"; font.pixelSize: 30; font.capitalization: Font.SmallCaps; font.bold: true; anchors.centerIn: parent}
+        Text {id: entryLabel; text: "Entry"; font.pixelSize: primaryFontSize * 1.25; font.capitalization: Font.SmallCaps; font.bold: true; anchors.centerIn: parent}
 
         CommonButton{
             id: acceptButton
@@ -154,9 +154,9 @@ Item {
 
             Column {
                 id: sheetContent
-                spacing: 12
+                spacing: primaryFontSize * 0.6
 
-                anchors{top: parent.top; left: parent.left; right: parent.right; margins: 15}
+                anchors{top: parent.top; left: parent.left; right: parent.right; margins: primaryFontSize * 0.75}
 
                 Row {
                     id: typeButtonRow

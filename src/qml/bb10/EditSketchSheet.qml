@@ -130,7 +130,7 @@ Item {
             onClicked: editSketchSheet.close();
         }
 
-        Text {id: entryLabel; text: "Entry"; font.pixelSize: 30; font.capitalization: Font.SmallCaps; font.bold: true; anchors.centerIn: parent}
+        Text {id: entryLabel; text: "Sketch"; font.pixelSize: primaryFontSize * 1.25; font.capitalization: Font.SmallCaps; font.bold: true; anchors.centerIn: parent}
 
         CommonButton{
             id: acceptButton

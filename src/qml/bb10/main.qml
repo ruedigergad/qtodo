@@ -4,23 +4,20 @@ import "../common"
 Rectangle {
     anchors.fill: parent
 
+    property int primaryFontSize: 50
+
     Rectangle {
         anchors.fill: parent
         color: "lightgoldenrodyellow"
 
         Header {
             id: header
-            height: 72
         }
 
         MainRectangle {
             anchors{left: parent.left; right: parent.right; top: header.bottom; bottom: toolBarItem.top}
 
             id: mainRectangle
-
-            Component.onCompleted: {
-                treeView.fontPixelSize = 52
-            }
         }
 
         Rectangle {
@@ -30,7 +27,7 @@ Rectangle {
 
             property int minWidth: commonTools.minWidth + resizeItem.width + 20
 
-            color: "lightgray"
+            color: "white"
             radius: parent.radius
 
             QToDoToolBar {

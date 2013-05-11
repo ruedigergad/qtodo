@@ -29,7 +29,7 @@ Rectangle {
 
     signal clicked
 
-    width: textItem.width + 40; height: textItem.height + 10
+    width: textItem.width + (primaryFontSize * 2); height: textItem.height + (primaryFontSize / 2)
 //    border.width: 1
     radius: height/3
     smooth: true
@@ -39,7 +39,7 @@ Rectangle {
     Text {
         id: textItem
         x: parent.width/2 - width/2; y: parent.height/2 - height/2
-        font.pixelSize: 64
+        font.pixelSize: primaryFontSize
         color: "black"
     }
 
