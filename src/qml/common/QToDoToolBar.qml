@@ -24,6 +24,8 @@ CommonToolBar {
 
     property int minWidth: iconAdd.width + iconSketch.width + iconMarkDone.width + iconDelete.width + iconBack.width + iconMenu.width
 
+    spacing: (width - minWidth) / 5
+
     CommonToolIcon {
         id: iconAdd
         iconSource: "../icons/add.png"
