@@ -39,11 +39,17 @@ Rectangle {
     Menu {
         id: mainMenu
 
+        anchors.bottomMargin: toolBarItem.height
+
+        onClosed: toolBarItem.enabled = true
+        onOpened: toolBarItem.enabled = false
+
         CommonButton{
             id: cleanDone
             anchors.bottom: syncToImap.top
+            anchors.bottomMargin: primaryFontSize / 3
             anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width
+            width: parent.width - primaryFontSize
             text: "Clean Done"
             onClicked: {
                 mainRectangle.confirmCleanDoneDialog.open()
@@ -54,8 +60,9 @@ Rectangle {
         CommonButton{
             id: syncToImap
             anchors.bottom: syncSketchesToImap.top
+            anchors.bottomMargin: primaryFontSize / 3
             anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width
+            width: parent.width - primaryFontSize
             text: "Sync to IMAP"
             onClicked: {
                 mainRectangle.confirmSyncToImapDialog.open()
@@ -66,8 +73,9 @@ Rectangle {
         CommonButton{
             id: syncSketchesToImap
             anchors.bottom: about.top
+            anchors.bottomMargin: primaryFontSize / 3
             anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width
+            width: parent.width - primaryFontSize
             text: "Sync Sketches to IMAP"
             onClicked: {
                 mainRectangle.confirmSyncSketchesToImapDialog.open()
@@ -78,8 +86,9 @@ Rectangle {
         CommonButton{
             id: about
             anchors.bottom: parent.bottom
+            anchors.bottomMargin: primaryFontSize / 3
             anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width
+            width: parent.width - primaryFontSize
             text: "About"
             onClicked: {
                 mainRectangle.aboutDialog.open()
@@ -91,11 +100,17 @@ Rectangle {
     Menu {
         id: contextMenu
 
+        anchors.bottomMargin: toolBarItem.height
+
+        onClosed: toolBarItem.enabled = true
+        onOpened: toolBarItem.enabled = false
+
         CommonButton{
             id: moveToTopItem
             anchors.bottom: moveToBottomItem.top
+            anchors.bottomMargin: primaryFontSize / 3
             anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width
+            width: parent.width - primaryFontSize
             text: "Move to Top"
             onClicked: {
                 mainRectangle.moveCurrentItemToTop()
@@ -106,8 +121,9 @@ Rectangle {
         CommonButton{
             id: moveToBottomItem
             anchors.bottom: editItem.top
+            anchors.bottomMargin: primaryFontSize / 3
             anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width
+            width: parent.width - primaryFontSize
             text: "Move to Bottom"
             onClicked: {
                 mainRectangle.moveCurrentItemToBottom()
@@ -118,8 +134,9 @@ Rectangle {
         CommonButton{
             id: editItem
             anchors.bottom: deleteItem.top
+            anchors.bottomMargin: primaryFontSize / 3
             anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width
+            width: parent.width - primaryFontSize
             text: "Edit"
             onClicked: {
                 mainRectangle.editCurrentItem()
@@ -130,8 +147,9 @@ Rectangle {
         CommonButton{
             id: deleteItem
             anchors.bottom: parent.bottom
+            anchors.bottomMargin: primaryFontSize / 3
             anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width
+            width: parent.width - primaryFontSize
             text: "Delete"
             onClicked: {
                 mainRectangle.deleteCurrentItem()

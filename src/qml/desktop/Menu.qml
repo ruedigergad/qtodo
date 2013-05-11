@@ -27,13 +27,18 @@ Item {
     visible: false
     z: 16
 
+    signal closed
+    signal opened
+
     function close(){
         menuBorder.y = height
+        closed()
     }
 
     function open(){
         menu.visible = true
         menuBorder.y = height - menuBorder.height
+        opened()
     }
 
     /*
