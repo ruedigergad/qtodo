@@ -98,12 +98,18 @@ Item {
 
     AboutDialog {
         id: aboutDialog
+
+        onClosed: commonTools.enabled = true
+        onOpened: commonTools.enabled = false
     }
 
     ConfirmationDialog {
         id: confirmDeleteDialog
 
         titleText: "Delete?"
+
+        onClosed: commonTools.enabled = true
+        onOpened: commonTools.enabled = false
 
         onAccepted: {
             var currentItem = treeView.currentItem
@@ -135,6 +141,9 @@ Item {
         titleText: "Clean Done?"
         message: "Delete all items marked as done?"
 
+        onClosed: commonTools.enabled = true
+        onOpened: commonTools.enabled = false
+
         onAccepted: {
             treeView.currentModel.cleanDone()
         }
@@ -146,6 +155,9 @@ Item {
         titleText: "Sync to IMAP?"
         message: "This may take some time."
 
+        onOpened: commonTools.enabled = false
+        onRejected: commonTools.enabled = true
+
         onAccepted: {
             syncFileToImap.syncFile(fileHelper.home() + "/to-do-o", "default.xml")
         }
@@ -156,6 +168,9 @@ Item {
 
         titleText: "Sync sketches to IMAP?"
         message: "This may take some time."
+
+        onOpened: commonTools.enabled = false
+        onRejected: commonTools.enabled = true
 
         onAccepted: {
             var mySketches = rootElementModel.getSketchNamesForIndex(-1)
