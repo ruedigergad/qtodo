@@ -60,6 +60,7 @@ PageStackWindow {
 
     ContextMenu {
         id: contextMenu
+
         MenuLayout {
             MenuItem {
                 text: "Move to Top"
@@ -82,7 +83,9 @@ PageStackWindow {
 
     Menu {
         id: mainMenu
+
         visualParent: pageStack
+
         MenuLayout {
             MenuItem {
                 text: "Clean Done"
