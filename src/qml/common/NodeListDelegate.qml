@@ -113,7 +113,7 @@ Item {
         Image {
             id: elementIcon
             height: textDelegate.height
-            width: primaryFontSize
+            width: primaryFontSize * 0.9
             fillMode: Image.PreserveAspectFit
             smooth: true
             source: tagName === "to-do"
@@ -164,7 +164,7 @@ Item {
                 anchors.right: parent.right
 
                 text: elementText
-                font.pointSize: primaryFontSize * 0.75
+                font.pointSize: primaryFontSize * 0.6
                 horizontalAlignment: Text.AlignHLeft
                 wrapMode: Text.WordWrap
                 color: "black"
@@ -203,7 +203,7 @@ Item {
         Rectangle{
             id: button
             anchors.centerIn: parent
-            width: primaryFontSize
+            width: primaryFontSize * 0.9
             height: width
 
             visible: isExpandable
