@@ -17,14 +17,8 @@
  *  along with Q To-Do.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifdef BB10_BUILD
-#include <bb/cascades/Application>
-#include <bb/cascades/QmlDocument>
-#include <bb/cascades/AbstractPane>
-#else
 #include <QtGui/QApplication>
 #include <QtDeclarative>
-#endif
 
 #if defined(MEEGO_EDITION_HARMATTAN) || defined(MER_EDITION_SAILFISH)
 #include <applauncherd/MDeclarativeCache>
@@ -43,8 +37,8 @@
 #include "filehelper.h"
 #ifdef QTODO_SYNC_SUPPORT
 #include "imapstorage.h"
-#include "merger.h"
 #endif
+#include "merger.h"
 #include "nodelistmodel.h"
 #include "todostorage.h"
 
@@ -61,23 +55,23 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     /*
      * Init Application
      */
-#ifdef BB10_BUILD
-    bb::cascades::Application *app = new bb::cascades::Application(argc, argv);
-#else
     QApplication *app;
     QDeclarativeView *view;
 
     QCoreApplication::setOrganizationName("ruedigergad.com");
     QCoreApplication::setOrganizationDomain("ruedigergad.com");
     QCoreApplication::setApplicationName("qtodo");
-#endif
 
 #ifdef QDECLARATIVE_BOOSTER
     app = MDeclarativeCache::qApplication(argc, argv);
     view = MDeclarativeCache::qDeclarativeView();
-#elif ! defined(BB10_BUILD)
+#else
     app = new QApplication(argc, argv);
+#if defined(LINUX_DESKTOP) || defined(WINDOWS_DESKTOP)
     view = new QToDoView();
+#else
+    view = new QDeclarativeView();
+#endif
 #endif
 
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
@@ -131,17 +125,15 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qmlRegisterType<FileHelper>("qtodo", 1, 0, "FileHelper");
 #ifdef QTODO_SYNC_SUPPORT
     qmlRegisterType<ImapStorage>("qtodo", 1, 0, "ImapStorage");
-    qmlRegisterType<Merger>("qtodo", 1, 0, "Merger");
 #endif
+    qmlRegisterType<Merger>("qtodo", 1, 0, "Merger");
     qmlRegisterType<NodeListModel>("qtodo", 1, 0, "NodeListModel");
     qmlRegisterType<ToDoStorage>("qtodo", 1, 0, "ToDoStorage");
 
-#ifndef BB10_BUILD
     view->setAttribute(Qt::WA_OpaquePaintEvent);
     view->setAttribute(Qt::WA_NoSystemBackground);
     view->viewport()->setAttribute(Qt::WA_OpaquePaintEvent);
     view->viewport()->setAttribute(Qt::WA_NoSystemBackground);
-#endif
 
     /*
      * Startup QML view.
@@ -192,11 +184,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     splash.close();
     view->show();
 #elif defined(BB10_BUILD)
-    QString mainQmlFile = "asset:///main.qml";
-    qDebug("Loading main QML file: %s", mainQmlFile.toAscii().constData());
-    bb::cascades::QmlDocument *qml = bb::cascades::QmlDocument::create(mainQmlFile);
-    bb::cascades::AbstractPane *root = qml->createRootObject<bb::cascades::AbstractPane>();
-    app->setScene(root);
+    view->setSource(QUrl::fromLocalFile("app/native/qml/bb10/main.qml"));
+    view->setResizeMode(QDeclarativeView::SizeRootObjectToView);
+    view->showMaximized();
 #endif
 
     qDebug("Starting Q To-Do...");

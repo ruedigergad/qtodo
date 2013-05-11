@@ -81,7 +81,10 @@ contains(LIBS,-lsailfishsilicabackground): {
     qmlBB10.source = qml/bb10
     qmlBB10.target = qml
 
-    DEPLOYMENTFOLDERS += qmlBB10 qmlCanvasImport
+    qmlBB10Common.source = qml/bb10/common
+    qmlBB10Common.target = qml
+
+    DEPLOYMENTFOLDERS += qmlBB10 qmlBB10Common qmlCanvasImport
 
     barDescriptor.files = bar-descriptor.xml
     barDescriptor.path = $${TARGET}
@@ -185,12 +188,14 @@ symbian:TARGET.CAPABILITY += NetworkServices
 HEADERS += \
     todostorage.h \
     nodelistmodel.h \
-    filehelper.h
+    filehelper.h \
+    merger.h
 
 SOURCES += main.cpp \
     todostorage.cpp \
     nodelistmodel.cpp \
-    filehelper.cpp
+    filehelper.cpp \
+    merger.cpp
 
 !contains(DEFINES, BB10_BUILD): {
     message(Building sync support...)
@@ -199,11 +204,9 @@ SOURCES += main.cpp \
 
     HEADERS += \
         imapstorage.h \
-        merger.h
 
     SOURCES += \
         imapstorage.cpp \
-        merger.cpp
 
     !win32 {
         CONFIG += link_pkgconfig

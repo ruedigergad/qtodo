@@ -21,6 +21,7 @@
     <action>access_shared</action>
     <!-- qtodo should point to the project binary, path can be relative -->
     <asset path="qtodo" type="Qnx/Elf" entry="true">qtodo</asset>
-    <asset path="%SRC_DIR%/qml/common">assets</asset>
-    <asset path="%SRC_DIR%/qml/bb10">assets</asset>
+    <asset path="%SRC_DIR%/qml/common">qml/common</asset>
+    <asset path="%SRC_DIR%/qml/bb10">qml/bb10</asset>
+    <asset path="%SRC_DIR%/qml/bb10/common">qml/common</asset>
 </qnx>
