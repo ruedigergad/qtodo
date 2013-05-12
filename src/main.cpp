@@ -52,6 +52,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     putenv("QML_IMPORT_PATH=imports");
 #elif defined(BB10_BUILD)
     putenv("QML_IMPORT_PATH=app/native/lib/imports");
+    putenv("QMF_PLUGINS=app/native/lib/qmf/plugins");
     QApplication::setStartDragDistance(50);
     QApplication::setDoubleClickInterval(750);
 #endif
