@@ -97,7 +97,7 @@ Item {
             id: noContentLabel
             text: "No entries yet"
             width: parent.width
-            font.pointSize: 60; anchors.bottom: anchorBase.top; anchors.bottomMargin: 20; anchors.horizontalCenter: parent.horizontalCenter
+            font.pointSize: primaryFontSize * 1.25; anchors.bottom: anchorBase.top; anchors.bottomMargin: primaryFontSize; anchors.horizontalCenter: parent.horizontalCenter
             wrapMode: Text.WordWrap
             horizontalAlignment: Text.AlignHCenter
             color: "gray"
@@ -112,7 +112,7 @@ Item {
             id: explanationLabel
             text: "Use + to add entries."
             width: parent.width
-            font.pointSize: 40
+            font.pointSize: primaryFontSize
             wrapMode: Text.WordWrap
             horizontalAlignment: Text.AlignHCenter
             color: "gray"

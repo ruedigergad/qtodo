@@ -21,7 +21,7 @@ import QtQuick 1.1
 
 Rectangle {
     id: header
-    height: primaryFontSize * 1.75
+    height: headerText.height * 1.25
     color: "#00b000" //#0c61a8"
     anchors{left: parent.left; right: parent.right; top: parent.top}
     z: 48
@@ -33,7 +33,7 @@ Rectangle {
         anchors{left: parent.left; leftMargin: primaryFontSize; verticalCenter: parent.verticalCenter}
         text: "My To-Dos"
         color: "white"
-        font {pointSize: header.height * 0.444; family: "Nokia Pure Text Light"}
+        font {pointSize: primaryFontSize * 0.7; family: "Nokia Pure Text Light"}
     }
 
     ListView {
@@ -61,7 +61,7 @@ Rectangle {
             // Hack to avoid item blinking up at target position at first.
             visible: false
 
-            height: header.height * 0.175
+            height: header.height * 0.2
             width: height
             anchors.verticalCenter: parent.verticalCenter
 

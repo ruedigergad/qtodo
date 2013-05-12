@@ -122,7 +122,7 @@ Item {
             onClicked: editToDoSheet.close();
         }
 
-        Text {id: entryLabel; text: "Entry"; font.pointSize: primaryFontSize * 1.25; font.capitalization: Font.SmallCaps; font.bold: true; anchors.centerIn: parent}
+        Text {id: entryLabel; text: "Entry"; font.pointSize: primaryFontSize; font.capitalization: Font.SmallCaps; font.bold: true; anchors.centerIn: parent}
 
         CommonButton{
             id: acceptButton

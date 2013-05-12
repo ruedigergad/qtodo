@@ -4,7 +4,7 @@ import "../common"
 Rectangle {
     anchors.fill: parent
 
-    property int primaryFontSize: 50
+    property int primaryFontSize: 20
 
     Rectangle {
         anchors.fill: parent
