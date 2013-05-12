@@ -30,6 +30,7 @@ Rectangle {
     radius: height/4
     smooth: true
 
+    property alias pointSize: textInput.font.pointSize
     property alias text: textInput.text
     property int echoMode: TextInput.Normal
 

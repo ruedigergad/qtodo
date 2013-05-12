@@ -36,6 +36,8 @@
 
 #include "filehelper.h"
 #ifdef QTODO_SYNC_SUPPORT
+#include "imapaccounthelper.h"
+#include "imapaccountlistmodel.h"
 #include "imapstorage.h"
 #endif
 #include "merger.h"
@@ -136,6 +138,8 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
      */
     qmlRegisterType<FileHelper>("qtodo", 1, 0, "FileHelper");
 #ifdef QTODO_SYNC_SUPPORT
+    qmlRegisterType<ImapAccountHelper>("qtodo", 1, 0, "ImapAccountHelper");
+    qmlRegisterType<ImapAccountListModel>("qtodo", 1, 0, "ImapAccountListModel");
     qmlRegisterType<ImapStorage>("qtodo", 1, 0, "ImapStorage");
 #endif
     qmlRegisterType<Merger>("qtodo", 1, 0, "Merger");

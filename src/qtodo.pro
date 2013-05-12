@@ -222,9 +222,13 @@ SOURCES += main.cpp \
     message(Building sync support...)
     DEFINES += QTODO_SYNC_SUPPORT
     HEADERS += \
-        imapstorage.h
+        imapstorage.h \
+        imapaccountlistmodel.h \
+        imapaccounthelper.h
     SOURCES += \
-        imapstorage.cpp
+        imapstorage.cpp \
+        imapaccountlistmodel.cpp \
+        imapaccounthelper.cpp
 #}
 
 OTHER_FILES += \
