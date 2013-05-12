@@ -56,31 +56,31 @@ Rectangle {
             }
         }
 
-        CommonButton{
-            id: syncToImap
-            anchors.bottom: syncSketchesToImap.top
-            anchors.bottomMargin: primaryFontSize / 3
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width - primaryFontSize
-            text: "Sync to IMAP"
-            onClicked: {
-                mainRectangle.confirmSyncToImapDialog.open()
-                mainMenu.close()
-            }
-        }
+//        CommonButton{
+//            id: syncToImap
+//            anchors.bottom: syncSketchesToImap.top
+//            anchors.bottomMargin: primaryFontSize / 3
+//            anchors.horizontalCenter: parent.horizontalCenter
+//            width: parent.width - primaryFontSize
+//            text: "Sync to IMAP"
+//            onClicked: {
+//                mainRectangle.confirmSyncToImapDialog.open()
+//                mainMenu.close()
+//            }
+//        }
 
-        CommonButton{
-            id: syncSketchesToImap
-            anchors.bottom: about.top
-            anchors.bottomMargin: primaryFontSize / 3
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width - primaryFontSize
-            text: "Sync Sketches to IMAP"
-            onClicked: {
-                mainRectangle.confirmSyncSketchesToImapDialog.open()
-                mainMenu.close()
-            }
-        }
+//        CommonButton{
+//            id: syncSketchesToImap
+//            anchors.bottom: about.top
+//            anchors.bottomMargin: primaryFontSize / 3
+//            anchors.horizontalCenter: parent.horizontalCenter
+//            width: parent.width - primaryFontSize
+//            text: "Sync Sketches to IMAP"
+//            onClicked: {
+//                mainRectangle.confirmSyncSketchesToImapDialog.open()
+//                mainMenu.close()
+//            }
+//        }
 
         CommonButton{
             id: about
