@@ -103,7 +103,7 @@ contains(LIBS,-lsailfishsilicabackground): {
     qmlDesktopCommon.source = qml/desktop/common
     qmlDesktopCommon.target = qml
 
-    DEPLOYMENTFOLDERS += qmlBB10 qmlBB10Common qmlCanvasImport qmlDesktopCommon
+    DEPLOYMENTFOLDERS += qmlBB10 qmlBB10Common qmlCanvasImport qmlDesktopCommon qmfLibs
 
     barDescriptor.files = bar-descriptor.xml
     barDescriptor.path = $${TARGET}
@@ -218,14 +218,14 @@ SOURCES += main.cpp \
     filehelper.cpp \
     merger.cpp
 
-
-message(Building sync support...)
-DEFINES += QTODO_SYNC_SUPPORT
-HEADERS += \
-    imapstorage.h
-SOURCES += \
-    imapstorage.cpp
-
+#!contains(DEFINES, BB10_BUILD): {
+    message(Building sync support...)
+    DEFINES += QTODO_SYNC_SUPPORT
+    HEADERS += \
+        imapstorage.h
+    SOURCES += \
+        imapstorage.cpp
+#}
 
 OTHER_FILES += \
     qtodo.desktop \
