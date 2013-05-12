@@ -41,6 +41,12 @@ Item {
 
     property alias textColor: textDelegate.color
 
+    Text {
+        id: dummyText
+        font.pointSize: textDelegate.pointSize
+        text: ""
+    }
+
     /*
      * Begin of custom code to display the data. Here the Q To-Do to-do or
      * note elements are shown. Customize this to display your own stuff.
@@ -106,15 +112,16 @@ Item {
         id: textContentDelegate
         anchors.left: parent.left
         anchors.right: nextButton.left
-        height: elementIcon.height
+        height: textDelegate.height
 
         visible: tagName !== "sketch"
 
         Image {
             id: elementIcon
-            height: textDelegate.height
-            width: primaryFontSize * 0.9
+            height: dummyText.height
+            width: height
             fillMode: Image.PreserveAspectFit
+            anchors.verticalCenter: parent.verticalCenter
             smooth: true
             source: tagName === "to-do"
                     ? "../icons/to-do_" + (isDone ? "done_" : "") + elementColor + ".png"
@@ -203,8 +210,8 @@ Item {
         Rectangle{
             id: button
             anchors.centerIn: parent
-            width: primaryFontSize * 0.9
-            height: width
+            height: dummyText.height
+            width: height
 
             visible: isExpandable
 
