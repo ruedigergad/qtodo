@@ -25,13 +25,12 @@ Rectangle {
             anchors {left: parent.left; right: parent.right; bottom: parent.bottom}
             height: commonTools.height
 
-            property int minWidth: commonTools.minWidth + resizeItem.width + 20
-
             color: "white"
             radius: parent.radius
 
             QToDoToolBar {
                 id: commonTools
+                width: parent.width
             }
         }
     }
