@@ -62,6 +62,14 @@ PageStackWindow {
     ContextMenu {
         id: contextMenu
 
+        onStatusChanged: {
+            if (status === DialogStatus.Opening) {
+                commonTools.enabled = false
+            } else if (status === DialogStatus.Closed) {
+                commonTools.enabled = true
+            }
+        }
+
         MenuLayout {
             MenuItem {
                 text: "Move to Top"
@@ -86,6 +94,14 @@ PageStackWindow {
         id: mainMenu
 
         visualParent: pageStack
+
+        onStatusChanged: {
+            if (status === DialogStatus.Opening) {
+                commonTools.enabled = false
+            } else if (status === DialogStatus.Closed) {
+                commonTools.enabled = true
+            }
+        }
 
         MenuLayout {
             MenuItem {
