@@ -1,0 +1,28 @@
+diff --git a/common.pri b/common.pri
+index 29b396d..649dd90 100644
+--- a/common.pri
++++ b/common.pri
+@@ -2,6 +2,7 @@ CONFIG(debug,debug|release) {
+     DEFINES += QMF_ENABLE_LOGGING
+ }
+ 
++DEFINES += Q_OS_MAC
+ 
+ win32 | macx {
+ 
+diff --git a/src/libraries/qmfclient/longstream.cpp b/src/libraries/qmfclient/longstream.cpp
+index cab48d9..007d8bb 100644
+--- a/src/libraries/qmfclient/longstream.cpp
++++ b/src/libraries/qmfclient/longstream.cpp
+@@ -235,9 +235,9 @@ bool LongStream::freeSpace( const QString &path, int min)
+     
+     return result;
+ #elif !defined(Q_OS_WIN)
+-    struct statfs stats;
++    struct statvfs stats;
+ 
+-    while (statfs(partitionPath.toLocal8Bit(), &stats) == -1) {
++    while (statvfs(partitionPath.toLocal8Bit(), &stats) == -1) {
+         if (errno != EINTR) {
+             qWarning() << "Could not stat filesystem";
+             return true;
