@@ -29,7 +29,8 @@ Rectangle {
 
     signal clicked
 
-    width: textItem.width + (primaryFontSize * 2); height: textItem.height + (primaryFontSize / 2)
+    width: text === "" ? height : textItem.width + (primaryFontSize * 2)
+    height: textItem.height + (primaryFontSize / 2)
 //    border.width: 1
     radius: height/3
     smooth: true
