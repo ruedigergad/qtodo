@@ -26,7 +26,7 @@ Rectangle {
     anchors.fill: parent
     color: "white"
     opacity: 0.75
-    radius: 20
+    radius: primaryFontSize * 0.5
 
     property int primaryFontSize: 20
 
@@ -71,7 +71,7 @@ Rectangle {
                 anchors.verticalCenter: parent.verticalCenter
 
                 text: "-"
-                font.pointSize: primaryFontSize * 2
+                font.pointSize: primaryFontSize * 1.5
                 color: "white"
 
                 MouseArea {
@@ -90,7 +90,7 @@ Rectangle {
                 anchors.verticalCenter: parent.verticalCenter
 
                 text: "x"
-                font.pointSize: primaryFontSize
+                font.pointSize: primaryFontSize * 0.75
                 color: "white"
 
                 MouseArea {
@@ -199,7 +199,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
 
             font.bold: true
-            font.pointSize: 24
+            font.pointSize: primaryFontSize * 0.75
             text: "o"
 
             MouseArea {
