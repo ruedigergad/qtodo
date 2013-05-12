@@ -30,15 +30,15 @@ CommonDialog {
             text: "<a href=\"http://ruedigergad.github.com/qtodo\" style=\"text-decoration:none; color:#00b000\">Q To-Do<br /><img src=\"../icons/logo.png\" /><br />Version 0.11.5</a>"
             textFormat: Text.RichText;
             onLinkActivated: { Qt.openUrlExternally(link); }
-            font.pointSize: primaryFontSize
+            font.pointSize: primaryFontSize * 0.6
             horizontalAlignment: Text.AlignHCenter;
-            anchors.horizontalCenter: parent.horizontalCenter; anchors.bottom: description.top; anchors.bottomMargin: primaryFontSize / 3
+            anchors.horizontalCenter: parent.horizontalCenter; anchors.bottom: description.top; anchors.bottomMargin: primaryFontSize / 4
         }
 
         Text {
             id: description
             text: "A Simple To-Do List Organizer"
-            font.pointSize: primaryFontSize
+            font.pointSize: primaryFontSize * 0.5
             font.bold: true;
             anchors.centerIn: parent
             color: "white"
@@ -51,7 +51,7 @@ CommonDialog {
             textFormat: Text.RichText;
             onLinkActivated: { Qt.openUrlExternally(link); }
             anchors.horizontalCenter: parent.horizontalCenter; anchors.top: description.bottom; anchors.topMargin: primaryFontSize / 2
-            font.pointSize: primaryFontSize; color: "lightgray"; horizontalAlignment: Text.AlignHCenter
+            font.pointSize: primaryFontSize * 0.5; color: "lightgray"; horizontalAlignment: Text.AlignHCenter
         }
 
         Text {
@@ -62,10 +62,10 @@ CommonDialog {
                   + "(at your option) any later version.";
             textFormat: Text.RichText;
             onLinkActivated: { Qt.openUrlExternally(link); }
-            font.pointSize: primaryFontSize * 0.75;
+            font.pointSize: primaryFontSize * 0.3;
             anchors.horizontalCenter: parent.horizontalCenter;
             anchors.top: author.bottom;
-            anchors.topMargin: primaryFontSize / 3;
+            anchors.topMargin: primaryFontSize / 4;
             width: parent.width;
             color: "lightgray";
             horizontalAlignment: Text.AlignHCenter;
