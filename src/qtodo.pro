@@ -91,6 +91,9 @@ contains(LIBS,-lsailfishsilicabackground): {
     qmlCanvasImport.source = lib/build/bb10/qmlcanvas
     qmlCanvasImport.target = lib/imports
 
+    qmfLibs.source = lib/build/bb10/qmf
+    qmfLibs.target = lib
+
     qmlBB10.source = qml/bb10
     qmlBB10.target = qml
 
