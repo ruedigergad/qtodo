@@ -20,6 +20,7 @@
     <arg>qnxlight</arg>
     <action system="true">run_native</action>
     <action>access_shared</action>
+    <action>access_internet</action>
     <!-- qtodo should point to the project binary, path can be relative -->
     <asset path="qtodo" type="Qnx/Elf" entry="true">qtodo</asset>
     <asset path="%SRC_DIR%/qml/common">qml/common</asset>

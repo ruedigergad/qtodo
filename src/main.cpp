@@ -125,6 +125,11 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
         qDebug("Messageserver is already running.");
     }
 #endif
+#ifdef BB10_BUILD
+    QProcess messageServerProcess;
+    qDebug("Starting messageserver...");
+    messageServerProcess.start("app/native/lib/qmf/bin/messageserver");
+#endif
 
     /*
      * Setup application.
@@ -206,6 +211,10 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
         messageServerProcess.kill();
         splash.close();
     }
+#endif
+#ifdef BB10_BUILD
+    qDebug("Stopping messageserver...");
+    messageServerProcess.kill();
 #endif
 
     return ret;
