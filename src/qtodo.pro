@@ -39,6 +39,9 @@ contains(LIBS,-lsailfishsilicabackground): {
     qmlMeegoCommon.target = qml
 
     DEPLOYMENTFOLDERS += qmlMeego qmlMeegoCommon
+
+    CONFIG += link_pkgconfig
+    PKGCONFIG += qmfclient
 } else:exists($$QMAKE_INCDIR_QT"/../applauncherd/MDeclarativeCache"): {
     message(MeeGo/Harmattan build)
 
@@ -66,6 +69,9 @@ contains(LIBS,-lsailfishsilicabackground): {
     wrapperScripts.files = qtodo_harmattan.sh
     wrapperScripts.path = /opt/$${TARGET}/bin
 
+    CONFIG += link_pkgconfig
+    PKGCONFIG += qmfclient
+
     INSTALLS += wrapperScripts
 } else:exists($$QMAKE_INCDIR_QT"/../bbndk.h"): {
     message(BB10 Build)
@@ -74,6 +80,13 @@ contains(LIBS,-lsailfishsilicabackground): {
 
     LIBS += -lbbdata -lbb -lbbcascades
     QT += declarative xml
+
+    INCLUDEPATH += \
+        lib/include
+
+    LIBS += \
+        -L$$PWD/lib/build/bb10/qmf/lib \
+        -lqmfclient
 
     qmlCanvasImport.source = lib/build/bb10/qmlcanvas
     qmlCanvasImport.target = lib/imports
@@ -125,7 +138,6 @@ contains(LIBS,-lsailfishsilicabackground): {
     RESOURCES += \
         icon.qrc \
         windows_resources.qrc
-
 } else {
     message(Defaulting to Linux desktop build.)
 
@@ -165,6 +177,9 @@ contains(LIBS,-lsailfishsilicabackground): {
     CONFIG  += qxt
     QXT     += core gui
 
+    CONFIG += link_pkgconfig
+    PKGCONFIG += qmfclient
+
     RESOURCES += \
         icon.qrc
 }
@@ -200,22 +215,14 @@ SOURCES += main.cpp \
     filehelper.cpp \
     merger.cpp
 
-!contains(DEFINES, BB10_BUILD): {
-    message(Building sync support...)
 
-    DEFINES += QTODO_SYNC_SUPPORT
+message(Building sync support...)
+DEFINES += QTODO_SYNC_SUPPORT
+HEADERS += \
+    imapstorage.h
+SOURCES += \
+    imapstorage.cpp
 
-    HEADERS += \
-        imapstorage.h \
-
-    SOURCES += \
-        imapstorage.cpp \
-
-    !win32 {
-        CONFIG += link_pkgconfig
-        PKGCONFIG += qmfclient
-    }
-}
 
 OTHER_FILES += \
     qtodo.desktop \
