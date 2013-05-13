@@ -242,6 +242,16 @@ Item {
                     text: "Save"
                     width: parent.width / 3
                     enabled: editAccount || newAccount
+                    onClicked: {
+                        if (newAccount) {
+                            console.log("Creating new account...")
+                        } else if (editAccount) {
+                            console.log("Updating account...")
+                            imapAccountHelper.updateAccount(currentAccountId, userNameTextField.text,
+                                                            passwordTextField.text, serverTextField.text,
+                                                            serverPortTextField.text, encryptionSetting)
+                        }
+                    }
                 }
             }
 
@@ -340,6 +350,7 @@ Item {
                     text: "SSL"
                     width: parent.width / 3
                     enabled: encryptionSetting != 1
+                    onClicked: encryptionSetting = 1
                 }
 
                 CommonButton {
@@ -347,6 +358,7 @@ Item {
                     text: "STARTTLS"
                     width: parent.width / 3
                     enabled: encryptionSetting != 2
+                    onClicked: encryptionSetting = 2
                 }
             }
         }

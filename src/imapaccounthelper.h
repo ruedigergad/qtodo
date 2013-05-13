@@ -34,6 +34,7 @@ public:
     Q_INVOKABLE QString imapPort(ulong accId);
     Q_INVOKABLE QString imapServer(ulong accId);
     Q_INVOKABLE QString imapUserName(ulong accId);
+    Q_INVOKABLE void updateAccount(ulong accId, QString userName, QString password, QString server, QString port, int encryptionSetting);
     
 signals:
     

@@ -20,6 +20,7 @@
 #include "imapaccounthelper.h"
 #include <QDebug>
 #include <qmfclient/qmailaccount.h>
+#include <qmfclient/qmailstore.h>
 
 ImapAccountHelper::ImapAccountHelper(QObject *parent) :
     QObject(parent)
@@ -51,4 +52,20 @@ QString ImapAccountHelper::imapServer(ulong accId) {
 
 QString ImapAccountHelper::imapUserName(ulong accId) {
     return imapConfig(accId).value("username");
+}
+
+void ImapAccountHelper::updateAccount(ulong accId, QString userName, QString password, QString server, QString port, int encryptionSetting) {
+    qDebug() << "Updating account: " << accId << " " << userName << " " << server << " " << port << " " << encryptionSetting;
+    QMailAccount *account = new QMailAccount(QMailAccountId(accId));
+
+    QMailAccountConfiguration *accountConfig = new QMailAccountConfiguration(QMailAccountId(accId));
+    QMailAccountConfiguration::ServiceConfiguration serviceConfig = accountConfig->serviceConfiguration("imap4");
+
+    serviceConfig.setValue("username", userName);
+    serviceConfig.setValue("password", QString(password.toAscii().toBase64()));
+    serviceConfig.setValue("server", server);
+    serviceConfig.setValue("port", port);
+    serviceConfig.setValue("encryption", QString::number(encryptionSetting));
+
+    QMailStore::instance()->updateAccount(account, accountConfig);
 }
