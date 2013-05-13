@@ -32,13 +32,16 @@ Item {
 
     property int currentAccountId: -1
 
+    property bool editAccount: false
+    property bool newAccount: false
+
     signal closed()
     signal closing()
     signal opened()
     signal opening()
     signal accepted()
 
-    function finished(){
+    function finished() {
         console.log("finished")
         if(state === "closed"){
             visible = false
@@ -48,17 +51,33 @@ Item {
         }
     }
 
-    function close(){
+    function clearTextFields() {
+        accountNameTextField.text = ""
+        passwordTextField.text = ""
+        userNameTextField.text = ""
+        serverTextField.text = ""
+        serverPortTextField.text = ""
+    }
+
+    function close() {
         closing()
+
+        clearTextFields()
+
         state = "closed"
     }
 
-    function open(){
+    function open() {
         console.log("open")
+        opening()
 
         visible = true
 
-        opening()
+        currentAccountId = -1
+        editAccount = false
+        newAccount = false
+        accountListView.currentIndex = -1
+
         state = "open"
     }
 
@@ -102,7 +121,8 @@ Item {
             onClicked: imapAccountSettingsSheet.close();
         }
 
-        Text {id: entryLabel; text: "Entry"; font.pointSize: primaryFontSize; font.capitalization: Font.SmallCaps; font.bold: true; anchors.centerIn: parent}
+        Text {id: entryLabel; text: "Sync Accounts"; font.pointSize: primaryFontSize * 0.75
+              font.capitalization: Font.SmallCaps; font.bold: true; anchors.centerIn: parent}
 
         CommonButton{
             id: acceptButton
@@ -123,7 +143,10 @@ Item {
         color: "white"
 
         Item {
-            anchors {top: parent.top; left: parent.left; leftMargin: primaryFontSize; right: parent.right; rightMargin: primaryFontSize; bottom: parent.bottom}
+            id: contentItem
+
+            anchors {top: parent.top; left: parent.left; leftMargin: primaryFontSize;
+                     right: parent.right; rightMargin: primaryFontSize; bottom: parent.bottom}
 
             Text {
                 id: accountsText
@@ -143,6 +166,7 @@ Item {
 
                 model: imapAccountListModel
                 clip: true
+                highlightFollowsCurrentItem: true
 
                 delegate: Text {
                     width: parent.width
@@ -161,6 +185,9 @@ Item {
                             console.log("clicked: " + index)
                             accountListView.currentIndex = index
 
+                            editAccount = false
+                            newAccount = false
+
                             currentAccountId = accountId
                             accountNameTextField.text = accountName
 
@@ -174,13 +201,49 @@ Item {
 
                 highlight: Rectangle {
                     anchors.fill: parent
-                    color: gray
+                    color: "gray"
+                }
+            }
+
+            Row {
+                id: actionButtonRow
+                anchors {top: accountListView.bottom; topMargin: primaryFontSize * 0.25; left: parent.left}
+                height: newButton.height
+                width: parent.width
+
+                CommonButton {
+                    id: newButton
+                    text: "New"
+                    width: parent.width / 3
+                    onClicked: {
+                        accountListView.currentIndex = -1
+                        clearTextFields()
+                        editAccount = true
+                        newAccount = true
+                    }
+                }
+
+                CommonButton {
+                    id: editButton
+                    text: "Edit"
+                    width: parent.width / 3
+                    enabled: accountListView.currentIndex > -1
+                    onClicked: {
+                        editAccount = true
+                    }
+                }
+
+                CommonButton {
+                    id: saveButton
+                    text: "Save"
+                    width: parent.width / 3
+                    enabled: editAccount || newAccount
                 }
             }
 
             Text {
                 id: accountNameText
-                anchors {top: accountListView.bottom; topMargin: primaryFontSize * 0.25; left: parent.left}
+                anchors {top: actionButtonRow.bottom; topMargin: primaryFontSize * 0.25; left: parent.left}
                 height: accountNameTextField.height
                 text: "Account Name"
                 font.pointSize: primaryFontSize * 0.75
@@ -189,8 +252,10 @@ Item {
             }
             CommonTextField {
                 id: accountNameTextField
-                anchors {top: accountListView.bottom; topMargin: primaryFontSize * 0.25; left: accountNameText.right; leftMargin: primaryFontSize * 0.5; right: parent.right}
+                anchors {top: actionButtonRow.bottom; topMargin: primaryFontSize * 0.25;
+                         left: accountNameText.right; leftMargin: primaryFontSize * 0.5; right: parent.right}
                 pointSize: primaryFontSize * 0.5
+                enabled: newAccount
             }
 
             Text {
@@ -204,8 +269,10 @@ Item {
             }
             CommonTextField {
                 id: userNameTextField
-                anchors {top: accountNameText.bottom; topMargin: primaryFontSize * 0.25; left: userNameText.right; leftMargin: primaryFontSize * 0.5; right: parent.right}
+                anchors {top: accountNameText.bottom; topMargin: primaryFontSize * 0.25;
+                         left: userNameText.right; leftMargin: primaryFontSize * 0.5; right: parent.right}
                 pointSize: primaryFontSize * 0.5
+                enabled: editAccount
             }
 
             Text {
@@ -219,9 +286,11 @@ Item {
             }
             CommonTextField {
                 id: passwordTextField
-                anchors {top: userNameText.bottom; topMargin: primaryFontSize * 0.25; left: passwordText.right; leftMargin: primaryFontSize * 0.5; right: parent.right}
+                anchors {top: userNameText.bottom; topMargin: primaryFontSize * 0.25;
+                         left: passwordText.right; leftMargin: primaryFontSize * 0.5; right: parent.right}
                 pointSize: primaryFontSize * 0.5
                 echoMode: TextInput.Password
+                enabled: editAccount
             }
 
             Text {
@@ -235,8 +304,10 @@ Item {
             }
             CommonTextField {
                 id: serverTextField
-                anchors {top: passwordText.bottom; topMargin: primaryFontSize * 0.25; left: serverText.right; leftMargin: primaryFontSize * 0.5; right: parent.right}
+                anchors {top: passwordText.bottom; topMargin: primaryFontSize * 0.25;
+                         left: serverText.right; leftMargin: primaryFontSize * 0.5; right: parent.right}
                 pointSize: primaryFontSize * 0.5
+                enabled: editAccount
             }
 
             Text {
@@ -250,11 +321,12 @@ Item {
             }
             CommonTextField {
                 id: serverPortTextField
-                anchors {top: serverText.bottom; topMargin: primaryFontSize * 0.25; left: serverPortText.right; leftMargin: primaryFontSize * 0.5; right: parent.right}
+                anchors {top: serverText.bottom; topMargin: primaryFontSize * 0.25;
+                         left: serverPortText.right; leftMargin: primaryFontSize * 0.5; right: parent.right}
                 pointSize: primaryFontSize * 0.5
+                enabled: editAccount
             }
         }
-
     }
 
     ImapAccountListModel {
@@ -263,5 +335,10 @@ Item {
 
     ImapAccountHelper {
         id: imapAccountHelper
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        z: -1
     }
 }
