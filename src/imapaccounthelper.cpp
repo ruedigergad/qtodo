@@ -58,11 +58,11 @@ void ImapAccountHelper::addAccount(QString accountName, QString userName, QStrin
     qDebug() << "Adding new account: " << accountName << " " << userName << " " << server << " " << port << " " << encryptionSetting;
     QMailAccount *account = new QMailAccount();
 
+    account->setMessageType(QMailMessage::Email);
     account->setName(accountName);
+    account->setStatus(QMailAccount::Enabled, true);
     account->setStatus(QMailAccount::UserEditable, true);
     account->setStatus(QMailAccount::UserRemovable, true);
-    account->setMessageType(QMailMessage::Email);
-    account->setStatus(QMailAccount::Enabled, true);
 
     QMailAccountConfiguration *accountConfig = new QMailAccountConfiguration();
     accountConfig->addServiceConfiguration("imap4");
