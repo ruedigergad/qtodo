@@ -170,6 +170,7 @@ Item {
                 highlightFollowsCurrentItem: true
 
                 delegate: Text {
+                    id: listDelegate
                     width: parent.width
 
                     text: accountName
@@ -203,7 +204,7 @@ Item {
                 }
 
                 highlight: Rectangle {
-                    anchors.fill: parent
+                    anchors.fill: listDelegate
                     color: "gray"
                 }
             }
@@ -245,6 +246,9 @@ Item {
                     onClicked: {
                         if (newAccount) {
                             console.log("Creating new account...")
+                            imapAccountHelper.addAccount(accountNameTextField.text, userNameTextField.text,
+                                                            passwordTextField.text, serverTextField.text,
+                                                            serverPortTextField.text, encryptionSetting)
                         } else if (editAccount) {
                             console.log("Updating account...")
                             imapAccountHelper.updateAccount(currentAccountId, userNameTextField.text,

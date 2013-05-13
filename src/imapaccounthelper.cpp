@@ -54,6 +54,35 @@ QString ImapAccountHelper::imapUserName(ulong accId) {
     return imapConfig(accId).value("username");
 }
 
+void ImapAccountHelper::addAccount(QString accountName, QString userName, QString password, QString server, QString port, int encryptionSetting) {
+    qDebug() << "Adding new account: " << accountName << " " << userName << " " << server << " " << port << " " << encryptionSetting;
+    QMailAccount *account = new QMailAccount();
+
+    account->setName(accountName);
+    account->setStatus(QMailAccount::UserEditable, true);
+    account->setStatus(QMailAccount::UserRemovable, true);
+    account->setMessageType(QMailMessage::Email);
+    account->setStatus(QMailAccount::Enabled, true);
+
+    QMailAccountConfiguration *accountConfig = new QMailAccountConfiguration();
+    accountConfig->addServiceConfiguration("imap4");
+    QMailAccountConfiguration::ServiceConfiguration serviceConfig = accountConfig->serviceConfiguration("imap4");
+
+    serviceConfig.setValue("username", userName);
+    serviceConfig.setValue("password", QString(password.toAscii().toBase64()));
+    serviceConfig.setValue("server", server);
+    serviceConfig.setValue("port", port);
+    serviceConfig.setValue("encryption", QString::number(encryptionSetting));
+    serviceConfig.setValue("canDelete", "1");
+    serviceConfig.setValue("servicetype", "source");
+//    serviceConfig.setValue("capabilities", "IMAP4rev1 CHILDREN ENABLE ID IDLE LIST-EXTENDED LIST-STATUS LITERAL+ MOVE NAMESPACE SASL-IR SORT THREAD=ORDEREDSUBJECT UIDPLUS UNSELECT WITHIN AUTH=LOGIN AUTH=PLAIN");
+    serviceConfig.setValue("authentication", "2");
+    serviceConfig.setValue("autoDownload", "0");
+    serviceConfig.setValue("baseFolder", "");
+
+    QMailStore::instance()->addAccount(account, accountConfig);
+}
+
 void ImapAccountHelper::updateAccount(ulong accId, QString userName, QString password, QString server, QString port, int encryptionSetting) {
     qDebug() << "Updating account: " << accId << " " << userName << " " << server << " " << port << " " << encryptionSetting;
     QMailAccount *account = new QMailAccount(QMailAccountId(accId));
