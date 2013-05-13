@@ -31,6 +31,7 @@ Item {
     z: 1
 
     property int currentAccountId: -1
+    property int encryptionSetting: -1
 
     property bool editAccount: false
     property bool newAccount: false
@@ -195,6 +196,8 @@ Item {
                             serverTextField.text = imapAccountHelper.imapServer(currentAccountId)
                             serverPortTextField.text = imapAccountHelper.imapPort(currentAccountId)
                             userNameTextField.text = imapAccountHelper.imapUserName(currentAccountId)
+
+                            encryptionSetting = imapAccountHelper.encryptionSetting(currentAccountId)
                         }
                     }
                 }
@@ -220,6 +223,7 @@ Item {
                         clearTextFields()
                         editAccount = true
                         newAccount = true
+                        encryptionSetting = 1
                     }
                 }
 
@@ -310,21 +314,40 @@ Item {
                 enabled: editAccount
             }
 
-            Text {
-                id: serverPortText
-                anchors {top: serverText.bottom; topMargin: primaryFontSize * 0.25; left: parent.left}
-                height: serverPortTextField.height
-                text: "Server Port"
-                font.pointSize: primaryFontSize * 0.75
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-            }
-            CommonTextField {
-                id: serverPortTextField
-                anchors {top: serverText.bottom; topMargin: primaryFontSize * 0.25;
-                         left: serverPortText.right; leftMargin: primaryFontSize * 0.5; right: parent.right}
-                pointSize: primaryFontSize * 0.5
-                enabled: editAccount
+            Row {
+                anchors {top: serverText.bottom; topMargin: primaryFontSize * 0.25}
+                width: parent.width
+
+                Text {
+                    id: serverPortText
+                    height: serverPortTextField.height
+                    width: parent.width / 6
+                    text: "Port"
+                    font.pointSize: primaryFontSize * 0.75
+                    horizontalAlignment: Text.AlignHLeft
+                    verticalAlignment: Text.AlignVCenter
+                }
+
+                CommonTextField {
+                    id: serverPortTextField
+                    width: parent.width / 6
+                    pointSize: primaryFontSize * 0.5
+                    enabled: editAccount
+                }
+
+                CommonButton {
+                    id: sslButton
+                    text: "SSL"
+                    width: parent.width / 3
+                    enabled: encryptionSetting != 1
+                }
+
+                CommonButton {
+                    id: startTlsButton
+                    text: "STARTTLS"
+                    width: parent.width / 3
+                    enabled: encryptionSetting != 2
+                }
             }
         }
     }

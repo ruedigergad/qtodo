@@ -26,6 +26,10 @@ ImapAccountHelper::ImapAccountHelper(QObject *parent) :
 {
 }
 
+int ImapAccountHelper::encryptionSetting(ulong accId) {
+    return imapConfig(accId).value("encryption").toInt();
+}
+
 QMailAccountConfiguration::ServiceConfiguration ImapAccountHelper::imapConfig(ulong accId) {
     QMailAccountConfiguration *accountConfig = new QMailAccountConfiguration(QMailAccountId(accId));
     QMailAccountConfiguration::ServiceConfiguration serviceConfig = accountConfig->serviceConfiguration("imap4");

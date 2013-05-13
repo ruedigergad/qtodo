@@ -29,6 +29,7 @@ class ImapAccountHelper : public QObject
 public:
     explicit ImapAccountHelper(QObject *parent = 0);
 
+    Q_INVOKABLE int encryptionSetting(ulong accId);
     Q_INVOKABLE QString imapPassword(ulong accId);
     Q_INVOKABLE QString imapPort(ulong accId);
     Q_INVOKABLE QString imapServer(ulong accId);
