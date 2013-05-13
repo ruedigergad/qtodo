@@ -252,7 +252,7 @@ Rectangle {
             anchors.bottomMargin: primaryFontSize / 3
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width - primaryFontSize
-            text: "Sync to IMAP"
+            text: "Sync To-Do List"
             onClicked: {
                 mainRectangle.confirmSyncToImapDialog.open()
                 mainMenu.close()
@@ -265,7 +265,7 @@ Rectangle {
             anchors.bottomMargin: primaryFontSize / 3
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width - primaryFontSize
-            text: "Sync Sketches to IMAP"
+            text: "Sync Sketches"
             onClicked: {
                 mainRectangle.confirmSyncSketchesToImapDialog.open()
                 mainMenu.close()

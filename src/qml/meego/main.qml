@@ -109,11 +109,11 @@ PageStackWindow {
                 onClicked: mainRectangle.confirmCleanDoneDialog.open()
             }
             MenuItem {
-                text: "Sync to IMAP"
+                text: "Sync To-Do List"
                 onClicked: mainRectangle.confirmSyncToImapDialog.open()
             }
             MenuItem {
-                text: "Sync Sketches to Imap"
+                text: "Sync Sketches"
                 onClicked: mainRectangle.confirmSyncSketchesToImapDialog.open()
             }
             MenuItem { 

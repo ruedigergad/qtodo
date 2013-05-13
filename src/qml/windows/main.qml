@@ -170,7 +170,7 @@ Rectangle {
             anchors.bottom: syncSketchesToImap.top
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
-            text: "Sync to IMAP"
+            text: "Sync To-Do List"
             onClicked: {
                 mainRectangle.confirmSyncToImapDialog.open()
                 mainMenu.close()
@@ -182,7 +182,7 @@ Rectangle {
             anchors.bottom: about.top
             anchors.horizontalCenter: parent.horizontalCenter
             width: parent.width
-            text: "Sync Sketches to IMAP"
+            text: "Sync Sketches"
             onClicked: {
                 mainRectangle.confirmSyncSketchesToImapDialog.open()
                 mainMenu.close()
