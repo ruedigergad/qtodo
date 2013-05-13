@@ -221,6 +221,7 @@ Item {
                 id: passwordTextField
                 anchors {top: userNameText.bottom; topMargin: primaryFontSize * 0.25; left: passwordText.right; leftMargin: primaryFontSize * 0.5; right: parent.right}
                 pointSize: primaryFontSize * 0.5
+                echoMode: TextInput.Password
             }
 
             Text {
