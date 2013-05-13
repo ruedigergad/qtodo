@@ -61,6 +61,7 @@ void ImapAccountHelper::addAccount(QString accountName, QString userName, QStrin
     account->setMessageType(QMailMessage::Email);
     account->setName(accountName);
     account->setStatus(QMailAccount::Enabled, true);
+    account->setStatus(QMailAccount::MessageSource, true);
     account->setStatus(QMailAccount::UserEditable, true);
     account->setStatus(QMailAccount::UserRemovable, true);
 
