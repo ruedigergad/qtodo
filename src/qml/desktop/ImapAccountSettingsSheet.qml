@@ -145,8 +145,6 @@ Item {
                 clip: true
 
                 delegate: Text {
-                    id: accountNameText
-
                     width: parent.width
 
                     text: accountName
@@ -164,12 +162,12 @@ Item {
                             accountListView.currentIndex = index
 
                             currentAccountId = accountId
-                            nameTextField.text = accountName
+                            accountNameTextField.text = accountName
 
                             passwordTextField.text = imapAccountHelper.imapPassword(currentAccountId)
                             serverTextField.text = imapAccountHelper.imapServer(currentAccountId)
                             serverPortTextField.text = imapAccountHelper.imapPort(currentAccountId)
-                            accountTextField.text = imapAccountHelper.imapUserName(currentAccountId)
+                            userNameTextField.text = imapAccountHelper.imapUserName(currentAccountId)
                         }
                     }
                 }
@@ -181,38 +179,38 @@ Item {
             }
 
             Text {
-                id: nameText
+                id: accountNameText
                 anchors {top: accountListView.bottom; topMargin: primaryFontSize * 0.25; left: parent.left}
-                height: nameTextField.height
-                text: "Name"
+                height: accountNameTextField.height
+                text: "Account Name"
                 font.pointSize: primaryFontSize * 0.75
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
             }
             CommonTextField {
-                id: nameTextField
-                anchors {top: accountListView.bottom; topMargin: primaryFontSize * 0.25; left: nameText.right; leftMargin: primaryFontSize * 0.5; right: parent.right}
+                id: accountNameTextField
+                anchors {top: accountListView.bottom; topMargin: primaryFontSize * 0.25; left: accountNameText.right; leftMargin: primaryFontSize * 0.5; right: parent.right}
                 pointSize: primaryFontSize * 0.5
             }
 
             Text {
-                id: accountText
-                anchors {top: nameText.bottom; topMargin: primaryFontSize * 0.25; left: parent.left}
-                height: accountTextField.height
-                text: "Account"
+                id: userNameText
+                anchors {top: accountNameText.bottom; topMargin: primaryFontSize * 0.25; left: parent.left}
+                height: userNameTextField.height
+                text: "User Name"
                 font.pointSize: primaryFontSize * 0.75
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
             }
             CommonTextField {
-                id: accountTextField
-                anchors {top: nameText.bottom; topMargin: primaryFontSize * 0.25; left: accountText.right; leftMargin: primaryFontSize * 0.5; right: parent.right}
+                id: userNameTextField
+                anchors {top: accountNameText.bottom; topMargin: primaryFontSize * 0.25; left: userNameText.right; leftMargin: primaryFontSize * 0.5; right: parent.right}
                 pointSize: primaryFontSize * 0.5
             }
 
             Text {
                 id: passwordText
-                anchors {top: accountText.bottom; topMargin: primaryFontSize * 0.25; left: parent.left}
+                anchors {top: userNameText.bottom; topMargin: primaryFontSize * 0.25; left: parent.left}
                 height: passwordTextField.height
                 text: "Password"
                 font.pointSize: primaryFontSize * 0.75
@@ -221,7 +219,7 @@ Item {
             }
             CommonTextField {
                 id: passwordTextField
-                anchors {top: accountText.bottom; topMargin: primaryFontSize * 0.25; left: passwordText.right; leftMargin: primaryFontSize * 0.5; right: parent.right}
+                anchors {top: userNameText.bottom; topMargin: primaryFontSize * 0.25; left: passwordText.right; leftMargin: primaryFontSize * 0.5; right: parent.right}
                 pointSize: primaryFontSize * 0.5
             }
 
