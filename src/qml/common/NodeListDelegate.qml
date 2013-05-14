@@ -165,7 +165,7 @@ Item {
                 anchors.right: parent.right
 
                 text: elementText
-                font.pointSize: primaryFontSize * 0.6
+                font.pointSize: primaryFontSize * 0.75
                 horizontalAlignment: Text.AlignHLeft
                 wrapMode: Text.WordWrap
                 color: "black"
