@@ -157,61 +157,70 @@ Item {
                 horizontalAlignment: Text.AlignHCenter
             }
 
-            ListView {
-                id: accountListView
-
+            Rectangle {
+                id: accountListViewRectangle
                 anchors {top: accountsText.bottom; topMargin: primaryFontSize * 0.25; horizontalCenter: parent.horizontalCenter}
 
                 width: parent.width * 0.8
-                height: parent.height * 0.2
+                height: parent.height * 0.15
 
-                model: imapAccountListModel
-                clip: true
-                highlightFollowsCurrentItem: true
+                border.color: "gray"
+                border.width: primaryFontSize * 0.1
+                radius: primaryFontSize * 0.25
 
-                delegate: Text {
-                    id: listDelegate
-                    width: parent.width
+                ListView {
+                    id: accountListView
 
-                    text: accountName
+                    anchors.fill: parent
 
-                    horizontalAlignment: Text.AlignHCenter
-                    wrapMode: Text.WrapAnywhere
+                    model: imapAccountListModel
+                    clip: true
+                    highlightFollowsCurrentItem: true
 
-                    font.pointSize: primaryFontSize
-                    color: "black"
+                    delegate: Text {
+                        id: listDelegate
+                        width: parent.width
 
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                            console.log("clicked: " + index)
-                            accountListView.currentIndex = index
+                        text: accountName
 
-                            editAccount = false
-                            newAccount = false
+                        horizontalAlignment: Text.AlignHCenter
+                        wrapMode: Text.WrapAnywhere
 
-                            currentAccountId = accountId
-                            accountNameTextField.text = accountName
+                        font.pointSize: primaryFontSize
+                        color: "black"
 
-                            passwordTextField.text = imapAccountHelper.imapPassword(currentAccountId)
-                            serverTextField.text = imapAccountHelper.imapServer(currentAccountId)
-                            serverPortTextField.text = imapAccountHelper.imapPort(currentAccountId)
-                            userNameTextField.text = imapAccountHelper.imapUserName(currentAccountId)
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                console.log("clicked: " + index)
+                                accountListView.currentIndex = index
 
-                            encryptionSetting = imapAccountHelper.encryptionSetting(currentAccountId)
+                                editAccount = false
+                                newAccount = false
+
+                                currentAccountId = accountId
+                                accountNameTextField.text = accountName
+
+                                passwordTextField.text = imapAccountHelper.imapPassword(currentAccountId)
+                                serverTextField.text = imapAccountHelper.imapServer(currentAccountId)
+                                serverPortTextField.text = imapAccountHelper.imapPort(currentAccountId)
+                                userNameTextField.text = imapAccountHelper.imapUserName(currentAccountId)
+
+                                encryptionSetting = imapAccountHelper.encryptionSetting(currentAccountId)
+                            }
                         }
                     }
-                }
 
-                highlight: Rectangle {
-                    anchors.fill: listDelegate
-                    color: "gray"
+                    highlight: Rectangle {
+                        anchors.fill: listDelegate
+                        color: "gray"
+                    }
                 }
             }
 
             Row {
                 id: actionButtonRow
-                anchors {top: accountListView.bottom; topMargin: primaryFontSize * 0.25; left: parent.left}
+                anchors {top: accountListViewRectangle.bottom; topMargin: primaryFontSize * 0.25; left: parent.left}
                 height: newButton.height
                 width: parent.width
 
@@ -259,110 +268,143 @@ Item {
                 }
             }
 
-            Text {
-                id: accountNameText
-                anchors {top: actionButtonRow.bottom; topMargin: primaryFontSize * 0.25; left: parent.left}
-                height: accountNameTextField.height
-                text: "Account Name"
-                font.pointSize: primaryFontSize * 0.75
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-            }
-            CommonTextField {
-                id: accountNameTextField
-                anchors {top: actionButtonRow.bottom; topMargin: primaryFontSize * 0.25;
-                         left: accountNameText.right; leftMargin: primaryFontSize * 0.5; right: parent.right}
-                pointSize: primaryFontSize * 0.5
-                enabled: newAccount
-            }
+            CommonFlickable {
+                id: inputFlickable
 
-            Text {
-                id: userNameText
-                anchors {top: accountNameText.bottom; topMargin: primaryFontSize * 0.25; left: parent.left}
-                height: userNameTextField.height
-                text: "User Name"
-                font.pointSize: primaryFontSize * 0.75
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-            }
-            CommonTextField {
-                id: userNameTextField
-                anchors {top: accountNameText.bottom; topMargin: primaryFontSize * 0.25;
-                         left: userNameText.right; leftMargin: primaryFontSize * 0.5; right: parent.right}
-                pointSize: primaryFontSize * 0.5
-                enabled: editAccount
-            }
+                anchors {top: actionButtonRow.bottom; topMargin: primaryFontSize * 0.5
+                         left: parent.left; right: parent.right; bottom: parent.bottom}
+                clip: true
+                contentHeight: flickableContent.height
 
-            Text {
-                id: passwordText
-                anchors {top: userNameText.bottom; topMargin: primaryFontSize * 0.25; left: parent.left}
-                height: passwordTextField.height
-                text: "Password"
-                font.pointSize: primaryFontSize * 0.75
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-            }
-            CommonTextField {
-                id: passwordTextField
-                anchors {top: userNameText.bottom; topMargin: primaryFontSize * 0.25;
-                         left: passwordText.right; leftMargin: primaryFontSize * 0.5; right: parent.right}
-                pointSize: primaryFontSize * 0.5
-                echoMode: TextInput.Password
-                enabled: editAccount
-            }
+                Column {
+                    id: flickableContent
 
-            Text {
-                id: serverText
-                anchors {top: passwordText.bottom; topMargin: primaryFontSize * 0.25; left: parent.left}
-                height: serverTextField.height
-                text: "Server"
-                font.pointSize: primaryFontSize * 0.75
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-            }
-            CommonTextField {
-                id: serverTextField
-                anchors {top: passwordText.bottom; topMargin: primaryFontSize * 0.25;
-                         left: serverText.right; leftMargin: primaryFontSize * 0.5; right: parent.right}
-                pointSize: primaryFontSize * 0.5
-                enabled: editAccount
-            }
+                    anchors {top: parent.top; left: parent.left; right: parent.right}
+                    spacing: primaryFontSize * 0.4
 
-            Row {
-                anchors {top: serverText.bottom; topMargin: primaryFontSize * 0.25}
-                width: parent.width
+                    Row {
+                        width: parent.width
+                        height: accountNameTextField.height
 
-                Text {
-                    id: serverPortText
-                    height: serverPortTextField.height
-                    width: parent.width / 6
-                    text: "Port"
-                    font.pointSize: primaryFontSize * 0.75
-                    horizontalAlignment: Text.AlignHLeft
-                    verticalAlignment: Text.AlignVCenter
-                }
+                        Text {
+                            id: accountNameText
+                            anchors.left: parent.left
+                            height: parent.height
+                            text: "Account Name"
+                            font.pointSize: primaryFontSize * 0.75
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                        }
+                        CommonTextField {
+                            id: accountNameTextField
+                            anchors {left: accountNameText.right; leftMargin: primaryFontSize * 0.5; right: parent.right}
+                            pointSize: primaryFontSize * 0.5
+                            enabled: newAccount
+                        }
+                    }
 
-                CommonTextField {
-                    id: serverPortTextField
-                    width: parent.width / 6
-                    pointSize: primaryFontSize * 0.5
-                    enabled: editAccount
-                }
+                    Row {
+                        width: parent.width
+                        height: userNameTextField.height
 
-                CommonButton {
-                    id: sslButton
-                    text: "SSL"
-                    width: parent.width / 3
-                    enabled: encryptionSetting != 1
-                    onClicked: encryptionSetting = 1
-                }
+                        Text {
+                            id: userNameText
+                            anchors.left: parent.left
+                            height: parent.height
+                            text: "User Name"
+                            font.pointSize: primaryFontSize * 0.75
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                        }
+                        CommonTextField {
+                            id: userNameTextField
+                            anchors {left: userNameText.right; leftMargin: primaryFontSize * 0.5; right: parent.right}
+                            pointSize: primaryFontSize * 0.5
+                            enabled: editAccount
+                        }
+                    }
 
-                CommonButton {
-                    id: startTlsButton
-                    text: "STARTTLS"
-                    width: parent.width / 3
-                    enabled: encryptionSetting != 2
-                    onClicked: encryptionSetting = 2
+                    Row {
+                        width: parent.width
+                        height: passwordTextField.height
+
+                        Text {
+                            id: passwordText
+                            anchors.left: parent.left
+                            height: parent.height
+                            text: "Password"
+                            font.pointSize: primaryFontSize * 0.75
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                        }
+                        CommonTextField {
+                            id: passwordTextField
+                            anchors {left: passwordText.right; leftMargin: primaryFontSize * 0.5; right: parent.right}
+                            pointSize: primaryFontSize * 0.5
+                            echoMode: TextInput.Password
+                            enabled: editAccount
+                        }
+                    }
+
+                    Row {
+                        width: parent.width
+                        height: serverTextField.height
+
+                        Text {
+                            id: serverText
+                            anchors.left: parent.left
+                            height: parent.height
+                            text: "Server"
+                            font.pointSize: primaryFontSize * 0.75
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                        }
+                        CommonTextField {
+                            id: serverTextField
+                            anchors {left: serverText.right; leftMargin: primaryFontSize * 0.5; right: parent.right}
+                            pointSize: primaryFontSize * 0.5
+                            enabled: editAccount
+                        }
+                    }
+
+                    Row {
+                        id: portRow
+                        anchors {top: serverText.bottom; topMargin: primaryFontSize * 0.25}
+                        width: parent.width
+
+                        Text {
+                            id: serverPortText
+                            height: serverPortTextField.height
+                            width: parent.width / 6
+                            text: "Port"
+                            font.pointSize: primaryFontSize * 0.75
+                            horizontalAlignment: Text.AlignHLeft
+                            verticalAlignment: Text.AlignVCenter
+                        }
+
+                        CommonTextField {
+                            id: serverPortTextField
+                            width: parent.width / 6
+                            pointSize: primaryFontSize * 0.5
+                            enabled: editAccount
+                        }
+
+                        CommonButton {
+                            id: sslButton
+                            text: "SSL"
+                            width: parent.width / 3
+                            enabled: encryptionSetting != 1
+                            onClicked: encryptionSetting = 1
+                        }
+
+                        CommonButton {
+                            id: startTlsButton
+                            text: "STARTTLS"
+                            width: parent.width / 3
+                            enabled: encryptionSetting != 2
+                            onClicked: encryptionSetting = 2
+                        }
+                    }
                 }
             }
         }
