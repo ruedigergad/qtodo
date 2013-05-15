@@ -85,7 +85,7 @@ contains(LIBS,-lsailfishsilicabackground): {
         lib/include
 
     LIBS += \
-        -L$$PWD/lib/build/bb10/qmf/lib \
+        -L$$PWD/lib/link/bb10 \
         -lqmfclient
 
     qmlCanvasImport.source = lib/build/bb10/qmlcanvas
@@ -180,8 +180,15 @@ contains(LIBS,-lsailfishsilicabackground): {
     CONFIG  += qxt
     QXT     += core gui
 
-    CONFIG += link_pkgconfig
-    PKGCONFIG += qmfclient
+#    CONFIG += link_pkgconfig
+#    PKGCONFIG += qmfclient
+
+    LIBS += \
+        -Llib/build/linux/x86_64 \
+        -Llib/link/linux/x86_64 \
+        -lqmfclient \
+        -lQxtCore \
+        -lQxtGui
 
     RESOURCES += \
         icon.qrc
@@ -219,16 +226,16 @@ SOURCES += main.cpp \
     merger.cpp
 
 #!contains(DEFINES, BB10_BUILD): {
-    message(Building sync support...)
-    DEFINES += QTODO_SYNC_SUPPORT
-    HEADERS += \
-        imapstorage.h \
-        imapaccountlistmodel.h \
-        imapaccounthelper.h
-    SOURCES += \
-        imapstorage.cpp \
-        imapaccountlistmodel.cpp \
-        imapaccounthelper.cpp
+message(Building sync support...)
+DEFINES += QTODO_SYNC_SUPPORT
+HEADERS += \
+    imapstorage.h \
+    imapaccountlistmodel.h \
+    imapaccounthelper.h
+SOURCES += \
+    imapstorage.cpp \
+    imapaccountlistmodel.cpp \
+    imapaccounthelper.cpp
 #}
 
 OTHER_FILES += \

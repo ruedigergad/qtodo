@@ -328,6 +328,19 @@ index e0a8ad6..9b32c17 100644
      if(syslogEnabled) {
          SysLogger<LvlLogPrefix>* sl = new SysLogger<LvlLogPrefix>(ident, LOG_PID, LOG_LOCAL7);
          addLoggerIfReady(sl);
+diff --git a/src/libraries/qmfclient/support/qmailpluginmanager.cpp b/src/libraries/qmfclient/support/qmailpluginmanager.cpp
+index 444e185..ba3e370 100644
+--- a/src/libraries/qmfclient/support/qmailpluginmanager.cpp
++++ b/src/libraries/qmfclient/support/qmailpluginmanager.cpp
+@@ -120,7 +120,7 @@ QStringList pluginFilePatterns()
+ #elif defined(Q_OS_WIN)
+ 	return QStringList() << QString("*%1.dll").arg(debugSuffix) << QString("*%1.DLL").arg(debugSuffix);
+ #elif defined(Q_OS_MAC)
+-	return QStringList() << "*.dylib";
++	return QStringList() << "*.so";
+ #else
+ 	return QStringList() << QString("*%1.so*").arg(debugSuffix);
+ #endif
 diff --git a/src/tools/messageserver/messageserver.cpp b/src/tools/messageserver/messageserver.cpp
 index 09aede6..601e307 100644
 --- a/src/tools/messageserver/messageserver.cpp

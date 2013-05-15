@@ -21,6 +21,8 @@
 #include <QDebug>
 #include <qmfclient/qmailaccount.h>
 #include <qmfclient/qmailstore.h>
+#include <qmfclient/qmailnamespace.h>
+#include <qmfclient/qmailpluginmanager.h>
 
 ImapAccountHelper::ImapAccountHelper(QObject *parent) :
     QObject(parent)
@@ -35,6 +37,11 @@ QMailAccountConfiguration::ServiceConfiguration ImapAccountHelper::imapConfig(ul
     QMailAccountConfiguration *accountConfig = new QMailAccountConfiguration(QMailAccountId(accId));
     QMailAccountConfiguration::ServiceConfiguration serviceConfig = accountConfig->serviceConfiguration("imap4");
     qDebug() << serviceConfig.values();
+    qDebug() << "Plug-ins path: " << QMail::pluginsPath();
+    qDebug() << "Plug-ins: " << QMailPluginManager("messageservices").list();
+    qDebug() << QString(qgetenv("QMF_PLUGINS"));
+    qDebug() << QString(getenv("QMF_PLUGINS"));
+    qDebug() << QString(getenv("QML_IMPORT_PATH"));
     return serviceConfig;
 }
 

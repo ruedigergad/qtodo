@@ -128,7 +128,14 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     }
 #endif
 #ifdef BB10_BUILD
+//    QString qmfPlugins = "QMF_PLUGINS=" + QCoreApplication::applicationDirPath() + "/lib/qmf/plugins";
+//    qDebug("QMF_PLUGINS: %s", qmfPlugins.toAscii().data());
+//    putenv(qmfPlugins.toAscii().data());
+
+    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+    env.insert("QMF_PLUGINS", QCoreApplication::applicationDirPath() + "/lib/qmf/plugins");
     QProcess messageServerProcess;
+    messageServerProcess.setProcessEnvironment(env);
     qDebug("Starting messageserver...");
     messageServerProcess.start("app/native/lib/qmf/bin/messageserver");
 #endif
