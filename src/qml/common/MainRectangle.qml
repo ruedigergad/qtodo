@@ -152,7 +152,7 @@ Item {
     ConfirmationDialog {
         id: confirmSyncToImapDialog
 
-        titleText: "Sync to IMAP?"
+        titleText: "Sync to-do list?"
         message: "This may take some time."
 
         onOpened: commonTools.enabled = false
@@ -166,7 +166,7 @@ Item {
     ConfirmationDialog {
         id: confirmSyncSketchesToImapDialog
 
-        titleText: "Sync sketches to IMAP?"
+        titleText: "Sync sketches?"
         message: "This may take some time."
 
         onOpened: commonTools.enabled = false

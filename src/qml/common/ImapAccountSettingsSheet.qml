@@ -118,23 +118,12 @@ Item {
             anchors.left: parent.left
             anchors.leftMargin: 16
             anchors.verticalCenter: parent.verticalCenter
-            text: "Cancel"
+            text: "Close"
             onClicked: imapAccountSettingsSheet.close();
         }
 
         Text {id: entryLabel; text: "Sync Accounts"; font.pointSize: primaryFontSize * 0.75
               font.capitalization: Font.SmallCaps; font.bold: true; anchors.centerIn: parent}
-
-        CommonButton{
-            id: acceptButton
-            anchors.right: parent.right
-            anchors.rightMargin: 16
-            anchors.verticalCenter: parent.verticalCenter
-            text: "OK"
-            onClicked: {
-                imapAccountSettingsSheet.accepted()
-            }
-        }
     }
 
     Rectangle {

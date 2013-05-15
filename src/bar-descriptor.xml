@@ -3,7 +3,7 @@
     <id>com.ruedigergad.qtodo</id>
     <name>Q To-Do</name>
     <versionNumber>0.11.5</versionNumber>
-    <description>foo</description>
+    <description>Q To-Do is a simple to-do list organizer. It features: synchronization with desktop version, nested to-dos, sketches, an intuitive and easy to use user interface, and more.</description>
     <initialWindow>
         <aspectRatio>portrait</aspectRatio>
         <autoOrients>false</autoOrients>
@@ -30,4 +30,8 @@
     <asset path="%SRC_DIR%/icons">qml/icons</asset>
     <asset path="%SRC_DIR%/lib/build/bb10/qmlcanvas">lib/imports/qmlcanvas</asset>
     <asset path="%SRC_DIR%/lib/build/bb10/qmf">lib/qmf</asset>
+    <asset path="/home/rc/repositories/private/qt/qtodo/src/logo_bb10.png">logo_bb10.png</asset>
+    <icon>
+        <image>logo_bb10.png</image>
+    </icon>
 </qnx>
