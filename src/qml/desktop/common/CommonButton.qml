@@ -40,7 +40,7 @@ Rectangle {
     Text {
         id: textItem
         x: parent.width/2 - width/2; y: parent.height/2 - height/2
-        font.pointSize: primaryFontSize * 0.6
+        font.pointSize: primaryFontSize * 0.75
         color: "black"
     }
 

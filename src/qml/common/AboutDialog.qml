@@ -30,17 +30,17 @@ CommonDialog {
             text: "<a href=\"http://ruedigergad.github.com/qtodo\" style=\"text-decoration:none; color:#00b000\">Q To-Do<br /><img src=\"../icons/logo.png\" /><br />Version 0.11.5</a>"
             textFormat: Text.RichText;
             onLinkActivated: { Qt.openUrlExternally(link); }
-            font.pointSize: primaryFontSize * 0.6
+            font.pointSize: primaryFontSize * 0.75
             horizontalAlignment: Text.AlignHCenter;
-            anchors.horizontalCenter: parent.horizontalCenter; anchors.bottom: description.top; anchors.bottomMargin: primaryFontSize / 4
+            anchors {horizontalCenter: parent.horizontalCenter; top: parent.top; topMargin: primaryFontSize / 4}
         }
 
         Text {
             id: description
             text: "A Simple To-Do List Organizer"
-            font.pointSize: primaryFontSize * 0.5
+            font.pointSize: primaryFontSize * 0.6
             font.bold: true;
-            anchors.centerIn: parent
+            anchors {top: homepage.bottom; topMargin: primaryFontSize / 4; horizontalCenter: parent.horizontalCenter}
             color: "white"
         }
 
@@ -62,7 +62,7 @@ CommonDialog {
                   + "(at your option) any later version.";
             textFormat: Text.RichText;
             onLinkActivated: { Qt.openUrlExternally(link); }
-            font.pointSize: primaryFontSize * 0.3;
+            font.pointSize: primaryFontSize * 0.5;
             anchors.horizontalCenter: parent.horizontalCenter;
             anchors.top: author.bottom;
             anchors.topMargin: primaryFontSize / 4;

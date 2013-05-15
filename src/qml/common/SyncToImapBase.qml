@@ -207,7 +207,7 @@ Item {
         parent: syncToImapBase.parent
 
         title: "Syncing..."
-        message: "Sync to IMAP in progess"
+        message: "Sync is in progess."
 
         maxValue: 6
         currentValue: 0
