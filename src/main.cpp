@@ -33,6 +33,9 @@
 #include "qtodotrayicon.h"
 #include "qtodoview.h"
 #endif
+#ifdef BB10_BUILD
+#include <QGLWidget>
+#endif
 
 #include "filehelper.h"
 #ifdef QTODO_SYNC_SUPPORT
@@ -55,8 +58,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     putenv("QMF_PLUGINS=plugins");
     putenv("QML_IMPORT_PATH=imports");
 #elif defined(BB10_BUILD)
-//    putenv("QML_IMPORT_PATH=app/native/lib/imports");
-//    putenv("QMF_PLUGINS=app/native/lib/qmf/plugins");
     QApplication::setStartDragDistance(50);
     QApplication::setDoubleClickInterval(750);
 #endif
@@ -102,7 +103,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 #endif
 
     /*
-     * Desktop versions may need to start messageserver.
+     * Some versions may need to start messageserver.
      */
 #ifdef WINDOWS_DESKTOP
     QString messageServerRunningQuery = "tasklist | find /N \"messageserver.exe\"";
@@ -128,14 +129,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     }
 #endif
 #ifdef BB10_BUILD
-//    QString qmfPlugins = "QMF_PLUGINS=" + QCoreApplication::applicationDirPath() + "/lib/qmf/plugins";
-//    qDebug("QMF_PLUGINS: %s", qmfPlugins.toAscii().data());
-//    putenv(qmfPlugins.toAscii().data());
-
-    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
-    env.insert("QMF_PLUGINS", QCoreApplication::applicationDirPath() + "/lib/qmf/plugins");
     QProcess messageServerProcess;
-    messageServerProcess.setProcessEnvironment(env);
     qDebug("Starting messageserver...");
     messageServerProcess.start("app/native/lib/qmf/bin/messageserver");
 #endif
@@ -207,6 +201,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     splash.close();
     view->show();
 #elif defined(BB10_BUILD)
+    view->setViewport(new QGLWidget());
     view->setSource(QUrl::fromLocalFile("app/native/qml/bb10/main.qml"));
     view->setResizeMode(QDeclarativeView::SizeRootObjectToView);
     view->showMaximized();

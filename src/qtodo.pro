@@ -79,7 +79,7 @@ contains(LIBS,-lsailfishsilicabackground): {
     DEFINES += BB10_BUILD
 
     LIBS += -lbbdata -lbb -lbbcascades
-    QT += declarative xml
+    QT += declarative xml opengl
 
     INCLUDEPATH += \
         lib/include
