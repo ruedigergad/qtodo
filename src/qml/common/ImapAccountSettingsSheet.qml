@@ -79,6 +79,8 @@ Item {
         newAccount = false
         accountListView.currentIndex = -1
 
+        imapAccountListModel.reload()
+
         state = "open"
     }
 
@@ -118,12 +120,24 @@ Item {
             anchors.left: parent.left
             anchors.leftMargin: 16
             anchors.verticalCenter: parent.verticalCenter
-            text: "Close"
+            text: "Cancel"
             onClicked: imapAccountSettingsSheet.close();
         }
 
         Text {id: entryLabel; text: "Sync Accounts"; font.pointSize: primaryFontSize * 0.75
               font.capitalization: Font.SmallCaps; font.bold: true; anchors.centerIn: parent}
+
+        CommonButton{
+            id: acceptButton
+            anchors.right: parent.right
+            anchors.rightMargin: 16
+            anchors.verticalCenter: parent.verticalCenter
+            text: "OK"
+            onClicked: {
+                imapAccountHelper.setSyncAccount(currentAccountId)
+                imapAccountSettingsSheet.close()
+            }
+        }
     }
 
     Rectangle {

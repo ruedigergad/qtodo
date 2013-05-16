@@ -18,6 +18,7 @@
  */
 
 #include "imapaccountlistmodel.h"
+#include <QSettings>
 
 ImapAccountListModel::ImapAccountListModel(QObject *parent) :
     QSortFilterProxyModel(parent)
@@ -38,12 +39,31 @@ QVariant ImapAccountListModel::data(const QModelIndex &index, int role) const{
 
     QModelIndex sourceModelIndex = mapToSource(index);
 
-    if(role == AccountNameRole)
-        return accountListModel->data(sourceModelIndex, QMailAccountListModel::NameTextRole);
-    else if (role == AccountIdRole)
+    if(role == AccountNameRole) {
+        qulonglong syncAccountid = QSettings().value("syncAccountId", -1).toULongLong();
+        qulonglong currentAccountId = accountListModel->idFromIndex(sourceModelIndex).toULongLong();
+        QString accountName = accountListModel->data(sourceModelIndex, QMailAccountListModel::NameTextRole).toString();
+        if (currentAccountId == syncAccountid) {
+            accountName += " *";
+        }
+        return accountName;
+    } else if (role == AccountIdRole)
         return accountListModel->idFromIndex(sourceModelIndex).toULongLong();
 
     return QVariant();
+}
+
+void ImapAccountListModel::reload() {
+    beginResetModel();
+    if (accountListModel != NULL) {
+        delete accountListModel;
+        accountListModel = NULL;
+    }
+
+    accountListModel = new QMailAccountListModel();
+    accountListModel->setSynchronizeEnabled(true);
+    setSourceModel(accountListModel);
+    endResetModel();
 }
 
 int ImapAccountListModel::rowCount(const QModelIndex &parent) const{

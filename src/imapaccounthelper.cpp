@@ -19,6 +19,7 @@
 
 #include "imapaccounthelper.h"
 #include <QDebug>
+#include <QSettings>
 #include <qmfclient/qmailaccount.h>
 #include <qmfclient/qmailstore.h>
 #include <qmfclient/qmailnamespace.h>
@@ -99,4 +100,8 @@ void ImapAccountHelper::updateAccount(qulonglong accId, QString userName, QStrin
     serviceConfig.setValue("encryption", QString::number(encryptionSetting));
 
     QMailStore::instance()->updateAccount(account, accountConfig);
+}
+
+void ImapAccountHelper::setSyncAccount(qulonglong accId) {
+    QSettings().setValue("syncAccountId", accId);
 }
