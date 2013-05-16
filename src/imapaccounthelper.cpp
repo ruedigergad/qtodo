@@ -29,11 +29,11 @@ ImapAccountHelper::ImapAccountHelper(QObject *parent) :
 {
 }
 
-int ImapAccountHelper::encryptionSetting(ulong accId) {
+int ImapAccountHelper::encryptionSetting(qulonglong accId) {
     return imapConfig(accId).value("encryption").toInt();
 }
 
-QMailAccountConfiguration::ServiceConfiguration ImapAccountHelper::imapConfig(ulong accId) {
+QMailAccountConfiguration::ServiceConfiguration ImapAccountHelper::imapConfig(qulonglong accId) {
     QMailAccountConfiguration *accountConfig = new QMailAccountConfiguration(QMailAccountId(accId));
     QMailAccountConfiguration::ServiceConfiguration serviceConfig = accountConfig->serviceConfiguration("imap4");
     qDebug() << serviceConfig.values();
@@ -45,19 +45,19 @@ QMailAccountConfiguration::ServiceConfiguration ImapAccountHelper::imapConfig(ul
     return serviceConfig;
 }
 
-QString ImapAccountHelper::imapPassword(ulong accId) {
+QString ImapAccountHelper::imapPassword(qulonglong accId) {
     return QString(QByteArray::fromBase64(imapConfig(accId).value("password").toAscii()));
 }
 
-QString ImapAccountHelper::imapPort(ulong accId) {
+QString ImapAccountHelper::imapPort(qulonglong accId) {
     return imapConfig(accId).value("port");
 }
 
-QString ImapAccountHelper::imapServer(ulong accId) {
+QString ImapAccountHelper::imapServer(qulonglong accId) {
     return imapConfig(accId).value("server");
 }
 
-QString ImapAccountHelper::imapUserName(ulong accId) {
+QString ImapAccountHelper::imapUserName(qulonglong accId) {
     return imapConfig(accId).value("username");
 }
 
@@ -91,7 +91,7 @@ void ImapAccountHelper::addAccount(QString accountName, QString userName, QStrin
     QMailStore::instance()->addAccount(account, accountConfig);
 }
 
-void ImapAccountHelper::updateAccount(ulong accId, QString userName, QString password, QString server, QString port, int encryptionSetting) {
+void ImapAccountHelper::updateAccount(qulonglong accId, QString userName, QString password, QString server, QString port, int encryptionSetting) {
     qDebug() << "Updating account: " << accId << " " << userName << " " << server << " " << port << " " << encryptionSetting;
     QMailAccount *account = new QMailAccount(QMailAccountId(accId));
 

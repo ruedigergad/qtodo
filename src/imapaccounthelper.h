@@ -29,15 +29,15 @@ class ImapAccountHelper : public QObject
 public:
     explicit ImapAccountHelper(QObject *parent = 0);
 
-    Q_INVOKABLE int encryptionSetting(ulong accId);
-    Q_INVOKABLE QString imapPassword(ulong accId);
-    Q_INVOKABLE QString imapPort(ulong accId);
-    Q_INVOKABLE QString imapServer(ulong accId);
-    Q_INVOKABLE QString imapUserName(ulong accId);
+    Q_INVOKABLE int encryptionSetting(qulonglong accId);
+    Q_INVOKABLE QString imapPassword(qulonglong accId);
+    Q_INVOKABLE QString imapPort(qulonglong accId);
+    Q_INVOKABLE QString imapServer(qulonglong accId);
+    Q_INVOKABLE QString imapUserName(qulonglong accId);
 
     Q_INVOKABLE void addAccount(QString accountName, QString userName, QString password,
                                 QString server, QString port, int encryptionSetting);
-    Q_INVOKABLE void updateAccount(ulong accId, QString userName, QString password,
+    Q_INVOKABLE void updateAccount(qulonglong accId, QString userName, QString password,
                                    QString server, QString port, int encryptionSetting);
     
 signals:
@@ -45,7 +45,7 @@ signals:
 public slots:
     
 private:
-    QMailAccountConfiguration::ServiceConfiguration imapConfig(ulong accId);
+    QMailAccountConfiguration::ServiceConfiguration imapConfig(qulonglong accId);
 };
 
 #endif // IMAPACCOUNTHELPER_H

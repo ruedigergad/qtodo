@@ -30,24 +30,24 @@ class ImapStorage : public QObject
 public:
     explicit ImapStorage(QObject *parent = 0);
     
-    Q_INVOKABLE void addMessage(ulong accId, QString folder, QString subject, QString attachment = "");
-    Q_INVOKABLE void createFolder(ulong accId, QString name);
-    Q_INVOKABLE void deleteMessage(ulong msgId);
-    Q_INVOKABLE bool folderExists(ulong accId, QString path);
-    Q_INVOKABLE QString getAttachmentIdentifier(ulong msgId, QString attachmentLocation);
-    Q_INVOKABLE QStringList getAttachmentLocations(ulong msgId);
-    Q_INVOKABLE QString getDateString(ulong msgId);
-    Q_INVOKABLE QString getSubject(ulong msgId);
-    Q_INVOKABLE void moveMessageToTrash(ulong msgId);
+    Q_INVOKABLE void addMessage(qulonglong accId, QString folder, QString subject, QString attachment = "");
+    Q_INVOKABLE void createFolder(qulonglong accId, QString name);
+    Q_INVOKABLE void deleteMessage(qulonglong msgId);
+    Q_INVOKABLE bool folderExists(qulonglong accId, QString path);
+    Q_INVOKABLE QString getAttachmentIdentifier(qulonglong msgId, QString attachmentLocation);
+    Q_INVOKABLE QStringList getAttachmentLocations(qulonglong msgId);
+    Q_INVOKABLE QString getDateString(qulonglong msgId);
+    Q_INVOKABLE QString getSubject(qulonglong msgId);
+    Q_INVOKABLE void moveMessageToTrash(qulonglong msgId);
     Q_INVOKABLE QVariantList queryImapAccounts();
-    Q_INVOKABLE QVariantList queryMessages(ulong accId, QString folder, QString subject);
-    Q_INVOKABLE bool removeMessage(ulong msgId);
-    Q_INVOKABLE void retrieveFolderList(ulong accId);
-    Q_INVOKABLE void retrieveMessage(ulong msgId);
-    Q_INVOKABLE void retrieveMessageList(ulong accId, QString folder);
-    Q_INVOKABLE void searchMessage(ulong accId, QString folder, QString subject);
-    Q_INVOKABLE void updateMessageAttachment(ulong msgId, QString attachment);
-    Q_INVOKABLE QString writeAttachmentTo(ulong msgId, QString attachmentLocation, QString path);
+    Q_INVOKABLE QVariantList queryMessages(qulonglong accId, QString folder, QString subject);
+    Q_INVOKABLE bool removeMessage(qulonglong msgId);
+    Q_INVOKABLE void retrieveFolderList(qulonglong accId);
+    Q_INVOKABLE void retrieveMessage(qulonglong msgId);
+    Q_INVOKABLE void retrieveMessageList(qulonglong accId, QString folder);
+    Q_INVOKABLE void searchMessage(qulonglong accId, QString folder, QString subject);
+    Q_INVOKABLE void updateMessageAttachment(qulonglong msgId, QString attachment);
+    Q_INVOKABLE QString writeAttachmentTo(qulonglong msgId, QString attachmentLocation, QString path);
 
 signals:
     void error(QString errorString, int errorCode, int currentAction);
@@ -88,7 +88,7 @@ private:
     QMailSearchAction *searchAction;
     QMailStorageAction *storageAction;
 
-    QMailFolderIdList queryFolders(ulong accId, QString path);
+    QMailFolderIdList queryFolders(qulonglong accId, QString path);
 };
 
 #endif // IMAPSTORAGE_H

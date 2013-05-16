@@ -72,7 +72,7 @@ void ImapStorage::accountContentsModified(const QMailAccountIdList &ids) {
     }
 }
 
-void ImapStorage::addMessage(ulong accId, QString folder, QString subject, QString attachment) {
+void ImapStorage::addMessage(qulonglong accId, QString folder, QString subject, QString attachment) {
     QMailFolderIdList folderIds = queryFolders(accId, folder);
     if (folderIds.count() != 1) {
         qDebug("Error retrieving folder for new message!");
@@ -98,7 +98,7 @@ void ImapStorage::addMessage(ulong accId, QString folder, QString subject, QStri
     retrievalAction->exportUpdates(QMailAccountId(accId));
 }
 
-void ImapStorage::createFolder(ulong accId, QString name) {
+void ImapStorage::createFolder(qulonglong accId, QString name) {
     currentAction = CreateFolderAction;
 #if defined(MER_EDITION_SAILFISH) || defined(MER_EDITION_NEMO)
     storageAction->onlineCreateFolder(name, QMailAccountId(accId), QMailFolderId());
@@ -107,7 +107,7 @@ void ImapStorage::createFolder(ulong accId, QString name) {
 #endif
 }
 
-void ImapStorage::deleteMessage(ulong msgId) {
+void ImapStorage::deleteMessage(qulonglong msgId) {
     qDebug() << "Deleting message with id: " << msgId;
     currentAction = DeleteMessageAction;
 #if defined(MER_EDITION_SAILFISH) || defined(MER_EDITION_NEMO)
@@ -125,17 +125,17 @@ void ImapStorage::foldersAdded(QMailFolderIdList ids) {
     qDebug() << "Folders added: " << ids << " number of new folders: " << ids.count();
 }
 
-bool ImapStorage::folderExists(ulong accId, QString path) {
+bool ImapStorage::folderExists(qulonglong accId, QString path) {
     return (queryFolders(accId, path).count() == 1);
 }
 
-QString ImapStorage::getAttachmentIdentifier(ulong msgId, QString attachmentLocation) {
+QString ImapStorage::getAttachmentIdentifier(qulonglong msgId, QString attachmentLocation) {
     QMailMessage *msg = new QMailMessage(QMailMessageId(msgId));
     QMailMessagePart attachment = msg->partAt(QMailMessagePart::Location(attachmentLocation));
     return attachment.identifier();
 }
 
-QStringList ImapStorage::getAttachmentLocations(ulong msgId) {
+QStringList ImapStorage::getAttachmentLocations(qulonglong msgId) {
     QMailMessage *msg = new QMailMessage(QMailMessageId(msgId));
     QList<QMailMessagePartContainer::Location> locations = msg->findAttachmentLocations();
 
@@ -147,23 +147,23 @@ QStringList ImapStorage::getAttachmentLocations(ulong msgId) {
     return ret;
 }
 
-QString ImapStorage::getDateString(ulong msgId) {
+QString ImapStorage::getDateString(qulonglong msgId) {
     QMailMessage *msg = new QMailMessage(QMailMessageId(msgId));
     return msg->date().toLocalTime().toString(Qt::ISODate);
 }
 
-QString ImapStorage::getSubject(ulong msgId) {
+QString ImapStorage::getSubject(qulonglong msgId) {
     QMailMessage *msg = new QMailMessage(QMailMessageId(msgId));
     return msg->subject();
 }
 
-void ImapStorage::moveMessageToTrash(ulong msgId) {
+void ImapStorage::moveMessageToTrash(qulonglong msgId) {
     QMailDisconnected::moveToStandardFolder(QMailMessageIdList() << QMailMessageId(msgId), QMailFolder::TrashFolder);
     currentAction = MoveToTrashAction;
     retrievalAction->exportUpdates(QMailMessage(QMailMessageId(msgId)).parentAccountId());
 }
 
-QMailFolderIdList ImapStorage::queryFolders(ulong accId, QString path) {
+QMailFolderIdList ImapStorage::queryFolders(qulonglong accId, QString path) {
     QMailFolderKey accountKey(QMailFolderKey::parentAccountId(QMailAccountId(accId)));
     QMailFolderKey pathKey(QMailFolderKey::path(path));
 
@@ -191,7 +191,7 @@ QVariantList ImapStorage::queryImapAccounts() {
     return ret;
 }
 
-QVariantList ImapStorage::queryMessages(ulong accId, QString folder, QString subject) {
+QVariantList ImapStorage::queryMessages(qulonglong accId, QString folder, QString subject) {
     QMailFolderIdList folders = queryFolders(accId, folder);
     if (folders.count() != 1) {
         qDebug("Error retrieving folder for query!");
@@ -211,7 +211,7 @@ QVariantList ImapStorage::queryMessages(ulong accId, QString folder, QString sub
     return ret;
 }
 
-bool ImapStorage::removeMessage(ulong msgId) {
+bool ImapStorage::removeMessage(qulonglong msgId) {
     return QMailStore::instance()->removeMessage(QMailMessageId(msgId));
 }
 
@@ -260,19 +260,19 @@ void ImapStorage::retrieveActivityChanged(QMailServiceAction::Activity activity)
     }
 }
 
-void ImapStorage::retrieveFolderList(ulong accId) {
+void ImapStorage::retrieveFolderList(qulonglong accId) {
     qDebug() << "Retrieving folder list for account id: " << accId;
     currentAction = RetrieveFolderListAction;
     retrievalAction->retrieveFolderList(QMailAccountId(accId), QMailFolderId());
 }
 
-void ImapStorage::retrieveMessage(ulong msgId) {
+void ImapStorage::retrieveMessage(qulonglong msgId) {
     qDebug() << "Retrieving message with id: " << msgId;
     currentAction = RetrieveMessageAction;
     retrievalAction->retrieveMessages(QMailMessageIdList() << QMailMessageId(msgId), QMailRetrievalAction::Content);
 }
 
-void ImapStorage::retrieveMessageList(ulong accId, QString folder) {
+void ImapStorage::retrieveMessageList(qulonglong accId, QString folder) {
     qDebug() << "Retrieving message list for account id: " << accId << " from folder: " << folder;
 
     QMailFolderIdList folders = queryFolders(accId, folder);
@@ -285,7 +285,7 @@ void ImapStorage::retrieveMessageList(ulong accId, QString folder) {
     retrievalAction->retrieveMessageList(QMailAccountId(accId), folders.at(0));
 }
 
-void ImapStorage::searchMessage(ulong accId, QString folder, QString subject) {
+void ImapStorage::searchMessage(qulonglong accId, QString folder, QString subject) {
     QMailMessageKey accountKey(QMailMessageKey::parentAccountId(QMailAccountId(accId)));
 
     QMailFolderIdList folders = queryFolders(accId, folder);
@@ -360,7 +360,7 @@ void ImapStorage::storageActivityChanged(QMailServiceAction::Activity activity) 
     }
 }
 
-void ImapStorage::updateMessageAttachment(ulong msgId, QString attachment) {
+void ImapStorage::updateMessageAttachment(qulonglong msgId, QString attachment) {
     qDebug("Updating message attachment...");
     QMailMessage *oldMsg = new QMailMessage(QMailMessageId(msgId));
 
@@ -397,7 +397,7 @@ void ImapStorage::updateMessageAttachment(ulong msgId, QString attachment) {
     retrievalAction->exportUpdates(QMailAccountId(oldMsg->parentAccountId()));
 }
 
-QString ImapStorage::writeAttachmentTo(ulong msgId, QString attachmentLocation, QString path) {
+QString ImapStorage::writeAttachmentTo(qulonglong msgId, QString attachmentLocation, QString path) {
     QMailMessage *msg = new QMailMessage(QMailMessageId(msgId));
     QMailMessagePart attachment = msg->partAt(QMailMessagePart::Location(attachmentLocation));
     QString ret = attachment.writeBodyTo(path);
