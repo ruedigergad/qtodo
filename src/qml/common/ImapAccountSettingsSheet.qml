@@ -31,6 +31,7 @@ Item {
     z: 1
 
     property int currentAccountId: -1
+    property string currentAccountName
     property int encryptionSetting: -1
 
     property bool editAccount: false
@@ -205,7 +206,9 @@ Item {
 
                                 currentAccountId = accountId
                                 console.log("Current account id: " + currentAccountId)
-                                accountNameTextField.text = accountName
+
+                                currentAccountName = accountName
+                                accountNameTextField.text = currentAccountName
 
                                 passwordTextField.text = imapAccountHelper.imapPassword(currentAccountId)
                                 serverTextField.text = imapAccountHelper.imapServer(currentAccountId)
@@ -233,7 +236,7 @@ Item {
                 CommonButton {
                     id: newButton
                     text: "New"
-                    width: parent.width / 3
+                    width: parent.width / 4
                     onClicked: {
                         accountListView.currentIndex = -1
                         clearTextFields()
@@ -246,7 +249,7 @@ Item {
                 CommonButton {
                     id: editButton
                     text: "Edit"
-                    width: parent.width / 3
+                    width: parent.width / 4
                     enabled: accountListView.currentIndex > -1
                     onClicked: {
                         editAccount = true
@@ -256,7 +259,7 @@ Item {
                 CommonButton {
                     id: saveButton
                     text: "Save"
-                    width: parent.width / 3
+                    width: parent.width / 4
                     enabled: editAccount || newAccount
                     onClicked: {
                         if (newAccount) {
@@ -270,6 +273,16 @@ Item {
                                                             passwordTextField.text, serverTextField.text,
                                                             serverPortTextField.text, encryptionSetting)
                         }
+                    }
+                }
+
+                CommonButton {
+                    id: deleteButton
+                    text: "Del"
+                    width: parent.width / 4
+                    enabled: currentAccountId >= 0
+                    onClicked: {
+                        removeAccountConfirmationDialog.open()
                     }
                 }
             }
@@ -427,5 +440,17 @@ Item {
     MouseArea {
         anchors.fill: parent
         z: -1
+    }
+
+    ConfirmationDialog {
+        id: removeAccountConfirmationDialog
+
+        titleText: "Remove account?"
+        message: "Delete account " + currentAccountName + "?"
+
+        onAccepted: {
+            console.log("Removing account: " + currentAccountId + " - " + currentAccountName)
+            imapAccountHelper.removeAccount(currentAccountId)
+        }
     }
 }

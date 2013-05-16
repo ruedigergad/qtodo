@@ -37,6 +37,7 @@ public:
 
     Q_INVOKABLE void addAccount(QString accountName, QString userName, QString password,
                                 QString server, QString port, int encryptionSetting);
+    Q_INVOKABLE void removeAccount(qulonglong accId);
     Q_INVOKABLE void updateAccount(qulonglong accId, QString userName, QString password,
                                    QString server, QString port, int encryptionSetting);
 

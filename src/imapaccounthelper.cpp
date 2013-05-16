@@ -86,6 +86,11 @@ void ImapAccountHelper::addAccount(QString accountName, QString userName, QStrin
     QMailStore::instance()->addAccount(account, accountConfig);
 }
 
+void ImapAccountHelper::removeAccount(qulonglong accId) {
+    qDebug("Removing account: %lld", accId);
+    QMailStore::instance()->removeAccount(QMailAccountId(accId));
+}
+
 void ImapAccountHelper::updateAccount(qulonglong accId, QString userName, QString password, QString server, QString port, int encryptionSetting) {
     qDebug() << "Updating account: " << accId << " " << userName << " " << server << " " << port << " " << encryptionSetting;
     QMailAccount *account = new QMailAccount(QMailAccountId(accId));
