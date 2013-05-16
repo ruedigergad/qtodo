@@ -65,35 +65,43 @@ Item {
             _syncToImapProgressDialog.open()
         }
 
-        _imapAccountId = -1
+        _imapAccountId = imapAccountHelper.getSyncAccount()
+        console.log("Found sync account id: " + _imapAccountId)
         _imapMessageId = -1
         _imapSyncFile = ""
 
-        var accIds = _imapStorage.queryImapAccounts()
-        console.log("Found " + accIds.length + " IMAP account(s).")
+        if (_imapAccountId < 0) {
+            var accIds = _imapStorage.queryImapAccounts()
+            console.log("Found " + accIds.length + " IMAP account(s).")
+        }
 
         progress()
 
-        if (accIds.length === 1) {
-            console.log("Found a single IMAP account. Using this for syncing.")
-            console.log("IMAP account id is: " + accIds[0])
-            _imapAccountId = accIds[0]
+        if (_imapAccountId < 0) {
+            if (accIds.length === 1) {
+                console.log("Found a single IMAP account. Using this for syncing.")
+                console.log("IMAP account id is: " + accIds[0])
+                _imapAccountId = accIds[0]
+            } else if (accIds.length === 0) {
+                _syncToImapProgressDialog.close()
+                _messageDialog.title = "No IMAP Account"
+                _messageDialog.message = "Please set up an IMAP e-mail account for syncing."
+                _messageDialog.open()
+            } else if (accIds.length > 1) {
+                _syncToImapProgressDialog.close()
+                _messageDialog.title = "Multiple IMAP Accounts"
+                _messageDialog.message = "Functionality for choosing from different IMAP accounts still needs to be implemented."
+                _messageDialog.open()
+            } else {
+                _syncToImapProgressDialog.close()
+                _messageDialog.title = "Unexpected Error"
+                _messageDialog.message = "Querying for IMAP accounts returned an unexpected value."
+                _messageDialog.open()
+            }
+        }
+
+        if (_imapAccountId >= 0) {
             _imapStorage.retrieveFolderList(_imapAccountId)
-        } else if (accIds.length === 0) {
-            _syncToImapProgressDialog.close()
-            _messageDialog.title = "No IMAP Account"
-            _messageDialog.message = "Please set up an IMAP e-mail account for syncing."
-            _messageDialog.open()
-        } else if (accIds.length > 1) {
-            _syncToImapProgressDialog.close()
-            _messageDialog.title = "Multiple IMAP Accounts"
-            _messageDialog.message = "Functionality for choosing from different IMAP accounts still needs to be implemented."
-            _messageDialog.open()
-        } else {
-            _syncToImapProgressDialog.close()
-            _messageDialog.title = "Unexpected Error"
-            _messageDialog.message = "Querying for IMAP accounts returned an unexpected value."
-            _messageDialog.open()
         }
     }
 
@@ -216,5 +224,9 @@ Item {
     MessageDialog {
         id: _messageDialog
         parent: syncToImapBase.parent
+    }
+
+    ImapAccountHelper {
+        id: imapAccountHelper
     }
 }

@@ -40,6 +40,7 @@ public:
     Q_INVOKABLE void updateAccount(qulonglong accId, QString userName, QString password,
                                    QString server, QString port, int encryptionSetting);
 
+    Q_INVOKABLE qulonglong getSyncAccount();
     Q_INVOKABLE void setSyncAccount(qulonglong accId);
     
 signals:

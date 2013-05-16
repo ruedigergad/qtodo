@@ -102,6 +102,11 @@ void ImapAccountHelper::updateAccount(qulonglong accId, QString userName, QStrin
     QMailStore::instance()->updateAccount(account, accountConfig);
 }
 
+qulonglong ImapAccountHelper::getSyncAccount() {
+    return QSettings().value("syncAccountId", -1).toULongLong();
+}
+
 void ImapAccountHelper::setSyncAccount(qulonglong accId) {
+    qDebug("Setting account id: %lld", accId);
     QSettings().setValue("syncAccountId", accId);
 }

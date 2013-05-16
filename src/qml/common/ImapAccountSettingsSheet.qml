@@ -134,7 +134,9 @@ Item {
             anchors.verticalCenter: parent.verticalCenter
             text: "OK"
             onClicked: {
-                imapAccountHelper.setSyncAccount(currentAccountId)
+                if (currentAccountId >= 0) {
+                    imapAccountHelper.setSyncAccount(currentAccountId)
+                }
                 imapAccountSettingsSheet.close()
             }
         }
@@ -202,6 +204,7 @@ Item {
                                 newAccount = false
 
                                 currentAccountId = accountId
+                                console.log("Current account id: " + currentAccountId)
                                 accountNameTextField.text = accountName
 
                                 passwordTextField.text = imapAccountHelper.imapPassword(currentAccountId)
