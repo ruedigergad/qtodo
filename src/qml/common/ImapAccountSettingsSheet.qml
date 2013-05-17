@@ -243,6 +243,7 @@ Item {
                         editAccount = true
                         newAccount = true
                         encryptionSetting = 1
+                        serverPortTextField.text = 993
                     }
                 }
 
@@ -413,7 +414,10 @@ Item {
                             text: "SSL"
                             width: parent.width / 3
                             enabled: encryptionSetting != 1
-                            onClicked: encryptionSetting = 1
+                            onClicked: {
+                                encryptionSetting = 1
+                                serverPortTextField.text = 993
+                            }
                         }
 
                         CommonButton {
@@ -421,7 +425,10 @@ Item {
                             text: "STARTTLS"
                             width: parent.width / 3
                             enabled: encryptionSetting != 2
-                            onClicked: encryptionSetting = 2
+                            onClicked: {
+                                encryptionSetting = 2
+                                serverPortTextField.text = 143
+                            }
                         }
                     }
                 }
