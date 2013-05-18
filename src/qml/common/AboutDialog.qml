@@ -27,12 +27,21 @@ CommonDialog {
 
         Text {
             id: homepage
-            text: "<a href=\"http://ruedigergad.github.com/qtodo\" style=\"text-decoration:none; color:#00b000\">Q To-Do<br /><img src=\"../icons/logo.png\" /><br />Version 0.11.5</a>"
+            text: "<a href=\"http://ruedigergad.github.com/qtodo\" style=\"text-decoration:none; color:#00b000\">Q To-Do<br /><img src=\"../icons/logo.png\" /></a>"
             textFormat: Text.RichText;
             onLinkActivated: { Qt.openUrlExternally(link); }
             font.pointSize: primaryFontSize * 0.75
             horizontalAlignment: Text.AlignHCenter;
-            anchors {horizontalCenter: parent.horizontalCenter; top: parent.top; topMargin: primaryFontSize / 4}
+            anchors {horizontalCenter: parent.horizontalCenter; bottom: version.top; bottomMargin: primaryFontSize / 4}
+        }
+
+        Text {
+            id: version
+            text: "Version 0.11.5"
+            font.pointSize: primaryFontSize * 0.75
+            horizontalAlignment: Text.AlignHCenter;
+            anchors.centerIn: parent
+            color: "lightgray"
         }
 
         Text {
@@ -40,7 +49,7 @@ CommonDialog {
             text: "A Simple To-Do List Organizer"
             font.pointSize: primaryFontSize * 0.6
             font.bold: true;
-            anchors {top: homepage.bottom; topMargin: primaryFontSize / 4; horizontalCenter: parent.horizontalCenter}
+            anchors {top: version.bottom; topMargin: primaryFontSize / 4; horizontalCenter: parent.horizontalCenter}
             color: "white"
         }
 
