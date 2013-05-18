@@ -30,10 +30,10 @@ Rectangle {
 
     Text {
         id: headerText
-        anchors{left: parent.left; leftMargin: primaryFontSize; verticalCenter: parent.verticalCenter}
+        anchors{left: parent.left; leftMargin: primaryFontSize * 0.75; verticalCenter: parent.verticalCenter}
         text: "My To-Dos"
         color: "white"
-        font {pointSize: primaryFontSize * 0.7; family: "Nokia Pure Text Light"}
+        font {pointSize: primaryFontSize * 0.7}
     }
 
     ListView {
