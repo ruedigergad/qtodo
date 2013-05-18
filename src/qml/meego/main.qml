@@ -27,7 +27,7 @@ PageStackWindow {
 
     initialPage: mainPage
 
-    property int primaryFontSize: 35
+    property int primaryFontSize: 30
 
     Page {
         id: mainPage

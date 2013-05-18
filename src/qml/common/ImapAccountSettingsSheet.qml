@@ -85,6 +85,31 @@ Item {
         state = "open"
     }
 
+    ImapAccountListModel {
+        id: imapAccountListModel
+    }
+
+    ImapAccountHelper {
+        id: imapAccountHelper
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        z: -1
+    }
+
+    ConfirmationDialog {
+        id: removeAccountConfirmationDialog
+
+        titleText: "Remove account?"
+        message: "Delete account " + currentAccountName + "?"
+
+        onAccepted: {
+            console.log("Removing account: " + currentAccountId + " - " + currentAccountName)
+            imapAccountHelper.removeAccount(currentAccountId)
+        }
+    }
+
     onStateChanged: {
         console.log("Imap account settings state changed: " + state)
     }
@@ -433,31 +458,6 @@ Item {
                     }
                 }
             }
-        }
-    }
-
-    ImapAccountListModel {
-        id: imapAccountListModel
-    }
-
-    ImapAccountHelper {
-        id: imapAccountHelper
-    }
-
-    MouseArea {
-        anchors.fill: parent
-        z: -1
-    }
-
-    ConfirmationDialog {
-        id: removeAccountConfirmationDialog
-
-        titleText: "Remove account?"
-        message: "Delete account " + currentAccountName + "?"
-
-        onAccepted: {
-            console.log("Removing account: " + currentAccountId + " - " + currentAccountName)
-            imapAccountHelper.removeAccount(currentAccountId)
         }
     }
 }

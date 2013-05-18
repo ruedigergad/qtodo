@@ -283,6 +283,7 @@ OTHER_FILES += \
     qml/meego/common/CommonToolBar.qml \
     qml/meego/common/CommonToolIcon.qml \
     qml/meego/common/ConfirmationDialog.qml \
+    qml/meego/common/ImapAccountSettingsSheet.qml \
     qml/sailfish/main.qml \
     qml/sailfish/common/AboutDialog.qml \
     qml/sailfish/common/CommonButton.qml \
