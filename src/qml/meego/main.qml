@@ -116,10 +116,18 @@ PageStackWindow {
                 text: "Sync Sketches"
                 onClicked: mainRectangle.confirmSyncSketchesToImapDialog.open()
             }
+            MenuItem {
+                text: "Sync Account Settings"
+                onClicked: imapAccountSettings.open()
+            }
             MenuItem { 
                 text: "About"
                 onClicked: mainRectangle.aboutDialog.open()
             }
         }
+    }
+
+    ImapAccountSettingsSheet {
+        id: imapAccountSettings
     }
 }
