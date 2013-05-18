@@ -98,7 +98,7 @@ PageStackWindow {
         onStatusChanged: {
             if (status === DialogStatus.Opening) {
                 commonTools.enabled = false
-            } else if (status === DialogStatus.Closed) {
+            } else if (status === DialogStatus.Closing) {
                 commonTools.enabled = true
             }
         }
