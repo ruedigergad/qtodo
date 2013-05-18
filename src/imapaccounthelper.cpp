@@ -34,6 +34,10 @@ int ImapAccountHelper::encryptionSetting(qulonglong accId) {
     return imapConfig(accId).value("encryption").toInt();
 }
 
+int ImapAccountHelper::imapAuthenticationType(qulonglong accId) {
+    return imapConfig(accId).value("authentication").toInt();
+}
+
 QMailAccountConfiguration::ServiceConfiguration ImapAccountHelper::imapConfig(qulonglong accId) {
     QMailAccountConfiguration *accountConfig = new QMailAccountConfiguration(QMailAccountId(accId));
     QMailAccountConfiguration::ServiceConfiguration serviceConfig = accountConfig->serviceConfiguration("imap4");
@@ -56,7 +60,7 @@ QString ImapAccountHelper::imapUserName(qulonglong accId) {
     return imapConfig(accId).value("username");
 }
 
-void ImapAccountHelper::addAccount(QString accountName, QString userName, QString password, QString server, QString port, int encryptionSetting) {
+void ImapAccountHelper::addAccount(QString accountName, QString userName, QString password, QString server, QString port, int encryptionSetting, int authType) {
     qDebug() << "Adding new account: " << accountName << " " << userName << " " << server << " " << port << " " << encryptionSetting;
     QMailAccount *account = new QMailAccount();
 
@@ -79,7 +83,7 @@ void ImapAccountHelper::addAccount(QString accountName, QString userName, QStrin
     serviceConfig.setValue("canDelete", "1");
     serviceConfig.setValue("servicetype", "source");
 //    serviceConfig.setValue("capabilities", "IMAP4rev1 CHILDREN ENABLE ID IDLE LIST-EXTENDED LIST-STATUS LITERAL+ MOVE NAMESPACE SASL-IR SORT THREAD=ORDEREDSUBJECT UIDPLUS UNSELECT WITHIN AUTH=LOGIN AUTH=PLAIN");
-    serviceConfig.setValue("authentication", "2");
+    serviceConfig.setValue("authentication", QString::number(authType));
     serviceConfig.setValue("autoDownload", "0");
     serviceConfig.setValue("baseFolder", "");
 
@@ -91,7 +95,7 @@ void ImapAccountHelper::removeAccount(qulonglong accId) {
     QMailStore::instance()->removeAccount(QMailAccountId(accId));
 }
 
-void ImapAccountHelper::updateAccount(qulonglong accId, QString userName, QString password, QString server, QString port, int encryptionSetting) {
+void ImapAccountHelper::updateAccount(qulonglong accId, QString userName, QString password, QString server, QString port, int encryptionSetting, int authType) {
     qDebug() << "Updating account: " << accId << " " << userName << " " << server << " " << port << " " << encryptionSetting;
     QMailAccount *account = new QMailAccount(QMailAccountId(accId));
 
@@ -103,6 +107,7 @@ void ImapAccountHelper::updateAccount(qulonglong accId, QString userName, QStrin
     serviceConfig.setValue("server", server);
     serviceConfig.setValue("port", port);
     serviceConfig.setValue("encryption", QString::number(encryptionSetting));
+    serviceConfig.setValue("authentication", QString::number(authType));
 
     QMailStore::instance()->updateAccount(account, accountConfig);
 }

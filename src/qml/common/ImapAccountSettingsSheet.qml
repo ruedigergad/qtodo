@@ -30,6 +30,7 @@ Item {
     visible: false
     z: 1
 
+    property int authenticationTypeSetting
     property int currentAccountId: -1
     property string currentAccountName
     property int encryptionSetting: -1
@@ -241,6 +242,7 @@ Item {
                                 userNameTextField.text = imapAccountHelper.imapUserName(currentAccountId)
 
                                 encryptionSetting = imapAccountHelper.encryptionSetting(currentAccountId)
+                                authenticationTypeSetting = imapAccountHelper.imapAuthenticationType(currentAccountId)
                             }
                         }
                     }
@@ -269,6 +271,7 @@ Item {
                         newAccount = true
                         encryptionSetting = 1
                         serverPortTextField.text = 993
+                        authenticationTypeSetting = 2
                     }
                 }
 
@@ -291,13 +294,15 @@ Item {
                         if (newAccount) {
                             console.log("Creating new account...")
                             imapAccountHelper.addAccount(accountNameTextField.text, userNameTextField.text,
-                                                            passwordTextField.text, serverTextField.text,
-                                                            serverPortTextField.text, encryptionSetting)
+                                                         passwordTextField.text, serverTextField.text,
+                                                         serverPortTextField.text, encryptionSetting,
+                                                         authenticationTypeSetting)
                         } else if (editAccount) {
                             console.log("Updating account...")
                             imapAccountHelper.updateAccount(currentAccountId, userNameTextField.text,
                                                             passwordTextField.text, serverTextField.text,
-                                                            serverPortTextField.text, encryptionSetting)
+                                                            serverPortTextField.text, encryptionSetting,
+                                                            authenticationTypeSetting)
                         }
                     }
                 }
@@ -453,6 +458,52 @@ Item {
                             onClicked: {
                                 encryptionSetting = 2
                                 serverPortTextField.text = 143
+                            }
+                        }
+                    }
+
+                    Row {
+                        id: authenticationTypeRow
+                        anchors {top: portRow.bottom; topMargin: primaryFontSize * 0.25}
+                        width: parent.width
+
+                        CommonButton {
+                            id: authNoneButton
+                            text: "None"
+                            width: parent.width / 4
+                            enabled: authenticationTypeSetting != 0
+                            onClicked: {
+                                authenticationTypeSetting = 0
+                            }
+                        }
+
+                        CommonButton {
+                            id: authLoginButton
+                            text: "Login"
+                            width: parent.width / 4
+                            enabled: authenticationTypeSetting != 1
+                            onClicked: {
+                                authenticationTypeSetting = 1
+                            }
+                        }
+
+                        CommonButton {
+                            id: authPlainButton
+                            text: "Plain"
+                            width: parent.width / 4
+                            enabled: authenticationTypeSetting != 2
+                            onClicked: {
+                                authenticationTypeSetting = 2
+                            }
+                        }
+
+                        CommonButton {
+                            id: authMd5Button
+                            text: "MD5"
+                            width: parent.width / 4
+                            enabled: authenticationTypeSetting != 3
+                            onClicked: {
+                                authenticationTypeSetting = 3
                             }
                         }
                     }

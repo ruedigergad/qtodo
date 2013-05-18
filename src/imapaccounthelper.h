@@ -30,16 +30,17 @@ public:
     explicit ImapAccountHelper(QObject *parent = 0);
 
     Q_INVOKABLE int encryptionSetting(qulonglong accId);
+    Q_INVOKABLE int imapAuthenticationType(qulonglong accId);
     Q_INVOKABLE QString imapPassword(qulonglong accId);
     Q_INVOKABLE QString imapPort(qulonglong accId);
     Q_INVOKABLE QString imapServer(qulonglong accId);
     Q_INVOKABLE QString imapUserName(qulonglong accId);
 
     Q_INVOKABLE void addAccount(QString accountName, QString userName, QString password,
-                                QString server, QString port, int encryptionSetting);
+                                QString server, QString port, int encryptionSetting, int authType);
     Q_INVOKABLE void removeAccount(qulonglong accId);
     Q_INVOKABLE void updateAccount(qulonglong accId, QString userName, QString password,
-                                   QString server, QString port, int encryptionSetting);
+                                   QString server, QString port, int encryptionSetting, int authType);
 
     Q_INVOKABLE qulonglong getSyncAccount();
     Q_INVOKABLE void setSyncAccount(qulonglong accId);
