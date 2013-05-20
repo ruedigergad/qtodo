@@ -1,3 +1,10 @@
+qtodo (0.11.6) unstable; urgency=low
+
+  * Add possibility for setting the default account.
+  * Improve icons.
+
+ -- Ruediger Gad <r.c.g@gmx.de>  Mon, 20 May 2013 22:34:00 +0200
+
 qtodo (0.11.5) unstable; urgency=low
 
   * Fix startup when default.xml does not exist but directory does.
