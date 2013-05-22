@@ -26,7 +26,7 @@ Rectangle {
     anchors.fill: parent
     color: "white"
 
-    property int primaryFontSize: 30
+    property int primaryFontSize: 22
 
     Rectangle {
         anchors {top: parent.top; left: parent.left; right: parent.right; bottom: toolBarItem.top}
@@ -163,8 +163,9 @@ Rectangle {
         CommonButton{
             id: cleanDone
             anchors.bottom: syncToImap.top
+            anchors.bottomMargin: primaryFontSize / 3
             anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width
+            width: parent.width - primaryFontSize
             text: "Clean Done"
             onClicked: {
                 mainRectangle.confirmCleanDoneDialog.open()
@@ -175,8 +176,9 @@ Rectangle {
         CommonButton{
             id: syncToImap
             anchors.bottom: syncSketchesToImap.top
+            anchors.bottomMargin: primaryFontSize / 3
             anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width
+            width: parent.width - primaryFontSize
             text: "Sync To-Do List"
             onClicked: {
                 mainRectangle.confirmSyncToImapDialog.open()
@@ -213,8 +215,9 @@ Rectangle {
         CommonButton{
             id: about
             anchors.bottom: parent.bottom
+            anchors.bottomMargin: primaryFontSize / 3
             anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width
+            width: parent.width - primaryFontSize
             text: "About"
             onClicked: {
                 mainRectangle.aboutDialog.open()
@@ -273,8 +276,9 @@ Rectangle {
         CommonButton{
             id: deleteItem
             anchors.bottom: parent.bottom
+            anchors.bottomMargin: primaryFontSize / 3
             anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width
+            width: parent.width - primaryFontSize
             text: "Delete"
             onClicked: {
                 mainRectangle.deleteCurrentItem()
