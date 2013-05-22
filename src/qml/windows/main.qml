@@ -181,12 +181,26 @@ Rectangle {
 
         CommonButton{
             id: syncSketchesToImap
-            anchors.bottom: about.top
+            anchors.bottom: syncAccountSettings.top
+            anchors.bottomMargin: primaryFontSize / 3
             anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width
+            width: parent.width - primaryFontSize
             text: "Sync Sketches"
             onClicked: {
                 mainRectangle.confirmSyncSketchesToImapDialog.open()
+                mainMenu.close()
+            }
+        }
+
+        CommonButton{
+            id: syncAccountSettings
+            anchors.bottom: about.top
+            anchors.bottomMargin: primaryFontSize / 3
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width - primaryFontSize
+            text: "Sync Account Settings"
+            onClicked: {
+                imapAccountSettings.open()
                 mainMenu.close()
             }
         }
@@ -242,5 +256,9 @@ Rectangle {
 
     EditSketchSheet {
         id: editSketchItem
+    }
+
+    ImapAccountSettingsSheet {
+        id: imapAccountSettings
     }
 }
