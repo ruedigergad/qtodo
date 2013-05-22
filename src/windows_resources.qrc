@@ -30,6 +30,7 @@
         <file alias="ConfirmationDialog.qml">qml/desktop/common/ConfirmationDialog.qml</file>
         <file alias="Dialog.qml">qml/desktop/common/Dialog.qml</file>
         <file alias="main.qml">qml/windows/main.qml</file>
+        <file alias="ImapAccountSettingsSheet.qml">qml/common/ImapAccountSettingsSheet.qml</file>
     </qresource>
     <qresource prefix="/">
         <file>icons/back.png</file>
@@ -72,5 +73,11 @@
         <file>icons/to-do_red.svg</file>
         <file>icons/to-do_yellow.png</file>
         <file>icons/to-do_yellow.svg</file>
+        <file>icons/add.png</file>
+        <file>icons/add.svg</file>
+        <file>icons/delete.png</file>
+        <file>icons/delete.svg</file>
+        <file>icons/menu.png</file>
+        <file>icons/menu.svg</file>
     </qresource>
 </RCC>
