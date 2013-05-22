@@ -155,6 +155,11 @@ Rectangle {
     Menu {
         id: mainMenu
 
+        anchors.bottomMargin: commonTools.height
+
+        onClosed: commonTools.enabled = true
+        onOpened: commonTools.enabled = false
+
         CommonButton{
             id: cleanDone
             anchors.bottom: syncToImap.top
