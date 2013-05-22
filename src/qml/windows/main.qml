@@ -221,11 +221,43 @@ Rectangle {
     Menu {
         id: contextMenu
 
+        anchors.bottomMargin: commonTools.height
+
+        onClosed: commonTools.enabled = true
+        onOpened: commonTools.enabled = false
+
+        CommonButton{
+            id: moveToTopItem
+            anchors.bottom: moveToBottomItem.top
+            anchors.bottomMargin: primaryFontSize / 3
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width - primaryFontSize
+            text: "Move to Top"
+            onClicked: {
+                mainRectangle.moveCurrentItemToTop()
+                contextMenu.close()
+            }
+        }
+
+        CommonButton{
+            id: moveToBottomItem
+            anchors.bottom: editItem.top
+            anchors.bottomMargin: primaryFontSize / 3
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width - primaryFontSize
+            text: "Move to Bottom"
+            onClicked: {
+                mainRectangle.moveCurrentItemToBottom()
+                contextMenu.close()
+            }
+        }
+
         CommonButton{
             id: editItem
             anchors.bottom: deleteItem.top
+            anchors.bottomMargin: primaryFontSize / 3
             anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width
+            width: parent.width - primaryFontSize
             text: "Edit"
             onClicked: {
                 mainRectangle.editCurrentItem()
