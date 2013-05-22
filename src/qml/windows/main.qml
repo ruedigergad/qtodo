@@ -26,6 +26,8 @@ Rectangle {
     anchors.fill: parent
     color: "white"
 
+    property int primaryFontSize: 30
+
     Rectangle {
         anchors {top: parent.top; left: parent.left; right: parent.right; bottom: toolBarItem.top}
         color: "lightgoldenrodyellow"
