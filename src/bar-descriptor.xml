@@ -2,7 +2,7 @@
 <qnx xmlns="http://www.qnx.com/schemas/application/1.0">
     <id>com.ruedigergad.qtodo</id>
     <name>Q To-Do</name>
-    <versionNumber>0.11.5</versionNumber>
+    <versionNumber>0.11.6</versionNumber>
     <description>Q To-Do is a simple to-do list organizer. Its features include: synchronization with desktop version, nested to-dos, sketches, an intuitive and easy to use user interface, and more.</description>
     <initialWindow>
         <aspectRatio>portrait</aspectRatio>
