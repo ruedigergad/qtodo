@@ -301,7 +301,8 @@ OTHER_FILES += \
     qml/windows/main.qml \
     accounts_gui.sh \
     qtmail.sh \
-    bar-descriptor.xml
+    bar-descriptor.xml \
+    qml/bb10/CommonBB10TextArea.qml
 
 
 

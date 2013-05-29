@@ -218,7 +218,7 @@ Item {
                     }
                 }
 
-                CommonTextArea{
+                CommonBB10TextArea{
                     id: textInput
                     width: parent.width
                     textFormat: TextEdit.PlainText
