@@ -86,8 +86,10 @@ Item {
             anchors.fill: parent
 
             onClicked: {
-                selectItem()
-                nodeListDelegate.clicked()
+                if (! isSelected()) {
+                    selectItem()
+                    nodeListDelegate.clicked()
+                }
             }
             onDoubleClicked: {
                 selectItem()
@@ -175,15 +177,21 @@ Item {
                 id: textItemMouseArea
                 anchors.fill: parent
                 onClicked: {
-                    selectItem()
-                    nodeListDelegate.clicked()
+                    if (! isSelected()) {
+                        mouse.accepted = true
+                        selectItem()
+                        nodeListDelegate.clicked()
+                    }
                 }
                 onDoubleClicked: {
+                    console.log("blub")
+                    mouse.accepted = true
                     selectItem()
                     nodeListDelegate.doubleClicked()
                     treeView.doubleClicked()
                 }
                 onPressAndHold: {
+                    mouse.accepted = true
                     selectItem()
                     nodeListDelegate.pressAndHold()
                     treeView.pressAndHold()

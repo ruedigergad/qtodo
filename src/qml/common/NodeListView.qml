@@ -218,6 +218,10 @@ Item {
 
             property double displayedProgress: getProgress()
 
+            function isSelected() {
+                return currentIndex === index
+            }
+
             function selectItem() {
                 currentIndex = index
                 if (isExpandable) {
