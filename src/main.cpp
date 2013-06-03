@@ -148,10 +148,12 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qmlRegisterType<NodeListModel>("qtodo", 1, 0, "NodeListModel");
     qmlRegisterType<ToDoStorage>("qtodo", 1, 0, "ToDoStorage");
 
+#ifndef BB10_BUILD
     view->setAttribute(Qt::WA_OpaquePaintEvent);
     view->setAttribute(Qt::WA_NoSystemBackground);
     view->viewport()->setAttribute(Qt::WA_OpaquePaintEvent);
     view->viewport()->setAttribute(Qt::WA_NoSystemBackground);
+#endif
 
     /*
      * Startup QML view.
