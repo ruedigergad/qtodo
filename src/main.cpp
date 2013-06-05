@@ -205,6 +205,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     view->show();
 #elif defined(BB10_BUILD)
     view->setViewport(new QGLWidget());
+    view->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
     view->setSource(QUrl::fromLocalFile("app/native/qml/bb10/main.qml"));
     view->setResizeMode(QDeclarativeView::SizeRootObjectToView);
     view->showMaximized();
