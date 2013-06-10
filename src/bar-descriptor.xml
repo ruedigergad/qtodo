@@ -10,7 +10,7 @@
         <systemChrome>none</systemChrome>
         <transparent>false</transparent>
     </initialWindow>
-    <author>Ruediger Gad</author>
+    <author>ruedigergad.com</author>
     <copyright>COPYRIGHT</copyright>
     <env value="app/native/imports:app/native/lib/imports:/usr/lib/qt4/imports" var="QML_IMPORT_PATH"/>
     <env value="app/native/plugins:/usr/lib/qt4/plugins" var="QT_PLUGIN_PATH"/>
@@ -33,4 +33,5 @@
     <icon>
         <image>logo_bb10.png</image>
     </icon>
+    <authorId>gYAAgM1hVEHyVWp9kEL-6WK4ckQ</authorId>
 </qnx>
