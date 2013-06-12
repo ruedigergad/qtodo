@@ -126,7 +126,7 @@ Item {
     }
 
     function toggleDone() {
-        if (currentItem.type !== "to-do") {
+        if (currentItem == null || currentItem.type !== "to-do") {
             return
         }
 

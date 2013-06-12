@@ -324,12 +324,13 @@ Item {
                 anchors {top: actionButtonRow.bottom; topMargin: primaryFontSize * 0.5
                          left: parent.left; right: parent.right; bottom: parent.bottom}
                 clip: true
-                contentHeight: flickableContent.height
+                contentHeight: flickableContent.height * 2.05
 
                 Column {
                     id: flickableContent
 
-                    anchors {top: parent.top; left: parent.left; right: parent.right}
+                    anchors {top: parent.top; horizontalCenter: parent.horizontalCenter}
+                    width: parent.width * 0.98
                     spacing: primaryFontSize * 0.4
 
                     Row {

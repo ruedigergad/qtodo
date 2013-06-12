@@ -41,7 +41,7 @@ CommonToolBar {
     CommonToolIcon {
         id: iconMarkDone
         iconSource: "../icons/to-do_done.png"
-        enabled: mainRectangle.treeView.currentItem.type === "to-do"
+        enabled: mainRectangle.treeView.currentItem != null && mainRectangle.treeView.currentItem.type === "to-do"
         opacity: enabled ? 1 : 0.5
         onClicked: mainRectangle.treeView.toggleDone()
     }
