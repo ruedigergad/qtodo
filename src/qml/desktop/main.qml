@@ -182,13 +182,15 @@ Rectangle {
         anchors {left: parent.left; right: parent.right; bottom: parent.bottom}
         height: qtodoToolBar.height * 1.25
 
-        property int minWidth: qtodoToolBar.minWidth + resizeItem.width + 20
+        property int minWidth: qtodoToolBar.minWidth + resizeItem.width + 40
 
         color: "white"
 //        radius: parent.radius
 
         QToDoToolBar {
             id: qtodoToolBar
+            anchors.left: parent.left
+            anchors.leftMargin: 5
             anchors.right: resizeItem.left
             anchors.rightMargin: 10
             anchors.bottom: parent.bottom
