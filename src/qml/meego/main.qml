@@ -31,7 +31,7 @@ PageStackWindow {
 
     Page {
         id: mainPage
-        tools: commonTools
+//        tools: commonTools
 
         orientationLock: PageOrientation.LockPortrait
 
@@ -44,87 +44,179 @@ PageStackWindow {
             }
 
             MainRectangle {
-                anchors{left: parent.left; right: parent.right; top: header.bottom; bottom: parent.bottom}
+                anchors{left: parent.left; right: parent.right; top: header.bottom; bottom: toolBarItem.top}
 
                 id: mainRectangle
             }
-        }
-    }
 
-    EditToDoSheet { id: editToDoItem }
+            Rectangle {
+                id: toolBarItem
+                anchors {left: parent.left; right: parent.right; bottom: parent.bottom}
+                height: commonTools.height * 1.25
 
-    EditSketchSheet { id: editSketchItem }
+                color: "white"
+                radius: parent.radius
 
-    QToDoToolBar {
-        id: commonTools
-    }
+                QToDoToolBar {
+                    id: commonTools
+//                    width: parent.width
 
-    ContextMenu {
-        id: contextMenu
-
-        onStatusChanged: {
-            if (status === DialogStatus.Opening) {
-                commonTools.enabled = false
-            } else if (status === DialogStatus.Closed) {
-                commonTools.enabled = true
-            }
-        }
-
-        MenuLayout {
-            MenuItem {
-                text: "Move to Top"
-                onClicked: mainRectangle.moveCurrentItemToTop()
-            }
-            MenuItem {
-                text: "Move to Bottom"
-                onClicked: mainRectangle.moveCurrentItemToBottom()
-            }
-            MenuItem {
-                text: "Edit"
-                onClicked: mainRectangle.editCurrentItem()
-            }
-            MenuItem {
-                text: "Delete"
-                onClicked: mainRectangle.deleteCurrentItem()
+                    anchors.left: parent.left
+                    anchors.leftMargin: 5
+                    anchors.right: parent.right
+                    anchors.rightMargin: 5
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: - (height - parent.height) / 2
+                }
             }
         }
     }
 
-    Menu {
+    QToDoMenu {
         id: mainMenu
 
-        visualParent: pageStack
+        anchors.bottomMargin: toolBarItem.height
 
-        onStatusChanged: {
-            if (status === DialogStatus.Opening) {
-                commonTools.enabled = false
-            } else if (status === DialogStatus.Closing) {
-                commonTools.enabled = true
+        onClosed: toolBarItem.enabled = true
+        onOpened: toolBarItem.enabled = false
+
+        CommonButton{
+            id: cleanDone
+            anchors.bottom: syncToImap.top
+            anchors.bottomMargin: primaryFontSize / 3
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width - primaryFontSize
+            text: "Clean Done"
+            onClicked: {
+                mainRectangle.confirmCleanDoneDialog.open()
+                mainMenu.close()
             }
         }
 
-        MenuLayout {
-            MenuItem {
-                text: "Clean Done"
-                onClicked: mainRectangle.confirmCleanDoneDialog.open()
-            }
-            MenuItem {
-                text: "Sync To-Do List"
-                onClicked: mainRectangle.confirmSyncToImapDialog.open()
-            }
-            MenuItem {
-                text: "Sync Sketches"
-                onClicked: mainRectangle.confirmSyncSketchesToImapDialog.open()
-            }
-            MenuItem {
-                text: "Sync Account Settings"
-                onClicked: imapAccountSettings.open()
-            }
-            MenuItem { 
-                text: "About"
-                onClicked: mainRectangle.aboutDialog.open()
+        CommonButton{
+            id: syncToImap
+            anchors.bottom: syncSketchesToImap.top
+            anchors.bottomMargin: primaryFontSize / 3
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width - primaryFontSize
+            text: "Sync To-Do List"
+            onClicked: {
+                mainRectangle.confirmSyncToImapDialog.open()
+                mainMenu.close()
             }
         }
+
+        CommonButton{
+            id: syncSketchesToImap
+            anchors.bottom: syncAccountSettings.top
+            anchors.bottomMargin: primaryFontSize / 3
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width - primaryFontSize
+            text: "Sync Sketches"
+            onClicked: {
+                mainRectangle.confirmSyncSketchesToImapDialog.open()
+                mainMenu.close()
+            }
+        }
+
+        CommonButton{
+            id: syncAccountSettings
+            anchors.bottom: about.top
+            anchors.bottomMargin: primaryFontSize / 3
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width - primaryFontSize
+            text: "Sync Account Settings"
+            onClicked: {
+                imapAccountSettings.open()
+                mainMenu.close()
+            }
+        }
+
+        CommonButton{
+            id: about
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: primaryFontSize / 3
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width - primaryFontSize
+            text: "About"
+            onClicked: {
+                mainRectangle.aboutDialog.open()
+                mainMenu.close()
+            }
+        }
+    }
+
+    QToDoMenu {
+        id: contextMenu
+
+        anchors.bottomMargin: toolBarItem.height
+
+        onClosed: toolBarItem.enabled = true
+        onOpened: toolBarItem.enabled = false
+
+        CommonButton{
+            id: moveToTopItem
+            anchors.bottom: moveToBottomItem.top
+            anchors.bottomMargin: primaryFontSize / 3
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width - primaryFontSize
+            text: "Move to Top"
+            onClicked: {
+                mainRectangle.moveCurrentItemToTop()
+                contextMenu.close()
+            }
+        }
+
+        CommonButton{
+            id: moveToBottomItem
+            anchors.bottom: editItem.top
+            anchors.bottomMargin: primaryFontSize / 3
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width - primaryFontSize
+            text: "Move to Bottom"
+            onClicked: {
+                mainRectangle.moveCurrentItemToBottom()
+                contextMenu.close()
+            }
+        }
+
+        CommonButton{
+            id: editItem
+            anchors.bottom: deleteItem.top
+            anchors.bottomMargin: primaryFontSize / 3
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width - primaryFontSize
+            text: "Edit"
+            onClicked: {
+                mainRectangle.editCurrentItem()
+                contextMenu.close()
+            }
+        }
+
+        CommonButton{
+            id: deleteItem
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: primaryFontSize / 3
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: parent.width - primaryFontSize
+            text: "Delete"
+            onClicked: {
+                mainRectangle.deleteCurrentItem()
+                contextMenu.close()
+            }
+        }
+    }
+
+    EditToDoSheet {
+        id: editToDoItem
+
+        onClosed: {
+            mainRectangle.focus = true
+        }
+    }
+
+    EditSketchSheet {
+        id: editSketchItem
     }
 
     ImapAccountSettingsSheet {

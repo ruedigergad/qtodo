@@ -1,5 +1,5 @@
 /*
- *  Copyright 2011 Ruediger Gad
+ *  Copyright 2012, 2013 Ruediger Gad
  *
  *  This file is part of Q To-Do.
  *
@@ -18,152 +18,58 @@
  */
 
 import QtQuick 1.1
-import com.nokia.meego 1.0
+import "../common"
 
-Sheet{
+Item {
     id: editToDoSheet
-    anchors.fill: parent
-    visualParent: mainPage
+    anchors.bottom: parent.bottom
+    anchors.top: parent.bottom
+    width: parent.width
+
+    visible: false
+    z: 1
+
+    property bool edit: false
+    property int index: -1
 
     property alias text: textInput.text
 
     property string color: "blue"
     property string type: "to-do"
 
-    property bool edit: false
+    signal closed()
+    signal closing()
+    signal opened()
+    signal opening()
+    signal accepted()
 
-    onStatusChanged: {
-        if (status === DialogStatus.Opening){
-            commonTools.enabled = false
-
-            toDoButton.checked = (type === "to-do")
-            noteButton.checked = (type === "note")
-            typeButtonRow.enabled = !(edit && type === "to-do")
-
-            colorButtonRow.enabled = (type === "to-do")
-
-            if(type === "note")
-                color = "blue"
-            blueButton.checked = (color === "blue")
-            greenButton.checked = (color === "green")
-            yellowButton.checked = (color === "yellow")
-            redButton.checked = (color === "red")
-        }else if (status === DialogStatus.Closed){
-            commonTools.enabled = true
+    function finished(){
+        console.log("finished")
+        if(state === "closed"){
+            visible = false
+            closed()
+        }else{
+            opened()
         }
     }
 
-    Dialog{
-        id: noTextGivenDialog
-        anchors.fill: parent
+    function close(){
+        inputFlickable.contentY = 0
 
-        content: Text {
-            anchors.centerIn: parent
-            width: parent.width
-            text: "Please enter a text."
-            font.pointSize: 30
-            color: "white"
-            horizontalAlignment: Text.AlignHCenter; wrapMode: Text.Wrap
-        }
-
-        onRejected: {
-            textInput.focus = true
-        }
+        closing()
+        state = "closed"
     }
 
-    buttons: Item {
-        anchors.fill: parent
-        SheetButton{
-            id: rejectButton
-            anchors.left: parent.left
-            anchors.leftMargin: 16
-            anchors.verticalCenter: parent.verticalCenter
-            text: "Cancel"
-            onClicked: editToDoSheet.reject();
-        }
+    function open(){
+        console.log("open")
 
-        SheetButton{
-            id: acceptButton
-            anchors.right: parent.right
-            anchors.rightMargin: 16
-            anchors.verticalCenter: parent.verticalCenter
-            platformStyle: SheetButtonAccentStyle { }
-            text: "OK"
-            onClicked: {
-                if(textInput.text === ""){
-                    noTextGivenDialog.open()
-                }else{
-                    editToDoSheet.accept()
-                }
-            }
-        }
-    }
+        visible = true
+        inputFlickable.contentY = 0
 
-    content: Flickable {
-        anchors.fill: parent
-        contentHeight: sheetContent.height
+        opening()
+        state = "open"
 
-        Column {
-            id: sheetContent
-            spacing: 12
-
-            anchors{top: parent.top; left: parent.left; right: parent.right; margins: 15}
-
-            ButtonRow {
-                id: typeButtonRow
-                width: parent.width
-
-                Button {
-                    id: toDoButton
-                    text: "To-Do"
-                    onClicked: {
-                        type = "to-do"
-                        colorButtonRow.enabled = (type === "to-do")
-                    }
-                }
-                Button {
-                    id: noteButton
-                    text: "Note"
-                    onClicked: {
-                        type = "note"
-                        colorButtonRow.enabled = (type === "to-do")
-                    }
-                }
-            }
-
-            ButtonRow {
-                id: colorButtonRow
-                width: parent.width
-
-                Button {
-                    id: blueButton
-                    iconSource: "../icons/to-do_blue.png"
-                    onClicked: color = "blue"
-                }
-                Button {
-                    id: greenButton
-                    iconSource: "../icons/to-do_green.png"
-                    onClicked: color = "green"
-                }
-                Button {
-                    id: yellowButton
-                    iconSource: "../icons/to-do_yellow.png"
-                    onClicked: color = "yellow"
-                }
-                Button {
-                    id: redButton
-                    iconSource: "../icons/to-do_red.png"
-                    onClicked: color = "red"
-                }
-            }
-
-            TextArea{
-                id: textInput
-                width: parent.width
-                textFormat: TextEdit.PlainText
-                placeholderText: "Enter Text"
-            }
-        }
+        textInput.focus = true
     }
 
     onAccepted: {
@@ -176,6 +82,170 @@ Sheet{
         editToDoSheet.close();
     }
 
-    onRejected: editToDoSheet.close();
-}
+    onStateChanged: {
+        console.log("Edit entry dialog state changed: " + state)
+    }
 
+    states: [
+        State {
+            name: "open"
+            AnchorChanges { target: editToDoSheet; anchors.top: parent.top }
+        },
+        State {
+            name: "closed"
+            AnchorChanges { target: editToDoSheet; anchors.top: parent.bottom }
+        }
+    ]
+
+    transitions: Transition {
+        SequentialAnimation {
+            AnchorAnimation { duration: 250; easing.type: Easing.OutCubic }
+            ScriptAction { script: editToDoSheet.finished() }
+        }
+    }
+
+    Rectangle {
+        id: buttonBar
+        anchors.top: parent.top
+        height: rejectButton.height + 6
+        width: parent.width
+        z: 4
+
+        color: "lightgray"
+
+        CommonButton{
+            id: rejectButton
+            anchors.left: parent.left
+            anchors.leftMargin: 16
+            anchors.verticalCenter: parent.verticalCenter
+            text: "Cancel"
+            onClicked: editToDoSheet.close();
+        }
+
+        Text {id: entryLabel; text: "Entry"; font.pointSize: primaryFontSize; font.capitalization: Font.SmallCaps; font.bold: true; anchors.centerIn: parent}
+
+        CommonButton{
+            id: acceptButton
+            anchors.right: parent.right
+            anchors.rightMargin: 16
+            anchors.verticalCenter: parent.verticalCenter
+            text: "OK"
+            onClicked: {
+                if(textInput.text === ""){
+                    noTextGivenDialog.open()
+                }else{
+                    editToDoSheet.accepted()
+                }
+            }
+        }
+    }
+
+    Rectangle {
+        id: inputRectangle
+
+        anchors {top: buttonBar.bottom; left: parent.left; right: parent.right; bottom: parent.bottom}
+        color: "white"
+
+        Flickable {
+            id: inputFlickable
+
+            anchors.fill: parent
+            contentHeight: sheetContent.height
+
+            Column {
+                id: sheetContent
+                spacing: primaryFontSize * 0.6
+
+                anchors{top: parent.top; left: parent.left; right: parent.right; margins: primaryFontSize * 0.75}
+
+                Row {
+                    id: typeButtonRow
+                    width: parent.width
+
+                    CommonButton {
+                        id: toDoButton
+                        width: parent.width / 2
+                        text: "To-Do"
+                        enabled: editToDoSheet.type !== "to-do"
+                        onClicked: {
+                            type = "to-do"
+                            colorButtonRow.enabled = (type === "to-do")
+                        }
+                    }
+                    CommonButton {
+                        id: noteButton
+                        width: parent.width / 2
+                        text: "Note"
+                        enabled: editToDoSheet.type !== "note"
+                        onClicked: {
+                            type = "note"
+                            colorButtonRow.enabled = (type === "to-do")
+                        }
+                    }
+                }
+
+                Row {
+                    id: colorButtonRow
+                    width: parent.width
+
+                    CommonButton {
+                        id: blueButton
+                        width: parent.width / 4
+                        iconSource: "../icons/to-do_blue.png"
+                        enabled: editToDoSheet.color !== "blue"
+                        onClicked: editToDoSheet.color = "blue"
+                    }
+                    CommonButton {
+                        id: greenButton
+                        width: parent.width / 4
+                        iconSource: "../icons/to-do_green.png"
+                        enabled: editToDoSheet.color !== "green"
+                        onClicked: editToDoSheet.color = "green"
+                    }
+                    CommonButton {
+                        id: yellowButton
+                        width: parent.width / 4
+                        iconSource: "../icons/to-do_yellow.png"
+                        enabled: editToDoSheet.color !== "yellow"
+                        onClicked: editToDoSheet.color = "yellow"
+                    }
+                    CommonButton {
+                        id: redButton
+                        width: parent.width / 4
+                        iconSource: "../icons/to-do_red.png"
+                        enabled: editToDoSheet.color !== "red"
+                        onClicked: editToDoSheet.color = "red"
+                    }
+                }
+
+                CommonTextArea{
+                    id: textInput
+                    width: parent.width
+                    textFormat: TextEdit.PlainText
+
+                    onKeyPressed: {
+                        if (event.modifiers & Qt.AltModifier) {
+                            switch (event.key) {
+                            case Qt.Key_1:
+                                blueButton.clicked()
+                                break
+                            case Qt.Key_2:
+                                greenButton.clicked()
+                                break
+                            case Qt.Key_3:
+                                yellowButton.clicked()
+                                break
+                            case Qt.Key_4:
+                                redButton.clicked()
+                                break
+                            }
+                        }
+                    }
+
+                    Keys.onEscapePressed: editToDoSheet.close()
+                    onEnter: accepted()
+                }
+            }
+        }
+    }
+}

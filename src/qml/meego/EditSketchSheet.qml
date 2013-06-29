@@ -1,5 +1,5 @@
 /*
- *  Copyright 2012 Ruediger Gad
+ *  Copyright 2012, 2013 Ruediger Gad
  *
  *  This file is part of Q To-Do.
  *
@@ -18,78 +18,49 @@
  */
 
 import QtQuick 1.1
-import com.nokia.meego 1.0
-import qmlcanvas 1.0
 import "../common"
+import qmlcanvas 1.0
 
-Sheet{
+Item {
     id: editSketchSheet
-    anchors.fill: parent
-    visualParent: mainPage
+    anchors.bottom: parent.bottom
+    anchors.top: parent.bottom
+    width: parent.width
+
+    visible: false
+    z: 1
 
     property bool edit: false
     property string sketchFileName: ""
 
-    onStatusChanged: {
-        if (status === DialogStatus.Opening){
-            commonTools.enabled = false
+    signal closed()
+    signal closing()
+    signal opened()
+    signal opening()
+    signal accepted()
 
-            if (edit) {
-                drawing.load(mainRectangle._sketchPath + "/" + sketchFileName)
-            } else {
-                drawing.init()
-            }
-
-            blackButton.checked = true
-            drawing.drawColor = "black"
-        }else if (status === DialogStatus.Closed){
-            commonTools.enabled = true
+    function finished(){
+        console.log("finished")
+        if(state === "closed"){
+            visible = false
+            closed()
+        }else{
+            opened()
         }
     }
 
-    acceptButtonText: "OK"
-    rejectButtonText: "Cancel"
+    function close(){
+        closing()
+        state = "closed"
+    }
 
-    content: Item {
-        anchors.fill: parent
+    function open(){
+        console.log("open")
 
-        ButtonRow {
-            id: colorButtonRow
-            anchors{top: parent.top; left: parent.left; right: parent.right}
+        visible = true
 
-            Button {
-                id: blackButton
-                iconSource: "../icons/sketch_black.png"
-                onClicked: drawing.drawColor = "black"
-            }
-            Button {
-                iconSource: "../icons/sketch_blue.png"
-                onClicked: drawing.drawColor = "blue"
-            }
-            Button {
-                iconSource: "../icons/sketch_green.png"
-                onClicked: drawing.drawColor = "green"
-            }
-            Button {
-                iconSource: "../icons/sketch_yellow.png"
-                onClicked: drawing.drawColor = "yellow"
-            }
-            Button {
-                iconSource: "../icons/sketch_red.png"
-                onClicked: drawing.drawColor = "red"
-            }
-            Button {
-                iconSource: "../icons/sketch_erase.png"
-                onClicked: drawing.drawColor = drawing.backgroundColor
-            }
-        }
-
-        Drawing {
-            id: drawing
-            anchors{top: colorButtonRow.bottom; left: parent.left; right: parent.right; bottom: parent.bottom}
-            backgroundColor: mainRectangle.color
-            lineWidth: (drawColor === backgroundColor) ? 35 : 3
-        }
+        opening()
+        state = "open"
     }
 
     onAccepted: {
@@ -107,6 +78,129 @@ Sheet{
         editSketchSheet.close();
     }
 
-    onRejected: editSketchSheet.close();
-}
+    onClosed: drawing.init()
 
+    onOpened: {
+        if (edit) {
+            drawing.load(mainRectangle._sketchPath + "/" + sketchFileName)
+        } else {
+            drawing.init()
+        }
+
+        drawing.drawColor = "black"
+    }
+
+    onStateChanged: {
+        console.log("Edit entry dialog state changed: " + state)
+    }
+
+    states: [
+        State {
+            name: "open"
+            AnchorChanges { target: editSketchSheet; anchors.top: parent.top }
+        },
+        State {
+            name: "closed"
+            AnchorChanges { target: editSketchSheet; anchors.top: parent.bottom }
+        }
+    ]
+
+    transitions: Transition {
+        SequentialAnimation {
+            AnchorAnimation { duration: 250; easing.type: Easing.OutCubic }
+            ScriptAction { script: editSketchSheet.finished() }
+        }
+    }
+
+    Rectangle {
+        id: buttonBar
+        anchors.top: parent.top
+        height: rejectButton.height + 6
+        width: parent.width
+        z: 4
+
+        color: "lightgray"
+
+        CommonButton{
+            id: rejectButton
+            anchors.left: parent.left
+            anchors.leftMargin: 16
+            anchors.verticalCenter: parent.verticalCenter
+            text: "Cancel"
+            onClicked: editSketchSheet.close();
+        }
+
+        Text {id: entryLabel; text: "Sketch"; font.pointSize: primaryFontSize; font.capitalization: Font.SmallCaps; font.bold: true; anchors.centerIn: parent}
+
+        CommonButton{
+            id: acceptButton
+            anchors.right: parent.right
+            anchors.rightMargin: 16
+            anchors.verticalCenter: parent.verticalCenter
+            text: "OK"
+            onClicked: {
+                editSketchSheet.accepted()
+            }
+        }
+    }
+
+    Rectangle {
+        id: inputRectangle
+
+        anchors {top: buttonBar.bottom; left: parent.left; right: parent.right; bottom: parent.bottom}
+        color: "white"
+
+        Item {
+        anchors.fill: parent
+
+            Row {
+                id: colorButtonRow
+                anchors{top: parent.top; left: parent.left; right: parent.right}
+
+                CommonButton {
+                    id: blackButton
+                    width: parent.width / 6
+                    iconSource: "../icons/sketch_black.png"
+                    enabled: drawing.drawColor !== "black"
+                    onClicked: drawing.drawColor = "black"
+                }
+                CommonButton {
+                    width: parent.width / 6
+                    iconSource: "../icons/sketch_blue.png"
+                    enabled: drawing.drawColor !== "blue"
+                    onClicked: drawing.drawColor = "blue"
+                }
+                CommonButton {
+                    width: parent.width / 6
+                    iconSource: "../icons/sketch_green.png"
+                    enabled: drawing.drawColor !== "green"
+                    onClicked: drawing.drawColor = "green"
+                }
+                CommonButton {
+                    width: parent.width / 6
+                    iconSource: "../icons/sketch_yellow.png"
+                    enabled: drawing.drawColor !== "yellow"
+                    onClicked: drawing.drawColor = "yellow"
+                }
+                CommonButton {
+                    width: parent.width / 6
+                    iconSource: "../icons/sketch_red.png"
+                    enabled: drawing.drawColor !== "red"
+                    onClicked: drawing.drawColor = "red"
+                }
+                CommonButton {
+                    width: parent.width / 6
+                    iconSource: "../icons/sketch_erase.png"
+                    onClicked: drawing.drawColor = drawing.backgroundColor
+                }
+            }
+
+            Drawing {
+                id: drawing
+                anchors{top: colorButtonRow.bottom; left: parent.left; right: parent.right; bottom: parent.bottom}
+                backgroundColor: mainRectangle.color
+                lineWidth: (drawColor === backgroundColor) ? 35 : 3
+            }
+        }
+    }
+}
