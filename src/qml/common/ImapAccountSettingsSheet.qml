@@ -1,20 +1,20 @@
 /*
  *  Copyright 2013 Ruediger Gad
  *
- *  This file is part of Q To-Do.
+ *  This file is part of MeePasswords.
  *
- *  Q To-Do is free software: you can redistribute it and/or modify
+ *  MeePasswords is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  Q To-Do is distributed in the hope that it will be useful,
+ *  MeePasswords is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with Q To-Do.  If not, see <http://www.gnu.org/licenses/>.
+ *  along with MeePasswords.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 import QtQuick 1.1
@@ -80,8 +80,6 @@ Item {
         editAccount = false
         newAccount = false
         accountListView.currentIndex = -1
-
-        imapAccountListModel.reload()
 
         state = "open"
     }
@@ -151,7 +149,7 @@ Item {
             onClicked: imapAccountSettingsSheet.close();
         }
 
-        Text {id: entryLabel; text: "Sync Accounts"; font.pointSize: primaryFontSize * 0.75
+        Text {id: entryLabel; text: "Accounts"; font.pointSize: primaryFontSize * 0.75
               font.capitalization: Font.SmallCaps; font.bold: true; anchors.centerIn: parent}
 
         CommonButton{
@@ -198,7 +196,7 @@ Item {
 
                 border.color: "gray"
                 border.width: primaryFontSize * 0.1
-                radius: primaryFontSize * 0.25
+//                radius: primaryFontSize * 0.25
 
                 ListView {
                     id: accountListView
@@ -318,7 +316,7 @@ Item {
                 }
             }
 
-            CommonFlickable {
+            Flickable {
                 id: inputFlickable
 
                 anchors {top: actionButtonRow.bottom; topMargin: primaryFontSize * 0.5
@@ -425,8 +423,8 @@ Item {
 
                         Text {
                             id: serverPortText
-                            height: serverPortTextField.height
-                            width: parent.width / 6
+                            height: portRow.height
+                            width: parent.width / 6 - portSpacer.width
                             text: "Port"
                             font.pointSize: primaryFontSize * 0.75
                             horizontalAlignment: Text.AlignHLeft
@@ -436,8 +434,16 @@ Item {
                         CommonTextField {
                             id: serverPortTextField
                             width: parent.width / 6
+                            anchors.verticalCenter: portRow.verticalCenter
                             pointSize: primaryFontSize * 0.5
                             enabled: editAccount
+                        }
+
+                        Rectangle {
+                            id: portSpacer
+                            color: "transparent"
+                            height: portRow.height
+                            width: primaryBorderSize * 0.5
                         }
 
                         CommonButton {

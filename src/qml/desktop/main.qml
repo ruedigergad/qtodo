@@ -29,6 +29,7 @@ Rectangle {
 //    radius: primaryFontSize * 0.5
 
     property int primaryFontSize: 20
+    property int primaryBorderSize: 20
 
     Rectangle {
         anchors {top: parent.top; left: parent.left; right: parent.right; bottom: commonTools.top}
@@ -179,7 +180,7 @@ Rectangle {
     Rectangle {
         id: commonTools
         anchors {left: parent.left; right: parent.right; bottom: parent.bottom}
-        height: qtodoToolBar.height
+        height: qtodoToolBar.height * 1.25
 
         property int minWidth: qtodoToolBar.minWidth + resizeItem.width + 20
 
@@ -190,6 +191,8 @@ Rectangle {
             id: qtodoToolBar
             anchors.right: resizeItem.left
             anchors.rightMargin: 10
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: - (height - parent.height) / 2
         }
 
         Text {

@@ -217,7 +217,7 @@ Item {
 
             visible: isExpandable
 
-            radius: width / 3
+//            radius: width / 3
             color: nextMouseArea.pressed ? "gray" : "lightgray"
 
             Image {
