@@ -28,6 +28,7 @@ PageStackWindow {
     initialPage: mainPage
 
     property int primaryFontSize: 30
+    property int primaryBorderSize: 20
 
     Page {
         id: mainPage
@@ -72,9 +73,7 @@ PageStackWindow {
 
             EditToDoSheet {
                 id: editToDoItem
-
                 z: 64
-
                 onClosed: {
                     mainRectangle.focus = true
                 }
@@ -82,7 +81,11 @@ PageStackWindow {
 
             EditSketchSheet {
                 id: editSketchItem
+                z: 64
+            }
 
+            ImapAccountSettingsSheet {
+                id: imapAccountSettings
                 z: 64
             }
         }
@@ -221,9 +224,5 @@ PageStackWindow {
                 contextMenu.close()
             }
         }
-    }
-
-    ImapAccountSettingsSheet {
-        id: imapAccountSettings
     }
 }
