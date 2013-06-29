@@ -69,6 +69,22 @@ PageStackWindow {
                     anchors.bottomMargin: - (height - parent.height) / 2
                 }
             }
+
+            EditToDoSheet {
+                id: editToDoItem
+
+                z: 64
+
+                onClosed: {
+                    mainRectangle.focus = true
+                }
+            }
+
+            EditSketchSheet {
+                id: editSketchItem
+
+                z: 64
+            }
         }
     }
 
@@ -205,18 +221,6 @@ PageStackWindow {
                 contextMenu.close()
             }
         }
-    }
-
-    EditToDoSheet {
-        id: editToDoItem
-
-        onClosed: {
-            mainRectangle.focus = true
-        }
-    }
-
-    EditSketchSheet {
-        id: editSketchItem
     }
 
     ImapAccountSettingsSheet {
