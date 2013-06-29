@@ -26,7 +26,7 @@ Rectangle {
     anchors.fill: parent
     color: "white"
     opacity: 0.75
-    radius: primaryFontSize * 0.5
+//    radius: primaryFontSize * 0.5
 
     property int primaryFontSize: 20
 
@@ -39,7 +39,7 @@ Rectangle {
         Header {
             id: header
 
-            radius: parent.radius
+//            radius: parent.radius
             textColor: applicationWindow.windowFocus ? "white" : "black"
 
             /*
@@ -184,7 +184,7 @@ Rectangle {
         property int minWidth: qtodoToolBar.minWidth + resizeItem.width + 20
 
         color: "white"
-        radius: parent.radius
+//        radius: parent.radius
 
         QToDoToolBar {
             id: qtodoToolBar

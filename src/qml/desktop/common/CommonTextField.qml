@@ -27,7 +27,7 @@ Rectangle {
 
     border.width: 3
     border.color: "lightgrey"
-    radius: height/4
+//    radius: height/4
     smooth: true
 
     property int echoMode: TextInput.Normal

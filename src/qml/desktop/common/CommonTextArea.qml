@@ -26,7 +26,7 @@ Rectangle {
 
     border.width: primaryFontSize / 8
     border.color: "lightgrey"
-    radius: textEdit.font.pointSize * 0.75
+//    radius: textEdit.font.pointSize * 0.75
     smooth: true
 
     property alias text: textEdit.text
