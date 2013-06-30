@@ -65,7 +65,7 @@ Rectangle {
             width: height
             anchors.verticalCenter: parent.verticalCenter
 
-            radius: height * 0.5
+//            radius: height * 0.5
             border.width: height * 0.2
             border.color: headerText.color
             color: ((index + 1) === levelIndicator.count || animationRunning ) ? headerText.color : "transparent"
