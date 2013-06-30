@@ -50,6 +50,7 @@ Item {
             closed()
         }else{
             opened()
+            textInput.focus = true
         }
     }
 
@@ -68,8 +69,6 @@ Item {
 
         opening()
         state = "open"
-
-        textInput.focus = true
     }
 
     onAccepted: {
