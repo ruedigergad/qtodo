@@ -78,10 +78,10 @@ Rectangle {
 
         onFocusChanged: {
             if(focus){
-                textArea.border.color = "#569ffd";
+                textArea.border.color = "#00b000";
                 textEdit.cursorPosition = textEdit.text.length
             }else{
-                textArea.border.color = "lightgray";
+                textArea.border.color = "#20d020";
             }
         }
     }

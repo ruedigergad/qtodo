@@ -53,9 +53,9 @@ Rectangle {
 
         onFocusChanged: {
             if(focus){
-                textField.border.color = "#569ffd";
+                textField.border.color = "#00b000";
             }else{
-                textField.border.color = "lightgray";
+                textField.border.color = "20d020";
             }
         }
     }

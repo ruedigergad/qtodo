@@ -26,7 +26,7 @@ Rectangle {
     height: textInput.height * 1.5
 
     border.width: primaryBorderSize / 8
-    border.color: textInput.focus ? "#0e65c8" : "#4ea5f8"
+    border.color: textEdit.focus ? "#00b000" : "#20d020"
     color: enabled ? "white" : "#e0e0e0"
 //    radius: primaryBorderSize / 2
     smooth: true
