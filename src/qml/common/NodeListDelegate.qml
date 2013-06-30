@@ -245,7 +245,7 @@ Item {
         id: clickHighlight
         anchors.fill: parent
         color: "black"
-        radius: 10
+//        radius: 10
         opacity: textItemMouseArea.pressed ? 0.3 : 0
     }
 
