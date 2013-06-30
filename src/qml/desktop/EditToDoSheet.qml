@@ -135,6 +135,7 @@ Item {
             anchors.right: parent.right
             anchors.rightMargin: 16
             anchors.verticalCenter: parent.verticalCenter
+            width: rejectButton.width
             text: "OK"
             onClicked: {
                 if(textInput.text === ""){
