@@ -37,7 +37,7 @@ CommonDialog {
 
         Text {
             id: version
-            text: "Version 0.11.6"
+            text: "Version 1.12.0"
             font.pointSize: primaryFontSize * 0.75
             horizontalAlignment: Text.AlignHCenter;
             anchors.centerIn: parent

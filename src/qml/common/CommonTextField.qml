@@ -25,8 +25,8 @@ Rectangle {
     width: parent.width
     height: textInput.height * 1.8
 
-    border.width: 3
-    border.color: "lightgrey"
+    border.width: primaryBorderSize / 8
+    border.color: textInput.focus ? "#00d000" : "#50e050"
 //    radius: height/4
     smooth: true
 
@@ -40,11 +40,11 @@ Rectangle {
     TextInput {
         id: textInput
 
-        width: parent.width - (2 * font.pointSize)
+        width: parent.width - primaryBorderSize
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
 
-        font.pointSize: 17
+        font.pointSize: primaryFontSize * 0.75
 
         color: "black"
         echoMode: textField.echoMode
@@ -52,10 +52,10 @@ Rectangle {
         onTextChanged: textField.textChanged(text)
 
         onFocusChanged: {
-            if(focus){
-                textField.border.color = "#00d000";
-            }else{
-                textField.border.color = "#50e050";
+            if (focus) {
+                textInput.openSoftwareInputPanel()
+            } else {
+                textInput.closeSoftwareInputPanel()
             }
         }
     }

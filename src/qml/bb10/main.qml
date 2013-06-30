@@ -5,7 +5,7 @@ Rectangle {
     anchors.fill: parent
 
     property int primaryFontSize: 15
-    property int primaryBorderSize: 15
+    property int primaryBorderSize: 40
 
     Rectangle {
         anchors.fill: parent

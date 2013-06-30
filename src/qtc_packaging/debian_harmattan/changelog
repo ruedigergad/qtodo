@@ -1,3 +1,10 @@
+qtodo (1.12.0) unstable; urgency=low
+
+  * Improve stability.
+  * Change design.
+
+ -- Ruediger Gad <r.c.g@gmx.de>  Sun, 30 Jun 2013 20:32:00 +0200
+
 qtodo (0.11.6) unstable; urgency=low
 
   * Add possibility for setting the default account.

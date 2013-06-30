@@ -2,7 +2,7 @@
 <qnx xmlns="http://www.qnx.com/schemas/application/1.0">
     <id>com.ruedigergad.qtodo</id>
     <name>Q To-Do</name>
-    <versionNumber>0.11.6</versionNumber>
+    <versionNumber>1.12.0</versionNumber>
     <description>Q To-Do is a simple to-do list organizer. Its features include: synchronization with desktop version, nested to-dos, sketches, an intuitive and easy to use user interface, and more.</description>
     <initialWindow>
         <aspectRatio>portrait</aspectRatio>
@@ -11,7 +11,7 @@
         <transparent>false</transparent>
     </initialWindow>
     <author>ruedigergad.com</author>
-    <copyright>COPYRIGHT</copyright>
+    <copyright>Ruediger Gad, r.c.g@gmx.de, ruedigergad.com</copyright>
     <env value="app/native/imports:app/native/lib/imports:/usr/lib/qt4/imports" var="QML_IMPORT_PATH"/>
     <env value="app/native/plugins:/usr/lib/qt4/plugins" var="QT_PLUGIN_PATH"/>
     <env value="app/native/lib/qmf/plugins" var="QMF_PLUGINS"/>

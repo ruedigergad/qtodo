@@ -24,8 +24,8 @@ Rectangle {
 
     height: textEdit.height + textEdit.font.pointSize
 
-    border.width: primaryFontSize / 8
-    border.color: "lightgrey"
+    border.width: primaryBorderSize / 8
+    border.color: textEdit.focus ? "#00d000" : "#50e050"
 //    radius: textEdit.font.pointSize * 0.75
     smooth: true
 
@@ -44,7 +44,7 @@ Rectangle {
         id: textEdit
 
         anchors.centerIn: parent
-        width: parent.width - (2 * font.pointSize)
+        width: parent.width - primaryBorderSize
         focus: parent.focus
 
         font.pointSize: primaryFontSize * 0.75
@@ -77,13 +77,12 @@ Rectangle {
         onTextChanged: textArea.textChanged(text)
 
         onFocusChanged: {
-            if(focus){
-                textArea.border.color = "#00d000";
+            if (focus) {
+                textEdit.openSoftwareInputPanel()
                 textEdit.cursorPosition = textEdit.text.length
-            }else{
-                textArea.border.color = "#50e050";
+            } else {
+                textEdit.closeSoftwareInputPanel()
             }
         }
     }
-
 }
