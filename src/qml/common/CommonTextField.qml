@@ -1,20 +1,20 @@
 /*
  *  Copyright 2012, 2013 Ruediger Gad
  *
- *  This file is part of MeePasswords.
+ *  This file is part of Q To-Do.
  *
- *  MeePasswords is free software: you can redistribute it and/or modify
+ *  Q To-Do is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  MeePasswords is distributed in the hope that it will be useful,
+ *  Q To-Do is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with MeePasswords.  If not, see <http://www.gnu.org/licenses/>.
+ *  along with Q To-Do.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 import QtQuick 1.1
@@ -23,12 +23,11 @@ Rectangle {
     id: textField
 
     width: parent.width
-    height: textInput.height * 1.5
+    height: textInput.height * 1.8
 
-    border.width: primaryBorderSize / 8
-    border.color: textEdit.focus ? "#00b000" : "#20d020"
-    color: enabled ? "white" : "#e0e0e0"
-//    radius: primaryBorderSize / 2
+    border.width: 3
+    border.color: "lightgrey"
+//    radius: height/4
     smooth: true
 
     property int echoMode: TextInput.Normal
@@ -37,15 +36,15 @@ Rectangle {
 
     signal textChanged(string text)
 
+
     TextInput {
         id: textInput
 
-        focus: textField.focus
         width: parent.width - (2 * font.pointSize)
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
 
-        font.pointSize: primaryFontSize * 0.75
+        font.pointSize: 17
 
         color: "black"
         echoMode: textField.echoMode
@@ -53,10 +52,10 @@ Rectangle {
         onTextChanged: textField.textChanged(text)
 
         onFocusChanged: {
-            if (focus) {
-                openSoftwareInputPanel()
-            } else {
-                closeSoftwareInputPanel()
+            if(focus){
+                textField.border.color = "#00d000";
+            }else{
+                textField.border.color = "#50e050";
             }
         }
     }

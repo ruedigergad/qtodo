@@ -97,13 +97,7 @@ contains(LIBS,-lsailfishsilicabackground): {
     qmlBB10.source = qml/bb10
     qmlBB10.target = qml
 
-    qmlBB10Common.source = qml/bb10/common
-    qmlBB10Common.target = qml
-
-    qmlDesktopCommon.source = qml/desktop/common
-    qmlDesktopCommon.target = qml
-
-    DEPLOYMENTFOLDERS += qmlBB10 qmlBB10Common qmlCanvasImport qmlDesktopCommon qmfLibs
+    DEPLOYMENTFOLDERS += qmlBB10 qmlCanvasImport qmfLibs
 
     barDescriptor.files = bar-descriptor.xml
     barDescriptor.path = $${TARGET}
@@ -149,9 +143,6 @@ contains(LIBS,-lsailfishsilicabackground): {
     qmlDesktop.source = qml/desktop
     qmlDesktop.target = qml
 
-    qmlDesktopCommon.source = qml/desktop/common
-    qmlDesktopCommon.target = qml
-
     # TODO: Dynamically determine architecture.
     arch = x86_64
     os = linux
@@ -160,7 +151,7 @@ contains(LIBS,-lsailfishsilicabackground): {
     qmfLibs.source = lib/build/$${os}/$${arch}/qmf
     qmfLibs.target = lib
 
-    DEPLOYMENTFOLDERS += qmlDesktop qmlDesktopCommon qmlCanvasImport qmfLibs
+    DEPLOYMENTFOLDERS += qmlDesktop qmlCanvasImport qmfLibs
     QML_IMPORT_PATH += lib/build/linux/x86_64
 
     wrapperScripts.files = qtodo.sh accounts_gui.sh qtmail.sh

@@ -1,20 +1,20 @@
 /*
  *  Copyright 2012, 2013 Ruediger Gad
  *
- *  This file is part of MeePasswords.
+ *  This file is part of Q To-Do.
  *
- *  MeePasswords is free software: you can redistribute it and/or modify
+ *  Q To-Do is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  MeePasswords is distributed in the hope that it will be useful,
+ *  Q To-Do is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with MeePasswords.  If not, see <http://www.gnu.org/licenses/>.
+ *  along with Q To-Do.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 import QtQuick 1.1
@@ -24,15 +24,13 @@ Rectangle {
 
     height: textEdit.height + textEdit.font.pointSize
 
-    border.width: primaryBorderSize / 8
-    border.color: textEdit.focus ? "#00b000" : "#20d020"
-    color: enabled ? "white" : "#e0e0e0"
-//    radius: primaryBorderSize / 2
+    border.width: primaryFontSize / 8
+    border.color: "lightgrey"
+//    radius: textEdit.font.pointSize * 0.75
     smooth: true
 
     property alias text: textEdit.text
     property int textFormat: TextEdit.PlainText
-    property alias pointSize: textEdit.font.pointSize
 
     signal enter()
     signal keyPressed(variant event)
@@ -54,15 +52,38 @@ Rectangle {
         textFormat: textArea.textFormat
         wrapMode: TextEdit.WordWrap
 
+        Keys.onPressed: {
+            if (event.modifiers & Qt.AltModifier) {
+                event.accepted = true
+                keyPressed(event)
+            }
+        }
+
+        Keys.onEnterPressed: {
+            if (event.modifiers & Qt.ShiftModifier) {
+                event.accepted = false
+            } else {
+                enter()
+            }
+        }
+        Keys.onReturnPressed: {
+            if (event.modifiers & Qt.ShiftModifier) {
+                event.accepted = false
+            } else {
+                enter()
+            }
+        }
+
         onTextChanged: textArea.textChanged(text)
 
         onFocusChanged: {
             if(focus){
+                textArea.border.color = "#00d000";
                 textEdit.cursorPosition = textEdit.text.length
-                openSoftwareInputPanel()
-            } else {
-                closeSoftwareInputPanel()
+            }else{
+                textArea.border.color = "#50e050";
             }
         }
     }
+
 }

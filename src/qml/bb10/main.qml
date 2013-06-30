@@ -5,6 +5,7 @@ Rectangle {
     anchors.fill: parent
 
     property int primaryFontSize: 15
+    property int primaryBorderSize: 15
 
     Rectangle {
         anchors.fill: parent
@@ -23,14 +24,21 @@ Rectangle {
         Rectangle {
             id: toolBarItem
             anchors {left: parent.left; right: parent.right; bottom: parent.bottom}
-            height: commonTools.height
+            height: commonTools.height * 1.25
 
             color: "white"
             radius: parent.radius
 
             QToDoToolBar {
                 id: commonTools
-                width: parent.width
+//                    width: parent.width
+
+                anchors.left: parent.left
+                anchors.leftMargin: 5
+                anchors.right: parent.right
+                anchors.rightMargin: 5
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: - (height - parent.height) / 2
             }
         }
     }
