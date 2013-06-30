@@ -104,6 +104,12 @@ Item {
         }
     }
 
+    MouseArea {
+        anchors.fill: parent
+        z: -1
+        onClicked: focus = true
+    }
+
     Rectangle {
         id: buttonBar
         anchors.top: parent.top
@@ -245,6 +251,18 @@ Item {
                     Keys.onEscapePressed: editToDoSheet.close()
                     onEnter: accepted()
                 }
+
+                MouseArea {
+                    anchors.fill: parent
+                    z: -1
+                    onClicked: focus = true
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                z: -1
+                onClicked: focus = true
             }
         }
     }

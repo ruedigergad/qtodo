@@ -104,6 +104,12 @@ Item {
         }
     }
 
+    MouseArea {
+        anchors.fill: parent
+        z: -1
+        onClicked: focus = true
+    }
+
     Rectangle {
         id: buttonBar
         anchors.top: parent.top
@@ -222,7 +228,41 @@ Item {
                     id: textInput
                     width: parent.width
                     textFormat: TextEdit.PlainText
+
+                    onKeyPressed: {
+                        if (event.modifiers & Qt.AltModifier) {
+                            switch (event.key) {
+                            case Qt.Key_1:
+                                blueButton.clicked()
+                                break
+                            case Qt.Key_2:
+                                greenButton.clicked()
+                                break
+                            case Qt.Key_3:
+                                yellowButton.clicked()
+                                break
+                            case Qt.Key_4:
+                                redButton.clicked()
+                                break
+                            }
+                        }
+                    }
+
+                    Keys.onEscapePressed: editToDoSheet.close()
+                    onEnter: accepted()
                 }
+
+                MouseArea {
+                    anchors.fill: parent
+                    z: -1
+                    onClicked: focus = true
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                z: -1
+                onClicked: focus = true
             }
         }
     }
