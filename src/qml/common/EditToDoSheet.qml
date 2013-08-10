@@ -129,7 +129,7 @@ Item {
 
         Text {id: entryLabel; text: "Entry"; font.pointSize: primaryFontSize; font.capitalization: Font.SmallCaps; font.bold: true; anchors.centerIn: parent}
 
-        CommonButton{
+        CommonButton {
             id: acceptButton
             anchors.right: parent.right
             anchors.rightMargin: 16
@@ -137,9 +137,10 @@ Item {
             width: rejectButton.width
             text: "OK"
             onClicked: {
-                if(textInput.text === ""){
+                editToDoSheet.focus = true
+                if(textInput.text === "") {
                     noTextGivenDialog.open()
-                }else{
+                } else {
                     editToDoSheet.accepted()
                 }
             }
