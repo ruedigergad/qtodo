@@ -1,3 +1,9 @@
+qtodo (1.12.2) unstable; urgency=low
+
+  * Adapt icons to new design.
+
+ -- Ruediger Gad <r.c.g@gmx.de>  Sat, 24 Aug 2013 17:25:00 +0200
+
 qtodo (1.12.1) unstable; urgency=low
 
   * Fix input issue.
