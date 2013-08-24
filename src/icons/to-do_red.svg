@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -12,12 +13,13 @@
    height="32px"
    id="svg2393"
    sodipodi:version="0.32"
-   inkscape:version="0.46"
-   sodipodi:docname="todo_darkred.svg"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="to-do_red.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   inkscape:export-filename="/home/rc/workspace_test/To-Do-O/icons/todo_darkred.png"
+   inkscape:export-filename="/home/rc/repositories/private/qt/qtodo/src/icons/to-do_red.png"
    inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90">
+   inkscape:export-ydpi="90"
+   version="1.1">
   <defs
      id="defs2395">
     <inkscape:perspective
@@ -36,16 +38,17 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="11.197802"
-     inkscape:cx="9.0338558"
+     inkscape:cx="-13.202651"
      inkscape:cy="13.892739"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:grid-bbox="true"
      inkscape:document-units="px"
-     inkscape:window-width="888"
-     inkscape:window-height="716"
-     inkscape:window-x="310"
-     inkscape:window-y="179" />
+     inkscape:window-width="1366"
+     inkscape:window-height="721"
+     inkscape:window-x="-2"
+     inkscape:window-y="-3"
+     inkscape:window-maximized="1" />
   <metadata
      id="metadata2398">
     <rdf:RDF>
@@ -54,6 +57,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -61,30 +65,24 @@
      id="layer1"
      inkscape:label="Layer 1"
      inkscape:groupmode="layer">
-    <path
-       sodipodi:type="arc"
-       style="fill:#c20000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       id="path2403"
-       sodipodi:cx="25.317469"
-       sodipodi:cy="27.222277"
-       sodipodi:rx="11.29686"
-       sodipodi:ry="11.29686"
-       d="M 36.614328,27.222277 A 11.29686,11.29686 0 1 1 14.020609,27.222277 A 11.29686,11.29686 0 1 1 36.614328,27.222277 z"
-       transform="matrix(1.171866,0,0,1.171866,-13.683402,-15.975446)"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"
-       inkscape:export-filename="/home/rc/workspace_test/To-Do-O/icons/todo_darkred.png" />
+    <rect
+       style="fill:#c20000;fill-opacity:1;stroke-linecap:butt;stroke-linejoin:miter"
+       id="rect6343"
+       width="26.433758"
+       height="26.523062"
+       x="2.7831211"
+       y="2.7384691" />
     <text
        xml:space="preserve"
-       style="font-size:27.54609871px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Nimbus Roman No9 L;-inkscape-font-specification:Nimbus Roman No9 L Bold"
-       x="11.277583"
-       y="25.338001"
+       style="font-size:30.94307136999999841px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Liberation Serif;-inkscape-font-specification:Liberation Serif Bold"
+       x="10.582681"
+       y="26.196735"
        id="text3175"
        sodipodi:linespacing="125%"
-       transform="scale(1.0178302,0.9824821)"><tspan
+       transform="scale(1.0178302,0.98248214)"><tspan
          sodipodi:role="line"
          id="tspan3177"
-         x="11.277583"
-         y="25.338001">!</tspan></text>
+         x="10.582681"
+         y="26.196735">!</tspan></text>
   </g>
 </svg>

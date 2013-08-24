@@ -18,8 +18,8 @@
    sodipodi:docname="qtodo.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    inkscape:export-filename="/home/rc/repositories/private/qt/qtodo/src/qtodo.png"
-   inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90"
+   inkscape:export-xdpi="72"
+   inkscape:export-ydpi="72"
    version="1.1">
   <defs
      id="defs2395">
@@ -99,16 +99,16 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="5.598901"
-     inkscape:cx="22.444385"
+     inkscape:cx="0.20787823"
      inkscape:cy="31.992002"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:grid-bbox="true"
      inkscape:document-units="px"
      inkscape:window-width="1366"
-     inkscape:window-height="743"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-height="721"
+     inkscape:window-x="-2"
+     inkscape:window-y="-3"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata2398">
@@ -127,25 +127,28 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      transform="translate(0,48)">
-    <path
-       style="fill:url(#linearGradient2565);fill-opacity:1"
-       d="M 23.592351,28.15616 C 7.7036768,24.199001 2.4997201,16.144209 2.4997201,-8.3041429 c 0,-30.7567861 6.9181187,-36.9764131 37.6749029,-36.9764131 30.756786,0 37.325657,6.568874 37.325657,37.3256591 0,22.4601559 -3.341627,29.6182409 -15.602485,35.0563409 -5.477484,2.429444 -30.91547,2.895227 -38.305444,1.054716 z"
-       id="path2500"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ssssss" />
-    <path
-       sodipodi:type="arc"
-       style="fill:#00b000;fill-opacity:1;fill-rule:evenodd;stroke:none"
-       id="path2403"
-       sodipodi:cx="25.317469"
-       sodipodi:cy="27.222277"
-       sodipodi:rx="11.29686"
-       sodipodi:ry="11.29686"
-       d="m 36.614328,27.222277 c 0,6.239083 -5.057776,11.296859 -11.296859,11.296859 -6.239084,0 -11.29686,-5.057776 -11.29686,-11.296859 0,-6.239084 5.057776,-11.29686 11.29686,-11.29686 6.239083,0 11.296859,5.057776 11.296859,11.29686 z"
-       transform="matrix(2.5868858,0,0,2.5868858,-25.493399,-78.42092)"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"
-       inkscape:export-filename="/home/rc/workspace_test/Mobile To-Do/icons/todo_blue.png"
-       mask="url(#mask3465)" />
+    <g
+       transform="matrix(2.5286196,0,0,2.5286196,-0.4579136,-48.457914)"
+       id="g2994">
+      <rect
+         y="2.7384691"
+         x="2.7831211"
+         height="26.523062"
+         width="26.433758"
+         id="rect6343"
+         style="fill:#00b000;fill-opacity:1;stroke-linecap:butt;stroke-linejoin:miter" />
+      <text
+         transform="scale(1.0178302,0.98248214)"
+         sodipodi:linespacing="125%"
+         id="text3175"
+         y="26.196735"
+         x="10.582681"
+         style="font-size:30.94307137px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Liberation Serif;-inkscape-font-specification:Liberation Serif Bold"
+         xml:space="preserve"><tspan
+           y="26.196735"
+           x="10.582681"
+           id="tspan3177"
+           sodipodi:role="line">!</tspan></text>
+    </g>
   </g>
 </svg>
