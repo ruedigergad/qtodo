@@ -174,9 +174,14 @@ contains(LIBS,-lsailfishsilicabackground): {
 #    CONFIG += link_pkgconfig
 #    PKGCONFIG += qmfclient
 
+    INCLUDEPATH += \
+        lib/include \
+        lib/include/QxtCore \
+        lib/include/QxtGui
+
     LIBS += \
-        -Llib/build/linux/x86_64 \
-        -Llib/link/linux/x86_64 \
+        -L$$PWD/lib/build/linux/x86_64 \
+        -L$$PWD/lib/link/linux/x86_64 \
         -lqmfclient \
         -lQxtCore \
         -lQxtGui
