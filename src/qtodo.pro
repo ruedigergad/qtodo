@@ -1,5 +1,18 @@
 # Add more folders to ship with the application, here
 
+message(Building with Qt version: $$QT_VERSION)
+
+isEqual(QT_MAJOR_VERSION, 5) {
+    message(Qt5 Build)
+
+    DEFINES += QT5_BUILD
+
+    QT += qml quick
+
+    INCLUDEPATH += \
+        lib/qt5/include
+}
+
 qmlCommon.source = qml/common
 qmlCommon.target = qml
 
@@ -140,54 +153,65 @@ contains(LIBS,-lsailfishsilicabackground): {
 
     DEFINES += LINUX_DESKTOP
 
-    qmlDesktop.source = qml/desktop
-    qmlDesktop.target = qml
+    contains(DEFINES, QT5_BUILD) {
+        message(Qt5 Linux Desktop Build)
 
-    # TODO: Dynamically determine architecture.
-    arch = x86_64
-    os = linux
-    qmlCanvasImport.source = lib/build/$${os}/$${arch}/qmlcanvas
-    qmlCanvasImport.target = lib/imports
-    qmfLibs.source = lib/build/$${os}/$${arch}/qmf
-    qmfLibs.target = lib
+        LIBS += \
+            -L$$PWD/lib/qt5/build/linux/x86_64/qmf/lib \
+            -lqmfclient5 \
+            -Wl,-rpath lib
+    } else {
+        message(Qt4 Linux Desktop Build)
 
-    DEPLOYMENTFOLDERS += qmlDesktop qmlCanvasImport qmfLibs
-    QML_IMPORT_PATH += lib/build/linux/x86_64
+        qmlDesktop.source = qml/desktop
+        qmlDesktop.target = qml
 
-    wrapperScripts.files = qtodo.sh accounts_gui.sh qtmail.sh
-    wrapperScripts.path = /opt/$${TARGET}/bin
-    libqtx.files = lib/build/$${os}/$${arch}/libQxtCore.so.0 lib/build/$${os}/$${arch}/libQxtGui.so.0
-    libqtx.path = /opt/$${TARGET}/lib
-    INSTALLS += wrapperScripts libqtx
+        # TODO: Dynamically determine architecture.
+        arch = x86_64
+        os = linux
+        qmlCanvasImport.source = lib/build/$${os}/$${arch}/qmlcanvas
+        qmlCanvasImport.target = lib/imports
+        qmfLibs.source = lib/build/$${os}/$${arch}/qmf
+        qmfLibs.target = lib
 
-    HEADERS += \
-        qtodotrayicon.h \
-        qtodoview.h
+        DEPLOYMENTFOLDERS += qmlDesktop qmlCanvasImport qmfLibs
+        QML_IMPORT_PATH += lib/build/linux/x86_64
 
-    SOURCES += \
-        qtodotrayicon.cpp \
-        qtodoview.cpp
+        wrapperScripts.files = qtodo.sh accounts_gui.sh qtmail.sh
+        wrapperScripts.path = /opt/$${TARGET}/bin
+        libqtx.files = lib/build/$${os}/$${arch}/libQxtCore.so.0 lib/build/$${os}/$${arch}/libQxtGui.so.0
+        libqtx.path = /opt/$${TARGET}/lib
+        INSTALLS += wrapperScripts libqtx
 
-    CONFIG  += qxt
-    QXT     += core gui
+        HEADERS += \
+            qtodotrayicon.h \
+            qtodoview.h
 
-#    CONFIG += link_pkgconfig
-#    PKGCONFIG += qmfclient
+        SOURCES += \
+            qtodotrayicon.cpp \
+            qtodoview.cpp
 
-    INCLUDEPATH += \
-        lib/include \
-        lib/include/QxtCore \
-        lib/include/QxtGui
+        CONFIG  += qxt
+        QXT     += core gui
 
-    LIBS += \
-        -L$$PWD/lib/build/linux/x86_64 \
-        -L$$PWD/lib/link/linux/x86_64 \
-        -lqmfclient \
-        -lQxtCore \
-        -lQxtGui
+    #    CONFIG += link_pkgconfig
+    #    PKGCONFIG += qmfclient
 
-    RESOURCES += \
-        icon.qrc
+        INCLUDEPATH += \
+            lib/include \
+            lib/include/QxtCore \
+            lib/include/QxtGui
+
+        LIBS += \
+            -L$$PWD/lib/build/linux/x86_64 \
+            -L$$PWD/lib/link/linux/x86_64 \
+            -lqmfclient \
+            -lQxtCore \
+            -lQxtGui
+
+        RESOURCES += \
+            icon.qrc
+    }
 }
 
 QT+= declarative xml
@@ -215,13 +239,18 @@ HEADERS += \
     filehelper.h \
     merger.h
 
-SOURCES += main.cpp \
+SOURCES += \
     todostorage.cpp \
     nodelistmodel.cpp \
     filehelper.cpp \
     merger.cpp
 
-#!contains(DEFINES, BB10_BUILD): {
+contains(DEFINES, QT5_BUILD) {
+    SOURCES += main-qt5.cpp
+} else {
+    SOURCES += main.cpp
+}
+
 message(Building sync support...)
 DEFINES += QTODO_SYNC_SUPPORT
 HEADERS += \
@@ -232,7 +261,6 @@ SOURCES += \
     imapstorage.cpp \
     imapaccountlistmodel.cpp \
     imapaccounthelper.cpp
-#}
 
 OTHER_FILES += \
     qtodo.desktop \
@@ -299,8 +327,6 @@ OTHER_FILES += \
     qtmail.sh \
     bar-descriptor.xml \
     qml/bb10/CommonBB10TextArea.qml
-
-
 
 #RESOURCES += \
 #    res.qrc

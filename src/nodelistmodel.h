@@ -47,6 +47,8 @@ public:
 
     explicit NodeListModel(QObject *parent = 0);
 
+    virtual QHash<int, QByteArray> roleNames() const { return m_roles; }
+
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
     Q_INVOKABLE int rowCount(const QModelIndex &parent = QModelIndex()) const;
     Qt::ItemFlags flags(const QModelIndex &/*index*/) const { return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable; }
@@ -73,6 +75,8 @@ public slots:
     void setRoot(ToDoStorage *storage);
 
 private:
+    QHash<int, QByteArray> m_roles;
+
     QDomDocument document;
     QDomElement root;
 

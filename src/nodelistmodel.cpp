@@ -25,18 +25,16 @@ NodeListModel::NodeListModel(QObject *parent) :
     QAbstractListModel(parent),
     parentModel(NULL)
 {
-    QHash<int, QByteArray> roles;
-    roles[TagNameRole] = "tagName";
-    roles[TextRole] = "elementText";
-    roles[IsExpandableRole] = "isExpandable";
-    roles[IsLeafRole] = "isLeaf";
+    m_roles[TagNameRole] = "tagName";
+    m_roles[TextRole] = "elementText";
+    m_roles[IsExpandableRole] = "isExpandable";
+    m_roles[IsLeafRole] = "isLeaf";
 
-    roles[ColorRole] = "elementColor";
-    roles[DateRole] = "elementDate";
-    roles[IsDoneRole] = "isDone";
-    roles[ProgressRole] = "elementProgress";
-    roles[IdRole] = "elementId";
-    setRoleNames(roles);
+    m_roles[ColorRole] = "elementColor";
+    m_roles[DateRole] = "elementDate";
+    m_roles[IsDoneRole] = "isDone";
+    m_roles[ProgressRole] = "elementProgress";
+    m_roles[IdRole] = "elementId";
 }
 
 QVariant NodeListModel::data(const QModelIndex &idx, int role) const{
