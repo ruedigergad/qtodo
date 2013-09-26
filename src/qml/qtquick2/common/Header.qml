@@ -58,8 +58,7 @@ Rectangle {
             id: levelIndicatorDelegate
 
             property bool animationRunning: false
-            // Hack to avoid item blinking up at target position at first.
-            visible: false
+            visible: true
 
             height: header.height * 0.2
             width: height
@@ -69,33 +68,6 @@ Rectangle {
             border.width: height * 0.2
             border.color: headerText.color
             color: ((index + 1) === levelIndicator.count || animationRunning ) ? headerText.color : "transparent"
-
-            ListView.onAdd: SequentialAnimation {
-                PropertyAction { target: levelIndicatorDelegate; property: "animationRunning"; value: true }
-                // Hack to avoid item blinking up at target position at first.
-                // Setting x via PropertyAction causes the item to shortly show up at the target position.
-                NumberAnimation { target: levelIndicatorDelegate; property: "x"; to: header.width + width; duration: 1; easing.type: Easing.InOutQuad }
-                PropertyAction { target: levelIndicatorDelegate; property: "visible"; value: true }
-                NumberAnimation { target: levelIndicatorDelegate; property: "x"; to: x; duration: 250; easing.type: Easing.InOutQuad }
-                PropertyAction { target: levelIndicatorDelegate; property: "animationRunning"; value: false }
-            }
-
-            ListView.onRemove: SequentialAnimation {
-                PropertyAction { target: levelIndicatorDelegate; property: "animationRunning"; value: true }
-                PropertyAction { target: levelIndicatorDelegate; property: "ListView.delayRemove"; value: true }
-                NumberAnimation { target: levelIndicatorDelegate; property: "x"; to: header.width + width; duration: 250; easing.type: Easing.InOutQuad }
-                PropertyAction { target: levelIndicatorDelegate; property: "ListView.delayRemove"; value: false }
-                PropertyAction { target: levelIndicatorDelegate; property: "animationRunning"; value: false }
-            }
-
-            // Hack to avoid item blinking up at target position at first.
-            // We explicitly set the first item to visible as it is never animated
-            // and hence would not be set to visible otherwise.
-            Component.onCompleted: {
-                if (index === 0) {
-                    visible = true
-                }
-            }
         }
 
         Connections {
