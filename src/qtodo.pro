@@ -11,10 +11,13 @@ isEqual(QT_MAJOR_VERSION, 5) {
 
     INCLUDEPATH += \
         lib/qt5/include
-}
 
-qmlCommon.source = qml/common
-qmlCommon.target = qml
+    qmlCommon.source = qml/qtquick2/common
+    qmlCommon.target = qml
+} else {
+    qmlCommon.source = qml/common
+    qmlCommon.target = qml
+}
 
 iconDeployment.source = icons
 iconDeployment.target = qml
@@ -160,6 +163,10 @@ contains(LIBS,-lsailfishsilicabackground): {
             -L$$PWD/lib/qt5/build/linux/x86_64/qmf/lib \
             -lqmfclient5 \
             -Wl,-rpath lib
+
+        qmlDesktop.source = qml/qtquick2/desktop
+        qmlDesktop.target = qml
+        DEPLOYMENTFOLDERS += qmlDesktop
     } else {
         message(Qt4 Linux Desktop Build)
 
