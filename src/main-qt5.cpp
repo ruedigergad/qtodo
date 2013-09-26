@@ -58,12 +58,12 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     /*
      * Setup application.
      */
-    qmlRegisterType<FileHelper>("qtodo", 1, 0, "FileHelper");
+    qmlRegisterType<FileHelper>("SyncToImap", 1, 0, "FileHelper");
 
 #ifdef QTODO_SYNC_SUPPORT
-    qmlRegisterType<ImapAccountHelper>("qtodo", 1, 0, "ImapAccountHelper");
-    qmlRegisterType<ImapAccountListModel>("qtodo", 1, 0, "ImapAccountListModel");
-    qmlRegisterType<ImapStorage>("qtodo", 1, 0, "ImapStorage");
+    qmlRegisterType<ImapAccountHelper>("SyncToImap", 1, 0, "ImapAccountHelper");
+    qmlRegisterType<ImapAccountListModel>("SyncToImap", 1, 0, "ImapAccountListModel");
+    qmlRegisterType<ImapStorage>("SyncToImap", 1, 0, "ImapStorage");
 #endif
 
     qmlRegisterType<Merger>("qtodo", 1, 0, "Merger");
@@ -80,14 +80,14 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 //    QTodoTrayIcon *trayIcon = new QTodoTrayIcon(icon, view);
 //    trayIcon->show();
 
-#ifdef WINDOWS_DESKTOP
-    view->setSource(QUrl("qrc:/qml/main.qml"));
-#else
-    view->setSource(QUrl(QCoreApplication::applicationDirPath() + "/../qml/desktop/main.qml"));
-#endif
+//#ifdef WINDOWS_DESKTOP
+//    view->setSource(QUrl("qrc:/qml/main.qml"));
+//#else
+//    view->setSource(QUrl("qml/main.qml"));
+//#endif
 
     view->setResizeMode(QQuickView::SizeRootObjectToView);
-    view->setSource(QUrl("qrc:/qml/qtquick2/main.qml"));
+    view->setSource(QUrl("qml/main.qml"));
     view->resize(400, 500);
     view->show();
 

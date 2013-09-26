@@ -164,9 +164,11 @@ contains(LIBS,-lsailfishsilicabackground): {
             -lqmfclient5 \
             -Wl,-rpath lib
 
-        qmlDesktop.source = qml/qtquick2/desktop
-        qmlDesktop.target = qml
-        DEPLOYMENTFOLDERS += qmlDesktop
+        qmlDesktopCommon.source = qml/qtquick2/desktop/common
+        qmlDesktopCommon.target = qml
+        qmlDesktopMain.source = qml/qtquick2/desktop/main.qml
+        qmlDesktopMain.target = qml
+        DEPLOYMENTFOLDERS += qmlDesktopCommon qmlDesktopMain
     } else {
         message(Qt4 Linux Desktop Build)
 
@@ -315,6 +317,40 @@ OTHER_FILES += \
     qml/meego/common/CommonToolIcon.qml \
     qml/meego/common/ConfirmationDialog.qml \
     qml/meego/common/ImapAccountSettingsSheet.qml \
+    qml/qtquick2/common/AboutDialog.qml \
+    qml/qtquick2/common/Drawing.qml \
+    qml/qtquick2/common/EditSketchSheet.qml \
+    qml/qtquick2/common/EditToDoSheet.qml \
+    qml/qtquick2/common/FastScroll.js \
+    qml/qtquick2/common/FastScroll.qml \
+    qml/qtquick2/common/FlowListView.qml \
+    qml/qtquick2/common/Header.qml \
+    qml/qtquick2/common/ImapAccountSettingsSheet.qml \
+    qml/qtquick2/common/MainRectangle.qml \
+    qml/qtquick2/common/Menu.qml \
+    qml/qtquick2/common/MessageDialog.qml \
+    qml/qtquick2/common/NodeListDelegateContainer.qml \
+    qml/qtquick2/common/NodeListDelegate.qml \
+    qml/qtquick2/common/nodelisthelper.js \
+    qml/qtquick2/common/NodeListView.qml \
+    qml/qtquick2/common/ProgressDialog.qml \
+    qml/qtquick2/common/QToDoToolBar.qml \
+    qml/qtquick2/common/SelectionDialog.qml \
+    qml/qtquick2/common/SyncDirToImap.qml \
+    qml/qtquick2/common/SyncFileToImap.qml \
+    qml/qtquick2/common/SyncMessageDeleter.qml \
+    qml/qtquick2/common/SyncToImapBase.qml \
+    qml/qtquick2/common/SyncToImap.qml \
+    qml/qtquick2/common/TreeView.qml \
+    qml/qtquick2/common/desktop/main.qml \
+    qml/qtquick2/common/desktop/common/CommonButton.qml \
+    qml/qtquick2/common/desktop/common/CommonDialog.qml \
+    qml/qtquick2/common/desktop/common/CommonTextArea.qml \
+    qml/qtquick2/common/desktop/common/CommonTextField.qml \
+    qml/qtquick2/common/desktop/common/CommonToolBar.qml \
+    qml/qtquick2/common/desktop/common/CommonToolIcon.qml \
+    qml/qtquick2/common/desktop/common/ConfirmationDialog.qml \
+    qml/qtquick2/common/desktop/common/Dialog.qml \
     qml/sailfish/main.qml \
     qml/sailfish/common/AboutDialog.qml \
     qml/sailfish/common/CommonButton.qml \
