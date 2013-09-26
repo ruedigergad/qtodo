@@ -161,14 +161,16 @@ contains(LIBS,-lsailfishsilicabackground): {
 
         LIBS += \
             -L$$PWD/lib/qt5/build/linux/x86_64/qmf/lib \
-            -lqmfclient5 \
-            -Wl,-rpath lib
+            -lqmfclient5
+            #-Wl,-rpath lib
 
+        desktopQmfLibs.source = lib/qt5/build/linux/x86_64/qmf
+        desktopQmfLibs.target = lib
         qmlDesktopCommon.source = qml/qtquick2/desktop/common
         qmlDesktopCommon.target = qml
         qmlDesktopMain.source = qml/qtquick2/desktop/main.qml
         qmlDesktopMain.target = qml
-        DEPLOYMENTFOLDERS += qmlDesktopCommon qmlDesktopMain
+        DEPLOYMENTFOLDERS += desktopQmfLibs qmlDesktopCommon qmlDesktopMain
     } else {
         message(Qt4 Linux Desktop Build)
 
