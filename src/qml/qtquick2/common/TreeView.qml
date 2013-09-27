@@ -95,7 +95,7 @@ Item {
                 currentItem.expandable &&
                 ! currentNodeListView.model.rowCount() <= 0) {
             addView(currentNodeListView)
-            treeView.updateSubView(currentNodeListView.model, currentIndex)
+            updateSubView(currentNodeListView.model, currentIndex)
         }
     }
 
