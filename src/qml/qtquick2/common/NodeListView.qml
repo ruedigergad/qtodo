@@ -238,8 +238,8 @@ Item {
 //                    return progress
 
                 var idx = treeView.currentLevel === 0 ? index : index + 1
-                var nTodos = treeView.currentModel.countSubTodos(idx, false, true)
-                var notDone = treeView.currentModel.countSubTodos(idx, true, true)
+                var nTodos = treeView.currentNodeListView.model.countSubTodos(idx, false, true)
+                var notDone = treeView.currentNodeListView.model.countSubTodos(idx, true, true)
 
                 if (nTodos <= 0)
                     return 0

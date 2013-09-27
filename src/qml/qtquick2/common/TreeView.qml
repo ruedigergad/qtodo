@@ -65,7 +65,6 @@ Item {
      */
     property Item currentItem: null
     property int currentIndex: -1
-    property QtObject currentModel: null
 
     function addView(parentView) {
         console.log("Entering addView...")
@@ -131,9 +130,9 @@ Item {
         }
 
         if (currentItem.done) {
-            currentModel.setAttribute(currentIndex, "done", "false")
+            currentNodeListView.model.setAttribute(currentIndex, "done", "false")
         } else {
-            currentModel.setAttribute(currentIndex, "done", "true")
+            currentNodeListView.model.setAttribute(currentIndex, "done", "true")
         }
     }
 
@@ -156,7 +155,6 @@ Item {
         }
 
         currentNodeListView = NodeListHelper.views[currentLevel]
-        currentModel = currentNodeListView.model
 
         /*
          * Hack to properly update the selection when switching between levels.
@@ -233,7 +231,6 @@ Item {
                     NodeListHelper.views.push(currentNodeListView)
                     listViewCount++
                     currentIndex = currentNodeListView.currentIndex
-                    currentModel = currentNodeListView.model
 
                     if (currentNodeListView.currentIndex >= 0) {
                         currentItem = currentNodeListView.currentItem
