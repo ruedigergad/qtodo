@@ -44,8 +44,8 @@ function createNextView(parentView) {
         + "model: NodeListModel { id: elementListModel"+ treeView.listViewCount + " } "
         + "}"
 
-    console.log("Creating new view from the following string: " + viewString);
-    console.log("Parent view for new view: " + parentView);
+    console.log("Creating new view from string: " + viewString);
+    console.log("Parent view: " + parentView);
 
     var view = Qt.createQmlObject(viewString, parentView);
 
@@ -54,6 +54,6 @@ function createNextView(parentView) {
         return;
     }
 
-    console.log("View successfully created.");
+    console.log("View successfully created: " + view);
     return view;
 }
