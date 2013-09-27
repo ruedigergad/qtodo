@@ -156,6 +156,9 @@ contains(LIBS,-lsailfishsilicabackground): {
 
     DEFINES += LINUX_DESKTOP
 
+    RESOURCES += \
+        icon.qrc
+
     contains(DEFINES, QT5_BUILD) {
         message(Qt5 Linux Desktop Build)
 

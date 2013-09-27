@@ -71,11 +71,13 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qmlRegisterType<ToDoStorage>("qtodo", 1, 0, "ToDoStorage");
 
 
-//    QIcon icon(":/icon/icon.png");
-//TODO
     app->setApplicationName("Q To-Do");
     app->setApplicationDisplayName("Q To-Do");
-//    app->setWindowIcon(icon);
+
+#if defined(LINUX_DESKTOP)
+    QIcon icon(":/icon/icon.png");
+    view->setIcon(icon);
+#endif
 
 //    QTodoTrayIcon *trayIcon = new QTodoTrayIcon(icon, view);
 //    trayIcon->show();
