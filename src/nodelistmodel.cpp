@@ -249,6 +249,10 @@ void NodeListModel::move(int from, int to){
 }
 
 int NodeListModel::countSubTodos(int index, bool todoOnly, bool recursive){
+    if (index < 0) {
+        return -1;
+    }
+
     QDomElement element = childNodes.at(index).toElement();
     if(element.tagName() != "to-do")
         return -1;
