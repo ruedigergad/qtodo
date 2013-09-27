@@ -202,12 +202,11 @@ QStringList NodeListModel::getSketchNames(QDomElement element) {
     return ret;
 }
 
-void NodeListModel::updateElement(int index, QString type, QString text, QString color){
-    beginResetModel();
+void NodeListModel::updateElement(int rowIndex, QString type, QString text, QString color){
     if(childNodes.at(0).isText())
-        index++;
+        rowIndex++;
 
-    QDomElement element = childNodes.at(index).toElement();
+    QDomElement element = childNodes.at(rowIndex).toElement();
     element.setTagName(type);
     element.firstChild().toText().setData(text);
 
@@ -216,7 +215,9 @@ void NodeListModel::updateElement(int index, QString type, QString text, QString
     }
     element.setAttribute("mtime", QDateTime::currentDateTime().toString(Qt::ISODate));
 
-    endResetModel();
+    QModelIndex modelIndex = index(rowIndex, 0);
+    qDebug() << modelIndex;
+    emit dataChanged(modelIndex, modelIndex);
     emit changed();
 }
 
