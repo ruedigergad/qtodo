@@ -179,9 +179,7 @@ contains(LIBS,-lsailfishsilicabackground): {
         qmlDesktopCommon.target = qml
         qmlDesktopMain.source = qml/qtquick2/desktop/main.qml
         qmlDesktopMain.target = qml
-        qmlDesktopMainMenu.source = qml/qtquick2/desktop/MainMenu.qml
-        qmlDesktopMainMenu.target = qml
-        DEPLOYMENTFOLDERS += desktopQmfLibs qmlDesktopCommon qmlDesktopMain qmlDesktopMainMenu
+        DEPLOYMENTFOLDERS += desktopQmfLibs qmlDesktopCommon qmlDesktopMain
     } else {
         message(Qt4 Linux Desktop Build)
 
