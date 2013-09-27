@@ -92,112 +92,73 @@ Item {
             id: menuArea
 
             anchors.centerIn: parent
-            height: about.height * 7 + primaryFontSize / 3 * 8
+            height: about.height * 5 + primaryFontSize / 3 * 6
             width: parent.width
             y: parent.y
 
-            CommonButton {
-                id: changePassword
 
+            CommonButton{
+                id: cleanDone
                 anchors.bottom: syncToImap.top
                 anchors.bottomMargin: primaryFontSize / 3
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: "Change Password"
                 width: parent.width - primaryFontSize
-
+                text: "Clean Done"
                 onClicked: {
-                    passwordChangeDialog.open()
-                    menu.close()
+                    mainRectangle.confirmCleanDoneDialog.open()
+                    mainMenu.close()
                 }
             }
 
-            CommonButton {
+            CommonButton{
                 id: syncToImap
-
-                anchors.bottom: syncDeleteMessage.top
+                anchors.bottom: syncSketchesToImap.top
                 anchors.bottomMargin: primaryFontSize / 3
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: "Sync"
                 width: parent.width - primaryFontSize
-
+                text: "Sync To-Do List"
                 onClicked: {
-                    confirmSyncToImapDialog.open()
-                    menu.close()
+                    mainRectangle.confirmSyncToImapDialog.open()
+                    mainMenu.close()
                 }
             }
 
-            CommonButton {
-                id: syncDeleteMessage
-
+            CommonButton{
+                id: syncSketchesToImap
                 anchors.bottom: syncAccountSettings.top
                 anchors.bottomMargin: primaryFontSize / 3
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: "Clear Sync Data"
                 width: parent.width - primaryFontSize
-
+                text: "Sync Sketches"
                 onClicked: {
-                    confirmDeleteSyncMessage.open()
-                    menu.close()
+                    mainRectangle.confirmSyncSketchesToImapDialog.open()
+                    mainMenu.close()
                 }
             }
 
-            CommonButton {
+            CommonButton{
                 id: syncAccountSettings
-
-                anchors.bottom: exportKeePassXml.top
-                anchors.bottomMargin: primaryFontSize / 3
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: "Sync Account Settings"
-                width: parent.width - primaryFontSize
-
-                onClicked: {
-                    imapAccountSettings.open()
-                    menu.close()
-                }
-            }
-
-            CommonButton {
-                id: exportKeePassXml
-
-                anchors.bottom: importKeePassXml.top
-                anchors.bottomMargin: primaryFontSize / 3
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: "Export"
-                width: parent.width - primaryFontSize
-
-                onClicked: {
-                    entryStorage.exportKeePassXml()
-                    menu.close()
-                }
-            }
-
-            CommonButton {
-                id: importKeePassXml
-
                 anchors.bottom: about.top
                 anchors.bottomMargin: primaryFontSize / 3
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: "Import"
                 width: parent.width - primaryFontSize
-
+                text: "Sync Account Settings"
                 onClicked: {
-                    entryStorage.importKeePassXml()
-                    menu.close()
+                    imapAccountSettings.open()
+                    mainMenu.close()
                 }
             }
 
-            CommonButton {
+            CommonButton{
                 id: about
-
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: primaryFontSize / 3
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: "About"
                 width: parent.width - primaryFontSize
-
+                text: "About"
                 onClicked: {
-                    aboutDialog.open()
-                    menu.close()
+                    mainRectangle.aboutDialog.open()
+                    mainMenu.close()
                 }
             }
         }
