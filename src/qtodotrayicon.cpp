@@ -34,14 +34,14 @@ QTodoTrayIcon::QTodoTrayIcon(const QIcon &icon, QQuickView *view, QApplication *
     alwaysOnTopAction->setCheckable(true);
     alwaysOnTopAction->setChecked(QSettings().value("alwaysOnTop", true).toBool());
     connect(alwaysOnTopAction, SIGNAL(triggered(bool)), this, SLOT(toggleAlwaysOnTop(bool)));
-    trayMenu->addAction(alwaysOnTopAction);
+//    trayMenu->addAction(alwaysOnTopAction);
 
 #ifdef LINUX_DESKTOP
     QAction *hideDecorationAction = new QAction("Hide Window Decoration", this);
     hideDecorationAction->setCheckable(true);
     hideDecorationAction->setChecked(QSettings().value("hideDecoration", true).toBool());
     connect(hideDecorationAction, SIGNAL(triggered(bool)), this, SLOT(toggleHideDecoration(bool)));
-    trayMenu->addAction(hideDecorationAction);
+//    trayMenu->addAction(hideDecorationAction);
 #endif
 
     QAction *quitAction = new QAction("Quit", this);
