@@ -138,13 +138,7 @@ Item {
     }
 
     Component.onCompleted: {
-        NodeListHelper.views.push(rootListView)
-        listViewCount++
-        currentIndex = rootListView.currentIndex
-        currentModel = model
-        if (rootListView.currentIndex >= 0) {
-            currentItem = rootListView.currentItem
-        }
+
     }
 
     onCurrentLevelChanged: {
@@ -236,6 +230,15 @@ Item {
 
                 Component.onCompleted: {
                     currentNodeListView = rootListView
+                    NodeListHelper.views.push(currentNodeListView)
+                    listViewCount++
+                    currentIndex = currentNodeListView.currentIndex
+                    currentModel = currentNodeListView.model
+
+                    if (currentNodeListView.currentIndex >= 0) {
+                        currentItem = currentNodeListView.currentItem
+                        expandTree()
+                    }
                 }
             }
         }
