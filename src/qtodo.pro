@@ -179,7 +179,9 @@ contains(LIBS,-lsailfishsilicabackground): {
         qmlDesktopCommon.target = qml
         qmlDesktopMain.source = qml/qtquick2/desktop/main.qml
         qmlDesktopMain.target = qml
-        DEPLOYMENTFOLDERS += desktopQmfLibs qmlDesktopCommon qmlDesktopMain
+        qmlDesktopMainMenu.source = qml/qtquick2/desktop/MainMenu.qml
+        qmlDesktopMainMenu.target = qml
+        DEPLOYMENTFOLDERS += desktopQmfLibs qmlDesktopCommon qmlDesktopMain qmlDesktopMainMenu
     } else {
         message(Qt4 Linux Desktop Build)
 
@@ -338,7 +340,6 @@ OTHER_FILES += \
     qml/qtquick2/common/Header.qml \
     qml/qtquick2/common/ImapAccountSettingsSheet.qml \
     qml/qtquick2/common/MainRectangle.qml \
-    qml/qtquick2/common/Menu.qml \
     qml/qtquick2/common/MessageDialog.qml \
     qml/qtquick2/common/NodeListDelegateContainer.qml \
     qml/qtquick2/common/NodeListDelegate.qml \
@@ -353,15 +354,16 @@ OTHER_FILES += \
     qml/qtquick2/common/SyncToImapBase.qml \
     qml/qtquick2/common/SyncToImap.qml \
     qml/qtquick2/common/TreeView.qml \
-    qml/qtquick2/common/desktop/main.qml \
-    qml/qtquick2/common/desktop/common/CommonButton.qml \
-    qml/qtquick2/common/desktop/common/CommonDialog.qml \
-    qml/qtquick2/common/desktop/common/CommonTextArea.qml \
-    qml/qtquick2/common/desktop/common/CommonTextField.qml \
-    qml/qtquick2/common/desktop/common/CommonToolBar.qml \
-    qml/qtquick2/common/desktop/common/CommonToolIcon.qml \
-    qml/qtquick2/common/desktop/common/ConfirmationDialog.qml \
-    qml/qtquick2/common/desktop/common/Dialog.qml \
+    qml/qtquick2/desktop/main.qml \
+    qml/qtquick2/desktop/MainMenu.qml \
+    qml/qtquick2/desktop/common/CommonButton.qml \
+    qml/qtquick2/desktop/common/CommonDialog.qml \
+    qml/qtquick2/desktop/common/CommonTextArea.qml \
+    qml/qtquick2/desktop/common/CommonTextField.qml \
+    qml/qtquick2/desktop/common/CommonToolBar.qml \
+    qml/qtquick2/desktop/common/CommonToolIcon.qml \
+    qml/qtquick2/desktop/common/ConfirmationDialog.qml \
+    qml/qtquick2/desktop/common/Dialog.qml \
     qml/sailfish/main.qml \
     qml/sailfish/common/AboutDialog.qml \
     qml/sailfish/common/CommonButton.qml \

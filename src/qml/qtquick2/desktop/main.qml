@@ -234,7 +234,7 @@ Rectangle {
 //        }
     }
 
-    Menu {
+    MainMenu {
         id: mainMenu
 
         anchors.bottomMargin: commonTools.height
