@@ -34,7 +34,7 @@ Rectangle {
     property int primaryBorderSize: 20
 
     Rectangle {
-        anchors {top: parent.top; left: parent.left; right: parent.right; bottom: commonTools.top}
+        anchors {top: parent.top; left: parent.left; right: parent.right; bottom: toolBar.top}
         color: "lightgoldenrodyellow"
 
         radius: parent.radius
@@ -181,7 +181,7 @@ Rectangle {
     }
 
     Rectangle {
-        id: commonTools
+        id: toolBar
         anchors {left: parent.left; right: parent.right; bottom: parent.bottom}
         height: qtodoToolBar.height * 1.25
 
@@ -226,7 +226,7 @@ Rectangle {
 
 ////                        var newWidth = applicationWindow.size.width + dx
 
-////                        applicationWindow.size = Qt.size(newWidth < commonTools.minWidth ? commonTools.minWidth : newWidth,
+////                        applicationWindow.size = Qt.size(newWidth < toolBar.minWidth ? toolBar.minWidth : newWidth,
 ////                                                    applicationWindow.size.height + dy)
 //                    }
 //                }
@@ -237,19 +237,19 @@ Rectangle {
     MainMenu {
         id: mainMenu
 
-        anchors.bottomMargin: commonTools.height
+        anchors.bottomMargin: toolBar.height
 
-        onClosed: commonTools.enabled = true
-        onOpened: commonTools.enabled = false
+        onClosed: toolBar.enabled = true
+        onOpened: toolBar.enabled = false
     }
 
     Menu {
         id: contextMenu
 
-        anchors.bottomMargin: commonTools.height
+        anchors.bottomMargin: toolBar.height
 
-        onClosed: commonTools.enabled = true
-        onOpened: commonTools.enabled = false
+        onClosed: toolBar.enabled = true
+        onOpened: toolBar.enabled = false
 
         CommonButton{
             id: moveToTopItem

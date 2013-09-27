@@ -100,8 +100,8 @@ Item {
     AboutDialog {
         id: aboutDialog
 
-        onClosed: commonTools.enabled = true
-        onOpened: commonTools.enabled = false
+        onClosed: toolBar.enabled = true
+        onOpened: toolBar.enabled = false
     }
 
     ConfirmationDialog {
@@ -109,8 +109,8 @@ Item {
 
         titleText: "Delete?"
 
-        onClosed: commonTools.enabled = true
-        onOpened: commonTools.enabled = false
+        onClosed: toolBar.enabled = true
+        onOpened: toolBar.enabled = false
 
         onAccepted: {
             var currentItem = treeView.currentItem
@@ -142,8 +142,8 @@ Item {
         titleText: "Clean Done?"
         message: "Delete all items marked as done?"
 
-        onClosed: commonTools.enabled = true
-        onOpened: commonTools.enabled = false
+        onClosed: toolBar.enabled = true
+        onOpened: toolBar.enabled = false
 
         onAccepted: {
             treeView.currentNodeListView.model.cleanDone()
@@ -156,8 +156,8 @@ Item {
         titleText: "Sync to-do list?"
         message: "This may take some time."
 
-        onOpened: commonTools.enabled = false
-        onRejected: commonTools.enabled = true
+        onOpened: toolBar.enabled = false
+        onRejected: toolBar.enabled = true
 
         onAccepted: {
             syncFileToImap.syncFile(fileHelper.home() + "/to-do-o", "default.xml")
@@ -170,8 +170,8 @@ Item {
         titleText: "Sync sketches?"
         message: "This may take some time."
 
-        onOpened: commonTools.enabled = false
-        onRejected: commonTools.enabled = true
+        onOpened: toolBar.enabled = false
+        onRejected: toolBar.enabled = true
 
         onAccepted: {
             var mySketches = rootElementModel.getSketchNamesForIndex(-1)
@@ -243,8 +243,8 @@ Item {
             }
         }
 
-        onFinished: commonTools.enabled = true
-        onStarted: commonTools.enabled = false
+        onFinished: toolBar.enabled = true
+        onStarted: toolBar.enabled = false
     }
 
     SyncFileToImap {
@@ -253,8 +253,8 @@ Item {
         imapFolderName: "qtodo"
         merger: todoMerger
 
-        onFinished: commonTools.enabled = true
-        onStarted: commonTools.enabled = false
+        onFinished: toolBar.enabled = true
+        onStarted: toolBar.enabled = false
     }
 
     ToDoStorage {
