@@ -28,7 +28,7 @@ Rectangle {
 
     signal clicked
 
-    color: mouseArea.pressed ? "#4ea5f8" : "#0e65c8"
+    color: mouseArea.pressed ? "#00d000" : "#00f000"
     height: textItem.height + (primaryFontSize / 2)
     smooth: true
     width: text === "" ? height : textItem.width + primaryBorderSize
