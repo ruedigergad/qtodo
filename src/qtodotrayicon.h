@@ -20,16 +20,17 @@
 #ifndef QTODOTRAYICON_H
 #define QTODOTRAYICON_H
 
-#include <QDeclarativeView>
+#include <QApplication>
 #include <QIcon>
 #include <QObject>
+#include <QQuickView>
 #include <QSystemTrayIcon>
 
 class QTodoTrayIcon : public QSystemTrayIcon
 {
     Q_OBJECT
 public:
-    explicit QTodoTrayIcon(const QIcon &icon, QDeclarativeView *view);
+    explicit QTodoTrayIcon(const QIcon &icon, QQuickView *view, QApplication *app);
     
 signals:
     
@@ -37,7 +38,8 @@ public slots:
     void toggleViewHide();
 
 private:
-    QDeclarativeView *view;
+    QApplication *app;
+    QQuickView *view;
 
 private slots:
     void handleActivation(QSystemTrayIcon::ActivationReason reason);

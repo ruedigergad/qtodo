@@ -19,11 +19,15 @@
 
 #include <QCoreApplication>
 #include <QGuiApplication>
+
+#if defined(LINUX_DESKTOP)
+#include <QApplication>
+#endif
+
 #include <QQuickView>
 #include <QProcess>
 #include <QtQml>
 
-//#include "qtodotrayicon.h"
 //#include "qtodoview.h"
 
 #include "filehelper.h"
@@ -38,6 +42,10 @@
 #include "nodelistmodel.h"
 #include "todostorage.h"
 
+#if defined(LINUX_DESKTOP)
+#include "qtodotrayicon.h"
+#endif
+
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
     printf("Entering Q To-Do main...");
@@ -46,7 +54,11 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     /*
      * Init Application
      */
+#if defined(LINUX_DESKTOP)
+    QApplication *app = new QApplication(argc, argv);
+#else
     QGuiApplication *app = new QGuiApplication(argc, argv);
+#endif
     QQuickView *view = new QQuickView();
 
     QCoreApplication::setOrganizationName("ruedigergad.com");
@@ -77,10 +89,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 #if defined(LINUX_DESKTOP)
     QIcon icon(":/icon/icon.png");
     view->setIcon(icon);
+    QTodoTrayIcon *trayIcon = new QTodoTrayIcon(icon, view, app);
+    trayIcon->show();
 #endif
-
-//    QTodoTrayIcon *trayIcon = new QTodoTrayIcon(icon, view);
-//    trayIcon->show();
 
 //#ifdef WINDOWS_DESKTOP
 //    view->setSource(QUrl("qrc:/qml/main.qml"));

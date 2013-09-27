@@ -22,8 +22,9 @@
 #include <QSettings>
 #include "qtodotrayicon.h"
 
-QTodoTrayIcon::QTodoTrayIcon(const QIcon &icon, QDeclarativeView *view) :
+QTodoTrayIcon::QTodoTrayIcon(const QIcon &icon, QQuickView *view, QApplication *app) :
     QSystemTrayIcon(icon),
+    app(app),
     view(view)
 {
     QMenu *trayMenu = new QMenu();
@@ -44,7 +45,7 @@ QTodoTrayIcon::QTodoTrayIcon(const QIcon &icon, QDeclarativeView *view) :
 
     QAction *quitAction = new QAction("Quit", this);
     trayMenu->addAction(quitAction);
-    connect(quitAction, SIGNAL(triggered()), view, SLOT(close()));
+    connect(quitAction, SIGNAL(triggered()), app, SLOT(quit()));
 
     setContextMenu(trayMenu);
 
@@ -64,10 +65,10 @@ void QTodoTrayIcon::handleActivation(QSystemTrayIcon::ActivationReason reason) {
 void QTodoTrayIcon::toggleAlwaysOnTop(bool val) {
     QSettings().setValue("alwaysOnTop", val);
     if (val) {
-        view->setWindowFlags(view->windowFlags() | Qt::WindowStaysOnTopHint);
+        view->setFlags(view->flags() | Qt::WindowStaysOnTopHint);
         view->show();
     } else {
-        view->setWindowFlags(view->windowFlags() & (~ Qt::WindowStaysOnTopHint));
+        view->setFlags(view->flags() & (~ Qt::WindowStaysOnTopHint));
         view->show();
     }
 }
@@ -75,16 +76,16 @@ void QTodoTrayIcon::toggleAlwaysOnTop(bool val) {
 void QTodoTrayIcon::toggleHideDecoration(bool val) {
     QSettings().setValue("hideDecoration", val);
     if (val) {
-        view->setWindowFlags(view->windowFlags() | Qt::FramelessWindowHint);
+        view->setFlags(view->flags() | Qt::FramelessWindowHint);
         view->show();
     } else {
-        view->setWindowFlags(view->windowFlags() & (~ Qt::FramelessWindowHint));
+        view->setFlags(view->flags() & (~ Qt::FramelessWindowHint));
         view->show();
     }
 }
 
 void QTodoTrayIcon::toggleViewHide() {
-    if (view->isHidden()) {
+    if (!view->isVisible()) {
         view->show();
     } else {
         view->hide();

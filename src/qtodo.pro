@@ -159,6 +159,12 @@ contains(LIBS,-lsailfishsilicabackground): {
     RESOURCES += \
         icon.qrc
 
+    HEADERS += \
+        qtodotrayicon.h
+
+    SOURCES += \
+        qtodotrayicon.cpp
+
     contains(DEFINES, QT5_BUILD) {
         message(Qt5 Linux Desktop Build)
 
