@@ -20,6 +20,7 @@
 #include "nodelistmodel.h"
 #include <QDateTime>
 #include <QDebug>
+#include <QModelIndex>
 
 NodeListModel::NodeListModel(QObject *parent) :
     QAbstractListModel(parent),
@@ -219,16 +220,17 @@ void NodeListModel::updateElement(int index, QString type, QString text, QString
     emit changed();
 }
 
-void NodeListModel::setAttribute(int index, QString name, QString value){
-    beginResetModel();
+void NodeListModel::setAttribute(int rowIndex, QString name, QString value){
     if(childNodes.at(0).isText())
-        index++;
+        rowIndex++;
 
-    QDomElement element = childNodes.at(index).toElement();
+    QDomElement element = childNodes.at(rowIndex).toElement();
     element.setAttribute(name, value);
     element.setAttribute("mtime", QDateTime::currentDateTime().toString(Qt::ISODate));
 
-    endResetModel();
+    QModelIndex modelIndex = index(rowIndex, 0);
+    qDebug() << modelIndex;
+    emit dataChanged(modelIndex, modelIndex);
     emit changed();
 }
 
