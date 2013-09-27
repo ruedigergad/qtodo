@@ -39,6 +39,7 @@ public slots:
 
 private:
     QApplication *app;
+    QPoint oldPosition;
     QQuickView *view;
 
 private slots:

@@ -18,6 +18,7 @@
  */
 
 #include <QAction>
+#include <QDebug>
 #include <QMenu>
 #include <QSettings>
 #include "qtodotrayicon.h"
@@ -86,8 +87,10 @@ void QTodoTrayIcon::toggleHideDecoration(bool val) {
 
 void QTodoTrayIcon::toggleViewHide() {
     if (!view->isVisible()) {
-        view->show();
+        view->setPosition(oldPosition);
+        view->setVisible(true);
     } else {
-        view->hide();
+        oldPosition = view->position();
+        view->setVisible(false);
     }
 }
