@@ -225,6 +225,7 @@ Item {
                 anchors.left: parent.left
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
+                level: 0
 
                 Component.onCompleted: {
                     currentNodeListView = rootListView
