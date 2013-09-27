@@ -69,41 +69,41 @@ Rectangle {
                 }
             }
 
-            Text {
-                anchors.right: closeText.left
-                anchors.rightMargin: primaryFontSize - (primaryFontSize / 2)
-                anchors.verticalCenter: parent.verticalCenter
+//            Text {
+//                anchors.right: closeText.left
+//                anchors.rightMargin: primaryFontSize - (primaryFontSize / 2)
+//                anchors.verticalCenter: parent.verticalCenter
 
-                text: "-"
-                font.pointSize: primaryFontSize * 1.5
-                color: "white"
+//                text: "-"
+//                font.pointSize: primaryFontSize * 1.5
+//                color: "white"
 
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        trayIcon.toggleViewHide()
-                    }
-                }
-            }
+//                MouseArea {
+//                    anchors.fill: parent
+//                    onClicked: {
+//                        trayIcon.toggleViewHide()
+//                    }
+//                }
+//            }
 
-            Text {
-                id: closeText
+//            Text {
+//                id: closeText
 
-                anchors.right: parent.right
-                anchors.rightMargin: primaryFontSize - (primaryFontSize / 2)
-                anchors.verticalCenter: parent.verticalCenter
+//                anchors.right: parent.right
+//                anchors.rightMargin: primaryFontSize - (primaryFontSize / 2)
+//                anchors.verticalCenter: parent.verticalCenter
 
-                text: "x"
-                font.pointSize: primaryFontSize * 0.75
-                color: "white"
+//                text: "x"
+//                font.pointSize: primaryFontSize * 0.75
+//                color: "white"
 
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        Qt.quit()
-                    }
-                }
-            }
+//                MouseArea {
+//                    anchors.fill: parent
+//                    onClicked: {
+//                        Qt.quit()
+//                    }
+//                }
+//            }
         }
 
         MainRectangle {
@@ -194,43 +194,44 @@ Rectangle {
             id: qtodoToolBar
             anchors.left: parent.left
             anchors.leftMargin: 5
-            anchors.right: resizeItem.left
-            anchors.rightMargin: 10
+            anchors.right: parent.right
+//            anchors.right: resizeItem.left
+            anchors.rightMargin: 5
             anchors.bottom: parent.bottom
             anchors.bottomMargin: - (height - parent.height) / 2
         }
 
-        Text {
-            id: resizeItem
-            anchors.right: parent.right
-            anchors.rightMargin: 10
-            anchors.verticalCenter: parent.verticalCenter
+//        Text {
+//            id: resizeItem
+//            anchors.right: parent.right
+//            anchors.rightMargin: 10
+//            anchors.verticalCenter: parent.verticalCenter
 
-            font.bold: true
-            font.pointSize: primaryFontSize * 0.75
-            text: "o"
+//            font.bold: true
+//            font.pointSize: primaryFontSize * 0.75
+//            text: "o"
 
-            MouseArea {
-                anchors.fill: parent
-                property variant previousPosition
+//            MouseArea {
+//                anchors.fill: parent
+//                property variant previousPosition
 
-                onPressed: {
-                    previousPosition = Qt.point(mouseX, mouseY)
-                }
+//                onPressed: {
+//                    previousPosition = Qt.point(mouseX, mouseY)
+//                }
 
-                onPositionChanged: {
-                    if (pressedButtons == Qt.LeftButton) {
-                        var dx = mouseX - previousPosition.x
-                        var dy = mouseY - previousPosition.y
+//                onPositionChanged: {
+//                    if (pressedButtons == Qt.LeftButton) {
+//                        var dx = mouseX - previousPosition.x
+//                        var dy = mouseY - previousPosition.y
 
-//                        var newWidth = applicationWindow.size.width + dx
+////                        var newWidth = applicationWindow.size.width + dx
 
-//                        applicationWindow.size = Qt.size(newWidth < commonTools.minWidth ? commonTools.minWidth : newWidth,
-//                                                    applicationWindow.size.height + dy)
-                    }
-                }
-            }
-        }
+////                        applicationWindow.size = Qt.size(newWidth < commonTools.minWidth ? commonTools.minWidth : newWidth,
+////                                                    applicationWindow.size.height + dy)
+//                    }
+//                }
+//            }
+//        }
     }
 
     Menu {
