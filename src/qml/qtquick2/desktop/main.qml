@@ -112,7 +112,7 @@ Rectangle {
             focus: true
 
             Keys.onDownPressed:{
-                if (mainRectangle.treeView.currentNodeListView.currentIndex < (mainRectangle.treeView.currentModel.count - 1)) {
+                if (mainRectangle.treeView.currentNodeListView.currentIndex < (mainRectangle.treeView.currentNodeListView.model.count - 1)) {
                     mainRectangle.treeView.currentNodeListView.currentIndex++
                     mainRectangle.treeView.expandTree()
                 }
@@ -147,7 +147,7 @@ Rectangle {
                     mainRectangle.treeView.currentLevel--
                     break
                 case Qt.Key_J:
-                    if (mainRectangle.treeView.currentNodeListView.currentIndex < (mainRectangle.treeView.currentModel.count - 1)) {
+                    if (mainRectangle.treeView.currentNodeListView.currentIndex < (mainRectangle.treeView.currentNodeListView.model.count - 1)) {
                         mainRectangle.treeView.currentNodeListView.currentIndex++
                         mainRectangle.treeView.expandTree()
                     }

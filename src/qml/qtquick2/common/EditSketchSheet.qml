@@ -69,9 +69,9 @@ Item {
         drawing.save(fullFileName)
 
         if (edit) {
-            mainRectangle.treeView.currentModel.updateElement(mainRectangle.treeView.currentIndex, "sketch", sketchFileName, "na")
+            mainRectangle.treeView.currentNodeListView.model.updateElement(mainRectangle.treeView.currentIndex, "sketch", sketchFileName, "na")
         } else {
-            mainRectangle.treeView.currentModel.addElement("sketch", sketchFileName, "na")
+            mainRectangle.treeView.currentNodeListView.model.addElement("sketch", sketchFileName, "na")
         }
 
         editSketchSheet.close();

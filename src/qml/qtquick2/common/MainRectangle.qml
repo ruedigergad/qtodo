@@ -72,12 +72,12 @@ Item {
     }
 
     function moveCurrentItemToTop() {
-        treeView.currentModel.move(treeView.currentIndex, 0)
+        treeView.currentNodeListView.model.move(treeView.currentIndex, 0)
         storage.save()
     }
 
     function moveCurrentItemToBottom() {
-        treeView.currentModel.move(treeView.currentIndex, treeView.currentModel.count)
+        treeView.currentNodeListView.model.move(treeView.currentIndex, treeView.currentNodeListView.model.count)
         storage.save()
     }
 
@@ -118,7 +118,7 @@ Item {
 
             if (currentItem.type === "to-do") {
                 console.log("Item is a to-do entry. Searching for nested sketches.")
-                var nestedSketches = treeView.currentModel.getSketchNamesForIndex(treeView.currentIndex)
+                var nestedSketches = treeView.currentNodeListView.model.getSketchNamesForIndex(treeView.currentIndex)
                 console.log("nestedSketches: " + nestedSketches)
 
                 for (var i = 0; i < nestedSketches.length; i++) {
@@ -132,7 +132,7 @@ Item {
                 fileHelper.rm(fullFileName)
             }
 
-            treeView.currentModel.deleteElement(treeView.currentIndex)
+            treeView.currentNodeListView.model.deleteElement(treeView.currentIndex)
         }
     }
 
@@ -146,7 +146,7 @@ Item {
         onOpened: commonTools.enabled = false
 
         onAccepted: {
-            treeView.currentModel.cleanDone()
+            treeView.currentNodeListView.model.cleanDone()
         }
     }
 

@@ -72,9 +72,9 @@ Item {
 
     onAccepted: {
         if(edit){
-            mainRectangle.treeView.currentModel.updateElement(mainRectangle.treeView.currentIndex, type, text, color)
+            mainRectangle.treeView.currentNodeListView.model.updateElement(mainRectangle.treeView.currentIndex, type, text, color)
         }else{
-            mainRectangle.treeView.currentModel.addElement(type, text, color)
+            mainRectangle.treeView.currentNodeListView.model.addElement(type, text, color)
         }
 
         editToDoSheet.close();
