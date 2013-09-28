@@ -24,23 +24,28 @@ iconDeployment.target = qml
 
 DEPLOYMENTFOLDERS += qmlCommon iconDeployment
 
-message($$QMAKE_INCDIR_QT)
-
-load(sailfishsilicabackground)
-contains(LIBS,-lsailfishsilicabackground): {
+exists("/usr/lib/qt5/qml/Sailfish/Silica/SilicaGridView.qml"): {
     message(SailfishOS build)
 
     DEFINES += QDECLARATIVE_BOOSTER
     DEFINES += MER_EDITION_SAILFISH
     MER_EDITION = sailfish
 
-    qmlSailfish.source = qml/sailfish
-    qmlSailfish.target = qml
+#    qmlSailfish.source = qml/sailfish
+#    qmlSailfish.target = qml
 
-    qmlSailfishCommon.source = qml/sailfish/common
-    qmlSailfishCommon.target = qml
+#    qmlSailfishCommon.source = qml/sailfish/common
+#    qmlSailfishCommon.target = qml
 
-    DEPLOYMENTFOLDERS += qmlSailfish qmlSailfishCommon
+#    DEPLOYMENTFOLDERS += qmlSailfish qmlSailfishCommon
+
+    desktopQmfLibs.source = lib/qt5/build/linux/x86_64/qmf
+    desktopQmfLibs.target = lib
+    qmlDesktopCommon.source = qml/qtquick2/desktop/common
+    qmlDesktopCommon.target = qml
+    qmlDesktopMain.source = qml/qtquick2/desktop/main.qml
+    qmlDesktopMain.target = qml
+    DEPLOYMENTFOLDERS += desktopQmfLibs qmlDesktopCommon qmlDesktopMain
 } else:exists($$QMAKE_INCDIR_QT"/../mdeclarativecache/MDeclarativeCache"): {
     message(Nemomobile build)
 
