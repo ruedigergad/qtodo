@@ -46,6 +46,9 @@ exists("/usr/lib/qt5/qml/Sailfish/Silica/SilicaGridView.qml"): {
     qmlDesktopMain.source = qml/qtquick2/desktop/main.qml
     qmlDesktopMain.target = qml
     DEPLOYMENTFOLDERS += desktopQmfLibs qmlDesktopCommon qmlDesktopMain
+
+    CONFIG += link_pkgconfig
+    PKGCONFIG += qmfclient5
 } else:exists($$QMAKE_INCDIR_QT"/../mdeclarativecache/MDeclarativeCache"): {
     message(Nemomobile build)
 
