@@ -100,7 +100,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 //#endif
 
     view->setResizeMode(QQuickView::SizeRootObjectToView);
-    view->setSource(QUrl("qml/main.qml"));
+    view->setSource(QUrl(app->applicationDirPath() + "/../qml/main.qml"));
     view->resize(400, 500);
     view->show();
 
