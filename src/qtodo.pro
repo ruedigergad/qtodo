@@ -390,7 +390,8 @@ OTHER_FILES += \
     accounts_gui.sh \
     qtmail.sh \
     bar-descriptor.xml \
-    qml/bb10/CommonBB10TextArea.qml
+    qml/bb10/CommonBB10TextArea.qml \
+    rpm/qtodo.yaml
 
 #RESOURCES += \
 #    res.qrc

@@ -1,0 +1,28 @@
+Name: qtodo
+Summary: My SailfishOS Application
+Version: 0.1
+Release: 1
+Group: Qt/Qt
+License: LICENSE
+Sources:
+- '%{name}-%{version}.tar.bz2'
+Description: |
+  Short description of my SailfishOS Application
+Configure: none
+Builder: qtc5
+PkgConfigBR:
+- Qt5Qml
+- qmfclient5
+- Qt5Core
+- Qt5Quick
+PkgBR: []
+Requires: []
+Files:
+- /opt/qtodo/bin
+- /opt/qtodo/icons
+- /opt/qtodo
+- /opt/qtodo/qml
+- /opt/qtodo/lib
+- /usr/share/applications
+- /usr/share/icons/hicolor/64x64/apps
+- /usr/share/icons/hicolor/scalable/apps
