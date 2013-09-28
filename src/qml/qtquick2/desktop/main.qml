@@ -243,66 +243,66 @@ Rectangle {
         onOpened: toolBar.enabled = false
     }
 
-    Menu {
-        id: contextMenu
+//    Menu {
+//        id: contextMenu
 
-        anchors.bottomMargin: toolBar.height
+//        anchors.bottomMargin: toolBar.height
 
-        onClosed: toolBar.enabled = true
-        onOpened: toolBar.enabled = false
+//        onClosed: toolBar.enabled = true
+//        onOpened: toolBar.enabled = false
 
-        CommonButton{
-            id: moveToTopItem
-            anchors.bottom: moveToBottomItem.top
-            anchors.bottomMargin: primaryFontSize / 3
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width - primaryFontSize
-            text: "Move to Top"
-            onClicked: {
-                mainRectangle.moveCurrentItemToTop()
-                contextMenu.close()
-            }
-        }
+//        CommonButton{
+//            id: moveToTopItem
+//            anchors.bottom: moveToBottomItem.top
+//            anchors.bottomMargin: primaryFontSize / 3
+//            anchors.horizontalCenter: parent.horizontalCenter
+//            width: parent.width - primaryFontSize
+//            text: "Move to Top"
+//            onClicked: {
+//                mainRectangle.moveCurrentItemToTop()
+//                contextMenu.close()
+//            }
+//        }
 
-        CommonButton{
-            id: moveToBottomItem
-            anchors.bottom: editItem.top
-            anchors.bottomMargin: primaryFontSize / 3
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width - primaryFontSize
-            text: "Move to Bottom"
-            onClicked: {
-                mainRectangle.moveCurrentItemToBottom()
-                contextMenu.close()
-            }
-        }
+//        CommonButton{
+//            id: moveToBottomItem
+//            anchors.bottom: editItem.top
+//            anchors.bottomMargin: primaryFontSize / 3
+//            anchors.horizontalCenter: parent.horizontalCenter
+//            width: parent.width - primaryFontSize
+//            text: "Move to Bottom"
+//            onClicked: {
+//                mainRectangle.moveCurrentItemToBottom()
+//                contextMenu.close()
+//            }
+//        }
 
-        CommonButton{
-            id: editItem
-            anchors.bottom: deleteItem.top
-            anchors.bottomMargin: primaryFontSize / 3
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width - primaryFontSize
-            text: "Edit"
-            onClicked: {
-                mainRectangle.editCurrentItem()
-                contextMenu.close()
-            }
-        }
+//        CommonButton{
+//            id: editItem
+//            anchors.bottom: deleteItem.top
+//            anchors.bottomMargin: primaryFontSize / 3
+//            anchors.horizontalCenter: parent.horizontalCenter
+//            width: parent.width - primaryFontSize
+//            text: "Edit"
+//            onClicked: {
+//                mainRectangle.editCurrentItem()
+//                contextMenu.close()
+//            }
+//        }
 
-        CommonButton{
-            id: deleteItem
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: primaryFontSize / 3
-            anchors.horizontalCenter: parent.horizontalCenter
-            width: parent.width - primaryFontSize
-            text: "Delete"
-            onClicked: {
-                mainRectangle.deleteCurrentItem()
-                contextMenu.close()
-            }
-        }
-    }
+//        CommonButton{
+//            id: deleteItem
+//            anchors.bottom: parent.bottom
+//            anchors.bottomMargin: primaryFontSize / 3
+//            anchors.horizontalCenter: parent.horizontalCenter
+//            width: parent.width - primaryFontSize
+//            text: "Delete"
+//            onClicked: {
+//                mainRectangle.deleteCurrentItem()
+//                contextMenu.close()
+//            }
+//        }
+//    }
 
     EditToDoSheet {
         id: editToDoItem
