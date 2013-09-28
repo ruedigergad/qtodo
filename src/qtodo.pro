@@ -156,6 +156,8 @@ contains(LIBS,-lsailfishsilicabackground): {
 
     DEFINES += LINUX_DESKTOP
 
+    QT += widgets
+
     RESOURCES += \
         icon.qrc
 
@@ -234,7 +236,7 @@ contains(LIBS,-lsailfishsilicabackground): {
     }
 }
 
-QT+= declarative xml
+QT += xml
 symbian:TARGET.UID3 = 0xE1CCA219
 
 # Smart Installer packages UID
