@@ -100,7 +100,18 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 //#endif
 
     view->setResizeMode(QQuickView::SizeRootObjectToView);
-    view->setSource(QUrl(app->applicationDirPath() + "/../qml/main.qml"));
+    QUrl mainQmlLocation;
+    if (QFile::exists(app->applicationDirPath() + "/../qml/main.qml")) {
+        mainQmlLocation = QUrl(app->applicationDirPath() + "/../qml/main.qml");
+    } else if (QFile::exists(app->applicationDirPath() + "/qml/main.qml")) {
+        mainQmlLocation = QUrl(app->applicationDirPath() + "/qml/main.qml");
+    } else if (QFile::exists("qml/main.qml")) {
+        mainQmlLocation = QUrl("qml/main.qml");
+    } else {
+        qErrnoWarning("Couldn't find qml/main.qml, aborting.");
+        return -1;
+    }
+    view->setSource(mainQmlLocation);
     view->resize(400, 500);
     view->show();
 
