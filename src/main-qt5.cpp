@@ -20,6 +20,10 @@
 #include <QCoreApplication>
 #include <QGuiApplication>
 
+#if defined(MER_EDITION_SAILFISH) && defined(SAILFISH_BOOSTER)
+#include <MDeclarativeCache>
+#endif
+
 #if defined(LINUX_DESKTOP)
 #include <QApplication>
 #endif
@@ -99,7 +103,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 //    view->setSource(QUrl("qml/main.qml"));
 //#endif
 
-    view->setResizeMode(QQuickView::SizeRootObjectToView);
     QUrl mainQmlLocation;
     if (QFile::exists(app->applicationDirPath() + "/../qml/main.qml")) {
         mainQmlLocation = QUrl(app->applicationDirPath() + "/../qml/main.qml");
@@ -112,8 +115,14 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
         return -1;
     }
     view->setSource(mainQmlLocation);
+
+    view->setResizeMode(QQuickView::SizeRootObjectToView);
+#if defined(MER_EDITION_SAILFISH)
+    view->showFullScreen();
+#else
     view->resize(400, 500);
     view->show();
+#endif
 
     int ret = app->exec();
 
