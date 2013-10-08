@@ -30,15 +30,14 @@ ApplicationWindow {
     initialPage: Page {
         id: mainPage
 
-        Rectangle {
+        Item {
             id: main
 
             anchors.fill: parent
 
-            color: "transparent"
         //    radius: primaryFontSize * 0.5
 
-            Rectangle {
+            Item {
                 anchors {top: parent.top; left: parent.left; right: parent.right; bottom: toolBar.top}
 
                 Header {
