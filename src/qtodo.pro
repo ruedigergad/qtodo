@@ -39,13 +39,11 @@ exists("/usr/lib/qt5/qml/Sailfish/Silica/SilicaGridView.qml"): {
 
 #    DEPLOYMENTFOLDERS += qmlSailfish qmlSailfishCommon
 
-    desktopQmfLibs.source = lib/qt5/build/linux/x86_64/qmf
-    desktopQmfLibs.target = lib
-    qmlDesktopCommon.source = qml/qtquick2/desktop/common
-    qmlDesktopCommon.target = qml
-    qmlDesktopMain.source = qml/qtquick2/desktop/main.qml
-    qmlDesktopMain.target = qml
-    DEPLOYMENTFOLDERS += desktopQmfLibs qmlDesktopCommon qmlDesktopMain
+    qmlSailfishCommon.source = qml/qtquick2/sailfish/common
+    qmlSailfishCommon.target = qml
+    qmlSailfishMain.source = qml/qtquick2/sailfish/main.qml
+    qmlSailfishMain.target = qml
+    DEPLOYMENTFOLDERS += qmlSailfishCommon qmlSailfishMain
 
     CONFIG += link_pkgconfig
     PKGCONFIG += qmfclient5
@@ -372,6 +370,16 @@ OTHER_FILES += \
     qml/qtquick2/desktop/common/CommonToolIcon.qml \
     qml/qtquick2/desktop/common/ConfirmationDialog.qml \
     qml/qtquick2/desktop/common/Dialog.qml \
+    qml/qtquick2/sailfish/main.qml \
+    qml/qtquick2/sailfish/MainMenu.qml \
+    qml/qtquick2/sailfish/common/CommonButton.qml \
+    qml/qtquick2/sailfish/common/CommonDialog.qml \
+    qml/qtquick2/sailfish/common/CommonTextArea.qml \
+    qml/qtquick2/sailfish/common/CommonTextField.qml \
+    qml/qtquick2/sailfish/common/CommonToolBar.qml \
+    qml/qtquick2/sailfish/common/CommonToolIcon.qml \
+    qml/qtquick2/sailfish/common/ConfirmationDialog.qml \
+    qml/qtquick2/sailfish/common/Dialog.qml \
     qml/sailfish/main.qml \
     qml/sailfish/common/AboutDialog.qml \
     qml/sailfish/common/CommonButton.qml \
