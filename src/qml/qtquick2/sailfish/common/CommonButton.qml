@@ -30,7 +30,7 @@ Rectangle {
     signal clicked
 
     color: "transparent"
-    enabled: !iconSource || text !== ""
+    enabled: iconImage.status === Image.Ready || text !== ""
     height: textItem.height + (primaryFontSize / 4)
     smooth: true
     width: text === "" ? height : textItem.width + primaryBorderSize
