@@ -33,6 +33,9 @@ Rectangle {
     property int primaryFontSize: 20
     property int primaryBorderSize: 20
 
+    property string primaryBackgroundColor: "white"
+    property string secondaryBackgroundColor: "lightgray"
+
     Rectangle {
         anchors {top: parent.top; left: parent.left; right: parent.right; bottom: toolBar.top}
         color: "lightgoldenrodyellow"

@@ -115,7 +115,7 @@ Item {
         width: parent.width
         z: 4
 
-        color: "lightgray"
+        color: secondaryBackgroundColor
 
         CommonButton{
             id: rejectButton
@@ -150,7 +150,7 @@ Item {
         id: inputRectangle
 
         anchors {top: buttonBar.bottom; left: parent.left; right: parent.right; bottom: parent.bottom}
-        color: "white"
+        color: primaryBackgroundColor
 
         Flickable {
             id: inputFlickable
