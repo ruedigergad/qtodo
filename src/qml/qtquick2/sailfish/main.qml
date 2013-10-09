@@ -30,9 +30,9 @@ ApplicationWindow {
     property string primaryFontColor: Theme.primaryColor
     property string secondaryFontColor: Theme.secondaryColor
 
-    property string primaryBackgroundColor: "black"
+    property string primaryBackgroundColor: "transparent"
     property double primaryBackgroundOpacity: 0.9
-    property string secondaryBackgroundColor: "black"
+    property string secondaryBackgroundColor: "transparent"
     property double secondaryBackgroundOpacity: 0.9
 
     initialPage: Page {
@@ -41,7 +41,7 @@ ApplicationWindow {
         Item {
             id: main
 
-            anchors.fill: parent
+            anchors { fill: parent; bottomMargin: editToDoItem.margin }
 
         //    radius: primaryFontSize * 0.5
 
@@ -155,20 +155,50 @@ ApplicationWindow {
                 onOpened: toolBar.enabled = false
             }
 
-            EditToDoSheet {
-                id: editToDoItem
-
-                onClosed: {
-                    mainRectangle.focus = true
-                }
-            }
-
         //    EditSketchSheet {
         //        id: editSketchItem
         //    }
 
             ImapAccountSettingsSheet {
                 id: imapAccountSettings
+            }
+        }
+
+        SailfishDialog {
+            id: editToDoItem
+
+            property alias edit: editToDoItemSheet.edit
+            property alias index: editToDoItemSheet.index
+            property alias text: editToDoItemSheet.text
+            property alias color: editToDoItemSheet.color
+            property alias type: editToDoItemSheet.type
+
+            height: parent.height
+            width: parent.width
+
+            function show() {
+                open(false, true)
+            }
+
+            onAccepted: editToDoItemSheet.save()
+
+            EditToDoSheet {
+                id: editToDoItemSheet
+
+                acceptText: ""
+                anchors.fill: parent
+                cancelText: ""
+                visible: true
+                z: 0
+
+                states: [
+                    State {
+                        name: "open"
+                    },
+                    State {
+                        name: "closed"
+                    }
+                ]
             }
         }
     }

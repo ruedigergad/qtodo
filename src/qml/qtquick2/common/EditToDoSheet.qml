@@ -28,12 +28,12 @@ Item {
     visible: false
     z: 1
 
+    property alias acceptText: acceptButton.text
+    property alias cancelText: rejectButton.text
+    property string color: "blue"
     property bool edit: false
     property int index: -1
-
     property alias text: textInput.text
-
-    property string color: "blue"
     property string type: "to-do"
 
     signal closed()
@@ -60,7 +60,15 @@ Item {
         state = "closed"
     }
 
-    function open(){
+    function save() {
+        if(edit){
+            mainRectangle.treeView.currentNodeListView.model.updateElement(mainRectangle.treeView.currentIndex, type, text, color)
+        }else{
+            mainRectangle.treeView.currentNodeListView.model.addElement(type, text, color)
+        }
+    }
+
+    function show(){
         console.log("open")
 
         visible = true
@@ -71,13 +79,8 @@ Item {
     }
 
     onAccepted: {
-        if(edit){
-            mainRectangle.treeView.currentNodeListView.model.updateElement(mainRectangle.treeView.currentIndex, type, text, color)
-        }else{
-            mainRectangle.treeView.currentNodeListView.model.addElement(type, text, color)
-        }
-
-        editToDoSheet.close();
+        save()
+        editToDoSheet.close()
     }
 
     onStateChanged: {
@@ -120,10 +123,13 @@ Item {
 
         CommonButton{
             id: rejectButton
+
             anchors.left: parent.left
             anchors.leftMargin: 16
             anchors.verticalCenter: parent.verticalCenter
+            enabled: text !== ""
             text: "Cancel"
+
             onClicked: editToDoSheet.close();
         }
 
@@ -138,11 +144,14 @@ Item {
 
         CommonButton {
             id: acceptButton
+
             anchors.right: parent.right
             anchors.rightMargin: 16
             anchors.verticalCenter: parent.verticalCenter
-            width: rejectButton.width
+            enabled: text !== ""
             text: "OK"
+            width: rejectButton.width
+
             onClicked: {
                 editToDoSheet.focus = true
                 if(textInput.text === "") {

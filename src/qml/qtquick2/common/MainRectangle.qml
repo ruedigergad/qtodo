@@ -42,7 +42,7 @@ Item {
         editToDoItem.type = "to-do"
         editToDoItem.text = ""
         editToDoItem.edit = false
-        editToDoItem.open()
+        editToDoItem.show()
     }
 
     function addSketch() {
@@ -67,7 +67,7 @@ Item {
             editToDoItem.type = currentItem.type
             editToDoItem.text = currentItem.text
             editToDoItem.edit = true
-            editToDoItem.open()
+            editToDoItem.show()
         }
     }
 

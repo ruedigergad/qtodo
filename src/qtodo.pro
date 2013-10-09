@@ -399,7 +399,8 @@ OTHER_FILES += \
     qtmail.sh \
     bar-descriptor.xml \
     qml/bb10/CommonBB10TextArea.qml \
-    rpm/qtodo.yaml
+    rpm/qtodo.yaml \
+    qml/qtquick2/sailfish/common/SailfishDialog.qml
 
 #RESOURCES += \
 #    res.qrc
