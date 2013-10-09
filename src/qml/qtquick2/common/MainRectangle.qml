@@ -100,6 +100,8 @@ Item {
     AboutDialog {
         id: aboutDialog
 
+        parent: main
+
         onClosed: toolBar.enabled = true
         onOpened: toolBar.enabled = false
     }
@@ -107,6 +109,7 @@ Item {
     ConfirmationDialog {
         id: confirmDeleteDialog
 
+        parent: main
         titleText: "Delete?"
 
         onClosed: toolBar.enabled = true
@@ -139,8 +142,9 @@ Item {
     ConfirmationDialog {
         id: confirmCleanDoneDialog
 
-        titleText: "Clean Done?"
         message: "Delete all items marked as done?"
+        parent: main
+        titleText: "Clean Done?"
 
         onClosed: toolBar.enabled = true
         onOpened: toolBar.enabled = false
@@ -153,8 +157,9 @@ Item {
     ConfirmationDialog {
         id: confirmSyncToImapDialog
 
-        titleText: "Sync to-do list?"
         message: "This may take some time."
+        parent: main
+        titleText: "Sync to-do list?"
 
         onOpened: toolBar.enabled = false
         onRejected: toolBar.enabled = true
@@ -167,8 +172,9 @@ Item {
     ConfirmationDialog {
         id: confirmSyncSketchesToImapDialog
 
-        titleText: "Sync sketches?"
         message: "This may take some time."
+        parent: main
+        titleText: "Sync sketches?"
 
         onOpened: toolBar.enabled = false
         onRejected: toolBar.enabled = true
