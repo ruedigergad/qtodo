@@ -18,6 +18,7 @@
  */
 
 import QtQuick 2.0
+import Sailfish.Silica 1.0
 
 Rectangle {
     id: commonButton
@@ -28,7 +29,7 @@ Rectangle {
 
     signal clicked
 
-    color: text === "" ? "transparent" : mouseArea.pressed ? "#00d000" : "#00f000"
+    color: "transparent"
     height: textItem.height + (primaryFontSize / 4)
     smooth: true
     width: text === "" ? height : textItem.width + primaryBorderSize
@@ -36,7 +37,7 @@ Rectangle {
     Text {
         id: textItem
 
-        color: "black"
+        color: Theme.primaryColor
         font.pointSize: primaryFontSize * 0.75
         x: parent.width/2 - width/2; y: parent.height/2 - height/2
     }

@@ -59,7 +59,7 @@ Item {
 
         anchors.fill: parent
         color: "black"
-        opacity: menu.enabled ? 0.3 : 0
+        opacity: menu.enabled ? 0.75 : 0
     }
 
     MouseArea {
