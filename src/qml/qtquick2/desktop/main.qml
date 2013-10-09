@@ -235,7 +235,7 @@ Rectangle {
     MainMenu {
         id: mainMenu
 
-        anchors.bottomMargin: toolBar.height
+        menuBottomOffset: toolBar.height
 
         onClosed: toolBar.enabled = true
         onOpened: toolBar.enabled = false
