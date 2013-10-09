@@ -62,7 +62,6 @@ CommonToolBar {
     CommonToolIcon {
         id: iconMenu
         iconSource: "../icons/menu.png"
-        anchors.right: parent === undefined ? undefined : parent.right
         onClicked: ! mainMenu.isOpen ? mainMenu.open() : mainMenu.close()
         opacity: enabled ? 1 : 0.5
     }
