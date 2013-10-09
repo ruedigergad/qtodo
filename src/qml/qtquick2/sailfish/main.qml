@@ -27,8 +27,10 @@ ApplicationWindow {
     property int primaryFontSize: Theme.fontSizeMedium
     property int primaryBorderSize: 25
 
-    property string primaryBackgroundColor: "transparent"
-    property string secondaryBackgroundColor: "transparent"
+    property string primaryBackgroundColor: "gray"
+    property double primaryBackgroundOpacity: 0.7
+    property string secondaryBackgroundColor: "gray"
+    property double secondaryBackgroundOpacity: 0.7
 
     initialPage: Page {
         id: mainPage

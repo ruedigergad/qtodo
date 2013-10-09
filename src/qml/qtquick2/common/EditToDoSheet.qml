@@ -116,6 +116,7 @@ Item {
         z: 4
 
         color: secondaryBackgroundColor
+        opacity: secondaryBackgroundOpacity
 
         CommonButton{
             id: rejectButton
@@ -151,6 +152,7 @@ Item {
 
         anchors {top: buttonBar.bottom; left: parent.left; right: parent.right; bottom: parent.bottom}
         color: primaryBackgroundColor
+        opacity: primaryBackgroundOpacity
 
         Flickable {
             id: inputFlickable
