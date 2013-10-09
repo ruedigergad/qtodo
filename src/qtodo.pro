@@ -366,7 +366,6 @@ OTHER_FILES += \
     qml/qtquick2/desktop/common/CommonDialog.qml \
     qml/qtquick2/desktop/common/CommonTextArea.qml \
     qml/qtquick2/desktop/common/CommonTextField.qml \
-    qml/qtquick2/desktop/common/CommonToolBar.qml \
     qml/qtquick2/desktop/common/CommonToolIcon.qml \
     qml/qtquick2/desktop/common/ConfirmationDialog.qml \
     qml/qtquick2/desktop/common/Dialog.qml \
@@ -376,7 +375,6 @@ OTHER_FILES += \
     qml/qtquick2/sailfish/common/CommonDialog.qml \
     qml/qtquick2/sailfish/common/CommonTextArea.qml \
     qml/qtquick2/sailfish/common/CommonTextField.qml \
-    qml/qtquick2/sailfish/common/CommonToolBar.qml \
     qml/qtquick2/sailfish/common/CommonToolIcon.qml \
     qml/qtquick2/sailfish/common/ConfirmationDialog.qml \
     qml/qtquick2/sailfish/common/Dialog.qml \
