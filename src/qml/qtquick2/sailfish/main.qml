@@ -177,7 +177,7 @@ ApplicationWindow {
             width: parent.width
 
             function show() {
-                open(false, true)
+                open()
             }
 
             onAccepted: editToDoItemSheet.save()
