@@ -67,8 +67,8 @@ Item {
     Rectangle {
         id: menuBorder
 
-        color: "lightgray"
-        opacity: 0.9
+        color: secondaryBackgroundColor
+        opacity: secondaryBackgroundOpacity
         height: menuArea.height
         width: parent.width
         y: parent.height
