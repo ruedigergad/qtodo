@@ -347,9 +347,9 @@ OTHER_FILES += \
     qml/qtquick2/common/ImapAccountSettingsSheet.qml \
     qml/qtquick2/common/MainRectangle.qml \
     qml/qtquick2/common/MessageDialog.qml \
-    qml/qtquick2/common/NodeListDelegateContainer.qml \
-    qml/qtquick2/common/NodeListDelegate.qml \
     qml/qtquick2/common/nodelisthelper.js \
+    qml/qtquick2/common/NodeListDelegate.qml \
+    qml/qtquick2/common/NodeListDelegateContainer.qml \
     qml/qtquick2/common/NodeListView.qml \
     qml/qtquick2/common/ProgressDialog.qml \
     qml/qtquick2/common/QToDoToolBar.qml \
@@ -369,6 +369,7 @@ OTHER_FILES += \
     qml/qtquick2/desktop/common/CommonToolIcon.qml \
     qml/qtquick2/desktop/common/ConfirmationDialog.qml \
     qml/qtquick2/desktop/common/Dialog.qml \
+    qml/qtquick2/desktop/common/NodeListDelegateContainer.qml \
     qml/qtquick2/sailfish/main.qml \
     qml/qtquick2/sailfish/MainMenu.qml \
     qml/qtquick2/sailfish/common/CommonButton.qml \
@@ -378,6 +379,7 @@ OTHER_FILES += \
     qml/qtquick2/sailfish/common/CommonToolIcon.qml \
     qml/qtquick2/sailfish/common/ConfirmationDialog.qml \
     qml/qtquick2/sailfish/common/Dialog.qml \
+    qml/qtquick2/sailfish/common/NodeListDelegateContainer.qml \
     qml/sailfish/main.qml \
     qml/sailfish/common/AboutDialog.qml \
     qml/sailfish/common/CommonButton.qml \

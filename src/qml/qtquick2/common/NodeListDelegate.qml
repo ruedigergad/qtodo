@@ -32,14 +32,17 @@ import QtQuick 2.0
 
 Item {
     id: nodeListDelegate
-    width: tagName === "sketch" ? sketchContentDelegate.width : nodeListView.width
-    height: tagName === "sketch" ? sketchContentDelegate.height : textContentDelegate.height
+
+    property alias nextButtonBackgroundColor: nextButtonRectangle.color
+    property alias nextButtonIcon: nextIcon.source
+    property alias textColor: textDelegate.color
 
     signal clicked
     signal doubleClicked
     signal pressAndHold
 
-    property alias textColor: textDelegate.color
+    width: tagName === "sketch" ? sketchContentDelegate.width : nodeListView.width
+    height: tagName === "sketch" ? sketchContentDelegate.height : textContentDelegate.height
 
     /*
      * Begin of custom code to display the data. Here the Q To-Do to-do or
@@ -184,7 +187,6 @@ Item {
                     }
                 }
                 onDoubleClicked: {
-                    console.log("blub")
                     mouse.accepted = true
                     selectItem()
                     nodeListDelegate.doubleClicked()
@@ -206,19 +208,21 @@ Item {
     Item {
         id: nextButton
         anchors.right: parent.right
-        width: (! isExpandable) ? 0 : button.width * 1.2
+        width: (! isExpandable) ? 0 : nextButtonRectangle.width * 1.2
         height: parent.height
 
         Rectangle{
-            id: button
+            id: nextButtonRectangle
+
             anchors.centerIn: parent
+            color: "gray"
             height: textDelegate.font.pixelSize
+            opacity: nextMouseArea.pressed ? 1 : 0.6
             width: height
 
             visible: isExpandable
 
 //            radius: width / 3
-            color: nextMouseArea.pressed ? "gray" : "lightgray"
 
             Image {
                 id: nextIcon
