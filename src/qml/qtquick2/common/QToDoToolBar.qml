@@ -22,6 +22,8 @@ import QtQuick 2.0
 Row {
     id: qtodoToolBar
 
+    property string iconNameSuffix: ""
+
     anchors {
         left: parent.left; leftMargin: primaryBorderSize * 0.25
         right: parent.right; rightMargin: primaryBorderSize * 0.25
@@ -32,40 +34,40 @@ Row {
 
     CommonToolIcon {
         id: iconAdd
-        iconSource: "../icons/add.png"
+        iconSource: "../icons/add" + iconNameSuffix + ".png"
         opacity: enabled ? 1 : 0.5
         onClicked: mainRectangle.addItem()
     }
     CommonToolIcon {
         id: iconSketch
-        iconSource: "../icons/sketch.png"
+        iconSource: "../icons/sketch" + iconNameSuffix + ".png"
         opacity: enabled ? 1 : 0.5
         onClicked: mainRectangle.addSketch()
     }
     CommonToolIcon {
         id: iconMarkDone
-        iconSource: "../icons/to-do_done.png"
+        iconSource: "../icons/to-do_done" + iconNameSuffix + ".png"
         enabled: mainRectangle.treeView.currentItem != null && mainRectangle.treeView.currentItem.type === "to-do"
         opacity: enabled ? 1 : 0.5
         onClicked: mainRectangle.treeView.toggleDone()
     }
     CommonToolIcon {
         id: iconDelete
-        iconSource: "../icons/delete.png"
+        iconSource: "../icons/delete" + iconNameSuffix + ".png"
         enabled: mainRectangle.treeView.currentIndex >= 0
         opacity: enabled ? 1 : 0.5
         onClicked: mainRectangle.deleteCurrentItem()
     }
     CommonToolIcon {
         id: iconBack
-        iconSource: "../icons/back.png"
+        iconSource: "../icons/back" + iconNameSuffix + ".png"
         enabled: mainRectangle.treeView.currentLevel > 0
         opacity: enabled ? 1 : 0.5
         onClicked: mainRectangle.treeView.currentLevel--
     }
     CommonToolIcon {
         id: iconMenu
-        iconSource: "../icons/menu.png"
+        iconSource: "../icons/menu" + iconNameSuffix + ".png"
         onClicked: ! mainMenu.isOpen ? mainMenu.open() : mainMenu.close()
         opacity: enabled ? 1 : 0.5
     }

@@ -14,9 +14,9 @@
    id="svg2383"
    sodipodi:version="0.32"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="to-do_done.svg"
+   sodipodi:docname="to-do_done-white.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
-   inkscape:export-filename="/home/rc/repositories/private/qt/qtodo/src/icons/to-do_done.png"
+   inkscape:export-filename="/home/rc/repositories/private/qt/qtodo/src/icons/to-do_done-gray50.png"
    inkscape:export-xdpi="112.5"
    inkscape:export-ydpi="112.5"
    version="1.1">
@@ -48,8 +48,8 @@
      inkscape:guide-bbox="true"
      inkscape:window-width="995"
      inkscape:window-height="714"
-     inkscape:window-x="165"
-     inkscape:window-y="-27"
+     inkscape:window-x="159"
+     inkscape:window-y="31"
      inkscape:window-maximized="0" />
   <metadata
      id="metadata2388">
@@ -68,7 +68,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer">
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:4.19999980999999956;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;fill-rule:evenodd;stroke:#808080;stroke-width:4.19999980999999956;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M 5.9833171,16.639843 L 13.306182,24.230618 L 26.344455,6.7271831"
        id="path2399" />
   </g>

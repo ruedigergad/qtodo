@@ -128,16 +128,18 @@ ApplicationWindow {
 
             Rectangle {
                 id: toolBar
+
                 anchors {left: parent.left; right: parent.right; bottom: parent.bottom}
-                height: qtodoToolBar.height * 1.2
-
-                property int minWidth: qtodoToolBar.minWidth + resizeItem.width + 40
-
                 color: "transparent"
+                height: qtodoToolBar.height * 1.2
+                opacity: 1
         //        radius: parent.radius
 
                 QToDoToolBar {
                     id: qtodoToolBar
+
+                    iconNameSuffix: "-white"
+                    opacity: 0.8
                 }
             }
 

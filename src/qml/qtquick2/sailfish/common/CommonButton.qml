@@ -28,7 +28,7 @@ Rectangle {
 
     signal clicked
 
-    color: mouseArea.pressed ? "#00d000" : "#00f000"
+    color: text === "" ? "transparent" : mouseArea.pressed ? "#00d000" : "#00f000"
     height: textItem.height + (primaryFontSize / 4)
     smooth: true
     width: text === "" ? height : textItem.width + primaryBorderSize
@@ -37,7 +37,7 @@ Rectangle {
         id: textItem
 
         color: "black"
-        font.pointSize: primaryFontSize * 0.7
+        font.pointSize: primaryFontSize * 0.75
         x: parent.width/2 - width/2; y: parent.height/2 - height/2
     }
 
@@ -47,6 +47,7 @@ Rectangle {
         anchors.centerIn: parent
         fillMode: Image.PreserveAspectFit
         height: parent.height * 0.8
+        opacity: mouseArea.pressed ? 0.75 : 1
         smooth: true
         width: height
     }
