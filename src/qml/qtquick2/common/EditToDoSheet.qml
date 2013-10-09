@@ -172,6 +172,7 @@ Item {
             id: inputFlickable
 
             anchors.fill: parent
+            clip: true
             contentHeight: sheetContent.height
 
             Column {
