@@ -127,7 +127,14 @@ Item {
             onClicked: editToDoSheet.close();
         }
 
-        Text {id: entryLabel; text: "Entry"; font.pointSize: primaryFontSize; font.capitalization: Font.SmallCaps; font.bold: true; anchors.centerIn: parent}
+        Text {
+            id: entryLabel
+
+            anchors.centerIn: parent
+            color: primaryFontColor
+            font { pointSize: primaryFontSize; capitalization: Font.SmallCaps; bold: true }
+            text: "Entry"
+        }
 
         CommonButton {
             id: acceptButton

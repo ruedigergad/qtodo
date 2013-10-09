@@ -120,7 +120,7 @@ Item {
         width: parent.width
         z: 4
 
-        color: "lightgray"
+        color: secondaryBackgroundColor
 
         CommonButton{
             id: rejectButton
@@ -131,8 +131,14 @@ Item {
             onClicked: imapAccountSettingsSheet.close();
         }
 
-        Text {id: entryLabel; text: "Accounts"; font.pointSize: primaryFontSize * 0.75
-              font.capitalization: Font.SmallCaps; font.bold: true; anchors.centerIn: parent}
+        Text {
+            id: entryLabel
+
+            anchors.centerIn: parent
+            color: primaryFontColor
+            text: "Accounts"
+            font { pointSize: primaryFontSize * 0.75; capitalization: Font.SmallCaps; bold: true }
+        }
 
         CommonButton{
             id: acceptButton
@@ -154,7 +160,7 @@ Item {
         id: inputRectangle
 
         anchors {top: buttonBar.bottom; left: parent.left; right: parent.right; bottom: parent.bottom}
-        color: "white"
+        color: primaryBackgroundColor
 
         Item {
             id: contentItem
@@ -164,7 +170,9 @@ Item {
 
             Text {
                 id: accountsText
+
                 anchors {top: parent.top; topMargin: primaryFontSize * 0.5; left: parent.left; right: parent.right}
+                color: primaryFontColor
                 text: "Available Accounts"
                 font.pointSize: primaryFontSize * 0.75
                 horizontalAlignment: Text.AlignHCenter
@@ -200,7 +208,7 @@ Item {
                         wrapMode: Text.WrapAnywhere
 
                         font.pointSize: primaryFontSize
-                        color: "black"
+                        color: primaryFontColor
 
                         MouseArea {
                             anchors.fill: parent
@@ -325,6 +333,7 @@ Item {
                         Text {
                             id: accountNameText
 
+                            color: primaryFontColor
                             font.pointSize: primaryFontSize * 0.75
                             height: parent.height
                             horizontalAlignment: Text.AlignHCenter
@@ -349,6 +358,7 @@ Item {
                         Text {
                             id: userNameText
 
+                            color: primaryFontColor
                             font.pointSize: primaryFontSize * 0.75
                             height: parent.height
                             horizontalAlignment: Text.AlignHCenter
@@ -373,6 +383,7 @@ Item {
                         Text {
                             id: passwordText
 
+                            color: primaryFontColor
                             font.pointSize: primaryFontSize * 0.75
                             height: parent.height
                             horizontalAlignment: Text.AlignHCenter
@@ -398,6 +409,7 @@ Item {
                         Text {
                             id: serverText
 
+                            color: primaryFontColor
                             font.pointSize: primaryFontSize * 0.75
                             height: parent.height
                             horizontalAlignment: Text.AlignHCenter
@@ -422,6 +434,7 @@ Item {
                         Text {
                             id: serverPortText
 
+                            color: primaryFontColor
                             font.pointSize: primaryFontSize * 0.75
                             height: portRow.height
                             horizontalAlignment: Text.AlignHLeft

@@ -33,6 +33,9 @@ Rectangle {
     property int primaryFontSize: 20
     property int primaryBorderSize: 20
 
+    property string primaryFontColor: "black"
+    property string secondaryFontColor: "black"
+
     property string primaryBackgroundColor: "white"
     property double primaryBackgroundOpacity: 1
     property string secondaryBackgroundColor: "lightgray"

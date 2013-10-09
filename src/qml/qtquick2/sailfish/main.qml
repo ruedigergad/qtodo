@@ -27,6 +27,9 @@ ApplicationWindow {
     property int primaryFontSize: Theme.fontSizeMedium
     property int primaryBorderSize: 25
 
+    property string primaryFontColor: Theme.primaryColor
+    property string secondaryFontColor: Theme.secondaryColor
+
     property string primaryBackgroundColor: "black"
     property double primaryBackgroundOpacity: 0.9
     property string secondaryBackgroundColor: "black"
