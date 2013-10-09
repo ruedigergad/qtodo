@@ -168,6 +168,8 @@ Item {
 
                 Row {
                     id: typeButtonRow
+
+                    height: toDoButton.height
                     width: parent.width
 
                     CommonButton {
@@ -194,6 +196,8 @@ Item {
 
                 Row {
                     id: colorButtonRow
+
+                    height: blueButton.height
                     width: parent.width
 
                     CommonButton {
