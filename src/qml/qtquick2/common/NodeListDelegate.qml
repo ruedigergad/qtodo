@@ -172,7 +172,7 @@ Item {
                 text: elementText
                 font.pointSize: primaryFontSize * 0.75
                 horizontalAlignment: Text.AlignHLeft
-                wrapMode: Text.WrapAnywhere
+                wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                 color: "black"
             }
 
