@@ -188,9 +188,11 @@ Item {
 
                     CommonButton {
                         id: toDoButton
-                        width: parent.width / 2
+
+                        selected: editToDoSheet.type === "to-do"
                         text: "To-Do"
-                        enabled: editToDoSheet.type !== "to-do"
+                        width: parent.width / 2
+
                         onClicked: {
                             type = "to-do"
                             colorButtonRow.enabled = (type === "to-do")
@@ -198,9 +200,11 @@ Item {
                     }
                     CommonButton {
                         id: noteButton
-                        width: parent.width / 2
+
+                        selected: editToDoSheet.type === "note"
                         text: "Note"
-                        enabled: editToDoSheet.type !== "note"
+                        width: parent.width / 2
+
                         onClicked: {
                             type = "note"
                             colorButtonRow.enabled = (type === "to-do")
@@ -216,30 +220,39 @@ Item {
 
                     CommonButton {
                         id: blueButton
-                        width: parent.width / 4
+
+
                         iconSource: "../icons/to-do_blue.png"
-                        enabled: editToDoSheet.color !== "blue"
+                        selected: editToDoSheet.color === "blue"
+                        width: parent.width / 4
+
                         onClicked: editToDoSheet.color = "blue"
                     }
                     CommonButton {
                         id: greenButton
-                        width: parent.width / 4
+
                         iconSource: "../icons/to-do_green.png"
-                        enabled: editToDoSheet.color !== "green"
+                        selected: editToDoSheet.color === "green"
+                        width: parent.width / 4
+
                         onClicked: editToDoSheet.color = "green"
                     }
                     CommonButton {
                         id: yellowButton
-                        width: parent.width / 4
+
                         iconSource: "../icons/to-do_yellow.png"
-                        enabled: editToDoSheet.color !== "yellow"
+                        selected: editToDoSheet.color === "yellow"
+                        width: parent.width / 4
+
                         onClicked: editToDoSheet.color = "yellow"
                     }
                     CommonButton {
                         id: redButton
-                        width: parent.width / 4
+
                         iconSource: "../icons/to-do_red.png"
-                        enabled: editToDoSheet.color !== "red"
+                        selected: editToDoSheet.color === "red"
+                        width: parent.width / 4
+
                         onClicked: editToDoSheet.color = "red"
                     }
                 }

@@ -24,11 +24,13 @@ Rectangle {
 
     property alias font: textItem.font
     property alias iconSource: iconImage.source;
+    property bool selected: false
     property alias text: textItem.text
 
     signal clicked
 
     color: mouseArea.pressed ? "#00d000" : "#00f000"
+    enabled: selected
     height: textItem.height + (primaryFontSize / 2)
     smooth: true
     width: text === "" ? height : textItem.width + primaryBorderSize

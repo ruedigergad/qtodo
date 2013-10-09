@@ -25,10 +25,12 @@ Rectangle {
 
     property alias font: textItem.font
     property alias iconSource: iconImage.source;
+    property bool selected: false
     property alias text: textItem.text
 
     signal clicked
 
+    border.color: selected ? Theme.highlightColor : "transparent"
     color: "transparent"
     enabled: iconImage.status === Image.Ready || text !== ""
     height: textItem.height + (primaryFontSize / 4)
@@ -38,7 +40,7 @@ Rectangle {
     Text {
         id: textItem
 
-        color: Theme.primaryColor
+        color: selected ? Theme.highlightColor : Theme.primaryColor
         font.pointSize: primaryFontSize * 0.75
         x: parent.width/2 - width/2; y: parent.height/2 - height/2
     }
