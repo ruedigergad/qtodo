@@ -127,7 +127,6 @@ Item {
             anchors.left: parent.left
             anchors.leftMargin: 16
             anchors.verticalCenter: parent.verticalCenter
-            enabled: text !== ""
             text: "Cancel"
 
             onClicked: editToDoSheet.close();
@@ -148,7 +147,6 @@ Item {
             anchors.right: parent.right
             anchors.rightMargin: 16
             anchors.verticalCenter: parent.verticalCenter
-            enabled: text !== ""
             text: "OK"
             width: rejectButton.width
 
