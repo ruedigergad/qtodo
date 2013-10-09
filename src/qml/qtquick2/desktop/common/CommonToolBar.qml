@@ -18,10 +18,7 @@
  */
 
 import QtQuick 2.0
-import QtQuick.Layouts 1.0
 
-RowLayout {
+Row {
     id: commonToolBar
-
-    anchors {bottom: parent.bottom; left: parent.left; right: parent.right}
 }

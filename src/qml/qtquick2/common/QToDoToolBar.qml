@@ -19,12 +19,16 @@
 
 import QtQuick 2.0
 
-CommonToolBar {
-    id: toolBar
+Row {
+    id: qtodoToolBar
 
-    property int minWidth: iconAdd.width + iconSketch.width + iconMarkDone.width + iconDelete.width + iconBack.width + iconMenu.width
-
-    spacing: (width - minWidth) / 5
+    anchors {
+        left: parent.left; leftMargin: primaryBorderSize * 0.25
+        right: parent.right; rightMargin: primaryBorderSize * 0.25
+        verticalCenter: parent.verticalCenter
+    }
+    height: iconAdd.height
+    spacing: (qtodoToolBar.width - (6 * iconAdd.width)) / 5
 
     CommonToolIcon {
         id: iconAdd
