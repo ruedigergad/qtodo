@@ -53,7 +53,7 @@ Item {
         state = "closed"
     }
 
-    function open(){
+    function show(){
         console.log("open")
 
         visible = true

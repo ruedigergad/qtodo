@@ -48,7 +48,7 @@ Item {
     function addSketch() {
         editSketchItem.edit = false
         editSketchItem.sketchFileName = (rootElementModel.getMaxId() + 1) + ".png"
-        editSketchItem.open()
+        editSketchItem.show()
     }
 
     function deleteCurrentItem() {
@@ -61,7 +61,7 @@ Item {
         if (currentItem.type === "sketch") {
             editSketchItem.sketchFileName = currentItem.text
             editSketchItem.edit = true
-            editSketchItem.open()
+            editSketchItem.show()
         } else {
             editToDoItem.color = currentItem.itemColor
             editToDoItem.type = currentItem.type
