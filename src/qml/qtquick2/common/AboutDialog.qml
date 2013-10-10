@@ -22,7 +22,7 @@ import QtQuick 2.0
 CommonDialog {
     id: aboutDialog
 
-    content: Item {
+    Item {
         anchors.fill: parent
 
         Text {

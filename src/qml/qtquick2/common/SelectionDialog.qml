@@ -37,7 +37,7 @@ CommonDialog {
         accepted()
     }
 
-    content: Item {
+    Item {
         anchors.fill: parent
 
         Text {
