@@ -25,7 +25,7 @@ Dialog {
     property alias message: message.text
     property alias titleText: titleText.text
 
-    signal accepted();
+    signal accepted()
 
     function accept() {
         close()
