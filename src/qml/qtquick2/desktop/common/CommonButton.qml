@@ -30,7 +30,7 @@ Rectangle {
     signal clicked
 
     color: mouseArea.pressed ? "#00d000" : "#00f000"
-    enabled: selected
+    enabled: iconImage.status === Image.Ready || text !== ""
     height: textItem.height + (primaryFontSize / 2)
     smooth: true
     width: text === "" ? height : textItem.width + primaryBorderSize
