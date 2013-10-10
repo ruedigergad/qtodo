@@ -18,76 +18,13 @@
  */
 
 import QtQuick 2.0
+import Sailfish.Silica 1.0
 
-Rectangle {
-    id: dialog
-
-    property Item content: Item{}
+Dialog {
 
     signal closed()
-    signal closing()
-    signal opened()
-    signal opening()
-    signal rejected()
 
-    function close(){
-        closing()
-        opacity = 0
-    }
-
-    function open(){
-        opening()
-        enabled = true
-        opacity = 0.9
-    }
-
-    function reject() {
-        close();
-        rejected();
-    }
-
-    anchors.fill: parent
-    enabled: false
-    focus: enabled
-    color: "black"
-    opacity: 0
-    visible: enabled
-    z: 32
-
-    onContentChanged: content.parent = dialog
-
-    onClosed: {
-        enabled = false
-        parent.focus = true
-    }
-
-    Keys.onPressed: {
-        event.accepted = true
-        reject()
-    }
-
-    Behavior on opacity {
-        SequentialAnimation {
-            PropertyAnimation { duration: 200 }
-            ScriptAction {script: {
-                    if (opacity === 0) {
-                        closed()
-                    } else {
-                        opened()
-                    }
-                }
-            }
-        }
-    }
-
-    MouseArea{
-        id: area
-
-        anchors.fill: parent
-        enabled: dialog.enabled
-
-        onClicked: {
-            reject()
-        }
+    onDone: {
+        closed()
     }
 }

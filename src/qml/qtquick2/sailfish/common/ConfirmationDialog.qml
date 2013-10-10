@@ -25,13 +25,6 @@ Dialog {
     property alias message: message.text
     property alias titleText: titleText.text
 
-    signal accepted();
-
-    function accept() {
-        close()
-        accepted()
-    }
-
     Text {
         id: titleText
 
@@ -54,34 +47,6 @@ Dialog {
         horizontalAlignment: Text.AlignHCenter
         width: parent.width
         wrapMode: Text.Wrap
-    }
-
-    CommonButton {
-        id: acceptButton
-
-        anchors.top: message.bottom
-        anchors.topMargin: 20
-        anchors.horizontalCenter: parent.horizontalCenter
-        text: "OK"
-        width: parent.width * 0.5
-
-        onClicked: {
-            accept()
-        }
-    }
-
-    CommonButton {
-        id: rejectButton
-
-        anchors.top: acceptButton.bottom
-        anchors.topMargin: 10
-        anchors.horizontalCenter: parent.horizontalCenter
-        text: "Cancel"
-        width: parent.width * 0.5
-
-        onClicked: {
-            reject()
-        }
     }
 
     Keys.onEscapePressed: {
