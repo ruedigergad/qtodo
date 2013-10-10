@@ -42,13 +42,13 @@ Item {
         editToDoItem.type = "to-do"
         editToDoItem.text = ""
         editToDoItem.edit = false
-        editToDoItem.show()
+        editToDoItem.open()
     }
 
     function addSketch() {
         editSketchItem.edit = false
         editSketchItem.sketchFileName = (rootElementModel.getMaxId() + 1) + ".png"
-        editSketchItem.show()
+        editSketchItem.open()
     }
 
     function deleteCurrentItem() {
@@ -61,13 +61,13 @@ Item {
         if (currentItem.type === "sketch") {
             editSketchItem.sketchFileName = currentItem.text
             editSketchItem.edit = true
-            editSketchItem.show()
+            editSketchItem.open()
         } else {
             editToDoItem.color = currentItem.itemColor
             editToDoItem.type = currentItem.type
             editToDoItem.text = currentItem.text
             editToDoItem.edit = true
-            editToDoItem.show()
+            editToDoItem.open()
         }
     }
 

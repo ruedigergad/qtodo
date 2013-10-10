@@ -172,10 +172,6 @@ ApplicationWindow {
             height: parent.height
             width: parent.width
 
-            function show() {
-                open()
-            }
-
             onAccepted: editToDoItemSheet.save()
 
             EditToDoSheet {
@@ -201,12 +197,6 @@ ApplicationWindow {
 
             height: parent.height
             width: parent.width
-
-            function show() {
-                open()
-            }
-
-            onAccepted: imapAccountSettings.save()
 
             ImapAccountSettingsSheet {
                 id: imapAccountSettingsSheet

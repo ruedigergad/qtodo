@@ -68,7 +68,7 @@ Item {
         }
     }
 
-    function show(){
+    function open(){
         console.log("open")
 
         visible = true
