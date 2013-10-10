@@ -158,10 +158,6 @@ ApplicationWindow {
         //    EditSketchSheet {
         //        id: editSketchItem
         //    }
-
-            ImapAccountSettingsSheet {
-                id: imapAccountSettings
-            }
         }
 
         SailfishDialog {
@@ -190,15 +186,36 @@ ApplicationWindow {
                 cancelText: ""
                 visible: true
                 z: 0
+            }
+        }
 
-                states: [
-                    State {
-                        name: "open"
-                    },
-                    State {
-                        name: "closed"
-                    }
-                ]
+        SailfishDialog {
+            id: imapAccountSettings
+
+            property alias authenticationTypeSetting: imapAccountSettingsSheet.authenticationTypeSetting
+            property alias currentAccountId: imapAccountSettingsSheet.currentAccountId
+            property alias currentAccountName: imapAccountSettingsSheet.currentAccountName
+            property alias editAccount: imapAccountSettingsSheet.editAccount
+            property alias encryptionSetting: imapAccountSettingsSheet.encryptionSetting
+            property alias newAccount: imapAccountSettingsSheet.newAccount
+
+            height: parent.height
+            width: parent.width
+
+            function show() {
+                open()
+            }
+
+            onAccepted: imapAccountSettings.save()
+
+            ImapAccountSettingsSheet {
+                id: imapAccountSettingsSheet
+
+                acceptText: ""
+                anchors.fill: parent
+                cancelText: ""
+                visible: true
+                z: 0
             }
         }
     }

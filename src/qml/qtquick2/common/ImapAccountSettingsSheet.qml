@@ -24,6 +24,8 @@ Item {
     id: imapAccountSettingsSheet
 
     property int authenticationTypeSetting
+    property alias acceptText: acceptButton.text
+    property alias cancelText: rejectButton.text
     property int currentAccountId: -1
     property string currentAccountName
     property bool editAccount: false

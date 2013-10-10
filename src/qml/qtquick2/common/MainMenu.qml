@@ -158,7 +158,7 @@ Item {
                 width: parent.width - primaryFontSize
                 text: "Sync Account Settings"
                 onClicked: {
-                    imapAccountSettings.open()
+                    imapAccountSettings.show()
                     mainMenu.close()
                 }
             }
