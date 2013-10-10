@@ -160,7 +160,7 @@ ApplicationWindow {
         //    }
         }
 
-        SailfishDialog {
+        Dialog {
             id: editToDoItem
 
             property alias edit: editToDoItemSheet.edit
@@ -185,7 +185,7 @@ ApplicationWindow {
             }
         }
 
-        SailfishDialog {
+        Dialog {
             id: imapAccountSettings
 
             property alias authenticationTypeSetting: imapAccountSettingsSheet.authenticationTypeSetting
