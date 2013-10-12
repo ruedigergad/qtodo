@@ -20,6 +20,9 @@
 #ifndef SYNCTOIMAP_H
 #define SYNCTOIMAP_H
 
+#include <QProcess>
+#include <QString>
+
 class SyncToImap
 {
 public:
@@ -29,6 +32,14 @@ public:
 
 private:
     SyncToImap();
+
+    static int getOwnLibPath();
+    static int getOwnPath();
+
+    static QString ownLibPathStr;
+    static QString ownPathStr;
+    static QProcess *messageServerProcess;
+    static bool messageServerStarted;
 };
 
 #endif // SYNCTOIMAP_H

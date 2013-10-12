@@ -24,33 +24,49 @@
 
 #include <unistd.h>
 
+QString SyncToImap::ownLibPathStr = "";
+QString SyncToImap::ownPathStr = "";
+QProcess *SyncToImap::messageServerProcess = NULL;
+bool SyncToImap::messageServerStarted = false;
+
 SyncToImap::SyncToImap()
 {
 }
 
-int SyncToImap::setEnvironmentVariables() {
-    qDebug("Setting SyncToImap environment variables...");
+int SyncToImap::getOwnLibPath() {
+#ifdef LINUX_DESKTOP
+    if (QFile::exists(ownPathStr + "/../lib/qmf/lib/qmf/plugins5/messageservices/libimap.so")) {
+        ownLibPathStr = ownPathStr + "/../lib";
+    } else if (QFile::exists(ownPathStr + "/lib/qmf/lib/qmf/plugins5/messageservices/libimap.so")) {
+        ownLibPathStr = ownPathStr + "/lib";
+    } else if (QFile::exists("lib/qmf/lib/qmf/plugins5/messageservices/libimap.so")) {
+        ownLibPathStr = "lib";
+    } else {
+        qErrnoWarning("Couldn't find own lib directory. Synchronization feature might not work.");
+        return -1;
+    }
+#endif
+    return 0;
+}
+
+int SyncToImap::getOwnPath() {
 #ifdef LINUX_DESKTOP
     char ownPath[256];
     int ownPathLength = readlink("/proc/self/cwd", ownPath, 256);
-    QString ownPathStr = QString::fromUtf8(ownPath, ownPathLength);
+    ownPathStr = QString::fromUtf8(ownPath, ownPathLength);
     qDebug() << "Found own path:" << ownPathStr;
+#endif
+    return 0;
+}
 
-    QString libDirPath;
-    QString qmfPluginsEnvVar;
-    if (QFile::exists(ownPathStr + "/../lib/qmf/lib/qmf/plugins5/messageservices/libimap.so")) {
-        qmfPluginsEnvVar = ownPathStr + "/../lib/qmf/lib/qmf/plugins5";
-        libDirPath = ownPathStr + "/../lib/qmf/lib";
-    } else if (QFile::exists(ownPathStr + "/lib/qmf/lib/qmf/plugins5/messageservices/libimap.so")) {
-        qmfPluginsEnvVar = ownPathStr + "/lib/qmf/lib/qmf/plugins5";
-        libDirPath = ownPathStr + "/lib/qmf/lib";
-    } else if (QFile::exists("lib/qmf/lib/qmf/plugins5/messageservices/libimap.so")) {
-        qmfPluginsEnvVar = "lib/qmf/lib/qmf/plugins5";
-        libDirPath = "lib/qmf/lib";
-    } else {
-        qErrnoWarning("Couldn't find QMF plugins directory. Synchronization feature might not work.");
-        return -1;
-    }
+int SyncToImap::setEnvironmentVariables() {
+    qDebug("Setting SyncToImap environment variables...");
+
+    getOwnPath();
+    getOwnLibPath();
+#ifdef LINUX_DESKTOP
+    QString libDirPath = ownLibPathStr + "/qmf/lib";
+    QString qmfPluginsEnvVar = ownLibPathStr + "/qmf/lib/qmf/plugins5";
 
     if (! qmfPluginsEnvVar.isEmpty()) {
         qDebug() << "Setting QMF_PLUGINS to:" << qmfPluginsEnvVar.toLatin1();
@@ -71,6 +87,29 @@ int SyncToImap::setEnvironmentVariables() {
 }
 
 int SyncToImap::startMessageServer() {
+#ifdef WINDOWS_DESKTOP
+    QString messageServerRunningQuery = "tasklist | find /N \"messageserver.exe\"";
+    QString messageServerExecutable = "messageserver.exe";
+#endif
+#ifdef LINUX_DESKTOP
+    QString messageServerRunningQuery = "ps -el | grep messageserver5";
+    QString messageServerExecutable = ownLibPathStr + "/qmf/bin/messageserver5";
+#endif
+#if defined(LINUX_DESKTOP) || defined(WINDOWS_DESKTOP)
+    QProcess queryMessageServerRunning;
+    queryMessageServerRunning.start(messageServerRunningQuery);
+    queryMessageServerRunning.waitForFinished(-1);
+
+    if (queryMessageServerRunning.exitCode() != 0) {
+        qDebug("Starting messageserver...");
+        messageServerProcess = new QProcess();
+        messageServerProcess->start(messageServerExecutable);
+        messageServerStarted = true;
+    } else {
+        qDebug("Messageserver is already running.");
+    }
+#endif
+
     return 0;
 }
 
