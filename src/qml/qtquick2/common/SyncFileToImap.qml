@@ -53,6 +53,12 @@ SyncToImapBase {
         var attachmentLocations = _imapStorage.getAttachmentLocations(_imapMessageId)
         console.log("Found the following attachment locations: " + attachmentLocations)
 
+        if (attachmentLocations.length <= 0) {
+            console.log("Error: no attachment found!");
+            _reportError("No attachment found", "A message was found but with no attachment. Aborting sync.")
+            return
+        }
+
         _imapSyncFile = _imapStorage.writeAttachmentTo(_imapMessageId, attachmentLocations[0], _baseDir)
         console.log("Wrote attachment to: " + _imapSyncFile)
 
@@ -104,6 +110,7 @@ SyncToImapBase {
             _imapStorage.retrieveMessage(_imapMessageId)
         } else {
             console.log("Error: Multiple messages found.")
+            _reportError("Multiple messages found!", "Error: Multiple messages found.")
         }
     }
 }

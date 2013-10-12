@@ -84,20 +84,11 @@ Item {
                 console.log("IMAP account id is: " + accIds[0])
                 _imapAccountId = accIds[0]
             } else if (accIds.length === 0) {
-                _syncToImapProgressDialog.close()
-                _messageDialog.title = "No IMAP Account"
-                _messageDialog.message = "Please set up an IMAP e-mail account for syncing."
-                _messageDialog.open()
+                _reportError("No IMAP Account", "Please set up an IMAP e-mail account for syncing.")
             } else if (accIds.length > 1) {
-                _syncToImapProgressDialog.close()
-                _messageDialog.title = "Multiple IMAP Accounts"
-                _messageDialog.message = "Functionality for choosing from different IMAP accounts still needs to be implemented."
-                _messageDialog.open()
+                _reportError("Multiple IMAP Accounts", "Functionality for choosing from different IMAP accounts still needs to be implemented.")
             } else {
-                _syncToImapProgressDialog.close()
-                _messageDialog.title = "Unexpected Error"
-                _messageDialog.message = "Querying for IMAP accounts returned an unexpected value."
-                _messageDialog.open()
+                _reportError("Unexpected Error", "Querying for IMAP accounts returned an unexpected value.")
             }
         }
 
@@ -165,6 +156,13 @@ Item {
         }
 
         return attachmentLocations[0]
+    }
+
+    function _reportError(title, message) {
+        _syncToImapProgressDialog.close()
+        _messageDialog.title = title
+        _messageDialog.message = message
+        _messageDialog.open()
     }
 
     function _reportSuccess() {
