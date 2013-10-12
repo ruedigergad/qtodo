@@ -358,7 +358,6 @@ OTHER_FILES += \
     qml/qtquick2/common/SyncFileToImap.qml \
     qml/qtquick2/common/SyncMessageDeleter.qml \
     qml/qtquick2/common/SyncToImapBase.qml \
-    qml/qtquick2/common/SyncToImap.qml \
     qml/qtquick2/common/TreeView.qml \
     qml/qtquick2/desktop/main.qml \
     qml/qtquick2/desktop/MainMenu.qml \
