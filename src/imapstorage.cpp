@@ -170,7 +170,7 @@ QMailFolderIdList ImapStorage::queryFolders(qulonglong accId, QString path) {
     QMailFolderKey parentAccountKey(QMailFolderKey::parentAccountId(QMailAccountId(accId)));
     QMailFolderKey pathKey(QMailFolderKey::path(path));
 
-    qDebug() << "Querying folders for account id " << accId << ", " << QMailAccountId(accId) << " and parent account folder key: " << parentAccountKey;
+//    qDebug() << "Querying folders for account id " << accId << ", " << QMailAccountId(accId) << " and parent account folder key: " << parentAccountKey;
 
     QMailFolderIdList folderIds = QMailStore::instance()->queryFolders(parentAccountKey & pathKey);
     return folderIds;
