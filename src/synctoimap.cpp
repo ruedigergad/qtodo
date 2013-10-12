@@ -65,7 +65,10 @@ int SyncToImap::setEnvironmentVariables() {
     qDebug("Setting SyncToImap environment variables...");
 
     getOwnPath();
-    getOwnLibPath();
+    if (getOwnLibPath() != 0) {
+        qErrnoWarning("getOwnLibPath returned non zero value. Not setting up QMF environment variables.");
+        return -1;
+    }
 
 #ifdef LINUX_DESKTOP
     QString libDirPath = ownLibPathStr + "/qmf/lib";
