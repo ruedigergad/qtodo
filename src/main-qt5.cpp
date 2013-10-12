@@ -57,6 +57,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
 #ifdef QTODO_SYNC_SUPPORT
     SyncToImap::setEnvironmentVariables();
+    SyncToImap::startMessageServer();
 #endif
 
     /*
@@ -129,6 +130,10 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 #endif
 
     int ret = app->exec();
+
+#ifdef QTODO_SYNC_SUPPORT
+    SyncToImap::stopMessageServer();
+#endif
 
     return ret;
 }

@@ -46,6 +46,7 @@ int SyncToImap::getOwnLibPath() {
         return -1;
     }
 #endif
+
     return 0;
 }
 
@@ -56,6 +57,7 @@ int SyncToImap::getOwnPath() {
     ownPathStr = QString::fromUtf8(ownPath, ownPathLength);
     qDebug() << "Found own path:" << ownPathStr;
 #endif
+
     return 0;
 }
 
@@ -64,6 +66,7 @@ int SyncToImap::setEnvironmentVariables() {
 
     getOwnPath();
     getOwnLibPath();
+
 #ifdef LINUX_DESKTOP
     QString libDirPath = ownLibPathStr + "/qmf/lib";
     QString qmfPluginsEnvVar = ownLibPathStr + "/qmf/lib/qmf/plugins5";
@@ -87,15 +90,19 @@ int SyncToImap::setEnvironmentVariables() {
 }
 
 int SyncToImap::startMessageServer() {
-#ifdef WINDOWS_DESKTOP
-    QString messageServerRunningQuery = "tasklist | find /N \"messageserver.exe\"";
-    QString messageServerExecutable = "messageserver.exe";
+    QString messageServerRunningQuery;
+    QString messageServerExecutable;
+
+#if defined(WINDOWS_DESKTOP)
+    messageServerRunningQuery = "tasklist | find /N \"messageserver.exe\"";
+    messageServerExecutable = "messageserver.exe";
+#elif defined(LINUX_DESKTOP)
+    messageServerRunningQuery = "ps -el | grep messageserver5";
+    messageServerExecutable = ownLibPathStr + "/qmf/bin/messageserver5";
+#else
+    return -1;
 #endif
-#ifdef LINUX_DESKTOP
-    QString messageServerRunningQuery = "ps -el | grep messageserver5";
-    QString messageServerExecutable = ownLibPathStr + "/qmf/bin/messageserver5";
-#endif
-#if defined(LINUX_DESKTOP) || defined(WINDOWS_DESKTOP)
+
     QProcess queryMessageServerRunning;
     queryMessageServerRunning.start(messageServerRunningQuery);
     queryMessageServerRunning.waitForFinished(-1);
@@ -108,11 +115,15 @@ int SyncToImap::startMessageServer() {
     } else {
         qDebug("Messageserver is already running.");
     }
-#endif
 
     return 0;
 }
 
 int SyncToImap::stopMessageServer() {
+    if (messageServerStarted) {
+        qDebug("Stopping messageserver...");
+        messageServerProcess->kill();
+    }
+
     return 0;
 }
