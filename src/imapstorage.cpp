@@ -89,6 +89,7 @@ void ImapStorage::addMessage(qulonglong accId, QString folder, QString subject, 
     msg.setDate(QMailTimeStamp(QDateTime::currentDateTime()));
     msg.setStatus(QMailMessage::LocalOnly, true);
     if (attachment != "") {
+        qDebug() << "Adding attachment: " << attachment;
         msg.setAttachments(QStringList() << attachment);
     }
 
