@@ -167,10 +167,12 @@ void ImapStorage::moveMessageToTrash(qulonglong msgId) {
 }
 
 QMailFolderIdList ImapStorage::queryFolders(qulonglong accId, QString path) {
-    QMailFolderKey accountKey(QMailFolderKey::parentAccountId(QMailAccountId(accId)));
+    QMailFolderKey parentAccountKey(QMailFolderKey::parentAccountId(QMailAccountId(accId)));
     QMailFolderKey pathKey(QMailFolderKey::path(path));
 
-    QMailFolderIdList folderIds = QMailStore::instance()->queryFolders(accountKey & pathKey);
+    qDebug() << "Querying folders for account id " << accId << ", " << QMailAccountId(accId) << " and parent account folder key: " << parentAccountKey;
+
+    QMailFolderIdList folderIds = QMailStore::instance()->queryFolders(parentAccountKey & pathKey);
     return folderIds;
 }
 
