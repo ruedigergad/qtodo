@@ -32,18 +32,21 @@ int SyncToImap::setEnvironmentVariables() {
     qDebug("Setting SyncToImap environment variables...");
 #ifdef LINUX_DESKTOP
     char ownPath[256];
-    readlink("/proc/self/cwd", ownPath, 256);
-    QString ownPathStr = QString::fromLocal8Bit(ownPath);
+    int ownPathLength = readlink("/proc/self/cwd", ownPath, 256);
+    QString ownPathStr = QString::fromUtf8(ownPath, ownPathLength);
     qDebug() << "Found own path:" << ownPathStr;
 
-    /* Set QMF_PLUGINS environment variable.*/
+    QString libDirPath;
     QString qmfPluginsEnvVar;
     if (QFile::exists(ownPathStr + "/../lib/qmf/lib/qmf/plugins5/messageservices/libimap.so")) {
         qmfPluginsEnvVar = ownPathStr + "/../lib/qmf/lib/qmf/plugins5";
+        libDirPath = ownPathStr + "/../lib/qmf/lib";
     } else if (QFile::exists(ownPathStr + "/lib/qmf/lib/qmf/plugins5/messageservices/libimap.so")) {
         qmfPluginsEnvVar = ownPathStr + "/lib/qmf/lib/qmf/plugins5";
+        libDirPath = ownPathStr + "/lib/qmf/lib";
     } else if (QFile::exists("lib/qmf/lib/qmf/plugins5/messageservices/libimap.so")) {
         qmfPluginsEnvVar = "lib/qmf/lib/qmf/plugins5";
+        libDirPath = "lib/qmf/lib";
     } else {
         qErrnoWarning("Couldn't find QMF plugins directory. Synchronization feature might not work.");
         return -1;
@@ -52,10 +55,18 @@ int SyncToImap::setEnvironmentVariables() {
     if (! qmfPluginsEnvVar.isEmpty()) {
         qDebug() << "Setting QMF_PLUGINS to:" << qmfPluginsEnvVar.toLatin1();
         qDebug() << "setenv returned:" << setenv("QMF_PLUGINS", qmfPluginsEnvVar.toLocal8Bit().constData(), 1);
-        return 0;
     }
 
-    return -2;
+    if (! libDirPath.isEmpty()) {
+        char *ldLibraryPath = getenv("LD_LIBRARY_PATH");
+        qDebug() << "Got LD_LIBRARY_PATH:" << ldLibraryPath;
+
+        libDirPath = QString(ldLibraryPath) + ":" + libDirPath;
+        qDebug() << "Setting new LD_LIBRARY_PATH:" << libDirPath;
+        qDebug() << "setenv returned:" << setenv("LD_LIBRARY_PATH", libDirPath.toLocal8Bit().constData(), 1);
+    }
+
+    return 0;
 #endif
 }
 
