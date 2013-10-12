@@ -284,11 +284,13 @@ DEFINES += QTODO_SYNC_SUPPORT
 HEADERS += \
     imapstorage.h \
     imapaccountlistmodel.h \
-    imapaccounthelper.h
+    imapaccounthelper.h \
+    synctoimap.h
 SOURCES += \
     imapstorage.cpp \
     imapaccountlistmodel.cpp \
-    imapaccounthelper.cpp
+    imapaccounthelper.cpp \
+    synctoimap.cpp
 
 OTHER_FILES += \
     qtodo.desktop \

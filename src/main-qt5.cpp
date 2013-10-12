@@ -40,6 +40,7 @@
 #include "imapaccounthelper.h"
 #include "imapaccountlistmodel.h"
 #include "imapstorage.h"
+#include "synctoimap.h"
 #endif
 
 #include "merger.h"
@@ -48,7 +49,6 @@
 
 #if defined(LINUX_DESKTOP)
 #include "qtodotrayicon.h"
-#include <unistd.h>
 #endif
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
@@ -56,31 +56,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qDebug("Initializing Q To-Do...");
 
 #ifdef QTODO_SYNC_SUPPORT
-#ifdef LINUX_DESKTOP
-    qDebug("Setting environment variables...");
-
-    char ownPath[256];
-    readlink("/proc/self/cwd", ownPath, 256);
-    QString ownPathStr = QString::fromLocal8Bit(ownPath);
-    qDebug() << "Found own path:" << ownPathStr;
-
-    /* Set QMF_PLUGINS */
-    QString qmfPluginsEnvVar;
-    if (QFile::exists(ownPathStr + "/../lib/qmf/lib/qmf/plugins5/messageservices/libimap.so")) {
-        qmfPluginsEnvVar = ownPathStr + "/../lib/qmf/lib/qmf/plugins5";
-    } else if (QFile::exists(ownPathStr + "/lib/qmf/lib/qmf/plugins5/messageservices/libimap.so")) {
-        qmfPluginsEnvVar = ownPathStr + "/lib/qmf/lib/qmf/plugins5";
-    } else if (QFile::exists("lib/qmf/lib/qmf/plugins5/messageservices/libimap.so")) {
-        qmfPluginsEnvVar = "lib/qmf/lib/qmf/plugins5";
-    } else {
-        qErrnoWarning("Couldn't find QMF plugins directory. Synchronization feature might not work.");
-    }
-
-    if (! qmfPluginsEnvVar.isEmpty()) {
-        qDebug() << "Setting QMF_PLUGINS to:" << qmfPluginsEnvVar.toLatin1();
-        qDebug() << "setenv returned:" << setenv("QMF_PLUGINS", qmfPluginsEnvVar.toLocal8Bit().constData(), 1);
-    }
-#endif
+    SyncToImap::setEnvironmentVariables();
 #endif
 
     /*

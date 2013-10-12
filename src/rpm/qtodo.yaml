@@ -11,18 +11,18 @@ Description: |
 Configure: none
 Builder: qtc5
 PkgConfigBR:
-- Qt5Quick
-- Qt5Core
-- qmfclient5
 - Qt5Qml
+- qmfclient5
+- Qt5Core
+- Qt5Quick
 PkgBR: []
 Requires: []
 Files:
-- /usr/share/icons/hicolor/scalable/apps
-- /usr/share/icons/hicolor/64x64/apps
-- /usr/share/applications
-- /opt/qtodo/lib
-- /opt/qtodo/qml
-- /opt/qtodo
-- /opt/qtodo/icons
 - /opt/qtodo/bin
+- /opt/qtodo/icons
+- /opt/qtodo
+- /opt/qtodo/qml
+- /opt/qtodo/lib
+- /usr/share/applications
+- /usr/share/icons/hicolor/64x64/apps
+- /usr/share/icons/hicolor/scalable/apps
