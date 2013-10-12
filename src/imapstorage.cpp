@@ -21,8 +21,9 @@
 #include <QDebug>
 #include <QDir>
 #include <qmfclient/qmaildisconnected.h>
-#include <qmfclient/qmailstore.h>
 #include <qmfclient/qmailfolderkey.h>
+#include <qmfclient/qmailid.h>
+#include <qmfclient/qmailstore.h>
 
 ImapStorage::ImapStorage(QObject *parent) :
     QObject(parent)
@@ -126,7 +127,9 @@ void ImapStorage::foldersAdded(QMailFolderIdList ids) {
 }
 
 bool ImapStorage::folderExists(qulonglong accId, QString path) {
-    return (queryFolders(accId, path).count() == 1);
+    QMailFolderIdList folderList = queryFolders(accId, path);
+    qDebug() << "Checking if folder " << path << " exists in: " << folderList;
+    return (folderList.count() == 1);
 }
 
 QString ImapStorage::getAttachmentIdentifier(qulonglong msgId, QString attachmentLocation) {
