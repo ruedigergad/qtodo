@@ -34,7 +34,7 @@
 //#include "qtodoview.h"
 
 #ifdef QTODO_SYNC_SUPPORT
-#include "synctoimap.h"
+#include <synctoimap/synctoimap.h>
 #endif
 
 #include "merger.h"

@@ -272,17 +272,17 @@ contains(DEFINES, QT5_BUILD) {
 message(Building sync support...)
 DEFINES += QTODO_SYNC_SUPPORT
 HEADERS += \
-    filehelper.h \
-    imapstorage.h \
-    imapaccountlistmodel.h \
-    imapaccounthelper.h \
-    synctoimap.h
+    synctoimap/filehelper.h \
+    synctoimap/imapstorage.h \
+    synctoimap/imapaccountlistmodel.h \
+    synctoimap/imapaccounthelper.h \
+    synctoimap/synctoimap.h
 SOURCES += \
-    filehelper.cpp \
-    imapstorage.cpp \
-    imapaccountlistmodel.cpp \
-    imapaccounthelper.cpp \
-    synctoimap.cpp
+    synctoimap/filehelper.cpp \
+    synctoimap/imapstorage.cpp \
+    synctoimap/imapaccountlistmodel.cpp \
+    synctoimap/imapaccounthelper.cpp \
+    synctoimap/synctoimap.cpp
 
 OTHER_FILES += \
     qtodo.desktop \
