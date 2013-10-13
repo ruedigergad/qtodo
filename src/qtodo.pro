@@ -31,14 +31,6 @@ exists("/usr/lib/qt5/qml/Sailfish/Silica/SilicaGridView.qml"): {
     DEFINES += MER_EDITION_SAILFISH
     MER_EDITION = sailfish
 
-#    qmlSailfish.source = qml/sailfish
-#    qmlSailfish.target = qml
-
-#    qmlSailfishCommon.source = qml/sailfish/common
-#    qmlSailfishCommon.target = qml
-
-#    DEPLOYMENTFOLDERS += qmlSailfish qmlSailfishCommon
-
     qmlSailfishCommon.source = qml/qtquick2/sailfish/common
     qmlSailfishCommon.target = qml
     qmlSailfishMain.source = qml/qtquick2/sailfish/main.qml
