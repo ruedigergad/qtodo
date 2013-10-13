@@ -87,9 +87,9 @@ int SyncToImap::setEnvironmentVariables() {
         qDebug() << "Setting new LD_LIBRARY_PATH:" << libDirPath;
         qDebug() << "setenv returned:" << setenv("LD_LIBRARY_PATH", libDirPath.toLocal8Bit().constData(), 1);
     }
+#endif
 
     return 0;
-#endif
 }
 
 int SyncToImap::startMessageServer() {
