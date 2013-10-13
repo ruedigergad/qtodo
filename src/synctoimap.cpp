@@ -19,15 +19,25 @@
 
 #include "synctoimap.h"
 
+#include "filehelper.h"
+#include "imapaccounthelper.h"
+#include "imapaccountlistmodel.h"
+#include "imapstorage.h"
+
 #include <QDebug>
 #include <QFile>
+#include <QtQml>
 
 #include <unistd.h>
+
+
 
 QString SyncToImap::ownLibPathStr = "";
 QString SyncToImap::ownPathStr = "";
 QProcess *SyncToImap::messageServerProcess = NULL;
 bool SyncToImap::messageServerStarted = false;
+
+
 
 SyncToImap::SyncToImap()
 {
@@ -61,6 +71,19 @@ int SyncToImap::getOwnPath() {
     return 0;
 }
 
+int SyncToImap::init() {
+    qmlRegisterType<FileHelper>("SyncToImap", 1, 0, "FileHelper");
+    qmlRegisterType<ImapAccountHelper>("SyncToImap", 1, 0, "ImapAccountHelper");
+    qmlRegisterType<ImapAccountListModel>("SyncToImap", 1, 0, "ImapAccountListModel");
+    qmlRegisterType<ImapStorage>("SyncToImap", 1, 0, "ImapStorage");
+
+    if (SyncToImap::setEnvironmentVariables() == 0) {
+        return SyncToImap::startMessageServer();
+    }
+
+    return -1;
+}
+
 int SyncToImap::setEnvironmentVariables() {
     qDebug("Setting SyncToImap environment variables...");
 
@@ -90,6 +113,10 @@ int SyncToImap::setEnvironmentVariables() {
 #endif
 
     return 0;
+}
+
+int SyncToImap::shutdown() {
+    return stopMessageServer();
 }
 
 int SyncToImap::startMessageServer() {

@@ -26,15 +26,18 @@
 class SyncToImap
 {
 public:
-    static int setEnvironmentVariables();
-    static int startMessageServer();
-    static int stopMessageServer();
+    static int init();
+    static int shutdown();
 
 private:
     SyncToImap();
 
     static int getOwnLibPath();
     static int getOwnPath();
+
+    static int setEnvironmentVariables();
+    static int startMessageServer();
+    static int stopMessageServer();
 
     static QString ownLibPathStr;
     static QString ownPathStr;

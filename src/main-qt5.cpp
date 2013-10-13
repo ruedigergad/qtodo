@@ -29,17 +29,11 @@
 #endif
 
 #include <QQuickView>
-#include <QProcess>
 #include <QtQml>
 
 //#include "qtodoview.h"
 
-#include "filehelper.h"
-
 #ifdef QTODO_SYNC_SUPPORT
-#include "imapaccounthelper.h"
-#include "imapaccountlistmodel.h"
-#include "imapstorage.h"
 #include "synctoimap.h"
 #endif
 
@@ -56,8 +50,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qDebug("Initializing Q To-Do...");
 
 #ifdef QTODO_SYNC_SUPPORT
-    SyncToImap::setEnvironmentVariables();
-    SyncToImap::startMessageServer();
+    SyncToImap::init();
 #endif
 
     /*
@@ -76,21 +69,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
 //    view = new QToDoView();
 
-    /*
-     * Setup application.
-     */
-    qmlRegisterType<FileHelper>("SyncToImap", 1, 0, "FileHelper");
-
-#ifdef QTODO_SYNC_SUPPORT
-    qmlRegisterType<ImapAccountHelper>("SyncToImap", 1, 0, "ImapAccountHelper");
-    qmlRegisterType<ImapAccountListModel>("SyncToImap", 1, 0, "ImapAccountListModel");
-    qmlRegisterType<ImapStorage>("SyncToImap", 1, 0, "ImapStorage");
-#endif
-
     qmlRegisterType<Merger>("qtodo", 1, 0, "Merger");
     qmlRegisterType<NodeListModel>("qtodo", 1, 0, "NodeListModel");
     qmlRegisterType<ToDoStorage>("qtodo", 1, 0, "ToDoStorage");
-
 
     app->setApplicationName("Q To-Do");
     app->setApplicationDisplayName("Q To-Do");
@@ -132,7 +113,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     int ret = app->exec();
 
 #ifdef QTODO_SYNC_SUPPORT
-    SyncToImap::stopMessageServer();
+    SyncToImap::shutdown();
 #endif
 
     return ret;
