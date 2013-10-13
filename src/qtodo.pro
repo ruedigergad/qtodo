@@ -256,13 +256,11 @@ symbian:TARGET.CAPABILITY += NetworkServices
 HEADERS += \
     todostorage.h \
     nodelistmodel.h \
-    filehelper.h \
     merger.h
 
 SOURCES += \
     todostorage.cpp \
     nodelistmodel.cpp \
-    filehelper.cpp \
     merger.cpp
 
 contains(DEFINES, QT5_BUILD) {
@@ -274,11 +272,13 @@ contains(DEFINES, QT5_BUILD) {
 message(Building sync support...)
 DEFINES += QTODO_SYNC_SUPPORT
 HEADERS += \
+    filehelper.h \
     imapstorage.h \
     imapaccountlistmodel.h \
     imapaccounthelper.h \
     synctoimap.h
 SOURCES += \
+    filehelper.cpp \
     imapstorage.cpp \
     imapaccountlistmodel.cpp \
     imapaccounthelper.cpp \
