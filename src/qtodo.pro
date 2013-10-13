@@ -169,11 +169,11 @@ exists("/usr/lib/qt5/qml/Sailfish/Silica/SilicaGridView.qml"): {
         message(Qt5 Linux Desktop Build)
 
         LIBS += \
-            -L$$PWD/lib/qt5/build/linux/x86_64/qmf/lib \
+            -L$$PWD/lib/qmf/build/linux/x86_64/qmf/lib \
             -lqmfclient5
             #-Wl,-rpath lib
 
-        desktopQmfLibs.source = lib/qt5/build/linux/x86_64/qmf
+        desktopQmfLibs.source = lib/qmf/build/linux/x86_64/qmf
         desktopQmfLibs.target = lib
         qmlDesktopCommon.source = qml/qtquick2/desktop/common
         qmlDesktopCommon.target = qml
