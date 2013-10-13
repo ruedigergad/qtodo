@@ -20,6 +20,7 @@
 import QtQuick 2.0
 import qtodo 1.0
 import SyncToImap 1.0
+import "../synctoimap"
 
 Item {
     id: mainRectangle

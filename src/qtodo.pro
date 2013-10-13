@@ -10,7 +10,7 @@ isEqual(QT_MAJOR_VERSION, 5) {
     QT += qml quick
 
     INCLUDEPATH += \
-        lib/qt5/include
+        synctoimap/lib/include
 
     qmlCommon.source = qml/qtquick2/common
     qmlCommon.target = qml
@@ -169,11 +169,11 @@ exists("/usr/lib/qt5/qml/Sailfish/Silica/SilicaGridView.qml"): {
         message(Qt5 Linux Desktop Build)
 
         LIBS += \
-            -L$$PWD/lib/qmf/build/linux/x86_64/qmf/lib \
+            -L$$PWD/synctoimap/lib/build/linux/x86_64/qmf/lib \
             -lqmfclient5
             #-Wl,-rpath lib
 
-        desktopQmfLibs.source = lib/qmf/build/linux/x86_64/qmf
+        desktopQmfLibs.source = synctoimap/lib/build/linux/x86_64/qmf
         desktopQmfLibs.target = lib
         qmlDesktopCommon.source = qml/qtquick2/desktop/common
         qmlDesktopCommon.target = qml
@@ -277,12 +277,17 @@ HEADERS += \
     synctoimap/src/imapaccountlistmodel.h \
     synctoimap/src/imapaccounthelper.h \
     synctoimap/src/synctoimap.h
+INCLUDEPATH += \
+    synctoimap/src
 SOURCES += \
     synctoimap/src/filehelper.cpp \
     synctoimap/src/imapstorage.cpp \
     synctoimap/src/imapaccountlistmodel.cpp \
     synctoimap/src/imapaccounthelper.cpp \
     synctoimap/src/synctoimap.cpp
+syncToImapQml.source = synctoimap/qml/synctoimap
+syncToImapQml.target = qml/
+DEPLOYMENTFOLDERS += syncToImapQml
 
 OTHER_FILES += \
     qtodo.desktop \
