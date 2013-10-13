@@ -188,9 +188,9 @@ SyncToImapBase {
             console.log("Uploading: " + _dirSyncFiles)
             _dirSyncCurrentIndex = 0
 
-            if (useBuiltInDialogs) {
-                _syncToImapProgressDialog.maxValue = _dirSyncFiles.length
-                _syncToImapProgressDialog.currentValue = 0
+            if (useDialogs) {
+                progressDialog.maxValue = _dirSyncFiles.length
+                progressDialog.currentValue = 0
             }
 
             _addFiles()

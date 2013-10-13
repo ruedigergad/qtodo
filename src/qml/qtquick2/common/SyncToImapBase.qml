@@ -25,7 +25,9 @@ Item {
 
     property string imapFolderName: ""
     property QtObject merger
-    property bool useBuiltInDialogs: true
+    property QtObject messageDialog
+    property QtObject progressDialog
+    property bool useDialogs: false
 
     signal error
     signal finished
@@ -50,7 +52,6 @@ Item {
 
     property alias _fileHelper: _fileHelper
     property alias _imapStorage: _imapStorage
-    property alias _syncToImapProgressDialog: _syncToImapProgressDialog
 
     function _syncToImap() {
         started()
@@ -61,9 +62,9 @@ Item {
 
         //TODO: Add check if merger was set.
 
-        if (useBuiltInDialogs) {
-            _syncToImapProgressDialog.currentValue = 0
-            _syncToImapProgressDialog.open()
+        if (useDialogs) {
+            progressDialog.currentValue = 0
+            progressDialog.open()
         }
 
         _imapAccountId = imapAccountHelper.getSyncAccount()
@@ -159,27 +160,29 @@ Item {
     }
 
     function _reportError(title, message) {
-        _syncToImapProgressDialog.close()
-        _messageDialog.title = title
-        _messageDialog.message = message
-        _messageDialog.open()
+        if (useDialogs) {
+            progressDialog.close()
+            messageDialog.title = title
+            messageDialog.message = message
+            messageDialog.open()
+        }
     }
 
     function _reportSuccess() {
         finished()
         success()
 
-        if (useBuiltInDialogs) {
-            _syncToImapProgressDialog.close()
-            _messageDialog.title = "Success"
-            _messageDialog.message = "Sync was successful."
-            _messageDialog.open()
+        if (useDialogs) {
+            progressDialog.close()
+            messageDialog.title = "Success"
+            messageDialog.message = "Sync was successful."
+            messageDialog.open()
         }
     }
 
     onProgress: {
-        if (useBuiltInDialogs) {
-            _syncToImapProgressDialog.currentValue++
+        if (useDialogs) {
+            progressDialog.currentValue++
         }
     }
 
@@ -198,33 +201,16 @@ Item {
             finished()
             syncToImapBase.error(errorString, errorCode, currentAction)
 
-            if (useBuiltInDialogs) {
-                _syncToImapProgressDialog.close()
-                _messageDialog.title = "Error"
-                _messageDialog.message = "Sync failed: \"" + errorString + "\" Code: " + errorCode + " Action: " + currentAction
-                _messageDialog.open()
+            if (useDialogs) {
+                progressDialog.close()
+                messageDialog.title = "Error"
+                messageDialog.message = "Sync failed: \"" + errorString + "\" Code: " + errorCode + " Action: " + currentAction
+                messageDialog.open()
             }
         }
     }
 
     FileHelper { id: _fileHelper }
-
-    ProgressDialog {
-        id: _syncToImapProgressDialog
-        parent: syncToImapBase.parent
-
-        title: "Syncing..."
-        message: "Sync is in progess."
-
-        maxValue: 6
-        currentValue: 0
-    }
-
-    MessageDialog {
-        id: _messageDialog
-        parent: syncToImapBase.parent
-        onClosed: syncToImapBase.messageDialogClosed()
-    }
 
     ImapAccountHelper {
         id: imapAccountHelper

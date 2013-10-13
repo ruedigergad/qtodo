@@ -214,16 +214,33 @@ Item {
         }
     }
 
+    MessageDialog {
+        id: messageDialog
+//        onClosed: syncToImapBase.messageDialogClosed()
+    }
+
     NodeListModel {
         id: rootElementModel
     }
 
+    ProgressDialog {
+        id: progressDialog
+
+        title: "Syncing..."
+        message: "Sync is in progess."
+
+        maxValue: 6
+        currentValue: 0
+    }
 
     SyncDirToImap {
         id: syncDirToImap
 
         imapFolderName: "qtodo"
         merger: todoMerger
+        messageDialog: messageDialog
+        progressDialog: progressDialog
+        useDialogs: true
 
         onSuccess: {
             console.log("Sync succeeded. Cleaning remaining sketch files.")
@@ -258,6 +275,9 @@ Item {
 
         imapFolderName: "qtodo"
         merger: todoMerger
+        messageDialog: messageDialog
+        progressDialog: progressDialog
+        useDialogs: true
 
         onFinished: toolBar.enabled = true
         onStarted: toolBar.enabled = false

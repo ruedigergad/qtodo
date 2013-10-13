@@ -39,8 +39,8 @@ SyncToImapBase {
         _imapMessageSubject = _localFileName
         _imapMessageSubjectPrefix = _imapMessageSubject
 
-        if (useBuiltInDialogs) {
-            _syncToImapProgressDialog.maxValue = 6
+        if (useDialogs) {
+            progressDialog.maxValue = 6
         }
 
         _syncToImap()
