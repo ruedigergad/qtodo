@@ -1,4 +1,4 @@
 *.swp
-*.user
+*.pro.user*
 /*build*
 profile.log
