@@ -64,5 +64,6 @@ rm -rf %{buildroot}
 /usr/share/applications
 /usr/share/icons/hicolor/64x64/apps
 /usr/share/icons/hicolor/scalable/apps
+/opt/qtodo/qml/
 # >> files
 # << files
