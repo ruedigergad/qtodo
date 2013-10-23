@@ -171,7 +171,7 @@ exists("/usr/lib/qt5/qml/Sailfish/Silica/SilicaGridView.qml"): {
         LIBS += \
             -L$$PWD/synctoimap/lib/build/linux/x86_64/qmf/lib \
             -lqmfclient5
-            #-Wl,-rpath lib
+        QMAKE_LFLAGS += '-Wl,-rpath,\'\$$ORIGIN/lib/qmf/lib\''
 
         desktopQmfLibs.source = synctoimap/lib/build/linux/x86_64/qmf
         desktopQmfLibs.target = lib
