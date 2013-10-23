@@ -272,6 +272,7 @@ contains(DEFINES, QT5_BUILD) {
 message(Building sync support...)
 DEFINES += QTODO_SYNC_SUPPORT
 HEADERS += \
+    synctoimap/src/envvarhelper.h \
     synctoimap/src/filehelper.h \
     synctoimap/src/imapstorage.h \
     synctoimap/src/imapaccountlistmodel.h \
@@ -280,6 +281,7 @@ HEADERS += \
 INCLUDEPATH += \
     synctoimap/src
 SOURCES += \
+    synctoimap/src/envvarhelper.cpp \
     synctoimap/src/filehelper.cpp \
     synctoimap/src/imapstorage.cpp \
     synctoimap/src/imapaccountlistmodel.cpp \
