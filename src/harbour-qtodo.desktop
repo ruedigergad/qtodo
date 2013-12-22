@@ -1,0 +1,8 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Name=Q To-Do
+Exec=harbour-qtodo
+Icon=harbour-qtodo
+X-Nemo-Application-Type=silica-qt5

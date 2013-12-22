@@ -404,7 +404,8 @@ OTHER_FILES += \
     bar-descriptor.xml \
     qml/bb10/CommonBB10TextArea.qml \
     rpm/harbour-qtodo.yaml \
-    rpm/harbour-qtodo.spec
+    rpm/harbour-qtodo.spec \
+    harbour-qtodo.desktop
 
 #RESOURCES += \
 #    res.qrc
