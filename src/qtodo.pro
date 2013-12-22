@@ -403,25 +403,28 @@ OTHER_FILES += \
     qtmail.sh \
     bar-descriptor.xml \
     qml/bb10/CommonBB10TextArea.qml \
-    rpm/qtodo.yaml
+    rpm/harbour-qtodo.yaml \
+    rpm/harbour-qtodo.spec
 
 #RESOURCES += \
 #    res.qrc
 
-logoFiles.files = icons/logo.png
-logoFiles.path = /opt/$${TARGET}/icons
+!contains(DEFINES, MER_EDITION_SAILFISH) {
+    logoFiles.files = icons/logo.png
+    logoFiles.path = /opt/$${TARGET}/icons
 
-splash.files = splash.png
-splash.path = /opt/$${TARGET}
+    splash.files = splash.png
+    splash.path = /opt/$${TARGET}
 
-sampleXml.files = sample.xml
-sampleXml.path = /opt/$${TARGET}
+    sampleXml.files = sample.xml
+    sampleXml.path = /opt/$${TARGET}
 
-licenseInfo.files = LICENSES
-licenseInfo.path = /opt/$${TARGET}
+    licenseInfo.files = LICENSES
+    licenseInfo.path = /opt/$${TARGET}
 
-INSTALLS += logoFiles splash licenseInfo
-#sampleXml
+    INSTALLS += logoFiles splash licenseInfo
+    #sampleXml
+}
 
 # Please do not modify the following two lines. Required for deployment.
 include(deployment.pri)

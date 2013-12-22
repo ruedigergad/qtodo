@@ -1,0 +1,24 @@
+Name: harbour-qtodo
+Summary: A Simple and Easy to Use To-do List Organizer
+Version: 1.12.2
+Release: 1
+Group: Qt/Qt
+License: GPLv3
+Sources:
+- '%{name}-%{version}.tar.bz2'
+Description: |
+  Q To-Do is a simple to-do list organizer. It features a clear, simple, and easy to use user interface.
+Configure: none
+Builder: qtc5
+PkgConfigBR:
+- Qt5Qml
+- qmfclient5
+- Qt5Core
+- Qt5Quick
+PkgBR: []
+Requires: []
+Files:
+- '%{_datadir}/icons/hicolor/86x86/apps'
+- '%{_datadir}/applications'
+- '%{_datadir}/%{name}'
+- '%{_bindir}/%{name}'
