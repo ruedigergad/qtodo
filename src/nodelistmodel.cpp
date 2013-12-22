@@ -203,13 +203,11 @@ QStringList NodeListModel::getSketchNames(QDomElement element) {
 }
 
 void NodeListModel::updateElement(int rowIndex, QString type, QString text, QString color){
-    bool rowIndexIncremented = false;
-    if(childNodes.at(0).isText()) {
-        rowIndex++;
-        rowIndexIncremented = true;
-    }
+    bool isTextNode = false;
+    if(childNodes.at(0).isText())
+        isTextNode = true;
 
-    QDomElement element = childNodes.at(rowIndex).toElement();
+    QDomElement element = childNodes.at(isTextNode ? rowIndex + 1 : rowIndex).toElement();
     element.setTagName(type);
     element.firstChild().toText().setData(text);
 
@@ -218,24 +216,22 @@ void NodeListModel::updateElement(int rowIndex, QString type, QString text, QStr
     }
     element.setAttribute("mtime", QDateTime::currentDateTime().toString(Qt::ISODate));
 
-    QModelIndex modelIndex = index(rowIndexIncremented ? rowIndex - 1 : rowIndex, 0);
+    QModelIndex modelIndex = index(rowIndex, 0);
     qDebug() << modelIndex;
     emit dataChanged(modelIndex, modelIndex);
     emit changed();
 }
 
 void NodeListModel::setAttribute(int rowIndex, QString name, QString value){
-    bool rowIndexIncremented = false;
-    if(childNodes.at(0).isText()) {
-        rowIndex++;
-        rowIndexIncremented = true;
-    }
+    bool isTextNode = false;
+    if(childNodes.at(0).isText())
+        isTextNode = true;
 
-    QDomElement element = childNodes.at(rowIndex).toElement();
+    QDomElement element = childNodes.at(isTextNode ? rowIndex + 1 : rowIndex).toElement();
     element.setAttribute(name, value);
     element.setAttribute("mtime", QDateTime::currentDateTime().toString(Qt::ISODate));
 
-    QModelIndex modelIndex = index(rowIndexIncremented ? rowIndex - 1 : rowIndex, 0);
+    QModelIndex modelIndex = index(rowIndex, 0);
     qDebug() << modelIndex;
     emit dataChanged(modelIndex, modelIndex);
     emit changed();
