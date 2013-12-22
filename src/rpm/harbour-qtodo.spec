@@ -54,8 +54,8 @@ rm -rf %{buildroot}
 
 # >> install post
 find %{buildroot}/%{_datadir}/harbour-qtodo -type f -exec chmod 644 {} \;
-find %{buildroot}/%{_datadir}/harbour-qtodo -iname "*.qml" -exec sed -i 's/import qtodo/import harbour-qtodo/g' {} \;
-find %{buildroot}/%{_datadir}/harbour-qtodo -iname "*.qml" -exec sed -i 's/import SyncToImap/import harbour-qtodo/g' {} \;
+find %{buildroot}/%{_datadir}/harbour-qtodo -type f -exec sed -i 's/import qtodo/import harbour.qtodo/g' {} \;
+find %{buildroot}/%{_datadir}/harbour-qtodo -type f -exec sed -i 's/import SyncToImap/import harbour.qtodo/g' {} \;
 chmod 644 %{buildroot}/%{_datadir}/icons/hicolor/86x86/apps/harbour-qtodo.png
 chmod 644 %{buildroot}/%{_datadir}/applications/harbour-qtodo.desktop
 # << install post

@@ -79,14 +79,14 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 //    view = new QToDoView();
 
 #if defined(MER_EDITION_SAILFISH)
-    qmlRegisterType<FileHelper>("harbour-qtodo", 1, 0, "FileHelper");
-    qmlRegisterType<ImapAccountHelper>("harbour-qtodo", 1, 0, "ImapAccountHelper");
-    qmlRegisterType<ImapAccountListModel>("harbour-qtodo", 1, 0, "ImapAccountListModel");
-    qmlRegisterType<ImapStorage>("harbour-qtodo", 1, 0, "ImapStorage");
+    qmlRegisterType<FileHelper>("harbour.qtodo", 1, 0, "FileHelper");
+    qmlRegisterType<ImapAccountHelper>("harbour.qtodo", 1, 0, "ImapAccountHelper");
+    qmlRegisterType<ImapAccountListModel>("harbour.qtodo", 1, 0, "ImapAccountListModel");
+    qmlRegisterType<ImapStorage>("harbour.qtodo", 1, 0, "ImapStorage");
 
-    qmlRegisterType<Merger>("harbour-qtodo", 1, 0, "Merger");
-    qmlRegisterType<NodeListModel>("harbour-qtodo", 1, 0, "NodeListModel");
-    qmlRegisterType<ToDoStorage>("harbour-qtodo", 1, 0, "ToDoStorage");
+    qmlRegisterType<Merger>("harbour.qtodo", 1, 0, "Merger");
+    qmlRegisterType<NodeListModel>("harbour.qtodo", 1, 0, "NodeListModel");
+    qmlRegisterType<ToDoStorage>("harbour.qtodo", 1, 0, "ToDoStorage");
 #elif defined(LINUX_DESKTOP)
     qmlRegisterType<Merger>("qtodo", 1, 0, "Merger");
     qmlRegisterType<NodeListModel>("qtodo", 1, 0, "NodeListModel");
