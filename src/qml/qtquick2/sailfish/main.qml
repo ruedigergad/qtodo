@@ -35,6 +35,30 @@ ApplicationWindow {
     property string secondaryBackgroundColor: "transparent"
     property double secondaryBackgroundOpacity: 0.9
 
+    cover: CoverBackground {
+        Label {
+            id: coverLabel
+
+            anchors.fill: parent
+            color: primaryFontColor
+            horizontalAlignment: Text.AlignHCenter
+            text: "Q To-Do"
+            verticalAlignment: Text.AlignVCenter
+            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+        }
+    }
+
+    Connections {
+        target: mainRectangle.treeView
+        onCurrentItemChanged: {
+            if (mainRectangle.treeView.currentItem) {
+                coverLabel.text = mainRectangle.treeView.currentItem.text
+            } else {
+                coverLabel.text = "Q To-Do"
+            }
+        }
+    }
+
     initialPage: Page {
         id: mainPage
 
