@@ -21,6 +21,7 @@ exists("/usr/lib/qt5/qml/Sailfish/Silica/SilicaGridView.qml"): {
     message(SailfishOS build)
 
     TARGET = harbour-qtodo
+    target.path = /usr/bin
 
     DEFINES += QDECLARATIVE_BOOSTER
     DEFINES += MER_EDITION_SAILFISH
@@ -32,7 +33,8 @@ exists("/usr/lib/qt5/qml/Sailfish/Silica/SilicaGridView.qml"): {
     qmlSailfishMain.target = /usr/share/harbour-qtodo/qml
     DEPLOYMENTFOLDERS += qmlSailfishCommon qmlSailfishMain
 
-    CONFIG += sailfishapp
+#    CONFIG += sailfishapp
+    INCLUDEPATH += /usr/include/sailfishapp
 
     CONFIG += link_pkgconfig
     PKGCONFIG += qmfclient5 sailfishapp

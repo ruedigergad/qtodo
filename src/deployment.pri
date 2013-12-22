@@ -134,8 +134,10 @@ symbian {
     isEmpty(svg.path) {
         svg.path = /usr/share/icons/hicolor/scalable/apps
     }
+    isEmpty(target.path) {
+        target.path = $${installPrefix}/bin
+    }
 
-    target.path = $${installPrefix}/bin
     export(icon.files)
     export(icon.path)
     export(desktopfile.files)

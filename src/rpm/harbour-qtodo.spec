@@ -6,6 +6,7 @@
 Name:       harbour-qtodo
 
 # >> macros
+%define __requires_exclude ^libQt5Widgets|libcrypto|libqca-qt5|libqmfclient5|libssl|libstdc++.*$
 # << macros
 
 %{!?qtc_qmake:%define qtc_qmake %qmake}
@@ -55,6 +56,8 @@ rm -rf %{buildroot}
 find %{buildroot}/%{_datadir}/harbour-qtodo -type f -exec chmod 644 {} \;
 find %{buildroot}/%{_datadir}/harbour-qtodo -iname "*.qml" -exec sed -i 's/import qtodo/import harbour-qtodo/g' {} \;
 find %{buildroot}/%{_datadir}/harbour-qtodo -iname "*.qml" -exec sed -i 's/import SyncToImap/import harbour-qtodo/g' {} \;
+chmod 644 %{buildroot}/%{_datadir}/icons/hicolor/86x86/apps/harbour-qtodo.png
+chmod 644 %{buildroot}/%{_datadir}/applications/harbour-qtodo.desktop
 # << install post
 
 %files
