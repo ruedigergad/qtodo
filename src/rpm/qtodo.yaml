@@ -18,10 +18,10 @@ PkgConfigBR:
 PkgBR: []
 Requires: []
 Files:
-- /opt/qtodo/qml/
 - /usr/share/icons/hicolor/scalable/apps
 - /usr/share/icons/hicolor/64x64/apps
 - /usr/share/applications
+- /opt/qtodo/qml/
 - /opt/qtodo/lib
 - /opt/qtodo/qml
 - /opt/qtodo

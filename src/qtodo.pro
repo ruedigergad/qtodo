@@ -27,18 +27,22 @@ DEPLOYMENTFOLDERS += qmlCommon iconDeployment
 exists("/usr/lib/qt5/qml/Sailfish/Silica/SilicaGridView.qml"): {
     message(SailfishOS build)
 
+    TARGET = harbour-qtodo
+
     DEFINES += QDECLARATIVE_BOOSTER
     DEFINES += MER_EDITION_SAILFISH
     MER_EDITION = sailfish
 
     qmlSailfishCommon.source = qml/qtquick2/sailfish/common
-    qmlSailfishCommon.target = qml
+    qmlSailfishCommon.target = /usr/share/harbour-qtodo/qml
     qmlSailfishMain.source = qml/qtquick2/sailfish/main.qml
-    qmlSailfishMain.target = qml
+    qmlSailfishMain.target = /usr/share/harbour-qtodo/qml
     DEPLOYMENTFOLDERS += qmlSailfishCommon qmlSailfishMain
 
+    CONFIG += sailfishapp
+
     CONFIG += link_pkgconfig
-    PKGCONFIG += qmfclient5
+    PKGCONFIG += qmfclient5 sailfishapp
 } else:exists($$QMAKE_INCDIR_QT"/../mdeclarativecache/MDeclarativeCache"): {
     message(Nemomobile build)
 

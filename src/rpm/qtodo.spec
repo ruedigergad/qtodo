@@ -19,10 +19,10 @@ Group:      Qt/Qt
 License:    LICENSE
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  qtodo.yaml
-BuildRequires:  pkgconfig(Qt5Qml)
-BuildRequires:  pkgconfig(qmfclient5)
-BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Quick)
+BuildRequires:  pkgconfig(Qt5Core)
+BuildRequires:  pkgconfig(qmfclient5)
+BuildRequires:  pkgconfig(Qt5Qml)
 
 %description
 Short description of my SailfishOS Application
@@ -40,7 +40,7 @@ Short description of my SailfishOS Application
 
 %qtc_qmake5 
 
-%qtc_make %{?jobs:-j%jobs}
+%qtc_make %{?_smp_mflags}
 
 # >> build post
 # << build post
@@ -56,14 +56,11 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-/opt/qtodo/bin
-/opt/qtodo/icons
-/opt/qtodo
 /opt/qtodo/qml
-/opt/qtodo/lib
-/usr/share/applications
-/usr/share/icons/hicolor/64x64/apps
-/usr/share/icons/hicolor/scalable/apps
-/opt/qtodo/qml/
+/opt/qtodo
+/opt/qtodo/icons
+/opt/qtodo/bin
+/usr/share/icons/hicolor/80x80/apps/qtodo80.png
+/usr/share/icons/hicolor/scalable/apps/qtodo.svg
 # >> files
 # << files

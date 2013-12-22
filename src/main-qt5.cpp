@@ -24,6 +24,10 @@
 #include <MDeclarativeCache>
 #endif
 
+#if defined(MER_EDITION_SAILFISH)
+#include <sailfishapp.h>
+#endif
+
 #if defined(LINUX_DESKTOP)
 #include <QApplication>
 #endif
@@ -49,19 +53,20 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 {
     qDebug("Initializing Q To-Do...");
 
-#ifdef QTODO_SYNC_SUPPORT
+#if defined(QTODO_SYNC_SUPPORT) && defined(LINUX_DESKTOP)
     SyncToImap::init();
 #endif
 
     /*
      * Init Application
      */
-#if defined(LINUX_DESKTOP)
+#if defined(MER_EDITION_SAILFISH)
+    QGuiApplication *app = SailfishApp::application(argc, argv);
+    QQuickView *view = SailfishApp::createView();
+#elif defined(LINUX_DESKTOP)
     QApplication *app = new QApplication(argc, argv);
-#else
-    QGuiApplication *app = new QGuiApplication(argc, argv);
-#endif
     QQuickView *view = new QQuickView();
+#endif
 
     QCoreApplication::setOrganizationName("ruedigergad.com");
     QCoreApplication::setOrganizationDomain("ruedigergad.com");
@@ -69,6 +74,16 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
 //    view = new QToDoView();
 
+#if defined(MER_EDITION_SAILFISH)
+    qmlRegisterType<FileHelper>("harbour-qtodo", 1, 0, "FileHelper");
+    qmlRegisterType<ImapAccountHelper>("harbour-qtodo", 1, 0, "ImapAccountHelper");
+    qmlRegisterType<ImapAccountListModel>("harbour-qtodo", 1, 0, "ImapAccountListModel");
+    qmlRegisterType<ImapStorage>("harbour-qtodo", 1, 0, "ImapStorage");
+
+    qmlRegisterType<Merger>("harbour-qtodo", 1, 0, "Merger");
+    qmlRegisterType<NodeListModel>("harbour-qtodo", 1, 0, "NodeListModel");
+    qmlRegisterType<ToDoStorage>("harbour-qtodo", 1, 0, "ToDoStorage");
+#elif defined(LINUX_DESKTOP)
     qmlRegisterType<Merger>("qtodo", 1, 0, "Merger");
     qmlRegisterType<NodeListModel>("qtodo", 1, 0, "NodeListModel");
     qmlRegisterType<ToDoStorage>("qtodo", 1, 0, "ToDoStorage");
@@ -76,7 +91,6 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     app->setApplicationName("Q To-Do");
     app->setApplicationDisplayName("Q To-Do");
 
-#if defined(LINUX_DESKTOP)
     QIcon icon(":/icon/icon.png");
     view->setIcon(icon);
     QTodoTrayIcon *trayIcon = new QTodoTrayIcon(icon, view, app);
@@ -89,6 +103,9 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 //    view->setSource(QUrl("qml/main.qml"));
 //#endif
 
+#if defined(MER_EDITION_SAILFISH)
+    view->setSource(QUrl("/usr/share/harbour-qtodo/qml/main.qml"));
+#elif defined(LINUX_DESKTOP)
     QUrl mainQmlLocation;
     if (QFile::exists(QCoreApplication::applicationDirPath() + "/../qml/main.qml")) {
         mainQmlLocation = QUrl(QCoreApplication::applicationDirPath() + "/../qml/main.qml");
@@ -101,21 +118,22 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
         return -1;
     }
     view->setSource(mainQmlLocation);
+#endif
 
     view->setResizeMode(QQuickView::SizeRootObjectToView);
+
 #if defined(MER_EDITION_SAILFISH)
-    view->showFullScreen();
-#else
+    view->show();
+#elif defined(LINUX_DESKTOP)
     view->resize(400, 500);
     view->show();
 #endif
 
     int ret = app->exec();
 
-#ifdef QTODO_SYNC_SUPPORT
+#if defined(QTODO_SYNC_SUPPORT) && defined(LINUX_DESKTOP)
     SyncToImap::shutdown();
 #endif
 
     return ret;
 }
-
