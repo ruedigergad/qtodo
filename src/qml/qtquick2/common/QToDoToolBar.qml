@@ -30,7 +30,7 @@ Row {
         verticalCenter: parent.verticalCenter
     }
     height: iconAdd.height
-    spacing: (qtodoToolBar.width - (6 * iconAdd.width)) / 5
+    spacing: (qtodoToolBar.width - (5 * iconAdd.width)) / 4
 
     CommonToolIcon {
         id: iconAdd
@@ -38,12 +38,12 @@ Row {
         opacity: enabled ? 1 : 0.5
         onClicked: mainRectangle.addItem()
     }
-    CommonToolIcon {
-        id: iconSketch
-        iconSource: "../icons/sketch" + iconNameSuffix + ".png"
-        opacity: enabled ? 1 : 0.5
-        onClicked: mainRectangle.addSketch()
-    }
+//    CommonToolIcon {
+//        id: iconSketch
+//        iconSource: "../icons/sketch" + iconNameSuffix + ".png"
+//        opacity: enabled ? 1 : 0.5
+//        onClicked: mainRectangle.addSketch()
+//    }
     CommonToolIcon {
         id: iconMarkDone
         iconSource: "../icons/to-do_done" + iconNameSuffix + ".png"
