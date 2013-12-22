@@ -403,9 +403,9 @@ OTHER_FILES += \
 
 contains(DEFINES, MER_EDITION_SAILFISH) {
     iconDeployment.source = icons
-    iconDeployment.target = /usr/share/harbour-qtodo/qml
-    qmlCommon.target = /usr/share/harbour-qtodo/qml
-    syncToImapQml.target = /usr/share/harbour-qtodo/qml
+    iconDeployment.target = usr/share/harbour-qtodo/qml
+    qmlCommon.target = usr/share/harbour-qtodo/qml
+    syncToImapQml.target = usr/share/harbour-qtodo/qml
 } else {
     qmlCommon.target = qml
     syncToImapQml.target = qml

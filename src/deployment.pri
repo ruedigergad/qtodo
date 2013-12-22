@@ -53,12 +53,6 @@ symbian {
 } else:unix {
     maemo5 {
         desktopfile.path = /usr/share/applications/hildon
-    } else:contains(MER_EDITION, sailfish) {
-        desktopfile.files = $${TARGET}_mer.desktop
-        desktopfile.path = /opt/sdk/share/applications
-        icon.files = $${TARGET}80.png
-        icon.path = /opt/sdk/share/icons/hicolor/80x80/apps
-        svg.path = /opt/sdk/share/icons/hicolor/scalable/apps
     } else:contains(MER_EDITION, nemo) {
         desktopfile.files = $${TARGET}_mer.desktop
         icon.files = $${TARGET}80.png
@@ -97,7 +91,7 @@ symbian {
     }
 
     contains(DEFINES, MER_EDITION_SAILFISH) {
-        installPrefix = /
+        installPrefix =
     } else {
         installPrefix = /opt/$${TARGET}
     }
