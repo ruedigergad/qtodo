@@ -24,8 +24,6 @@ Item {
     id: imapAccountSettingsSheet
 
     property int authenticationTypeSetting
-    property alias acceptText: acceptButton.text
-    property alias cancelText: rejectButton.text
     property int currentAccountId: -1
     property string currentAccountName
     property bool editAccount: false
@@ -122,7 +120,7 @@ Item {
         width: parent.width
         z: 4
 
-        color: secondaryBackgroundColor
+        color: "lightgray"
 
         CommonButton{
             id: rejectButton
@@ -133,14 +131,8 @@ Item {
             onClicked: imapAccountSettingsSheet.close();
         }
 
-        Text {
-            id: entryLabel
-
-            anchors.centerIn: parent
-            color: primaryFontColor
-            text: "Accounts"
-            font { pointSize: primaryFontSize * 0.75; capitalization: Font.SmallCaps; bold: true }
-        }
+        Text {id: entryLabel; text: "Accounts"; font.pointSize: primaryFontSize * 0.75
+              font.capitalization: Font.SmallCaps; font.bold: true; anchors.centerIn: parent}
 
         CommonButton{
             id: acceptButton
@@ -162,7 +154,7 @@ Item {
         id: inputRectangle
 
         anchors {top: buttonBar.bottom; left: parent.left; right: parent.right; bottom: parent.bottom}
-        color: primaryBackgroundColor
+        color: "white"
 
         Item {
             id: contentItem
@@ -172,9 +164,7 @@ Item {
 
             Text {
                 id: accountsText
-
                 anchors {top: parent.top; topMargin: primaryFontSize * 0.5; left: parent.left; right: parent.right}
-                color: primaryFontColor
                 text: "Available Accounts"
                 font.pointSize: primaryFontSize * 0.75
                 horizontalAlignment: Text.AlignHCenter
@@ -210,7 +200,7 @@ Item {
                         wrapMode: Text.WrapAnywhere
 
                         font.pointSize: primaryFontSize
-                        color: primaryFontColor
+                        color: "black"
 
                         MouseArea {
                             anchors.fill: parent
@@ -239,8 +229,7 @@ Item {
                     }
 
                     highlight: Rectangle {
-                        //FIXME: use "parent" or "listDelegate"?
-                        anchors.fill: parent
+                        anchors.fill: listDelegate
                         color: "gray"
                     }
                 }
@@ -335,7 +324,6 @@ Item {
                         Text {
                             id: accountNameText
 
-                            color: primaryFontColor
                             font.pointSize: primaryFontSize * 0.75
                             height: parent.height
                             horizontalAlignment: Text.AlignHCenter
@@ -360,7 +348,6 @@ Item {
                         Text {
                             id: userNameText
 
-                            color: primaryFontColor
                             font.pointSize: primaryFontSize * 0.75
                             height: parent.height
                             horizontalAlignment: Text.AlignHCenter
@@ -385,7 +372,6 @@ Item {
                         Text {
                             id: passwordText
 
-                            color: primaryFontColor
                             font.pointSize: primaryFontSize * 0.75
                             height: parent.height
                             horizontalAlignment: Text.AlignHCenter
@@ -411,7 +397,6 @@ Item {
                         Text {
                             id: serverText
 
-                            color: primaryFontColor
                             font.pointSize: primaryFontSize * 0.75
                             height: parent.height
                             horizontalAlignment: Text.AlignHCenter
@@ -436,7 +421,6 @@ Item {
                         Text {
                             id: serverPortText
 
-                            color: primaryFontColor
                             font.pointSize: primaryFontSize * 0.75
                             height: portRow.height
                             horizontalAlignment: Text.AlignHLeft

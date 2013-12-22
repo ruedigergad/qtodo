@@ -185,28 +185,8 @@ ApplicationWindow {
             }
         }
 
-        Dialog {
+        ImapAccountSettingsSheet {
             id: imapAccountSettings
-
-            property alias authenticationTypeSetting: imapAccountSettingsSheet.authenticationTypeSetting
-            property alias currentAccountId: imapAccountSettingsSheet.currentAccountId
-            property alias currentAccountName: imapAccountSettingsSheet.currentAccountName
-            property alias editAccount: imapAccountSettingsSheet.editAccount
-            property alias encryptionSetting: imapAccountSettingsSheet.encryptionSetting
-            property alias newAccount: imapAccountSettingsSheet.newAccount
-
-            height: parent.height
-            width: parent.width
-
-            ImapAccountSettingsSheet {
-                id: imapAccountSettingsSheet
-
-                acceptText: ""
-                anchors.fill: parent
-                cancelText: ""
-                visible: true
-                z: 0
-            }
         }
     }
 }
