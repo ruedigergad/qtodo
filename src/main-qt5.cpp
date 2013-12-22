@@ -39,6 +39,10 @@
 
 #ifdef QTODO_SYNC_SUPPORT
 #include <synctoimap.h>
+#include "filehelper.h"
+#include "imapaccounthelper.h"
+#include "imapaccountlistmodel.h"
+#include "imapstorage.h"
 #endif
 
 #include "merger.h"

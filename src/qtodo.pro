@@ -13,16 +13,9 @@ isEqual(QT_MAJOR_VERSION, 5) {
         synctoimap/lib/include
 
     qmlCommon.source = qml/qtquick2/common
-    qmlCommon.target = qml
 } else {
     qmlCommon.source = qml/common
-    qmlCommon.target = qml
 }
-
-iconDeployment.source = icons
-iconDeployment.target = qml
-
-DEPLOYMENTFOLDERS += qmlCommon iconDeployment
 
 exists("/usr/lib/qt5/qml/Sailfish/Silica/SilicaGridView.qml"): {
     message(SailfishOS build)
@@ -292,8 +285,6 @@ SOURCES += \
     synctoimap/src/imapaccounthelper.cpp \
     synctoimap/src/synctoimap.cpp
 syncToImapQml.source = synctoimap/qml/synctoimap
-syncToImapQml.target = qml/
-DEPLOYMENTFOLDERS += syncToImapQml
 
 OTHER_FILES += \
     qtodo.desktop \
@@ -410,7 +401,15 @@ OTHER_FILES += \
 #RESOURCES += \
 #    res.qrc
 
-!contains(DEFINES, MER_EDITION_SAILFISH) {
+contains(DEFINES, MER_EDITION_SAILFISH) {
+    iconDeployment.source = icons
+    iconDeployment.target = /usr/share/harbour-qtodo/qml
+    qmlCommon.target = /usr/share/harbour-qtodo/qml
+    syncToImapQml.target = /usr/share/harbour-qtodo/qml
+} else {
+    qmlCommon.target = qml
+    syncToImapQml.target = qml
+
     logoFiles.files = icons/logo.png
     logoFiles.path = /opt/$${TARGET}/icons
 
@@ -426,6 +425,8 @@ OTHER_FILES += \
     INSTALLS += logoFiles splash licenseInfo
     #sampleXml
 }
+
+DEPLOYMENTFOLDERS += qmlCommon iconDeployment syncToImapQml
 
 # Please do not modify the following two lines. Required for deployment.
 include(deployment.pri)

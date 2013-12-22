@@ -95,7 +95,13 @@ symbian {
             QMAKE_EXTRA_TARGETS += first copydeploymentfolders
         }
     }
-    installPrefix = /opt/$${TARGET}
+
+    contains(DEFINES, MER_EDITION_SAILFISH) {
+        installPrefix = /
+    } else {
+        installPrefix = /opt/$${TARGET}
+    }
+
     for(deploymentfolder, DEPLOYMENTFOLDERS) {
         item = item$${deploymentfolder}
         itemfiles = $${item}.files
@@ -141,9 +147,10 @@ symbian {
     export(desktopfile.files)
     export(desktopfile.path)
     export(target.path)
-    export(svg.files)
-    export(svg.path)
-    INSTALLS += desktopfile icon target svg
+#    export(svg.files)
+#    export(svg.path)
+    INSTALLS += desktopfile icon target
+#svg
 }
 
 export (ICON)
