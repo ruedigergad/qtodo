@@ -175,7 +175,7 @@ exists("/usr/lib/qt5/qml/Sailfish/Silica/SilicaGridView.qml"): {
         # TODO: Dynamically determine architecture.
         arch = x86_64
         os = linux
-        desktopQmfLibs.source = synctoimap/lib/build/${{os}/$${arch}/qmf
+        desktopQmfLibs.source = synctoimap/lib/build/$${os}/$${arch}/qmf
         desktopQmfLibs.target = lib
         qmlDesktopCommon.source = qml/qtquick2/desktop/common
         qmlDesktopCommon.target = qml
@@ -255,17 +255,6 @@ OTHER_FILES += \
     qml/common/ProgressDialog.qml \
     qml/common/QToDoToolBar.qml \
     qml/common/TreeView.qml \
-    qml/desktop/EditToDoSheet.qml \
-    qml/desktop/main.qml \
-    qml/desktop/Menu.qml \
-    qml/desktop/common/CommonButton.qml \
-    qml/desktop/common/CommonDialog.qml \
-    qml/desktop/common/CommonTextArea.qml \
-    qml/desktop/common/CommonTextField.qml \
-    qml/desktop/common/CommonToolBar.qml \
-    qml/desktop/common/CommonToolIcon.qml \
-    qml/desktop/common/ConfirmationDialog.qml \
-    qml/desktop/common/Dialog.qml \
     qml/meego/EditSketchSheet.qml \
     qml/meego/EditToDoSheet.qml \
     qml/meego/main.qml \
@@ -354,6 +343,9 @@ contains(DEFINES, MER_EDITION_SAILFISH) {
 } else {
     qmlCommon.target = qml
     syncToImapQml.target = qml
+
+    iconDeployment.source = icons
+    iconDeployment.target = qml
 
     logoFiles.files = icons/logo.png
     logoFiles.path = /opt/$${TARGET}/icons
