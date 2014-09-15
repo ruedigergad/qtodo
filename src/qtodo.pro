@@ -183,56 +183,7 @@ exists("/usr/lib/qt5/qml/Sailfish/Silica/SilicaGridView.qml"): {
         qmlDesktopMain.target = qml
         DEPLOYMENTFOLDERS += desktopQmfLibs qmlDesktopCommon qmlDesktopMain
     } else {
-        message(Qt4 Linux Desktop Build)
-
-        qmlDesktop.source = qml/desktop
-        qmlDesktop.target = qml
-
-        # TODO: Dynamically determine architecture.
-        arch = x86_64
-        os = linux
-        qmlCanvasImport.source = lib/build/$${os}/$${arch}/qmlcanvas
-        qmlCanvasImport.target = lib/imports
-        qmfLibs.source = lib/build/$${os}/$${arch}/qmf
-        qmfLibs.target = lib
-
-        DEPLOYMENTFOLDERS += qmlDesktop qmlCanvasImport qmfLibs
-        QML_IMPORT_PATH += lib/build/linux/x86_64
-
-        wrapperScripts.files = qtodo.sh accounts_gui.sh qtmail.sh
-        wrapperScripts.path = /opt/$${TARGET}/bin
-        libqtx.files = lib/build/$${os}/$${arch}/libQxtCore.so.0 lib/build/$${os}/$${arch}/libQxtGui.so.0
-        libqtx.path = /opt/$${TARGET}/lib
-        INSTALLS += wrapperScripts libqtx
-
-        HEADERS += \
-            qtodotrayicon.h \
-            qtodoview.h
-
-        SOURCES += \
-            qtodotrayicon.cpp \
-            qtodoview.cpp
-
-        CONFIG  += qxt
-        QXT     += core gui
-
-    #    CONFIG += link_pkgconfig
-    #    PKGCONFIG += qmfclient
-
-        INCLUDEPATH += \
-            lib/include \
-            lib/include/QxtCore \
-            lib/include/QxtGui
-
-        LIBS += \
-            -L$$PWD/lib/build/linux/x86_64 \
-            -L$$PWD/lib/link/linux/x86_64 \
-            -lqmfclient \
-            -lQxtCore \
-            -lQxtGui
-
-        RESOURCES += \
-            icon.qrc
+        error(Qt4 Linux Desktop Build is not supported anymore!)
     }
 }
 
