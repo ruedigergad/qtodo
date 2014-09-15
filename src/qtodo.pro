@@ -172,7 +172,10 @@ exists("/usr/lib/qt5/qml/Sailfish/Silica/SilicaGridView.qml"): {
             -lqmfclient5
         QMAKE_LFLAGS += '-Wl,-rpath,\'\$$ORIGIN/lib/qmf/lib\''
 
-        desktopQmfLibs.source = synctoimap/lib/build/linux/x86_64/qmf
+        # TODO: Dynamically determine architecture.
+        arch = x86_64
+        os = linux
+        desktopQmfLibs.source = synctoimap/lib/build/${{os}/$${arch}/qmf
         desktopQmfLibs.target = lib
         qmlDesktopCommon.source = qml/qtquick2/desktop/common
         qmlDesktopCommon.target = qml
