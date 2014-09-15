@@ -1,4 +1,9 @@
 *.swp
 *.pro.user*
+*.list
 /*build*
+/src/moc
+/src/obj
+/src/qtodo
+/src/Makefile
 profile.log
