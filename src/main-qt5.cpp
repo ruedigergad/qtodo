@@ -19,6 +19,12 @@
 
 #include <QCoreApplication>
 #include <QGuiApplication>
+#include <QQuickView>
+#include <QtQml>
+
+#include "merger.h"
+#include "nodelistmodel.h"
+#include "todostorage.h"
 
 #if defined(MER_EDITION_SAILFISH) && defined(SAILFISH_BOOSTER)
 #include <MDeclarativeCache>
@@ -30,12 +36,8 @@
 
 #if defined(LINUX_DESKTOP)
 #include <QApplication>
+#include "qtodotrayicon.h"
 #endif
-
-#include <QQuickView>
-#include <QtQml>
-
-//#include "qtodoview.h"
 
 #ifdef QTODO_SYNC_SUPPORT
 #include <synctoimap.h>
@@ -45,13 +47,7 @@
 #include "imapstorage.h"
 #endif
 
-#include "merger.h"
-#include "nodelistmodel.h"
-#include "todostorage.h"
 
-#if defined(LINUX_DESKTOP)
-#include "qtodotrayicon.h"
-#endif
 
 Q_DECL_EXPORT int main(int argc, char *argv[])
 {
