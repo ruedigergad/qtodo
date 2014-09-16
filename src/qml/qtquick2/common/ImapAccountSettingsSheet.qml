@@ -229,7 +229,6 @@ Item {
                     }
 
                     highlight: Rectangle {
-                        anchors.fill: listDelegate
                         color: "gray"
                     }
                 }
