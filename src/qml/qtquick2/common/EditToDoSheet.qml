@@ -43,7 +43,7 @@ Item {
     signal accepted()
 
     function finished(){
-        console.log("finished")
+        console.log("EditToDoSheet: finished()")
         if(state === "closed"){
             visible = false
             closed()
