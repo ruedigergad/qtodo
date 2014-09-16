@@ -79,6 +79,7 @@ void ToDoStorage::save(){
 
 void ToDoStorage::save(QString fileName){
     qDebug() << "Saving file to: " << fileName;
+    emit saving();
     QFile file(fileName);
 
     if(! file.open(QFile::WriteOnly)){
@@ -95,4 +96,5 @@ void ToDoStorage::save(QString fileName){
     file.close();
 
     qDebug("Successfully saved: %s", fileName.toUtf8().constData());
+    emit saved();
 }

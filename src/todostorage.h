@@ -48,6 +48,8 @@ public:
 signals:
     void documentOpened();
     void error(QString message);
+    void saved();
+    void saving();
 
 private:
     QDomDocument document;

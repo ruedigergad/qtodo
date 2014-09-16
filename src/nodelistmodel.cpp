@@ -203,6 +203,8 @@ QStringList NodeListModel::getSketchNames(QDomElement element) {
 }
 
 void NodeListModel::updateElement(int rowIndex, QString type, QString text, QString color){
+    beginResetModel();
+
     bool isTextNode = false;
     if(childNodes.at(0).isText())
         isTextNode = true;
@@ -218,6 +220,7 @@ void NodeListModel::updateElement(int rowIndex, QString type, QString text, QStr
 
     QModelIndex modelIndex = index(rowIndex, 0);
     qDebug() << modelIndex;
+    endResetModel();
     emit dataChanged(modelIndex, modelIndex);
     emit changed();
 }
