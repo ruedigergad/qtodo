@@ -253,12 +253,6 @@ Item {
                     Keys.onEscapePressed: editToDoSheet.close()
                     onEnter: accepted()
                 }
-
-                MouseArea {
-                    anchors.fill: parent
-                    z: -1
-                    onClicked: focus = true
-                }
             }
 
             MouseArea {
