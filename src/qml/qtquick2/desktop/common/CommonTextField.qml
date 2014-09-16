@@ -27,8 +27,8 @@ Rectangle {
     property alias text: textInput.text
 
     border.width: primaryBorderSize / 8
-    border.color: textInput.focus ? "#0e65c8" : "#4ea5f8"
-    color: enabled ? "white" : "#e0e0e0"
+    border.color: textInput.focus ? primaryColorSchemeColor : tertiaryColorSchemeColor
+    color: enabled ? primaryBackgroundColor : secondaryBackgroundColor
     height: textInput.height * 1.5
     smooth: true
 

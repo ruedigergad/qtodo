@@ -27,11 +27,13 @@ Rectangle {
     width: 300
 
     color: "white"
-    opacity: 0.75
+    opacity: 1
 //    radius: primaryFontSize * 0.5
 
     property int primaryFontSize: 20
     property int primaryBorderSize: 20
+    property int secondaryFontSize: 14
+    property int secondaryBorderSize: 16
 
     property string primaryFontColor: "black"
     property string secondaryFontColor: "black"
@@ -40,6 +42,18 @@ Rectangle {
     property double primaryBackgroundOpacity: 1
     property string secondaryBackgroundColor: "lightgray"
     property double secondaryBackgroundOpacity: 1
+
+    property string primaryColorSchemeColor: "#00b000"
+    property double primaryColorSchemeOpacity: 1
+    property string secondaryColorSchemeColor: "#00f000"
+    property double secondaryColorSchemeOpacity: 1
+    property string tertiaryColorSchemeColor: "#00d000"
+    property double tertiaryColorSchemeOpacity: 1
+
+    property int primaryAnimationDuration: 250
+    property int secondaryAnimationDuration: 120
+
+    property double disabledStateOpacity: 0.3
 
     Rectangle {
         anchors {top: parent.top; left: parent.left; right: parent.right; bottom: toolBar.top}

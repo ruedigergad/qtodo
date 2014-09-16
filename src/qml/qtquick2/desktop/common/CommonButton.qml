@@ -29,9 +29,9 @@ Rectangle {
 
     signal clicked
 
-    color: mouseArea.pressed ? "#00d000" : "#00f000"
+    color: mouseArea.pressed ? primaryColorSchemeColor : (selected ? tertiaryColorSchemeColor : secondaryColorSchemeColor)
     enabled: iconImage.status === Image.Ready || text !== ""
-    height: textItem.height + (primaryFontSize / 2)
+    height: textItem.height + (textItem.font.pointSize / 2)
     smooth: true
     width: text === "" ? height : textItem.width + primaryBorderSize
 
@@ -39,7 +39,7 @@ Rectangle {
         id: textItem
 
         color: "black"
-        font.pointSize: primaryFontSize * 0.75
+        font.pointSize: secondaryFontSize
         x: parent.width/2 - width/2; y: parent.height/2 - height/2
     }
 
@@ -64,12 +64,11 @@ Rectangle {
     states: [
         State {
             name: "pressed"; when: mouseArea.pressed && mouseArea.containsMouse
-//            PropertyChanges { target: commonButton; color: commonButton.text === "" ? "gray" : "#2e85d8" } //"#569ffd"
             PropertyChanges { target: textItem; x: textItem.x + 1; y: textItem.y + 1; explicit: true }
         },
         State {
             name: "disabled"; when: !commonButton.enabled
-            PropertyChanges { target: commonButton; opacity: 0.5 }
+            PropertyChanges { target: commonButton; opacity: disabledStateOpacity }
         }
     ]
 }

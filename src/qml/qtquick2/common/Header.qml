@@ -22,7 +22,7 @@ import QtQuick 2.0
 Rectangle {
     id: header
     height: headerText.height * 1.5
-    color: "#00b000" //#0c61a8"
+    color: primaryColorSchemeColor
     anchors{left: parent.left; right: parent.right; top: parent.top}
     z: 48
 
@@ -30,10 +30,10 @@ Rectangle {
 
     Text {
         id: headerText
-        anchors{left: parent.left; leftMargin: primaryFontSize * 0.75; verticalCenter: parent.verticalCenter}
+        anchors{left: parent.left; leftMargin: secondaryBorderSize; verticalCenter: parent.verticalCenter}
         text: "My To-Dos"
-        color: "white"
-        font {pointSize: primaryFontSize * 0.7}
+        color: primaryBackgroundColor
+        font {pointSize: secondaryFontSize}
     }
 
     ListView {
@@ -64,7 +64,6 @@ Rectangle {
             width: height
             anchors.verticalCenter: parent.verticalCenter
 
-//            radius: height * 0.5
             border.width: height * 0.2
             border.color: headerText.color
             color: ((index + 1) === levelIndicator.count || animationRunning ) ? headerText.color : "transparent"

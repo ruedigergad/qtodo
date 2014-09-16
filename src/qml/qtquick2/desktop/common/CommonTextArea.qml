@@ -30,8 +30,8 @@ Rectangle {
     signal keyPressed(variant event)
 
     border.width: primaryBorderSize / 8
-    border.color: textEdit.focus ? "#0e65c8" : "#4ea5f8"
-    color: enabled ? "white" : "#e0e0e0"
+    border.color: textEdit.focus ? primaryColorSchemeColor : tertiaryColorSchemeColor
+    color: enabled ? primaryBackgroundColor : secondaryBackgroundColor
     height: textEdit.height + textEdit.font.pointSize
     smooth: true
 

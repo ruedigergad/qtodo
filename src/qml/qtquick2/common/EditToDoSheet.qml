@@ -125,7 +125,7 @@ Item {
             id: rejectButton
 
             anchors.left: parent.left
-            anchors.leftMargin: 16
+            anchors.leftMargin: secondaryBorderSize
             anchors.verticalCenter: parent.verticalCenter
             text: "Cancel"
 
@@ -145,7 +145,7 @@ Item {
             id: acceptButton
 
             anchors.right: parent.right
-            anchors.rightMargin: 16
+            anchors.rightMargin: secondaryBorderSize
             anchors.verticalCenter: parent.verticalCenter
             text: "OK"
             width: rejectButton.width
@@ -177,9 +177,9 @@ Item {
 
             Column {
                 id: sheetContent
-                spacing: primaryFontSize * 0.6
+                spacing: secondaryBorderSize
 
-                anchors{top: parent.top; left: parent.left; right: parent.right; margins: primaryFontSize * 0.75}
+                anchors{top: parent.top; left: parent.left; right: parent.right; margins: secondaryBorderSize}
 
                 Row {
                     id: typeButtonRow
