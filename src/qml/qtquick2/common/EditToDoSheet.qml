@@ -85,6 +85,9 @@ Item {
 
     onStateChanged: {
         console.log("Edit entry dialog state changed: " + state)
+        if (state === "open") {
+            textInput.forceActiveFocus()
+        }
     }
 
     states: [
@@ -226,7 +229,7 @@ Item {
                     }
                 }
 
-                CommonTextArea{
+                CommonTextArea {
                     id: textInput
                     width: parent.width
                     textFormat: TextEdit.PlainText

@@ -29,6 +29,8 @@ Rectangle {
     signal enter()
     signal keyPressed(variant event)
 
+    function forceActiveFocus() {textEdit.forceActiveFocus()}
+
     border.width: primaryBorderSize / 8
     border.color: textEdit.focus ? primaryColorSchemeColor : tertiaryColorSchemeColor
     color: enabled ? primaryBackgroundColor : secondaryBackgroundColor
@@ -40,7 +42,6 @@ Rectangle {
 
         anchors.centerIn: parent
         color: "black"
-        focus: textArea.focus
         font.pointSize: primaryFontSize * 0.75
         textFormat: textArea.textFormat
         width: parent.width - primaryBorderSize
