@@ -182,38 +182,6 @@ Item {
                 anchors{top: parent.top; left: parent.left; right: parent.right; margins: secondaryBorderSize}
 
                 Row {
-                    id: typeButtonRow
-
-                    height: toDoButton.height
-                    width: parent.width
-
-                    CommonButton {
-                        id: toDoButton
-
-                        selected: editToDoSheet.type === "to-do"
-                        text: "To-Do"
-                        width: parent.width / 2
-
-                        onClicked: {
-                            type = "to-do"
-                            colorButtonRow.enabled = (type === "to-do")
-                        }
-                    }
-                    CommonButton {
-                        id: noteButton
-
-                        selected: editToDoSheet.type === "note"
-                        text: "Note"
-                        width: parent.width / 2
-
-                        onClicked: {
-                            type = "note"
-                            colorButtonRow.enabled = (type === "to-do")
-                        }
-                    }
-                }
-
-                Row {
                     id: colorButtonRow
 
                     height: blueButton.height
