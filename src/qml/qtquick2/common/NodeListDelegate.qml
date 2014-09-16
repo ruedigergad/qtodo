@@ -41,7 +41,7 @@ Item {
     signal doubleClicked
     signal pressAndHold
 
-    width: tagName === "sketch" ? sketchContentDelegate.width : nodeListView.width
+    width: tagName === "sketch" ? sketchContentDelegate.width : _nodeListViewLV.width
     height: tagName === "sketch" ? sketchContentDelegate.height : textContentDelegate.height
 
     /*
@@ -53,7 +53,7 @@ Item {
         anchors.left: parent.left
         visible: tagName === "sketch"
         height: imgExists ? sketchImage.height : width
-        width: nodeListView.width * 0.5
+        width: _nodeListViewLV.width * 0.5
 
         property string imgSource: tagName === "sketch" ? mainRectangle._sketchPath + "/" + elementText : ""
         property bool imgExists: fileHelper.exists(imgSource)
@@ -257,6 +257,6 @@ Item {
         id: highlight
         anchors.fill: parent
         color: "gray"
-        opacity: nodeListView.currentIndex === index ? 0.5 : 0
+        opacity: _nodeListViewLV.currentIndex === index ? 0.5 : 0
     }
 }

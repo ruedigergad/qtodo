@@ -31,11 +31,11 @@
 import QtQuick 2.0
 
 Item {
-    id: nodeListItem
+    id: nodeListViewItem
 
-    property alias model: nodeListView.model
-    property alias currentIndex: nodeListView.currentIndex
-    property alias currentItem: nodeListView.currentItem
+    property alias model: _nodeListViewLV.model
+    property alias currentIndex: _nodeListViewLV.currentIndex
+    property alias currentItem: _nodeListViewLV.currentItem
     property int level;
     property bool movingItem: false
     property int tempContentY
@@ -64,20 +64,20 @@ Item {
         onChanged: {
             if (! movingItem) {
                 storage.save()
-                currentIndex = -1
-                currentIndex = tempIndex
-                nodeListView.contentY = tempContentY
+//                currentIndex = -1
+//                currentIndex = tempIndex
+//                _nodeListViewLV.contentY = tempContentY
             }
         }
 
-        onModelAboutToBeReset: {
-            tempContentY = nodeListView.contentY
-            tempIndex = currentIndex
-        }
+//        onModelAboutToBeReset: {
+//            tempContentY = _nodeListViewLV.contentY
+//            tempIndex = currentIndex
+//        }
     }
 
     function updateLabels() {
-        var listEmpty = (nodeListView.model.rowCount() <= 0)
+        var listEmpty = (_nodeListViewLV.model.rowCount() <= 0)
         emptyListItem.visible = listEmpty
     }
 
@@ -140,10 +140,10 @@ Item {
 
             if(lastPosition - currentPosition > moveDelta){
                 lastPosition = currentPosition
-                moveItem(nodeListView.currentIndex - 1)
+                moveItem(_nodeListViewLV.currentIndex - 1)
             }else if (lastPosition - currentPosition < -moveDelta){
                 lastPosition = currentPosition
-                moveItem(nodeListView.currentIndex + 1)
+                moveItem(_nodeListViewLV.currentIndex + 1)
             }
         }
 
@@ -153,19 +153,19 @@ Item {
         }
 
         function moveItem(targetIndex) {
-            if(targetIndex >= 0 && targetIndex < nodeListView.count){
-                nodeListView.model.move(nodeListView.currentIndex, targetIndex)
-                nodeListView.currentIndex = targetIndex
+            if(targetIndex >= 0 && targetIndex < _nodeListViewLV.count){
+                _nodeListViewLV.model.move(_nodeListViewLV.currentIndex, targetIndex)
+                _nodeListViewLV.currentIndex = targetIndex
             }
         }
     }
 
     FlowListView {
-        id: nodeListView
+        id: _nodeListViewLV
         anchors.fill: parent
 
         onCountChanged: {
-            nodeListItem.countChanged(count)
+            nodeListViewItem.countChanged(count)
             updateLabels()
         }
 
@@ -190,10 +190,10 @@ Item {
                 return
             }
 
-            if (currentItem.currentY > (nodeListView.contentHeight * nodeListView.visibleArea.heightRatio) + nodeListView.contentY) {
-                nodeListView.contentY += currentItem.currentHeight
-            } else if (currentItem.currentY < nodeListView.contentY) {
-                nodeListView.contentY -= currentItem.currentHeight
+            if (currentItem.currentY > (_nodeListViewLV.contentHeight * _nodeListViewLV.visibleArea.heightRatio) + _nodeListViewLV.contentY) {
+                _nodeListViewLV.contentY += currentItem.currentHeight
+            } else if (currentItem.currentY < _nodeListViewLV.contentY) {
+                _nodeListViewLV.contentY -= currentItem.currentHeight
             }
         }
 
