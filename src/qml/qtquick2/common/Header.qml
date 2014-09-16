@@ -51,7 +51,7 @@ Rectangle {
         spacing: header.height * 0.25
 
         model: ListModel {
-            ListElement {}
+            ListElement {level: 0}
         }
 
         delegate: Rectangle {
@@ -66,12 +66,12 @@ Rectangle {
 
             border.width: height * 0.2
             border.color: headerText.color
-            color: ((index + 1) === levelIndicator.count || animationRunning ) ? headerText.color : "transparent"
+            color: ((level + 1) === levelIndicator.count || animationRunning ) ? headerText.color : "transparent"
         }
 
         Connections {
             target: mainRectangle.treeView
-            onLevelIncrement: levelIndicator.model.append({})
+            onLevelIncrement: levelIndicator.model.append({level: levelIndicator.count})
             onLevelDecrement: levelIndicator.model.remove(levelIndicator.count - 1)
         }
     }
