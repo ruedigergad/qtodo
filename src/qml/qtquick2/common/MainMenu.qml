@@ -49,6 +49,9 @@ Item {
         menuBorder.height = menuArea.height
     }
 
+    onClosing: {background.opacity = 0}
+    onOpening: {background.opacity = 0.75}
+
     anchors.fill: parent
     enabled: false
     visible: enabled
@@ -59,7 +62,13 @@ Item {
 
         anchors.fill: parent
         color: "black"
-        opacity: menu.enabled ? 0.75 : 0
+        opacity: 0
+
+        Behavior on opacity {
+            SequentialAnimation {
+                PropertyAnimation { duration: secondaryAnimationDuration }
+            }
+        }
     }
 
     MouseArea {
@@ -86,7 +95,7 @@ Item {
 
         Behavior on height {
             SequentialAnimation {
-                PropertyAnimation { duration: 120 }
+                PropertyAnimation { duration: secondaryAnimationDuration }
                 ScriptAction {
                     script: {
                         if (menu.isOpening) {

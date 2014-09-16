@@ -255,7 +255,7 @@ Rectangle {
         menuBottomOffset: toolBar.height
 
         onClosed: toolBar.enabled = true
-        onOpened: toolBar.enabled = false
+        onOpening: toolBar.enabled = false
     }
 
 //    Menu {
