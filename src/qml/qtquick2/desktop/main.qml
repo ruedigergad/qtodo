@@ -133,16 +133,31 @@ Rectangle {
             anchors{left: parent.left; right: parent.right; top: header.bottom; bottom: parent.bottom}
             focus: true
 
+            Timer {
+                id: deferredExpandTreeTimer
+
+                interval: 50
+                onTriggered: mainRectangle.treeView.expandTree()
+            }
+
             Keys.onDownPressed:{
                 if (mainRectangle.treeView.currentNodeListView.currentIndex < (mainRectangle.treeView.currentNodeListView.model.count - 1)) {
                     mainRectangle.treeView.currentNodeListView.currentIndex++
-                    mainRectangle.treeView.expandTree()
+                    if (! event.isAutoRepeat) {
+                        mainRectangle.treeView.expandTree()
+                    } else {
+                        deferredExpandTreeTimer.restart()
+                    }
                 }
             }
             Keys.onUpPressed: {
                 if (mainRectangle.treeView.currentNodeListView.currentIndex > 0) {
                     mainRectangle.treeView.currentNodeListView.currentIndex--
-                    mainRectangle.treeView.expandTree()
+                    if (! event.isAutoRepeat) {
+                        mainRectangle.treeView.expandTree()
+                    } else {
+                        deferredExpandTreeTimer.restart()
+                    }
                 }
             }
             Keys.onLeftPressed: mainRectangle.treeView.currentLevel--
