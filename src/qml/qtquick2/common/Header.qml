@@ -54,7 +54,7 @@ Rectangle {
             ListElement {level: 0}
         }
 
-        delegate: Rectangle {
+        delegate: Item {
             id: levelIndicatorDelegate
 
             property bool animationRunning: false
@@ -65,9 +65,32 @@ Rectangle {
             width: height
             anchors.verticalCenter: parent.verticalCenter
 
-            border.width: height * 0.2
-            border.color: headerText.color
-            color: ((level + 1) === levelIndicator.count || animationRunning ) ? headerText.color : "transparent"
+            Rectangle {
+                id: levelIndicatorDelegateFilled
+
+                anchors.fill: parent
+                border.width: height * 0.2
+                border.color: headerText.color
+                color: headerText.color
+                opacity: ((level + 1) === levelIndicator.count || animationRunning) ? 1.0 : 0.0
+                visible: parent.visible
+
+                Behavior on opacity {
+                    SequentialAnimation {
+                        PropertyAnimation { duration: primaryAnimationDuration }
+                    }
+                }
+            }
+
+            Rectangle {
+                id: levelIndicatorDelegateBorder
+
+                anchors.fill: parent
+                border.width: height * 0.2
+                border.color: headerText.color
+                color: "transparent"
+                visible: parent.visible
+            }
 
             ListView.onAdd: SequentialAnimation {
                 PropertyAction { target: levelIndicatorDelegate; property: "animationRunning"; value: true }
@@ -75,7 +98,7 @@ Rectangle {
                 // Setting x via PropertyAction causes the item to shortly show up at the target position.
                 NumberAnimation { target: levelIndicatorDelegate; property: "x"; to: header.width + width; duration: 1; easing.type: Easing.InOutQuad }
                 PropertyAction { target: levelIndicatorDelegate; property: "visible"; value: true }
-                NumberAnimation { target: levelIndicatorDelegate; property: "x"; to: x + ((levelIndicator.spacing + width) * level); duration: primarAnimationDuration; easing.type: Easing.InOutQuad }
+                NumberAnimation { target: levelIndicatorDelegate; property: "x"; to: x + ((levelIndicator.spacing + width) * level); duration: primaryAnimationDuration; easing.type: Easing.InOutQuad }
                 PropertyAction { target: levelIndicatorDelegate; property: "animationRunning"; value: false }
             }
 
