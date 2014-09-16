@@ -100,7 +100,7 @@ Item {
 
     transitions: Transition {
         SequentialAnimation {
-            AnchorAnimation { duration: 250; easing.type: Easing.OutCubic }
+            AnchorAnimation { duration: primaryAnimationDuration; easing.type: Easing.OutCubic }
             ScriptAction { script: editToDoSheet.finished() }
         }
     }
