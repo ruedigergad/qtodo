@@ -15,7 +15,7 @@
    id="svg2393"
    sodipodi:version="0.32"
    inkscape:version="0.48.5 r10040"
-   sodipodi:docname="qtodo.svg"
+   sodipodi:docname="harbour-qtodo.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape"
    inkscape:export-filename="/home/rc/repositories/private/qt/qtodo/src/harbour-qtodo.png"
    inkscape:export-xdpi="96.75"
@@ -99,8 +99,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="5.598901"
-     inkscape:cx="0.20787823"
-     inkscape:cy="31.992002"
+     inkscape:cx="-22.028629"
+     inkscape:cy="41.993678"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:grid-bbox="true"
@@ -128,7 +128,7 @@
      inkscape:groupmode="layer"
      transform="translate(0,48)">
     <g
-       transform="matrix(2.5286196,0,0,2.5286196,-0.4579136,-48.457914)"
+       transform="matrix(2.93266,0,0,2.93266,-6.92256,-54.92256)"
        id="g2994">
       <rect
          y="2.7384691"
