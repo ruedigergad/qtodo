@@ -236,7 +236,6 @@ void NodeListModel::setAttribute(int rowIndex, QString name, QString value){
 }
 
 void NodeListModel::move(int from, int to){
-    beginResetModel();
     if(childNodes.at(0).isText()){
         from++;
         to++;
@@ -248,7 +247,15 @@ void NodeListModel::move(int from, int to){
     }else{
         parentElement.insertAfter(temp, childNodes.at(to - 1));
     }
-    endResetModel();
+
+    const QModelIndex fromIndex = index(from, 0);
+    const QModelIndex toIndex = index(to, 0);
+
+    if (from < to) {
+        emit dataChanged(fromIndex, toIndex);
+    } else {
+        emit dataChanged(toIndex, fromIndex);
+    }
 }
 
 int NodeListModel::countSubTodos(int index, bool todoOnly, bool recursive){

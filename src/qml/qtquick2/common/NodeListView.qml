@@ -58,27 +58,24 @@ Item {
         return "#00ff00"
     }
 
-    Connections {
-        target: model
-
-        onChanged: {
-            if (! movingItem) {
-                storage.save()
-//                currentIndex = -1
-//                currentIndex = tempIndex
-//                _nodeListViewLV.contentY = tempContentY
-            }
+    function moveItem(targetIndex) {
+        if(targetIndex >= 0 && targetIndex < _nodeListViewLV.count){
+            _nodeListViewLV.model.move(_nodeListViewLV.currentIndex, targetIndex)
+            _nodeListViewLV.currentIndex = targetIndex
         }
-
-//        onModelAboutToBeReset: {
-//            tempContentY = _nodeListViewLV.contentY
-//            tempIndex = currentIndex
-//        }
     }
 
     function updateLabels() {
         var listEmpty = (_nodeListViewLV.model.rowCount() <= 0)
         emptyListItem.visible = listEmpty
+    }
+
+    Connections {
+        target: model
+
+        onChanged: {
+            storage.save()
+        }
     }
 
     onExpandTree: {
@@ -117,46 +114,6 @@ Item {
             horizontalAlignment: Text.AlignHCenter
             color: "gray"
             anchors.top: anchorBase.bottom
-        }
-    }
-
-    PinchArea {
-        id: dndArea
-        anchors.fill: parent
-
-        property real lastPosition: 0
-        property real moveDelta: 40
-
-        onPinchStarted: {
-            movingItem = true
-            lastPosition = pinch.startPoint2.y
-        }
-
-        onPinchUpdated: {
-            var currentPosition = pinch.point2.y
-
-            if(currentPosition === pinch.point1.y)
-                return
-
-            if(lastPosition - currentPosition > moveDelta){
-                lastPosition = currentPosition
-                moveItem(_nodeListViewLV.currentIndex - 1)
-            }else if (lastPosition - currentPosition < -moveDelta){
-                lastPosition = currentPosition
-                moveItem(_nodeListViewLV.currentIndex + 1)
-            }
-        }
-
-        onPinchFinished: {
-            movingItem = false
-            storage.save()
-        }
-
-        function moveItem(targetIndex) {
-            if(targetIndex >= 0 && targetIndex < _nodeListViewLV.count){
-                _nodeListViewLV.model.move(_nodeListViewLV.currentIndex, targetIndex)
-                _nodeListViewLV.currentIndex = targetIndex
-            }
         }
     }
 
@@ -249,6 +206,47 @@ Item {
 
             NodeListDelegateContainer {
                 id: nodeListDelegateContainer
+            }
+        }
+    }
+
+    MouseArea {
+        anchors {top: parent.top; bottom: parent.bottom; left: parent.left}
+        propagateComposedEvents: true
+        width: 50
+
+        property real lastPosition: 0
+        property real moveDelta: primaryFontSize
+        property bool moving: false
+
+        onClicked: {
+            if (!moving) {
+                mouse.accepted = false
+            }
+        }
+
+        onMouseYChanged: {
+            if(lastPosition - mouseY > moveDelta){
+                console.log("Moving item down.")
+                moving = true
+                lastPosition = mouseY
+                moveItem(currentIndex - 1)
+            }else if (lastPosition - mouseY < -moveDelta){
+                console.log("Moving item up.")
+                moving = true
+                lastPosition = mouseY
+                moveItem(currentIndex + 1)
+            }
+        }
+
+        onPressed: {
+            lastPosition = mouseY
+        }
+
+        onReleased: {
+            if (moving) {
+                storage.save()
+                moving = false
             }
         }
     }

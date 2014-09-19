@@ -128,6 +128,8 @@ Item {
 
             MouseArea {
                 anchors.fill: parent
+                preventStealing: true
+
                 onClicked: {
                     selectItem()
                     treeView.toggleDone()
