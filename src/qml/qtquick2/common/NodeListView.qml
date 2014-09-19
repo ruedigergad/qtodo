@@ -147,10 +147,10 @@ Item {
                 return
             }
 
-            if (currentItem.currentY > (_nodeListViewLV.contentHeight * _nodeListViewLV.visibleArea.heightRatio) + _nodeListViewLV.contentY) {
-                _nodeListViewLV.contentY += currentItem.currentHeight
+            if (currentItem.currentY > (_nodeListViewLV.contentHeight * _nodeListViewLV.visibleArea.heightRatio) + _nodeListViewLV.contentY - currentItem.currentHeight) {
+                _nodeListViewLV.contentY = currentItem.currentY + currentItem.currentHeight - (_nodeListViewLV.contentHeight * _nodeListViewLV.visibleArea.heightRatio)
             } else if (currentItem.currentY < _nodeListViewLV.contentY) {
-                _nodeListViewLV.contentY -= currentItem.currentHeight
+                _nodeListViewLV.contentY = currentItem.currentY
             }
         }
 
