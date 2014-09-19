@@ -212,18 +212,12 @@ Item {
 
     MouseArea {
         anchors {top: parent.top; bottom: parent.bottom; left: parent.left}
-        propagateComposedEvents: true
-        width: 50
+        preventStealing: true
+        width: parent.width * 0.125
 
         property real lastPosition: 0
         property real moveDelta: primaryFontSize
         property bool moving: false
-
-        onClicked: {
-            if (!moving) {
-                mouse.accepted = false
-            }
-        }
 
         onMouseYChanged: {
             if(lastPosition - mouseY > moveDelta){
