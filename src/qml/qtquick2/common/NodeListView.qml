@@ -119,7 +119,9 @@ Item {
 
     ListView {
         id: _nodeListViewLV
+
         anchors.fill: parent
+        clip: true
 
         onCountChanged: {
             nodeListViewItem.countChanged(count)
