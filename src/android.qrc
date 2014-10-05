@@ -1,0 +1,79 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="/common/AboutDialog.qml">qml/qtquick2/common/AboutDialog.qml</file>
+        <file alias="/common/Drawing.qml">qml/qtquick2/common/Drawing.qml</file>
+        <file alias="/common/EditSketchSheet.qml">qml/qtquick2/common/EditSketchSheet.qml</file>
+        <file alias="/common/EditToDoSheet.qml">qml/qtquick2/common/EditToDoSheet.qml</file>
+        <file alias="/common/FastScroll.js">qml/qtquick2/common/FastScroll.js</file>
+        <file alias="/common/FastScroll.qml">qml/qtquick2/common/FastScroll.qml</file>
+        <file alias="/common/FlowListView.qml">qml/qtquick2/common/FlowListView.qml</file>
+        <file alias="/common/Header.qml">qml/qtquick2/common/Header.qml</file>
+        <file alias="/common/ImapAccountSettingsSheet.qml">qml/qtquick2/common/ImapAccountSettingsSheet.qml</file>
+        <file alias="/common/MainMenu.qml">qml/qtquick2/common/MainMenu.qml</file>
+        <file alias="/common/MessageDialog.qml">qml/qtquick2/common/MessageDialog.qml</file>
+        <file alias="/common/NodeListDelegate.qml">qml/qtquick2/common/NodeListDelegate.qml</file>
+        <file alias="/common/nodelisthelper.js">qml/qtquick2/common/nodelisthelper.js</file>
+        <file alias="/common/NodeListView.qml">qml/qtquick2/common/NodeListView.qml</file>
+        <file alias="/common/ProgressDialog.qml">qml/qtquick2/common/ProgressDialog.qml</file>
+        <file alias="/common/QToDoToolBar.qml">qml/qtquick2/common/QToDoToolBar.qml</file>
+        <file alias="/common/SelectionDialog.qml">qml/qtquick2/common/SelectionDialog.qml</file>
+        <file alias="/common/TreeView.qml">qml/qtquick2/common/TreeView.qml</file>
+        <file alias="/common/CommonButton.qml">qml/qtquick2/desktop/common/CommonButton.qml</file>
+        <file alias="/common/CommonDialog.qml">qml/qtquick2/desktop/common/CommonDialog.qml</file>
+        <file alias="/common/CommonFlickable.qml">qml/qtquick2/desktop/common/CommonFlickable.qml</file>
+        <file alias="/common/CommonTextArea.qml">qml/qtquick2/desktop/common/CommonTextArea.qml</file>
+        <file alias="/common/CommonTextField.qml">qml/qtquick2/desktop/common/CommonTextField.qml</file>
+        <file alias="/common/CommonToolIcon.qml">qml/qtquick2/desktop/common/CommonToolIcon.qml</file>
+        <file alias="/common/ConfirmationDialog.qml">qml/qtquick2/desktop/common/ConfirmationDialog.qml</file>
+        <file alias="/common/Dialog.qml">qml/qtquick2/desktop/common/Dialog.qml</file>
+        <file alias="/common/NodeListDelegateContainer.qml">qml/qtquick2/desktop/common/NodeListDelegateContainer.qml</file>
+        <file alias="/main.qml">qml/qtquick2/android/main.qml</file>
+        <file alias="/common/MainRectangle.qml">qml/qtquick2/android/common/MainRectangle.qml</file>
+        <file>icons/back.png</file>
+        <file>icons/back.svg</file>
+        <file>icons/logo.png</file>
+        <file>icons/logo.svg</file>
+        <file>icons/next.png</file>
+        <file>icons/next.svg</file>
+        <file>icons/note.png</file>
+        <file>icons/note.svg</file>
+        <file>icons/sketch_black.png</file>
+        <file>icons/sketch_black.svg</file>
+        <file>icons/sketch_blue.png</file>
+        <file>icons/sketch_blue.svg</file>
+        <file>icons/sketch_erase.png</file>
+        <file>icons/sketch_erase.svg</file>
+        <file>icons/sketch_green.png</file>
+        <file>icons/sketch_green.svg</file>
+        <file>icons/sketch_red.png</file>
+        <file>icons/sketch_red.svg</file>
+        <file>icons/sketch_yellow.png</file>
+        <file>icons/sketch_yellow.svg</file>
+        <file>icons/sketch.png</file>
+        <file>icons/sketch.svg</file>
+        <file>icons/to-do_blue.png</file>
+        <file>icons/to-do_blue.svg</file>
+        <file>icons/to-do_done_blue.png</file>
+        <file>icons/to-do_done_blue.svg</file>
+        <file>icons/to-do_done_green.png</file>
+        <file>icons/to-do_done_green.svg</file>
+        <file>icons/to-do_done_red.png</file>
+        <file>icons/to-do_done_red.svg</file>
+        <file>icons/to-do_done_yellow.png</file>
+        <file>icons/to-do_done_yellow.svg</file>
+        <file>icons/to-do_done.png</file>
+        <file>icons/to-do_done.svg</file>
+        <file>icons/to-do_green.png</file>
+        <file>icons/to-do_green.svg</file>
+        <file>icons/to-do_red.png</file>
+        <file>icons/to-do_red.svg</file>
+        <file>icons/to-do_yellow.png</file>
+        <file>icons/to-do_yellow.svg</file>
+        <file>icons/add.png</file>
+        <file>icons/add.svg</file>
+        <file>icons/delete.png</file>
+        <file>icons/delete.svg</file>
+        <file>icons/menu.png</file>
+        <file>icons/menu.svg</file>
+    </qresource>
+</RCC>

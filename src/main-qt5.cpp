@@ -32,10 +32,11 @@
 
 #if defined(MER_EDITION_SAILFISH)
 #include <sailfishapp.h>
+#else
+#include <QApplication>
 #endif
 
 #if defined(LINUX_DESKTOP)
-#include <QApplication>
 #include "qtodotrayicon.h"
 #endif
 
@@ -63,7 +64,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 #if defined(MER_EDITION_SAILFISH)
     QGuiApplication *app = SailfishApp::application(argc, argv);
     QQuickView *view = SailfishApp::createView();
-#elif defined(LINUX_DESKTOP)
+#else
     QApplication *app = new QApplication(argc, argv);
     QQuickView *view = new QQuickView();
 #endif
@@ -83,7 +84,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     qmlRegisterType<Merger>("harbour.qtodo", 1, 0, "Merger");
     qmlRegisterType<NodeListModel>("harbour.qtodo", 1, 0, "NodeListModel");
     qmlRegisterType<ToDoStorage>("harbour.qtodo", 1, 0, "ToDoStorage");
-#elif defined(LINUX_DESKTOP)
+#else
     qmlRegisterType<Merger>("qtodo", 1, 0, "Merger");
     qmlRegisterType<NodeListModel>("qtodo", 1, 0, "NodeListModel");
     qmlRegisterType<ToDoStorage>("qtodo", 1, 0, "ToDoStorage");
@@ -91,8 +92,11 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     app->setApplicationName("Q To-Do");
     app->setApplicationDisplayName("Q To-Do");
 
-    QIcon icon(":/icon/icon.png");
-    view->setIcon(icon);
+//    QIcon icon(":/icon/icon.png");
+//    view->setIcon(icon);
+#endif
+
+#if defined(LINUX_DESKTOP)
     QTodoTrayIcon *trayIcon = new QTodoTrayIcon(icon, view, app);
     trayIcon->show();
 #endif
@@ -118,11 +122,13 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
         return -1;
     }
     view->setSource(mainQmlLocation);
+#elif defined(Q_OS_ANDROID)
+    view->setSource(QUrl(QStringLiteral("qrc:/main.qml")));
 #endif
 
     view->setResizeMode(QQuickView::SizeRootObjectToView);
 
-#if defined(MER_EDITION_SAILFISH)
+#if defined(MER_EDITION_SAILFISH) || defined(Q_OS_ANDROID)
     view->show();
 #elif defined(LINUX_DESKTOP)
     view->resize(400, 500);
