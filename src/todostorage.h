@@ -26,7 +26,7 @@
 #include <QDomElement>
 
 #define DEFAULT_PATH QDir::homePath() + "/to-do-o"
-#define DEFAULT_FILE DEFAULT_PATH + "/default.xml"
+#define DEFAULT_FILE "/default.xml"
 
 class ToDoStorage : public QObject
 {
@@ -38,7 +38,7 @@ public:
     QDomDocument getDocument() { return document; }
     QDomElement getRootElement() { return document.documentElement(); }
 
-    Q_INVOKABLE QString getPath() { return DEFAULT_PATH ; }
+    Q_INVOKABLE QString getPath();
     Q_INVOKABLE void open();
     Q_INVOKABLE void open(QString fileName);
 

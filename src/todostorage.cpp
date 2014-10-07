@@ -23,17 +23,22 @@
 #include <QFile>
 #include <QTextStream>
 
+#ifdef Q_OS_ANDROID
+#include <QStandardPaths>
+#endif
+
 ToDoStorage::ToDoStorage(QObject *parent) :
     QObject(parent)
 {
-    if (!QDir().exists(getPath())) {
-        QDir().mkdir(getPath());
+    QString path = getPath();
+    if (!QDir().exists(path)) {
+        QDir().mkdir(path);
     }
-    if (!QDir().exists(getPath() + "/sketches")) {
-        QDir().mkdir(getPath() + "/sketches");
+    if (!QDir().exists(path + "/sketches")) {
+        QDir().mkdir(path + "/sketches");
     }
-    if (! QFile::exists(DEFAULT_FILE)) {
-        QFile file(DEFAULT_FILE);
+    if (! QFile::exists(path + DEFAULT_FILE)) {
+        QFile file(path + DEFAULT_FILE);
         file.open(QFile::WriteOnly);
         // Quite a hack but this should work for now...
         file.write("<?xml version='1.0' encoding='UTF-8'?><root></root>");
@@ -46,8 +51,16 @@ ToDoStorage::~ToDoStorage(){
     document.clear();
 }
 
+QString ToDoStorage::getPath() {
+#ifdef Q_OS_ANDROID
+    return QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(1);
+#else
+    return DEFAULT_PATH;
+#endif
+}
+
 void ToDoStorage::open(){
-    open(DEFAULT_FILE);
+    open(getPath() + DEFAULT_FILE);
 }
 
 void ToDoStorage::open(QString fileName){
@@ -74,7 +87,7 @@ void ToDoStorage::open(QString fileName){
 }
 
 void ToDoStorage::save(){
-    save(DEFAULT_FILE);
+    save(getPath() + DEFAULT_FILE);
 }
 
 void ToDoStorage::save(QString fileName){
