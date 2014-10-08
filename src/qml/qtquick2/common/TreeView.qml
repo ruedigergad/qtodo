@@ -122,6 +122,9 @@ Item {
          */
         NodeListHelper.views[currentLevel+1].currentIndex = -1
         NodeListHelper.views[currentLevel+1].model.setParentFromSelection(model, index)
+        if (NodeListHelper.views[currentLevel+1].model.count > 0) {
+            NodeListHelper.views[currentLevel+1].currentIndex = 0
+        }
     }
 
     function toggleDone() {
