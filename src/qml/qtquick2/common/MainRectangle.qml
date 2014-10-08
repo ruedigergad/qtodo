@@ -39,7 +39,7 @@ Item {
     property bool isTodo
 
     function addItem() {
-        editToDoItem.color = "blue"
+        editToDoItem.itemColor = "blue"
         editToDoItem.type = "to-do"
         editToDoItem.text = ""
         editToDoItem.edit = false
@@ -64,7 +64,7 @@ Item {
             editSketchItem.edit = true
             editSketchItem.open()
         } else {
-            editToDoItem.color = currentItem.itemColor
+            editToDoItem.itemColor = currentItem.itemColor
             editToDoItem.type = currentItem.type
             editToDoItem.text = currentItem.text
             editToDoItem.edit = true
