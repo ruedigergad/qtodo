@@ -326,6 +326,8 @@ android: {
         qml/qtquick2/common/SyncMessageDeleter.qml \
         qml/qtquick2/common/SyncToImapBase.qml \
         qml/qtquick2/common/TreeView.qml \
+        qml/qtquick2/android/main.qml \
+        qml/qtquick2/android/common/MainRectangle.qml \
         qml/qtquick2/desktop/main.qml \
         qml/qtquick2/desktop/MainMenu.qml \
         qml/qtquick2/desktop/common/CommonButton.qml \
