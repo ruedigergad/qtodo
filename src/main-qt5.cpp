@@ -91,12 +91,11 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
 
     app->setApplicationName("Q To-Do");
     app->setApplicationDisplayName("Q To-Do");
-
-//    QIcon icon(":/icon/icon.png");
-//    view->setIcon(icon);
 #endif
 
 #if defined(LINUX_DESKTOP)
+    QIcon icon(":/icon/icon.png");
+    view->setIcon(icon);
     QTodoTrayIcon *trayIcon = new QTodoTrayIcon(icon, view, app);
     trayIcon->show();
 #endif
