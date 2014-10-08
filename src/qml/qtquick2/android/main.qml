@@ -25,12 +25,11 @@ Rectangle {
 
     color: "white"
     opacity: 1
-//    radius: primaryFontSize * 0.5
 
-    property int primaryFontSize: 35
-    property int primaryBorderSize: 35
-    property int secondaryFontSize: 25
-    property int secondaryBorderSize: 25
+    property int primaryFontSize: 30
+    property int primaryBorderSize: 30
+    property int secondaryFontSize: 20
+    property int secondaryBorderSize: 20
 
     property string primaryFontColor: "black"
     property string secondaryFontColor: "black"
@@ -44,7 +43,7 @@ Rectangle {
     property double primaryColorSchemeOpacity: 1
     property string secondaryColorSchemeColor: "#00f000"
     property double secondaryColorSchemeOpacity: 1
-    property string tertiaryColorSchemeColor: "#00d000"
+    property string tertiaryColorSchemeColor: "#00c000"
     property double tertiaryColorSchemeOpacity: 1
 
     property int primaryAnimationDuration: 250
@@ -61,68 +60,7 @@ Rectangle {
         Header {
             id: header
 
-//            radius: parent.radius
-//            textColor: applicationWindow.windowFocus ? "white" : "black"
             textColor: "white"
-
-            /*
-             * Thanks to alexisdm
-             * http://stackoverflow.com/questions/10203260/moving-the-window-on-holding-qml-mousearea
-             * for the hint on how to move the application window via QML
-             */
-            MouseArea {
-                anchors.fill: parent
-                property variant previousPosition
-
-                onPressed: {
-                    previousPosition = Qt.point(mouseX, mouseY)
-                }
-
-                onPositionChanged: {
-                    if (pressedButtons == Qt.LeftButton) {
-                        var dx = mouseX - previousPosition.x
-                        var dy = mouseY - previousPosition.y
-//                        applicationWindow.pos = Qt.point(applicationWindow.pos.x + dx,
-//                                                    applicationWindow.pos.y + dy)
-                    }
-                }
-            }
-
-//            Text {
-//                anchors.right: closeText.left
-//                anchors.rightMargin: primaryFontSize - (primaryFontSize / 2)
-//                anchors.verticalCenter: parent.verticalCenter
-
-//                text: "-"
-//                font.pointSize: primaryFontSize * 1.5
-//                color: "white"
-
-//                MouseArea {
-//                    anchors.fill: parent
-//                    onClicked: {
-//                        trayIcon.toggleViewHide()
-//                    }
-//                }
-//            }
-
-//            Text {
-//                id: closeText
-
-//                anchors.right: parent.right
-//                anchors.rightMargin: primaryFontSize - (primaryFontSize / 2)
-//                anchors.verticalCenter: parent.verticalCenter
-
-//                text: "x"
-//                font.pointSize: primaryFontSize * 0.75
-//                color: "white"
-
-//                MouseArea {
-//                    anchors.fill: parent
-//                    onClicked: {
-//                        Qt.quit()
-//                    }
-//                }
-//            }
         }
 
         MainRectangle {
@@ -217,48 +155,13 @@ Rectangle {
     Rectangle {
         id: toolBar
         anchors {left: parent.left; right: parent.right; bottom: parent.bottom}
-        height: qtodoToolBar.height * 1.2
-
-//        property int minWidth: qtodoToolBar.minWidth + resizeItem.width + 40
+        height: qtodoToolBar.height + secondaryBorderSize * 0.5
 
         color: "white"
-//        radius: parent.radius
 
         QToDoToolBar {
             id: qtodoToolBar
         }
-
-//        Text {
-//            id: resizeItem
-//            anchors.right: parent.right
-//            anchors.rightMargin: 10
-//            anchors.verticalCenter: parent.verticalCenter
-
-//            font.bold: true
-//            font.pointSize: primaryFontSize * 0.75
-//            text: "o"
-
-//            MouseArea {
-//                anchors.fill: parent
-//                property variant previousPosition
-
-//                onPressed: {
-//                    previousPosition = Qt.point(mouseX, mouseY)
-//                }
-
-//                onPositionChanged: {
-//                    if (pressedButtons == Qt.LeftButton) {
-//                        var dx = mouseX - previousPosition.x
-//                        var dy = mouseY - previousPosition.y
-
-////                        var newWidth = applicationWindow.size.width + dx
-
-////                        applicationWindow.size = Qt.size(newWidth < toolBar.minWidth ? toolBar.minWidth : newWidth,
-////                                                    applicationWindow.size.height + dy)
-//                    }
-//                }
-//            }
-//        }
     }
 
     MainMenu {
@@ -269,67 +172,6 @@ Rectangle {
         onClosed: toolBar.enabled = true
         onOpening: toolBar.enabled = false
     }
-
-//    Menu {
-//        id: contextMenu
-
-//        anchors.bottomMargin: toolBar.height
-
-//        onClosed: toolBar.enabled = true
-//        onOpened: toolBar.enabled = false
-
-//        CommonButton{
-//            id: moveToTopItem
-//            anchors.bottom: moveToBottomItem.top
-//            anchors.bottomMargin: primaryFontSize / 3
-//            anchors.horizontalCenter: parent.horizontalCenter
-//            width: parent.width - primaryFontSize
-//            text: "Move to Top"
-//            onClicked: {
-//                mainRectangle.moveCurrentItemToTop()
-//                contextMenu.close()
-//            }
-//        }
-
-//        CommonButton{
-//            id: moveToBottomItem
-//            anchors.bottom: editItem.top
-//            anchors.bottomMargin: primaryFontSize / 3
-//            anchors.horizontalCenter: parent.horizontalCenter
-//            width: parent.width - primaryFontSize
-//            text: "Move to Bottom"
-//            onClicked: {
-//                mainRectangle.moveCurrentItemToBottom()
-//                contextMenu.close()
-//            }
-//        }
-
-//        CommonButton{
-//            id: editItem
-//            anchors.bottom: deleteItem.top
-//            anchors.bottomMargin: primaryFontSize / 3
-//            anchors.horizontalCenter: parent.horizontalCenter
-//            width: parent.width - primaryFontSize
-//            text: "Edit"
-//            onClicked: {
-//                mainRectangle.editCurrentItem()
-//                contextMenu.close()
-//            }
-//        }
-
-//        CommonButton{
-//            id: deleteItem
-//            anchors.bottom: parent.bottom
-//            anchors.bottomMargin: primaryFontSize / 3
-//            anchors.horizontalCenter: parent.horizontalCenter
-//            width: parent.width - primaryFontSize
-//            text: "Delete"
-//            onClicked: {
-//                mainRectangle.deleteCurrentItem()
-//                contextMenu.close()
-//            }
-//        }
-//    }
 
     EditToDoSheet {
         id: editToDoItem
