@@ -194,6 +194,7 @@ Rectangle {
             clip: true
             contentHeight: sheetContent.height + secondaryBorderSize * 0.25
             height: Math.min(contentHeight, parent.height - bottomBar.height) + bottomBar.anchors.topMargin
+
             Column {
                 id: sheetContent
                 spacing: secondaryBorderSize
