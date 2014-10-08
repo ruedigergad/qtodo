@@ -25,19 +25,19 @@ Row {
     property string iconNameSuffix: ""
 
     anchors {
-        left: parent.left; leftMargin: primaryBorderSize * 0.25
-        right: parent.right; rightMargin: primaryBorderSize * 0.25
+        left: parent.left; leftMargin: secondaryBorderSize * 0.25
+        right: parent.right; rightMargin: anchors.leftMargin
         verticalCenter: parent.verticalCenter
     }
     height: iconAdd.height
-    spacing: 0
+    spacing: anchors.leftMargin
 
     CommonToolIcon {
         id: iconAdd
         iconSource: "../icons/add" + iconNameSuffix + ".png"
         opacity: enabled ? 1 : 0.5
         onClicked: mainRectangle.addItem()
-        width: qtodoToolBar.width / 5
+        width: (qtodoToolBar.width - qtodoToolBar.spacing * 4) / 5
     }
 //    CommonToolIcon {
 //        id: iconSketch
@@ -51,7 +51,7 @@ Row {
         enabled: mainRectangle.treeView.currentItem != null && mainRectangle.treeView.currentItem.type === "to-do"
         opacity: enabled ? 1 : 0.5
         onClicked: mainRectangle.treeView.toggleDone()
-        width: qtodoToolBar.width / 5
+        width: iconAdd.width
     }
     CommonToolIcon {
         id: iconDelete
@@ -59,7 +59,7 @@ Row {
         enabled: mainRectangle.treeView.currentIndex >= 0
         opacity: enabled ? 1 : 0.5
         onClicked: mainRectangle.deleteCurrentItem()
-        width: qtodoToolBar.width / 5
+        width: iconAdd.width
     }
     CommonToolIcon {
         id: iconBack
@@ -67,13 +67,13 @@ Row {
         enabled: mainRectangle.treeView.currentLevel > 0
         opacity: enabled ? 1 : 0.5
         onClicked: mainRectangle.treeView.currentLevel--
-        width: qtodoToolBar.width / 5
+        width: iconAdd.width
     }
     CommonToolIcon {
         id: iconMenu
         iconSource: "../icons/menu" + iconNameSuffix + ".png"
         onClicked: ! mainMenu.isOpen ? mainMenu.open() : mainMenu.close()
         opacity: enabled ? 1 : 0.5
-        width: qtodoToolBar.width / 5
+        width: iconAdd.width
     }
 }

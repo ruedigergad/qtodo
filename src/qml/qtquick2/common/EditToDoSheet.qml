@@ -50,7 +50,6 @@ Rectangle {
             closed()
         }else{
             opened()
-            textInput.focus = true
         }
     }
 
@@ -140,6 +139,7 @@ Rectangle {
 
         anchors {top: topBar.bottom; left: parent.left; right: parent.right; margins: secondaryBorderSize * 0.25}
         height: blueButton.height + secondaryBorderSize * 0.25
+        spacing: secondaryBorderSize * 0.25
 
         CommonButton {
             id: blueButton
@@ -147,7 +147,7 @@ Rectangle {
 
             iconSource: "../icons/to-do_blue.png"
             selected: editToDoSheet.itemColor === "blue"
-            width: parent.width / 4
+            width: (parent.width - parent.spacing * 3) / 4
 
             onClicked: editToDoSheet.itemColor = "blue"
         }
@@ -156,7 +156,7 @@ Rectangle {
 
             iconSource: "../icons/to-do_green.png"
             selected: editToDoSheet.itemColor === "green"
-            width: parent.width / 4
+            width: blueButton.width
 
             onClicked: editToDoSheet.itemColor = "green"
         }
@@ -165,7 +165,7 @@ Rectangle {
 
             iconSource: "../icons/to-do_yellow.png"
             selected: editToDoSheet.itemColor === "yellow"
-            width: parent.width / 4
+            width: blueButton.width
 
             onClicked: editToDoSheet.itemColor = "yellow"
         }
@@ -174,7 +174,7 @@ Rectangle {
 
             iconSource: "../icons/to-do_red.png"
             selected: editToDoSheet.itemColor === "red"
-            width: parent.width / 4
+            width: blueButton.width
 
             onClicked: editToDoSheet.itemColor = "red"
         }
@@ -203,8 +203,9 @@ Rectangle {
 
                 CommonTextArea {
                     id: textInput
-                    width: parent.width
+
                     textFormat: TextEdit.PlainText
+                    width: parent.width
 
                     onKeyPressed: {
                         if (event.modifiers & Qt.AltModifier) {
@@ -247,7 +248,6 @@ Rectangle {
 
                 anchors.left: parent.left
                 anchors.leftMargin: secondaryBorderSize * 0.25
-                anchors.verticalCenter: parent.verticalCenter
                 text: "Cancel"
                 width: (parent.width - 3 * secondaryBorderSize * 0.25) / 2
 
@@ -259,7 +259,6 @@ Rectangle {
 
                 anchors.right: parent.right
                 anchors.rightMargin: secondaryBorderSize * 0.25
-                anchors.verticalCenter: parent.verticalCenter
                 text: "OK"
                 width: rejectButton.width
 
