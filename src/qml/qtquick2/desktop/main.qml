@@ -47,7 +47,7 @@ Rectangle {
     property double primaryColorSchemeOpacity: 1
     property string secondaryColorSchemeColor: "#00f000"
     property double secondaryColorSchemeOpacity: 1
-    property string tertiaryColorSchemeColor: "#00d000"
+    property string tertiaryColorSchemeColor: "#00c000"
     property double tertiaryColorSchemeOpacity: 1
 
     property int primaryAnimationDuration: 250
@@ -220,7 +220,7 @@ Rectangle {
     Rectangle {
         id: toolBar
         anchors {left: parent.left; right: parent.right; bottom: parent.bottom}
-        height: qtodoToolBar.height * 1.2
+        height: qtodoToolBar.height + secondaryBorderSize * 0.5
 
 //        property int minWidth: qtodoToolBar.minWidth + resizeItem.width + 40
 
