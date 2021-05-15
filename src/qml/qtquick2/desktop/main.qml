@@ -346,7 +346,7 @@ Rectangle {
 //        id: editSketchItem
 //    }
 
-    ImapAccountSettingsSheet {
-        id: imapAccountSettings
-    }
+//    ImapAccountSettingsSheet {
+//        id: imapAccountSettings
+//    }
 }

@@ -19,8 +19,8 @@
 
 import QtQuick 2.0
 import qtodo 1.0
-import SyncToImap 1.0
-import "../synctoimap"
+//import SyncToImap 1.0
+//import "../synctoimap"
 
 Item {
     id: mainRectangle
@@ -33,7 +33,7 @@ Item {
     property alias confirmSyncSketchesToImapDialog: confirmSyncSketchesToImapDialog
     property alias treeView: treeView
 
-    property string _todoPath: fileHelper.home() + "/to-do-o"
+    property string _todoPath: "to-do-o"
     property string _sketchPath: _todoPath + "/sketches"
 
     property bool isTodo
@@ -186,7 +186,7 @@ Item {
         }
     }
 
-    FileHelper { id: fileHelper }
+ //   FileHelper { id: fileHelper }
 
     Merger {
         id: todoMerger
@@ -234,6 +234,7 @@ Item {
         currentValue: 0
     }
 
+/*
     SyncDirToImap {
         id: syncDirToImap
 
@@ -283,7 +284,7 @@ Item {
         onFinished: toolBar.enabled = true
         onStarted: toolBar.enabled = false
     }
-
+*/
     ToDoStorage {
         id: storage
 
