@@ -122,7 +122,7 @@ Item {
 
             CommonButton{
                 id: cleanDone
-                anchors.bottom: syncToImap.top
+                anchors.bottom: about.top
                 anchors.bottomMargin: primaryFontSize / 3
                 anchors.horizontalCenter: parent.horizontalCenter
                 width: parent.width - primaryFontSize
@@ -133,6 +133,7 @@ Item {
                 }
             }
 
+/*
             CommonButton{
                 id: syncToImap
                 anchors.bottom: syncSketchesToImap.top
@@ -171,6 +172,7 @@ Item {
                     mainMenu.close()
                 }
             }
+*/
 
             CommonButton{
                 id: about

@@ -56,7 +56,7 @@ Item {
         width: _nodeListViewLV.width * 0.5
 
         property string imgSource: tagName === "sketch" ? mainRectangle._sketchPath + "/" + elementText : ""
-        property bool imgExists: fileHelper.exists(imgSource)
+        property bool imgExists: false //fileHelper.exists(imgSource)
 
         Image {
             id: sketchImage
