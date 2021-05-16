@@ -24,7 +24,6 @@ Canvas {
     property int lineWidth: 2
     property string drawColor: "black"
     property string backgroundColor: "white"
-    property variant ctx
 
     MouseArea {
         id:mousearea
@@ -40,40 +39,54 @@ Canvas {
     }
 
     function drawLine(x1, y1, x2, y2) {
-        ctx.beginPath();
-        ctx.strokeStyle = drawColor
-        ctx.lineWidth = lineWidth
-        ctx.moveTo(x1, y1);
-        ctx.lineTo(x2, y2);
-        ctx.stroke();
-        ctx.closePath();
+        context.beginPath();
+        context.strokeStyle = drawColor
+        context.lineWidth = lineWidth
+        context.moveTo(x1, y1);
+        context.lineTo(x2, y2);
+        context.stroke();
+        context.closePath();
+        requestPaint()
     }
 
     function drawPoint() {
-        ctx.lineWidth = lineWidth
-        ctx.fillStyle = drawColor
-        ctx.fillRect(mousearea.mouseX, mousearea.mouseY, 2, 2);
+        context.lineWidth = lineWidth
+        context.fillStyle = drawColor
+        context.fillRect(mousearea.mouseX, mousearea.mouseY, 2, 2);
+        requestPaint()
     }
 
     function clear() {
-        ctx.fillStyle = backgroundColor
-        ctx.fillRect(0, 0, width, height);
-        ctx.fillStyle = drawColor
+        getContext("2d")
+        context.fillStyle = backgroundColor
+        context.fillRect(0, 0, width, height);
+        context.fillStyle = drawColor
     }
 
     // Added by Ruediger Gad
     // Code comes without warranty but is free for use without any further requirements.
+    property string path: ""
+    onImageLoaded: {
+        console.log("Image loaded. Drawing to canvas: " + path)
+        context.drawImage("file:/" + path, 0, 0, width, height)
+        requestPaint()
+    }
+
     function load(path) {
-        ctx = getContext("2d")
-        var img = ctx.createImage(path)
-        ctx.drawImage(img, 0, 0, width, height)
+        console.log("Loading existing image for editing: " + path)
+        canvas.path = path
+        clear()
+        if (isImageLoaded("file:/" + path)) {
+            imageLoaded()
+        } else {
+            loadImage("file:/" + path)
+        }
     }
     function init(){
-        ctx = getContext("2d")
         clear()
-        ctx.lineWidth = 1
-        ctx.strokeStyle = "salmon"
+        context.lineWidth = 1
+        context.strokeStyle = "salmon"
         var gap = 3
-        ctx.strokeRect(gap, gap, width - (2*gap), height - (2*gap));
+        context.strokeRect(gap, gap, width - (2*gap), height - (2*gap));
     }
 }
