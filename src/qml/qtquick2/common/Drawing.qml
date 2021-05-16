@@ -30,9 +30,13 @@ Canvas {
         hoverEnabled:true
         anchors.fill: parent
         onClicked: drawPoint();
+        onPressed: {
+            paintX = mouseX;
+            paintY = mouseY;
+        }
         onPositionChanged:  {
             if (mousearea.pressed)
-                drawLine(paintX, paintY, mousearea.mouseX, mousearea.mouseY);
+                drawLine(paintX, paintY, mouseX, mouseY);
             paintX = mouseX;
             paintY = mouseY;
         }
