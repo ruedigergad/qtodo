@@ -1,29 +1,20 @@
 /*
- * This file had been initally taken from the painting example in qmlcanvas.
- * At the time this file was taken there was no license attached 
- * to any of the files in the painting example.
- * 
- * Changes (by Ruediger Gad) include the adaptation of the import statements
- * the addition of the load function, or the introduction of the
- * backgroundColor property.
- * These changes come without any warranty and are free for use 
- * without any further requirements.
- *
- * You can find the original version at:
+ * This file had been initally taken from:
  * https://qt.gitorious.org/qt-labs/qmlcanvas/trees/master/examples/painting
  *
- * PS: Update 2021-05-16, the link above seems to be dead.
- * This implementation was upated to use QtQuick Canvas.
+ * Update 2021-05-16, the link above seems to be dead.
+ * In the meantime, Canvas was added to QtQuick and this file was largely reworked.
+ * Thus, this file is now also released under the terms of the GPLv3, like the rest of qtodo.
  */
 
 import QtQuick 2.15
 
 Canvas {
     id: canvas
-    //color: "white"
+
     property int paintX
     property int paintY
-    property int count: 0
+    property string path: ""
     property int lineWidth: 2
     property string drawColor: "black"
     property string backgroundColor: "white"
@@ -32,7 +23,7 @@ Canvas {
         id:mousearea
         hoverEnabled:true
         anchors.fill: parent
-        onClicked: drawPoint();
+
         onPressed: {
             paintX = mouseX;
             paintY = mouseY;
@@ -56,13 +47,6 @@ Canvas {
         requestPaint()
     }
 
-    function drawPoint() {
-        context.lineWidth = lineWidth
-        context.fillStyle = drawColor
-        context.fillRect(mousearea.mouseX, mousearea.mouseY, 2, 2);
-        requestPaint()
-    }
-
     function clear() {
         getContext("2d")
         context.fillStyle = backgroundColor
@@ -70,12 +54,10 @@ Canvas {
         context.fillStyle = drawColor
     }
 
-    // Added by Ruediger Gad
-    // Code comes without warranty but is free for use without any further requirements.
-    property string path: ""
     onImageLoaded: {
         console.log("Image loaded. Drawing to canvas: " + path)
         context.drawImage("file:/" + path, 0, 0, width, height)
+        unloadImage("file:/" + path)
         requestPaint()
     }
 
@@ -91,9 +73,6 @@ Canvas {
     }
     function init(){
         clear()
-        context.lineWidth = 1
-        context.strokeStyle = "salmon"
-        var gap = 3
-        context.strokeRect(gap, gap, width - (2*gap), height - (2*gap));
+        requestPaint()
     }
 }
