@@ -11,6 +11,9 @@
  *
  * You can find the original version at:
  * https://qt.gitorious.org/qt-labs/qmlcanvas/trees/master/examples/painting
+ *
+ * PS: Update 2021-05-16, the link above seems to be dead.
+ * This implementation was upated to use QtQuick Canvas.
  */
 
 import QtQuick 2.15
