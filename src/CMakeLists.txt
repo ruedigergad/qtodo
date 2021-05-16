@@ -30,7 +30,6 @@ find_package(Qt6 COMPONENTS Xml REQUIRED)
 
 set(PROJECT_SOURCES
         main-qt6.cpp
-        qml_desktop.qrc
         merger.h
         merger.cpp
         nodelistmodel.h
@@ -40,10 +39,22 @@ set(PROJECT_SOURCES
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(qtodo
-        MANUAL_FINALIZATION
-        ${PROJECT_SOURCES}
-    )
+    message("Building for Qt6...")
+    if(ANDROID)
+        message("Building for Android...")
+        qt_add_executable(qtodo
+            MANUAL_FINALIZATION
+            ${PROJECT_SOURCES}
+            android.qrc
+        )
+    else()
+        message("Building for default platform...")
+        qt_add_executable(qtodo
+            MANUAL_FINALIZATION
+            ${PROJECT_SOURCES}
+            qml_desktop.qrc
+        )
+    endif()
 else()
     if(ANDROID)
         add_library(qtodo SHARED
@@ -52,6 +63,7 @@ else()
     else()
         add_executable(qtodo
           ${PROJECT_SOURCES}
+          qml_desktop.qrc
         )
     endif()
 endif()

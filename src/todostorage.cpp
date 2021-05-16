@@ -53,7 +53,7 @@ ToDoStorage::~ToDoStorage(){
 
 QString ToDoStorage::getPath() {
 #ifdef Q_OS_ANDROID
-    return QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(1);
+    return QStandardPaths::standardLocations(QStandardPaths::AppDataLocation).at(1);
 #else
     return DEFAULT_PATH;
 #endif
