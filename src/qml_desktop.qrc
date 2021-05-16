@@ -53,5 +53,6 @@
         <file>icons/to-do_green.png</file>
         <file>icons/to-do_red.png</file>
         <file>icons/to-do_yellow.png</file>
+        <file>icons/note.png</file>
     </qresource>
 </RCC>

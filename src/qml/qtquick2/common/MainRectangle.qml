@@ -33,7 +33,7 @@ Item {
     property alias confirmSyncSketchesToImapDialog: confirmSyncSketchesToImapDialog
     property alias treeView: treeView
 
-    property string _todoPath: "to-do-o"
+    property string _todoPath: storage.getPath()
     property string _sketchPath: _todoPath + "/sketches"
 
     property bool isTodo
@@ -186,7 +186,7 @@ Item {
         }
     }
 
- //   FileHelper { id: fileHelper }
+    FileHelper { id: fileHelper }
 
     Merger {
         id: todoMerger
