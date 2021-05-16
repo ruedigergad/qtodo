@@ -181,9 +181,9 @@ Rectangle {
         }
     }
 
-//    EditSketchSheet {
-//        id: editSketchItem
-//    }
+    EditSketchSheet {
+        id: editSketchItem
+    }
 
 //    ImapAccountSettingsSheet {
 //        id: imapAccountSettings

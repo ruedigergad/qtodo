@@ -13,12 +13,11 @@
  * https://qt.gitorious.org/qt-labs/qmlcanvas/trees/master/examples/painting
  */
 
-import qmlcanvas 1.0
-import QtQuick 2.0
+import QtQuick 2.15
 
 Canvas {
     id: canvas
-    color: "white"
+    //color: "white"
     property int paintX
     property int paintY
     property int count: 0

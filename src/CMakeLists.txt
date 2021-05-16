@@ -30,6 +30,8 @@ find_package(Qt6 COMPONENTS Xml REQUIRED)
 
 set(PROJECT_SOURCES
         main-qt6.cpp
+        filehelper.cpp
+        filehelper.h
         merger.h
         merger.cpp
         nodelistmodel.h

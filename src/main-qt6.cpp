@@ -25,6 +25,7 @@
 #include "merger.h"
 #include "nodelistmodel.h"
 #include "todostorage.h"
+#include "filehelper.h"
 
 #if defined(LINUX_DESKTOP)
 #include "qtodotrayicon.h"
@@ -39,6 +40,7 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
+    qmlRegisterType<FileHelper>("qtodo", 1, 0, "FileHelper");
     qmlRegisterType<Merger>("qtodo", 1, 0, "Merger");
     qmlRegisterType<NodeListModel>("qtodo", 1, 0, "NodeListModel");
     qmlRegisterType<ToDoStorage>("qtodo", 1, 0, "ToDoStorage");

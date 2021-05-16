@@ -34,7 +34,7 @@ Item {
     property alias treeView: treeView
 
 //    property string _todoPath: fileHelper.home() + "/to-do-o"
-    property string _todoPath: "to-do-o"
+    property string _todoPath: storage.getPath()
     property string _sketchPath: _todoPath + "/sketches"
 
     property bool isTodo
@@ -48,6 +48,7 @@ Item {
     }
 
     function addSketch() {
+        console.log("Adding sketch to: " + _sketchPath)
         editSketchItem.edit = false
         editSketchItem.sketchFileName = (rootElementModel.getMaxId() + 1) + ".png"
         editSketchItem.open()
@@ -187,7 +188,7 @@ Item {
         }
     }
 
-//    FileHelper { id: fileHelper }
+    FileHelper { id: fileHelper }
 
 //    Merger {
 //        id: todoMerger

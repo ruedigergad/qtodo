@@ -37,14 +37,15 @@ Row {
         iconSource: "../icons/add" + iconNameSuffix + ".png"
         opacity: enabled ? 1 : 0.5
         onClicked: mainRectangle.addItem()
-        width: (qtodoToolBar.width - qtodoToolBar.spacing * 4) / 5
+        width: (qtodoToolBar.width - qtodoToolBar.spacing * 5) / 6
     }
-//    CommonToolIcon {
-//        id: iconSketch
-//        iconSource: "../icons/sketch" + iconNameSuffix + ".png"
-//        opacity: enabled ? 1 : 0.5
-//        onClicked: mainRectangle.addSketch()
-//    }
+    CommonToolIcon {
+        id: iconSketch
+        iconSource: "../icons/sketch" + iconNameSuffix + ".png"
+        opacity: enabled ? 1 : 0.5
+        onClicked: mainRectangle.addSketch()
+        width: iconAdd.width
+    }
     CommonToolIcon {
         id: iconMarkDone
         iconSource: "../icons/to-do_done" + iconNameSuffix + ".png"

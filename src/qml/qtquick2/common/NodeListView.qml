@@ -117,7 +117,7 @@ Item {
         }
     }
 
-    ListView {
+    FlowListView {
         id: _nodeListViewLV
 
         anchors.fill: parent

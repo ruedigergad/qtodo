@@ -18,7 +18,6 @@
  */
 
 import QtQuick 2.0
-import qmlcanvas 1.0
 
 Item {
     id: editSketchSheet
@@ -54,7 +53,7 @@ Item {
     }
 
     function open(){
-        console.log("open")
+        console.log("EditSketchSheet open")
 
         visible = true
 
