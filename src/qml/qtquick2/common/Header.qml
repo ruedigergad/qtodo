@@ -98,7 +98,7 @@ Rectangle {
                 // Setting x via PropertyAction causes the item to shortly show up at the target position.
                 NumberAnimation { target: levelIndicatorDelegate; property: "x"; to: header.width + width; duration: 1; easing.type: Easing.InOutQuad }
                 PropertyAction { target: levelIndicatorDelegate; property: "visible"; value: true }
-                NumberAnimation { target: levelIndicatorDelegate; property: "x"; to: x + ((levelIndicator.spacing + width) * level); duration: primaryAnimationDuration; easing.type: Easing.InOutQuad }
+                NumberAnimation { target: levelIndicatorDelegate; property: "x"; to: x; duration: primaryAnimationDuration; easing.type: Easing.InOutQuad }
                 PropertyAction { target: levelIndicatorDelegate; property: "animationRunning"; value: false }
             }
 
