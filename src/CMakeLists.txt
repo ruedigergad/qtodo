@@ -14,14 +14,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # QtCreator supports the following variables for Android, which are identical to qmake Android variables.
 # Check https://doc.qt.io/qt/deployment-android.html for more information.
 # They need to be set before the find_package(...) calls below.
-
 #if(ANDROID)
-#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
+#    message("Setting Android-related variables...")
+#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android" CACHE INTERNAL "")
 #    if (ANDROID_ABI STREQUAL "armeabi-v7a")
 #        set(ANDROID_EXTRA_LIBS
 #            ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libcrypto.so
 #            ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libssl.so)
 #    endif()
+#    file(INSTALL "${ANDROID_PACKAGE_SOURCE_DIR}/res" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/android-build" FILES_MATCHING PATTERN "*")
 #endif()
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick REQUIRED)
@@ -49,12 +50,22 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
             ${PROJECT_SOURCES}
             android.qrc
         )
+
+        set_target_properties(qtodo PROPERTIES
+            QT_ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android"
+        )
     else()
         message("Building for default platform...")
         qt_add_executable(qtodo
             MANUAL_FINALIZATION
             ${PROJECT_SOURCES}
             qml_desktop.qrc
+        )
+
+        set_target_properties(qtodo PROPERTIES
+            MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
+            MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+            MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
         )
     endif()
 else()
@@ -75,12 +86,6 @@ target_compile_definitions(qtodo
 target_link_libraries(qtodo
   PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick)
 target_link_libraries(qtodo PRIVATE Qt6::Xml)
-
-set_target_properties(qtodo PROPERTIES
-    MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
-    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-)
 
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_import_qml_plugins(qtodo)
