@@ -53,7 +53,7 @@ Item {
         anchors.left: parent.left
         visible: tagName === "sketch"
         height: imgExists ? sketchImage.height : width
-        width: _nodeListViewLV.width * 0.5
+        width: _nodeListViewLV.width * 0.33
 
         property string imgSource: tagName === "sketch" ? mainRectangle._sketchPath + "/" + elementText : ""
         property bool imgExists: fileHelper.exists(imgSource)
